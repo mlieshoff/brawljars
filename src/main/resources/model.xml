@@ -1,0 +1,7 @@
+<model>
+
+    <class name="Version">
+        <const name="VERSION" value="v1" type="String"/>
+    </class>
+
+</model>
