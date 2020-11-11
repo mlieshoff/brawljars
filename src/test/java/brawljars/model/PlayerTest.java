@@ -172,7 +172,12 @@ class PlayerTest {
     unitUnderTest.setTag("astring");
     unitUnderTest.setThreeVsThreeVictories(815);
     unitUnderTest.setTrophies(815);
-    String expected = "Player(bestRoboRumbleTime=815, bestTimeAsBigBrawler=815, brawlers=" + new ArrayList<Brawler>() + ", club=" + new Club() + ", duoVictories=815, expLevel=815, expPoints=815, highestTrophies=815, icon=" + new PlayerIcon() + ", QualifiedFromChampionshipChallenge=false, name=astring, soloVictories=815, tag=astring, threeVsThreeVictories=815, trophies=815)";
+    String
+        expected =
+        "Player(bestRoboRumbleTime=815, bestTimeAsBigBrawler=815, brawlers=" + new ArrayList<Brawler>() + ", club="
+            + new Club() + ", duoVictories=815, expLevel=815, expPoints=815, highestTrophies=815, icon="
+            + new PlayerIcon()
+            + ", QualifiedFromChampionshipChallenge=false, name=astring, soloVictories=815, tag=astring, threeVsThreeVictories=815, trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);
