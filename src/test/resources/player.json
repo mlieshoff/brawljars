@@ -1,0 +1,302 @@
+{
+  "tag": "#28UP80RRY",
+  "name": "micah",
+  "icon": {
+    "id": 28000000
+  },
+  "trophies": 3016,
+  "highestTrophies": 3019,
+  "expLevel": 39,
+  "expPoints": 8635,
+  "isQualifiedFromChampionshipChallenge": false,
+  "3vs3Victories": 551,
+  "soloVictories": 0,
+  "duoVictories": 9,
+  "bestRoboRumbleTime": 1,
+  "bestTimeAsBigBrawler": 0,
+  "club": {
+    "tag": "#L99U2L2",
+    "name": "Berlin Popperz"
+  },
+  "brawlers": [
+    {
+      "id": 16000000,
+      "name": "SHELLY",
+      "power": 7,
+      "rank": 8,
+      "trophies": 112,
+      "highestTrophies": 114,
+      "starPowers": [],
+      "gadgets": [
+        {
+          "id": 23000255,
+          "name": "FAST FORWARD"
+        }
+      ]
+    },
+    {
+      "id": 16000001,
+      "name": "COLT",
+      "power": 6,
+      "rank": 12,
+      "trophies": 189,
+      "highestTrophies": 189,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000002,
+      "name": "BULL",
+      "power": 3,
+      "rank": 8,
+      "trophies": 103,
+      "highestTrophies": 103,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000003,
+      "name": "BROCK",
+      "power": 6,
+      "rank": 12,
+      "trophies": 211,
+      "highestTrophies": 211,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000004,
+      "name": "RICO",
+      "power": 7,
+      "rank": 15,
+      "trophies": 313,
+      "highestTrophies": 317,
+      "starPowers": [],
+      "gadgets": [
+        {
+          "id": 23000246,
+          "name": "MULTIBALL LAUNCHER"
+        }
+      ]
+    },
+    {
+      "id": 16000006,
+      "name": "BARLEY",
+      "power": 7,
+      "rank": 13,
+      "trophies": 212,
+      "highestTrophies": 223,
+      "starPowers": [],
+      "gadgets": [
+        {
+          "id": 23000250,
+          "name": "STICKY SYRUP MIXER"
+        }
+      ]
+    },
+    {
+      "id": 16000007,
+      "name": "JESSIE",
+      "power": 6,
+      "rank": 9,
+      "trophies": 135,
+      "highestTrophies": 135,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000008,
+      "name": "NITA",
+      "power": 6,
+      "rank": 7,
+      "trophies": 97,
+      "highestTrophies": 97,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000009,
+      "name": "DYNAMIKE",
+      "power": 3,
+      "rank": 9,
+      "trophies": 126,
+      "highestTrophies": 127,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000010,
+      "name": "EL PRIMO",
+      "power": 6,
+      "rank": 7,
+      "trophies": 80,
+      "highestTrophies": 80,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000011,
+      "name": "MORTIS",
+      "power": 1,
+      "rank": 1,
+      "trophies": 0,
+      "highestTrophies": 0,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000013,
+      "name": "POCO",
+      "power": 7,
+      "rank": 12,
+      "trophies": 196,
+      "highestTrophies": 196,
+      "starPowers": [],
+      "gadgets": [
+        {
+          "id": 23000267,
+          "name": "TUNING FORK"
+        }
+      ]
+    },
+    {
+      "id": 16000014,
+      "name": "BO",
+      "power": 1,
+      "rank": 1,
+      "trophies": 0,
+      "highestTrophies": 0,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000016,
+      "name": "PAM",
+      "power": 7,
+      "rank": 13,
+      "trophies": 246,
+      "highestTrophies": 246,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000017,
+      "name": "TARA",
+      "power": 5,
+      "rank": 9,
+      "trophies": 129,
+      "highestTrophies": 129,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000018,
+      "name": "DARRYL",
+      "power": 4,
+      "rank": 6,
+      "trophies": 64,
+      "highestTrophies": 64,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000019,
+      "name": "PENNY",
+      "power": 7,
+      "rank": 16,
+      "trophies": 341,
+      "highestTrophies": 341,
+      "starPowers": [],
+      "gadgets": [
+        {
+          "id": 23000248,
+          "name": "POCKET DETONATOR"
+        },
+        {
+          "id": 23000287,
+          "name": "CAPTAIN'S COMPASS"
+        }
+      ]
+    },
+    {
+      "id": 16000021,
+      "name": "GENE",
+      "power": 4,
+      "rank": 7,
+      "trophies": 99,
+      "highestTrophies": 99,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000024,
+      "name": "ROSA",
+      "power": 4,
+      "rank": 7,
+      "trophies": 80,
+      "highestTrophies": 80,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000025,
+      "name": "CARL",
+      "power": 5,
+      "rank": 8,
+      "trophies": 103,
+      "highestTrophies": 103,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000026,
+      "name": "BIBI",
+      "power": 1,
+      "rank": 1,
+      "trophies": 0,
+      "highestTrophies": 0,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000031,
+      "name": "MR. P",
+      "power": 3,
+      "rank": 5,
+      "trophies": 45,
+      "highestTrophies": 45,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000032,
+      "name": "MAX",
+      "power": 3,
+      "rank": 1,
+      "trophies": 8,
+      "highestTrophies": 8,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000034,
+      "name": "JACKY",
+      "power": 1,
+      "rank": 1,
+      "trophies": 0,
+      "highestTrophies": 0,
+      "starPowers": [],
+      "gadgets": []
+    },
+    {
+      "id": 16000035,
+      "name": "GALE",
+      "power": 4,
+      "rank": 9,
+      "trophies": 127,
+      "highestTrophies": 127,
+      "starPowers": [],
+      "gadgets": []
+    }
+  ]
+}

@@ -16,26 +16,21 @@
  */
 package brawljars;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+/**
+ * @author Michael Lieshoff
+ */
+public class TestPlayersServlet extends TestJsonFileServlet {
 
-import org.junit.jupiter.api.Test;
+  private static final long serialVersionUID = 3575671062995051750L;
 
-import java.io.File;
-import brawljars.response.GetPlayerResponse;
-
-class JsonModelIntegrationTest {
-
-  private static final Gson GSON = new Gson();
-
-  @Test
-  void fromJson_whenForGetPlayer_thenResolve() throws Exception {
-    String json = readFileToString(new File("src/test/resources/player.json"));
-    GetPlayerResponse object = GSON.fromJson(json, GetPlayerResponse.class);
-
-    assertNotNull(object);
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String filename = "src/test/resources/player.json";
+    doGet(filename, req, resp);
   }
 
 }

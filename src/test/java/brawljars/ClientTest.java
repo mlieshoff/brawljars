@@ -18,7 +18,10 @@ package brawljars;
 
 import static org.apache.http.HttpHeaders.AUTHORIZATION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +31,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+import brawljars.request.GetPlayerRequest;
+import brawljars.response.Callback;
+import brawljars.response.GetPlayerResponse;
 import brawljars.response.RawResponse;
 
 /**
@@ -35,8 +42,9 @@ import brawljars.response.RawResponse;
  */
 class ClientTest {
 
-  private static final String API_KEY = "apiKey";
-  private static final String URL = "url";
+  public static final String API_KEY = "apiKey";
+  public static final String URL = "url";
+  public static final String PLAYER_TAG = "playerTag";
 
   private CrawlerFactory crawlerFactory;
 
@@ -51,16 +59,19 @@ class ClientTest {
 
   @Test
   void construct_whenWithNullUrl_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new Client(null, API_KEY, crawlerFactory));
   }
 
   @Test
   void construct_whenWithEmptyUrl_thenThrowException() throws Exception {
+
     assertThrows(IllegalArgumentException.class, () -> new Client("", API_KEY, crawlerFactory));
   }
 
   @Test
   void construct_whenWithNullCrawlerFactory_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new Client(URL, API_KEY, null));
   }
 
@@ -76,7 +87,44 @@ class ClientTest {
   void getLastRawResponse_whenCalled_thenReturnLastRawResponse() throws Exception {
     RawResponse rawResponse = new RawResponse();
     when(crawler.getLastRawResponse()).thenReturn(rawResponse);
+
     assertEquals(rawResponse, createClient().getLastRawResponse());
+  }
+
+  @Test
+  void getPlayer_whenWithRequest_thenGetResponse() throws Exception {
+    GetPlayerRequest getPlayerRequest = GetPlayerRequest.builder(PLAYER_TAG).build();
+    when(crawler
+        .get("lala/players/%s", createHeaders(), getPlayerRequest.getQueryParameters(),
+            getPlayerRequest.getRestParameters()))
+        .thenReturn("{}");
+
+    assertNotNull(createClient().getPlayer(getPlayerRequest));
+  }
+
+  @Test
+  void getPlayer_whenWithCallback_thenCallOnResponse() throws Exception {
+    AtomicBoolean state = new AtomicBoolean(false);
+    GetPlayerRequest
+        getPlayerRequest =
+        GetPlayerRequest.builder(PLAYER_TAG).callback(new Callback<GetPlayerResponse>() {
+          @Override
+          public void onResponse(GetPlayerResponse getPlayerResponse) {
+            assertNotNull(getPlayerResponse);
+            state.set(true);
+          }
+
+          @Override
+          public void onException(Exception exception) {
+            fail();
+          }
+        }).build();
+    when(crawler.get("lala/players/%s", createHeaders(), getPlayerRequest.getQueryParameters(),
+        getPlayerRequest.getRestParameters())).thenReturn("{}");
+    createClient().getPlayer(getPlayerRequest);
+    waitUntil(state::get);
+
+    assertTrue(state.get(), "callback not notified!");
   }
 
   private static void waitUntil(Action action) {
@@ -88,6 +136,7 @@ class ClientTest {
     }
   }
 
+  @FunctionalInterface
   private interface Action {
 
     boolean eval();

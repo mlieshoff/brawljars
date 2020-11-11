@@ -16,7 +16,15 @@
  */
 package brawljars;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetPlayerResponse;
 
 /**
  * @author Michael Lieshoff
@@ -29,7 +37,18 @@ class EndToEnd {
 
   @BeforeEach
   void setUp() throws Exception {
-    api = new Api("https://proxy.royaleapi.dev/v1/", API_KEY);
+    api = new Api("https://bsproxy.royaleapi.dev/v1/", API_KEY);
+  }
+
+  @Test
+  void getPlayer_whenWithValidParameters_thenGetResponse() throws Exception {
+    GetPlayerResponse getPlayerResponse = api.getPlayer(GetPlayerRequest.builder("#28UP80RRY").build());
+
+    assertAll(
+        () -> assertNotNull(getPlayerResponse, "getPlayerResponse"),
+        () -> assertNull(getPlayerResponse.getMessage(), "message"),
+        () -> assertNull(getPlayerResponse.getReason(), "reason")
+    );
   }
 
 }

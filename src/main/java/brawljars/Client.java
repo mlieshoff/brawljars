@@ -31,7 +31,9 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.io.IOException;
 import java.util.Map;
+import brawljars.request.GetPlayerRequest;
 import brawljars.request.Request;
+import brawljars.response.GetPlayerResponse;
 import brawljars.response.IResponse;
 import brawljars.response.RawResponse;
 
@@ -64,6 +66,10 @@ public class Client {
   private static void checkString(String url) {
     checkNotNull(url);
     checkArgument(!url.isEmpty(), url);
+  }
+
+  GetPlayerResponse getPlayer(GetPlayerRequest getPlayerRequest) throws IOException {
+    return singleObjectFromJson("getPlayerRequest", "players/%s", getPlayerRequest, GetPlayerResponse.class);
   }
 
   private <T extends IResponse> T singleObjectFromJson(String nameOfRequest, String part, Request request,

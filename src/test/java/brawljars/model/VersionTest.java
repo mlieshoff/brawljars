@@ -14,28 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars;
+package brawljars.model;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.google.gson.Gson;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import brawljars.response.GetPlayerResponse;
+import javax.annotation.Generated;
 
-class JsonModelIntegrationTest {
+@Generated("org.mili.generator")
+class VersionTest {
 
-  private static final Gson GSON = new Gson();
+  private Version unitUnderTest;
+
+  @BeforeEach
+  void setUp() {
+    unitUnderTest = new Version();
+  }
 
   @Test
-  void fromJson_whenForGetPlayer_thenResolve() throws Exception {
-    String json = readFileToString(new File("src/test/resources/player.json"));
-    GetPlayerResponse object = GSON.fromJson(json, GetPlayerResponse.class);
+  void getVERSION_whenCalled_thenReturnVERSION() {
 
-    assertNotNull(object);
+    assertEquals( "v1", unitUnderTest.VERSION);
+  }
+
+  @Test
+  void toString_whenCalled_thenReturnStringRepresentation() {
+    String expected = "Version()";
+    String actual = unitUnderTest.toString();
+
+    assertEquals(expected, actual);
   }
 
 }

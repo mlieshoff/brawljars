@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -41,6 +42,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import brawljars.model.Player;
+import brawljars.request.GetPlayerRequest;
 
 /**
  * @author Michael Lieshoff
@@ -64,11 +67,13 @@ public class DataModelCheck {
   }
 
   public static void main(String[] args) throws IOException, ClassNotFoundException {
-    new DataModelCheck("https://proxy.royaleapi.dev/v1/", API_KEY).start();
+    new DataModelCheck("https://bsproxy.royaleapi.dev/v1/", API_KEY).start();
   }
 
   private void start() throws IOException, ClassNotFoundException {
     loadModel();
+
+    testPlayer();
   }
 
   private void printResults() {
@@ -118,6 +123,12 @@ public class DataModelCheck {
       }
       clazzToCheck = clazzToCheck.getSuperclass();
     }
+  }
+
+  private void testPlayer() throws IOException {
+    test(Arrays.asList(
+        "players?playerTag=#28UP80RRY"
+    ), GetPlayerRequest.class, false, Player.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {

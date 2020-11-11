@@ -19,12 +19,15 @@ package brawljars;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetPlayerResponse;
 import brawljars.response.RawResponse;
 
 /**
@@ -32,8 +35,9 @@ import brawljars.response.RawResponse;
  */
 class ApiTest {
 
-  private static final String API_KEY = "apiKey";
-  private static final String URL = "url";
+  public static final String API_KEY = "apiKey";
+  public static final String PLAYER_TAG = "playerTag";
+  public static final String URL = "url";
 
   private Client client;
 
@@ -53,21 +57,25 @@ class ApiTest {
 
   @Test
   void construct_whenWithNullUrl_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new Api(null, API_KEY));
   }
 
   @Test
   void construct_whenWithEmptyUrl_thenThrowException() throws Exception {
+
     assertThrows(IllegalArgumentException.class, () -> new Api("", API_KEY));
   }
 
   @Test
   void construct_whenWithNullApiKey_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new Api(URL, null));
   }
 
   @Test
   void construct_whenWithEmptyApiKey_thenThrowException() throws Exception {
+
     assertThrows(IllegalArgumentException.class, () -> new Api(URL, ""));
   }
 
@@ -75,7 +83,37 @@ class ApiTest {
   void getLastRawResponse_whenCalled_theReturnLastRawResponse() throws Exception {
     RawResponse rawResponse = new RawResponse();
     when(client.getLastRawResponse()).thenReturn(rawResponse);
+
     assertEquals(rawResponse, api.getLastRawResponse());
+  }
+
+  @Test
+  void getPlayer_whenWithNullRequest_thenThrowsException() throws Exception {
+
+    assertThrows(NullPointerException.class, () -> api.getPlayer(null));
+  }
+
+  @Test
+  void getPlayer_whenWithRequest_thenReturnResult() throws Exception {
+    GetPlayerRequest getPlayerRequest = GetPlayerRequest.builder(PLAYER_TAG).build();
+    GetPlayerResponse getPlayerResponse = new GetPlayerResponse();
+    when(client.getPlayer(getPlayerRequest)).thenReturn(getPlayerResponse);
+
+    assertEquals(getPlayerResponse, api.getPlayer(getPlayerRequest));
+  }
+
+  @Test
+  void getPlayer_whenWithException_thenThrowApiException() throws Exception {
+    GetPlayerRequest getPlayerRequest = GetPlayerRequest.builder(PLAYER_TAG).build();
+    when(client.getPlayer(getPlayerRequest)).thenThrow(crawlerException);
+    try {
+      api.getPlayer(getPlayerRequest);
+
+      fail();
+    } catch (ApiException e) {
+
+      assertEquals(SC_NOT_FOUND, e.getCode());
+    }
   }
 
 }

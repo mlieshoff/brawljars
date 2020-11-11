@@ -4,4 +4,54 @@
         <const name="VERSION" value="v1" type="String"/>
     </class>
 
+    <!-- player -->
+
+    <class name="Player">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="icon" type="PlayerIcon"/>
+        <member name="trophies" type="int"/>
+        <member name="highestTrophies" type="int"/>
+        <member name="expLevel" type="int"/>
+        <member name="expPoints" type="int"/>
+        <member name="isQualifiedFromChampionshipChallenge" type="boolean"/>
+        <member name="threeVsThreeVictories" alias="3vs3Victories" type="int"/>
+        <member name="soloVictories" type="int"/>
+        <member name="duoVictories" type="int"/>
+        <member name="bestRoboRumbleTime" type="int"/>
+        <member name="bestTimeAsBigBrawler" type="int"/>
+        <member name="club" type="Club"/>
+        <member name="brawlers" type="list(Brawler)"/>
+    </class>
+
+    <class name="PlayerIcon">
+        <member name="id" type="String"/>
+    </class>
+
+    <class name="Club">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+    </class>
+
+    <class name="Brawler">
+        <member name="id" type="long"/>
+        <member name="name" type="String"/>
+        <member name="power" type="int"/>
+        <member name="rank" type="int"/>
+        <member name="trophies" type="int"/>
+        <member name="highestTrophies" type="int"/>
+        <member name="starPowers" type="list(StarPower)"/>
+        <member name="gadgets" type="list(Gadget)"/>
+    </class>
+
+    <class name="StarPower">
+        <member name="id" type="long"/>
+        <member name="name" type="String"/>
+    </class>
+
+    <class name="Gadget">
+        <member name="id" type="long"/>
+        <member name="name" type="String"/>
+    </class>
+
 </model>

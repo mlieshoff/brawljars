@@ -21,6 +21,7 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.when;
@@ -63,6 +64,7 @@ class CrawlerTest {
 
   @Test
   void construct_whenWithNullUrl_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new Crawler(httpClientFactory).get(null, createHeaders(), null));
   }
 
@@ -72,16 +74,19 @@ class CrawlerTest {
 
   @Test
   void construct_whenWithEmptyUrl_thenThrowException() throws Exception {
+
     assertThrows(IllegalArgumentException.class, () -> new Crawler(httpClientFactory).get("", createHeaders(), null));
   }
 
   @Test
   void construct_whenWithNullHeaders_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new Crawler(httpClientFactory).get("abc", null, null));
   }
 
   @Test
   void construct_whenWithEmptyHeaders_thenThrowException() throws Exception {
+
     assertThrows(IllegalArgumentException.class,
         () -> new Crawler(httpClientFactory).get("abc", new HashMap<>(), null));
   }
@@ -95,6 +100,7 @@ class CrawlerTest {
         new BasicHttpResponse(new BasicStatusLine(new ProtocolVersion("http", 100, 1), SC_OK, ""));
     httpResponse.setEntity(new StringEntity(expectedResult));
     when(httpClient.execute(anyObject())).thenReturn(httpResponse);
+
     assertEquals(expectedResult, new Crawler(httpClientFactory).get("the-url", createHeaders()));
   }
 
@@ -109,7 +115,10 @@ class CrawlerTest {
     when(httpClient.execute(anyObject())).thenReturn(httpResponse);
     try {
       new Crawler(httpClientFactory).get("the-url", createHeaders(), null);
+
+      fail();
     } catch (IOException e) {
+
       assertEquals("crapi: " + SC_NOT_FOUND, e.getMessage());
     }
   }
@@ -123,6 +132,7 @@ class CrawlerTest {
         new BasicHttpResponse(new BasicStatusLine(new ProtocolVersion("http", 100, 1), SC_OK, ""));
     httpResponse.setEntity(new StringEntity(expectedResult));
     when(httpClient.execute(argThat(getEncodingParameterMatcher()))).thenReturn(httpResponse);
+
     assertEquals(expectedResult, new Crawler(httpClientFactory).get("the-url", createHeaders(),
         ImmutableMap.<String, String>builder().put("param", "a+b").put("key", "abc").build()));
   }
@@ -149,6 +159,7 @@ class CrawlerTest {
         new BasicHttpResponse(new BasicStatusLine(new ProtocolVersion("http", 100, 1), SC_OK, ""));
     httpResponse.setEntity(new StringEntity(expectedResult));
     when(httpClient.execute(argThat(getEncodingRestParameterMatcher()))).thenReturn(httpResponse);
+
     assertEquals(expectedResult,
         new Crawler(httpClientFactory).get("the-url/%s/end", createHeaders(), null, singletonList("a+b")));
   }
@@ -179,6 +190,7 @@ class CrawlerTest {
         throw new UnsupportedEncodingException("test");
       }
     };
+
     assertThrows(IllegalStateException.class,
         () -> defectCrawler.get("the-url/%s/end", createHeaders(), null, singletonList("a+b")));
   }
@@ -196,6 +208,7 @@ class CrawlerTest {
     RawResponse rawResponse = new RawResponse();
     rawResponse.setRaw(expectedResult);
     rawResponse.getResponseHeaders().put("hello", "world");
+
     assertEquals(expectedResult, new Crawler(httpClientFactory).get("the-url", createHeaders(),
         ImmutableMap.<String, String>builder().put("param", "a+b").put("key", "abc").build()));
     assertEquals(rawResponse, new Crawler(httpClientFactory).getLastRawResponse());

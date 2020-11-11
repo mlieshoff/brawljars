@@ -16,8 +16,15 @@
  */
 package brawljars;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetPlayerResponse;
 
 /**
  * @author Michael Lieshoff
@@ -32,16 +39,35 @@ class IntegrationTest {
   private static final String APP = "brawljars";
   private static final String URL = String.format("http://localhost:50000/%s/%s/", CONTEXT, APP);
   static final String API_KEY = "itsasecret";
+  private static final String PLAYER_TAG = "playerTag";
 
   @BeforeAll
   static void beforeClass() throws Exception {
     jettyServer = new JettyServer(PORT, '/' + CONTEXT);
+    jettyServer.addServlet('/' + APP + "/players/*", new TestPlayersServlet());
     jettyServer.start();
   }
 
   @AfterAll
   static void afterClass() throws Exception {
     jettyServer.stop();
+  }
+
+  @Test
+  void getPlayer_whenWithValidParameters_thenReturnResponse() throws Exception {
+    doGetPlayer(API_KEY);
+  }
+
+  private static void doGetPlayer(String apiKey) {
+    GetPlayerResponse actual = new Api(URL, apiKey).getPlayer(GetPlayerRequest.builder(PLAYER_TAG).build());
+
+    assertNotNull(actual);
+  }
+
+  @Test
+  void getPlayer_whenWithWrongUrl_thenThrow() throws Exception {
+
+    assertThrows(ApiException.class, () -> doGetPlayer("lala2"));
   }
 
 }

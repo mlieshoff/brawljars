@@ -23,6 +23,11 @@ String raw = rawResponse.getRaw();
 Map<String, String> responseHeaders = rawResponse.getResponseHeaders();
 ```
 
+```java
+// get player
+GetPlayerResponse getPlayerResponse = api.getPlayer(GetPlayerRequest.builder("#28UP80RRY").build());
+```
+
 ## Asynchronous usage
 
 All requests can have a *callback*. Then execution will be asynchronous.
