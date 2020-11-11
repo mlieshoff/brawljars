@@ -27,11 +27,13 @@ class ClientFactoryTest {
 
   @Test
   void construct_whenWithNullUrl_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new ClientFactory().createClient(null, "abc"));
   }
 
   @Test
   void construct_whenWithEmptyUrl_thenThrowException() throws Exception {
+
     assertThrows(IllegalArgumentException.class, () -> new ClientFactory().createClient("", "abc"));
   }
 

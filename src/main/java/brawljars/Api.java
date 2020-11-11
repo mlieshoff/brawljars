@@ -19,6 +19,9 @@ package brawljars;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.io.IOException;
+import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetPlayerResponse;
 import brawljars.response.RawResponse;
 
 /**
@@ -54,6 +57,15 @@ public class Api {
 
   public RawResponse getLastRawResponse() {
     return createClient().getLastRawResponse();
+  }
+
+  public GetPlayerResponse getPlayer(GetPlayerRequest getPlayerRequest) {
+    checkNotNull(getPlayerRequest, "getPlayerRequest");
+    try {
+      return createClient().getPlayer(getPlayerRequest);
+    } catch (IOException e) {
+      throw new ApiException(e);
+    }
   }
 
 }

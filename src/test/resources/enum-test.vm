@@ -14,28 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars;
+package $package;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import javax.annotation.Generated;
 
-import com.google.gson.Gson;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import brawljars.response.GetPlayerResponse;
+@Generated("org.mili.generator")
+public class $testClassname {
 
-class JsonModelIntegrationTest {
-
-  private static final Gson GSON = new Gson();
-
+#foreach( $const in $constlist )
   @Test
-  void fromJson_whenForGetPlayer_thenResolve() throws Exception {
-    String json = readFileToString(new File("src/test/resources/player.json"));
-    GetPlayerResponse object = GSON.fromJson(json, GetPlayerResponse.class);
-
-    assertNotNull(object);
+  public void should$const.name#[[()]]# {
+    assertEquals(#if($const.prefix) $classname.$const.prefix#[[.getCode()]]# +#end #if($const.type == "String")"$const.value"#else$const.value#end, $classname.$const.name#[[.getCode()]]#);
   }
 
+#end
 }

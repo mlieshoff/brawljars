@@ -38,23 +38,27 @@ class ApiExceptionTest {
 
   @Test
   void getCode_whenWithNoneCode_returnZero() throws Exception {
+
     assertEquals(0, new ApiException(new IllegalStateException("lala")).getCode());
   }
 
   @Test
   void getCode_whenWithNotKnownException_returnZero() throws Exception {
+
     assertEquals(0, new ApiException(new IllegalStateException("crapi: 402")).getCode());
   }
 
   @Test
   void getCode_whenWithCrawlerException_returnCode() throws Exception {
     when(crawlerException.getStatusCode()).thenReturn(SC_NOT_FOUND);
+
     assertEquals(SC_NOT_FOUND, new ApiException(crawlerException).getCode());
   }
 
   @Test
   void getMessage_whenWithCrawlerException_returnMessage() throws Exception {
     when(crawlerException.getMessage()).thenReturn("xyz");
+
     assertEquals("xyz", new ApiException(crawlerException).getMessage());
   }
 

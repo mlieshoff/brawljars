@@ -43,6 +43,7 @@ class CrawlerExceptionTest {
 
   @Test
   void construct_whenWithNullStatusCode_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> new CrawlerException(null));
   }
 
@@ -50,6 +51,7 @@ class CrawlerExceptionTest {
   void construct_whenWithStatusLine_thenGetStatusCode() throws Exception {
     when(statusLine.getStatusCode()).thenReturn(SC_OK);
     crawlerException = new CrawlerException(statusLine);
+
     assertEquals(SC_OK, crawlerException.getStatusCode());
   }
 
@@ -57,6 +59,7 @@ class CrawlerExceptionTest {
   void construct_whenWithStatusLine_thenGetReason() throws Exception {
     when(statusLine.getReasonPhrase()).thenReturn("that is what she said!");
     crawlerException = new CrawlerException(statusLine);
+
     assertEquals("that is what she said!", crawlerException.getReason());
   }
 
@@ -64,6 +67,7 @@ class CrawlerExceptionTest {
   void construct_whenWithStatusLine_thenGetMessage() throws Exception {
     when(statusLine.getStatusCode()).thenReturn(SC_BAD_REQUEST);
     crawlerException = new CrawlerException(statusLine);
+
     assertEquals("crapi: " + SC_BAD_REQUEST, crawlerException.getMessage());
   }
 
@@ -72,6 +76,7 @@ class CrawlerExceptionTest {
     when(statusLine.getReasonPhrase()).thenReturn("that is what she said!");
     when(statusLine.getStatusCode()).thenReturn(SC_BAD_REQUEST);
     crawlerException = new CrawlerException(statusLine);
+
     assertEquals("crapi: " + SC_BAD_REQUEST + ": that is what she said!", crawlerException.getMessage());
   }
 

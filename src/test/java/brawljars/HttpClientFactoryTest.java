@@ -27,6 +27,7 @@ class HttpClientFactoryTest {
 
   @Test
   void construct_whenWithValidParameters_thenConstruct() throws Exception {
+
     assertNotNull(new HttpClientFactory().create());
   }
 

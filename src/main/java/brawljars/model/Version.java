@@ -14,28 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars;
+package brawljars.model;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import javax.annotation.Generated;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import com.google.gson.Gson;
+@Generated("org.mili.generator")
+@Getter
+@Setter
+@ToString
+public class Version {
 
-import org.junit.jupiter.api.Test;
-
-import java.io.File;
-import brawljars.response.GetPlayerResponse;
-
-class JsonModelIntegrationTest {
-
-  private static final Gson GSON = new Gson();
-
-  @Test
-  void fromJson_whenForGetPlayer_thenResolve() throws Exception {
-    String json = readFileToString(new File("src/test/resources/player.json"));
-    GetPlayerResponse object = GSON.fromJson(json, GetPlayerResponse.class);
-
-    assertNotNull(object);
-  }
+  public static final String VERSION = "v1";
 
 }
