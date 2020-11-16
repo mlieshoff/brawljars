@@ -29,9 +29,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
@@ -124,6 +126,28 @@ class IntegrationTest {
   void getClub_whenWithWrongUrl_thenThrow() throws Exception {
 
     assertThrows(ApiException.class, () -> doGetClub("lala2"));
+  }
+
+  @Test
+  void getClubMembers_whenWithValidParameters_thenReturnResponse() throws Exception {
+    doGetClubMembers(API_KEY);
+  }
+
+  private static void doGetClubMembers(String apiKey) throws IOException {
+    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/clubMembers.json"));
+    GetClubMembersResponse expected = new Gson().fromJson(expectedJson, GetClubMembersResponse.class);
+
+    GetClubMembersResponse
+        actual =
+        new Api(URL, apiKey).getClubMembers(GetClubMembersRequest.builder(CLUB_TAG).build());
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void getClubMembers_whenWithWrongUrl_thenThrow() throws Exception {
+
+    assertThrows(ApiException.class, () -> doGetClubMembers("lala2"));
   }
 
 }

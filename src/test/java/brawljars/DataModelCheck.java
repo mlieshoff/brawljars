@@ -42,7 +42,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import brawljars.model.Club;
+import brawljars.model.ClubMember;
 import brawljars.model.Player;
+import brawljars.request.GetClubMembersRequest;
+import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 
@@ -85,6 +89,7 @@ public class DataModelCheck {
     testPlayer();
     testPlayerBattleLog();
     testClub();
+    testClubMembers();
   }
 
   private void printResults() {
@@ -145,7 +150,11 @@ public class DataModelCheck {
   }
 
   private void testClub() throws IOException {
-    test(asList("clubs/%23L99U2L2"), GetPlayerBattleLogRequest.class, false, Player.class);
+    test(asList("clubs/%23L99U2L2"), GetClubRequest.class, false, Club.class);
+  }
+
+  private void testClubMembers() throws IOException {
+    test(asList("clubs/%23L99U2L2/members"), GetClubMembersRequest.class, false, ClubMember.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {

@@ -40,8 +40,19 @@ GetPlayerBattleLogResponse getPlayerBattleLogResponse = api.getPlayerBattleLog(G
 ```
 
 ```java
-// get player battle log
+// get club
 GetClubResponse getClubResponse = api.getClub(GetClubRequest.builder("#L99U2L2")
+  .build()
+);
+```
+
+```java
+// get club members
+GetClubMembersResponse getClubMembersResponse = api.getClub(GetClubMembersRequest.builder("#L99U2L2")
+  // paging
+  .limit()
+  .after()
+  .before()
   .build()
 );
 ```

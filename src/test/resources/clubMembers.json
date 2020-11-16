@@ -1,0 +1,107 @@
+{
+  "items": [
+    {
+      "tag": "#Q8C8RJ8V",
+      "name": "DeadEyes",
+      "nameColor": "0xffffffff",
+      "role": "president",
+      "trophies": 7477,
+      "icon": {
+        "id": 28000007
+      }
+    },
+    {
+      "tag": "#28UP80RRY",
+      "name": "micah",
+      "nameColor": "0xffffffff",
+      "role": "member",
+      "trophies": 3698,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#YYQV0CP",
+      "name": "MicDaRoc",
+      "nameColor": "0xffffffff",
+      "role": "senior",
+      "trophies": 2128,
+      "icon": {
+        "id": 28000025
+      }
+    },
+    {
+      "tag": "#9PVCVQ8VJ",
+      "name": "Jan Deadeyes",
+      "nameColor": "0xfff05637",
+      "role": "member",
+      "trophies": 357,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#J8VJULYQ",
+      "name": "PROMY.TV",
+      "nameColor": "0xffffffff",
+      "role": "senior",
+      "trophies": 283,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#28YVPU0RL",
+      "name": "GG ProMy",
+      "nameColor": "0xffffffff",
+      "role": "member",
+      "trophies": 242,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#RPQCPUU0",
+      "name": "hshandy",
+      "nameColor": "0xffffffff",
+      "role": "member",
+      "trophies": 149,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#8R2C8YQJ2",
+      "name": "Mavin21#0269",
+      "nameColor": "0xffffffff",
+      "role": "member",
+      "trophies": 120,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#R2L0VL2C",
+      "name": "david",
+      "nameColor": "0xffffffff",
+      "role": "member",
+      "trophies": 111,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#GJL90V89",
+      "name": "AI Jan Promy YI",
+      "nameColor": "0xffffffff",
+      "role": "member",
+      "trophies": 30,
+      "icon": {
+        "id": 28000000
+      }
+    }
+  ],
+  "paging": {
+    "cursors": {}
+  }
+}

@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
@@ -202,6 +203,17 @@ class ClientTest {
         .thenReturn("{}");
 
     assertNotNull(createClient().getClub(getClubRequest));
+  }
+
+  @Test
+  void getClubMembers_whenWithRequest_thenGetResponse() throws Exception {
+    GetClubMembersRequest getClubMembersRequest = GetClubMembersRequest.builder(CLUB_TAG).build();
+    when(crawler
+        .get("lala/clubs/%s/members", createHeaders(), getClubMembersRequest.getQueryParameters(),
+            getClubMembersRequest.getRestParameters()))
+        .thenReturn("{}");
+
+    assertNotNull(createClient().getClubMembers(getClubMembersRequest));
   }
 
 }
