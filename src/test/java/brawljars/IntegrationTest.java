@@ -33,10 +33,12 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 
 /**
  * @author Michael Lieshoff
@@ -48,6 +50,7 @@ class IntegrationTest {
   static final String API_KEY = "itsasecret";
   private static final String APP = "brawljars";
   private static final String CLUB_TAG = "playerTag";
+  private static final String COUNTRY_CODE = "countryCode";
   private static final String CONTEXT = "test";
   private static final String PLAYER_TAG = "playerTag";
   private static final String URL = format("http://localhost:50000/%s/%s/", CONTEXT, APP);
@@ -59,6 +62,7 @@ class IntegrationTest {
     jettyServer = new JettyServer(PORT, '/' + CONTEXT);
     jettyServer.addServlet('/' + APP + "/players/*", new TestPlayersServlet());
     jettyServer.addServlet('/' + APP + "/clubs/*", new TestClubsServlet());
+    jettyServer.addServlet('/' + APP + "/rankings/*", new TestRankingsServlet());
     jettyServer.start();
   }
 
@@ -148,6 +152,31 @@ class IntegrationTest {
   void getClubMembers_whenWithWrongUrl_thenThrow() throws Exception {
 
     assertThrows(ApiException.class, () -> doGetClubMembers("lala2"));
+  }
+
+  @Test
+  void getRankingsPowerplaySeasons_whenWithValidParameters_thenReturnResponse() throws Exception {
+    doGetRankingsPowerplaySeasons(API_KEY);
+  }
+
+  private static void doGetRankingsPowerplaySeasons(String apiKey) throws IOException {
+    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/rankingsPowerplaySeasons.json"));
+    GetRankingsPowerplaySeasonsResponse
+        expected =
+        new Gson().fromJson(expectedJson, GetRankingsPowerplaySeasonsResponse.class);
+
+    GetRankingsPowerplaySeasonsResponse
+        actual =
+        new Api(URL, apiKey)
+            .getRankingsPowerplaySeasons(GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build());
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void getRankingsPowerplaySeasons_whenWithWrongUrl_thenThrow() throws Exception {
+
+    assertThrows(ApiException.class, () -> doGetRankingsPowerplaySeasons("lala2"));
   }
 
 }

@@ -37,6 +37,7 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.response.Callback;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.RawResponse;
@@ -214,6 +215,20 @@ class ClientTest {
         .thenReturn("{}");
 
     assertNotNull(createClient().getClubMembers(getClubMembersRequest));
+  }
+
+  @Test
+  void getRankingsPowerplaySeasons_whenWithRequest_thenGetResponse() throws Exception {
+    GetRankingsPowerplaySeasonsRequest
+        getRankingsPowerplaySeasonsRequest =
+        GetRankingsPowerplaySeasonsRequest.builder(CLUB_TAG).build();
+    when(crawler
+        .get("lala/rankings/%s/powerplay/seasons", createHeaders(),
+            getRankingsPowerplaySeasonsRequest.getQueryParameters(),
+            getRankingsPowerplaySeasonsRequest.getRestParameters()))
+        .thenReturn("{}");
+
+    assertNotNull(createClient().getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest));
   }
 
 }

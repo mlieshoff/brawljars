@@ -30,10 +30,12 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.RawResponse;
 
 /**
@@ -43,6 +45,7 @@ class ApiTest {
 
   public static final String API_KEY = "apiKey";
   public static final String CLUB_TAG = "clubTag";
+  public static final String COUNTRY_CODE = "countryCode";
   public static final String PLAYER_TAG = "playerTag";
   public static final String URL = "url";
 
@@ -204,6 +207,41 @@ class ApiTest {
     when(client.getClubMembers(getClubMembersRequest)).thenThrow(runtimeException);
     try {
       api.getClubMembers(getClubMembersRequest);
+
+      fail();
+    } catch (ApiException e) {
+
+      assertEquals(SC_NOT_FOUND, e.getCode());
+    }
+  }
+
+  @Test
+  void getRankingsPowerplaySeasons_whenWithNullRequest_thenThrowsException() throws Exception {
+
+    assertThrows(NullPointerException.class, () -> api.getRankingsPowerplaySeasons(null));
+  }
+
+  @Test
+  void getRankingsPowerplaySeasons_whenWithRequest_thenReturnResult() throws Exception {
+    GetRankingsPowerplaySeasonsRequest
+        getRankingsPowerplaySeasonsRequest =
+        GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build();
+    GetRankingsPowerplaySeasonsResponse getRankingsPowerplaySeasonsResponse = new GetRankingsPowerplaySeasonsResponse();
+    when(client.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest))
+        .thenReturn(getRankingsPowerplaySeasonsResponse);
+
+    assertEquals(getRankingsPowerplaySeasonsResponse,
+        api.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest));
+  }
+
+  @Test
+  void getRankingsPowerplaySeasons_whenWithException_thenThrowApiException() throws Exception {
+    GetRankingsPowerplaySeasonsRequest
+        getRankingsPowerplaySeasonsRequest =
+        GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build();
+    when(client.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest)).thenThrow(runtimeException);
+    try {
+      api.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest);
 
       fail();
     } catch (ApiException e) {
