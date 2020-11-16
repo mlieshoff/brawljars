@@ -26,9 +26,11 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
@@ -173,6 +175,35 @@ class ApiTest {
     when(client.getClub(getClubRequest)).thenThrow(runtimeException);
     try {
       api.getClub(getClubRequest);
+
+      fail();
+    } catch (ApiException e) {
+
+      assertEquals(SC_NOT_FOUND, e.getCode());
+    }
+  }
+
+  @Test
+  void getClubMembers_whenWithNullRequest_thenThrowsException() throws Exception {
+
+    assertThrows(NullPointerException.class, () -> api.getClubMembers(null));
+  }
+
+  @Test
+  void getClubMembers_whenWithRequest_thenReturnResult() throws Exception {
+    GetClubMembersRequest getClubMembersRequest = GetClubMembersRequest.builder(CLUB_TAG).build();
+    GetClubMembersResponse getClubMembersResponse = new GetClubMembersResponse();
+    when(client.getClubMembers(getClubMembersRequest)).thenReturn(getClubMembersResponse);
+
+    assertEquals(getClubMembersResponse, api.getClubMembers(getClubMembersRequest));
+  }
+
+  @Test
+  void getClubMembers_whenWithException_thenThrowApiException() throws Exception {
+    GetClubMembersRequest getClubMembersRequest = GetClubMembersRequest.builder(CLUB_TAG).build();
+    when(client.getClubMembers(getClubMembersRequest)).thenThrow(runtimeException);
+    try {
+      api.getClubMembers(getClubMembersRequest);
 
       fail();
     } catch (ApiException e) {

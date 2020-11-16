@@ -31,10 +31,12 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.io.IOException;
 import java.util.Map;
+import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.Request;
+import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
@@ -137,6 +139,10 @@ public class Client {
 
   GetClubResponse getClub(GetClubRequest getClubRequest) {
     return executeRequest("clubs/%s", getClubRequest, GetClubResponse.class);
+  }
+
+  GetClubMembersResponse getClubMembers(GetClubMembersRequest getClubMembersRequest) {
+    return executeRequest("clubs/%s/members", getClubMembersRequest, GetClubMembersResponse.class);
   }
 
 }

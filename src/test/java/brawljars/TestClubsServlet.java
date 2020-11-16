@@ -30,6 +30,10 @@ public class TestClubsServlet extends TestJsonFileServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String filename = "src/test/resources/club.json";
+    String restTagParameter = getRestTagParameter(req);
+    if ("members".equals(restTagParameter)) {
+      filename = "src/test/resources/clubMembers.json";
+    }
     doGet(filename, req, resp);
   }
 
