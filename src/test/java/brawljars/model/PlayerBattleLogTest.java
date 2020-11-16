@@ -24,24 +24,45 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class VersionTest {
+class PlayerBattleLogTest {
 
-  private Version unitUnderTest;
+  private PlayerBattleLog unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Version();
+    unitUnderTest = new PlayerBattleLog();
   }
 
   @Test
-  void getVERSION_whenCalled_thenReturnVERSION() {
+  void setBattle_whenWithValidParameter_thenSetBattle() {
+    PlayerBattleLogBattle expected = new PlayerBattleLogBattle();
+    unitUnderTest.setBattle(expected);
 
-    assertEquals("v1", unitUnderTest.VERSION);
+    assertEquals(expected, unitUnderTest.getBattle());
+  }
+
+  @Test
+  void setBattleTime_whenWithValidParameter_thenSetBattleTime() {
+    String expected = "astring";
+    unitUnderTest.setBattleTime(expected);
+
+    assertEquals(expected, unitUnderTest.getBattleTime());
+  }
+
+  @Test
+  void setEvent_whenWithValidParameter_thenSetEvent() {
+    PlayerBattleLogEvent expected = new PlayerBattleLogEvent();
+    unitUnderTest.setEvent(expected);
+
+    assertEquals(expected, unitUnderTest.getEvent());
   }
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    String expected = "Version()";
+    unitUnderTest.setBattle(new PlayerBattleLogBattle());
+    unitUnderTest.setBattleTime("astring");
+    unitUnderTest.setEvent(new PlayerBattleLogEvent());
+    String expected = "PlayerBattleLog(battle=" + new PlayerBattleLogBattle() + ", battleTime=astring, event=" + new PlayerBattleLogEvent() + ")";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

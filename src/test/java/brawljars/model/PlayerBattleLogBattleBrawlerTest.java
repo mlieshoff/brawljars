@@ -24,24 +24,54 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class VersionTest {
+class PlayerBattleLogBattleBrawlerTest {
 
-  private Version unitUnderTest;
+  private PlayerBattleLogBattleBrawler unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Version();
+    unitUnderTest = new PlayerBattleLogBattleBrawler();
   }
 
   @Test
-  void getVERSION_whenCalled_thenReturnVERSION() {
+  void setId_whenWithValidParameter_thenSetId() {
+    long expected = 4711L;
+    unitUnderTest.setId(expected);
 
-    assertEquals("v1", unitUnderTest.VERSION);
+    assertEquals(expected, unitUnderTest.getId());
+  }
+
+  @Test
+  void setName_whenWithValidParameter_thenSetName() {
+    String expected = "astring";
+    unitUnderTest.setName(expected);
+
+    assertEquals(expected, unitUnderTest.getName());
+  }
+
+  @Test
+  void setPower_whenWithValidParameter_thenSetPower() {
+    int expected = 815;
+    unitUnderTest.setPower(expected);
+
+    assertEquals(expected, unitUnderTest.getPower());
+  }
+
+  @Test
+  void setTrophies_whenWithValidParameter_thenSetTrophies() {
+    int expected = 815;
+    unitUnderTest.setTrophies(expected);
+
+    assertEquals(expected, unitUnderTest.getTrophies());
   }
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    String expected = "Version()";
+    unitUnderTest.setId(4711L);
+    unitUnderTest.setName("astring");
+    unitUnderTest.setPower(815);
+    unitUnderTest.setTrophies(815);
+    String expected = "PlayerBattleLogBattleBrawler(id=4711, name=astring, power=815, trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

@@ -54,4 +54,56 @@
         <member name="name" type="String"/>
     </class>
 
+    <!-- get player battel log -->
+
+    <class name="PlayerBattleLog">
+        <member name="battleTime" type="String"/>
+        <member name="event" type="PlayerBattleLogEvent"/>
+        <member name="battle" type="PlayerBattleLogBattle"/>
+    </class>
+
+    <class name="PlayerBattleLogEvent">
+        <member name="id" type="int"/>
+        <member name="mode" type="String"/>
+        <member name="map" type="String"/>
+    </class>
+
+    <class name="PlayerBattleLogBattle">
+        <member name="mode" type="String"/>
+        <member name="type" type="String"/>
+        <member name="result" type="String"/>
+        <member name="duration" type="int"/>
+        <member name="starPlayer" type="PlayerBattleLogBattleStarPlayer"/>
+        <member name="teams" type="list(PlayerBattleLogBattleTeam)"/>
+    </class>
+
+    <class name="PlayerBattleLogBattleStarPlayer">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="brawler" type="PlayerBattleLogBattleBrawler"/>
+    </class>
+
+    <class name="PlayerBattleLogBattleBrawler">
+        <member name="id" type="long"/>
+        <member name="name" type="String"/>
+        <member name="power" type="int"/>
+        <member name="trophies" type="int"/>
+    </class>
+
+    <class name="PlayerBattleLogBattleTeam" extends="java.util.ArrayList&lt;PlayerBattleLogBattleTeamParticipant&gt;">
+    </class>
+
+    <class name="PlayerBattleLogBattleTeamParticipant">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="brawler" type="PlayerBattleLogBattleBrawler"/>
+    </class>
+
+    <class name="PlayerBattleLogBattleBrawler">
+        <member name="id" type="long"/>
+        <member name="name" type="String"/>
+        <member name="power" type="int"/>
+        <member name="trophies" type="int"/>
+    </class>
+
 </model>

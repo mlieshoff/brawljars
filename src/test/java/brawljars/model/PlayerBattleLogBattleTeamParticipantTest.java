@@ -24,24 +24,45 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class VersionTest {
+class PlayerBattleLogBattleTeamParticipantTest {
 
-  private Version unitUnderTest;
+  private PlayerBattleLogBattleTeamParticipant unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Version();
+    unitUnderTest = new PlayerBattleLogBattleTeamParticipant();
   }
 
   @Test
-  void getVERSION_whenCalled_thenReturnVERSION() {
+  void setBrawler_whenWithValidParameter_thenSetBrawler() {
+    PlayerBattleLogBattleBrawler expected = new PlayerBattleLogBattleBrawler();
+    unitUnderTest.setBrawler(expected);
 
-    assertEquals("v1", unitUnderTest.VERSION);
+    assertEquals(expected, unitUnderTest.getBrawler());
+  }
+
+  @Test
+  void setName_whenWithValidParameter_thenSetName() {
+    String expected = "astring";
+    unitUnderTest.setName(expected);
+
+    assertEquals(expected, unitUnderTest.getName());
+  }
+
+  @Test
+  void setTag_whenWithValidParameter_thenSetTag() {
+    String expected = "astring";
+    unitUnderTest.setTag(expected);
+
+    assertEquals(expected, unitUnderTest.getTag());
   }
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    String expected = "Version()";
+    unitUnderTest.setBrawler(new PlayerBattleLogBattleBrawler());
+    unitUnderTest.setName("astring");
+    unitUnderTest.setTag("astring");
+    String expected = "PlayerBattleLogBattleTeamParticipant(brawler=" + new PlayerBattleLogBattleBrawler() + ", name=astring, tag=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

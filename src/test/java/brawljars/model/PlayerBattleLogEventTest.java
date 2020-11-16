@@ -24,24 +24,45 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class VersionTest {
+class PlayerBattleLogEventTest {
 
-  private Version unitUnderTest;
+  private PlayerBattleLogEvent unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Version();
+    unitUnderTest = new PlayerBattleLogEvent();
   }
 
   @Test
-  void getVERSION_whenCalled_thenReturnVERSION() {
+  void setId_whenWithValidParameter_thenSetId() {
+    int expected = 815;
+    unitUnderTest.setId(expected);
 
-    assertEquals("v1", unitUnderTest.VERSION);
+    assertEquals(expected, unitUnderTest.getId());
+  }
+
+  @Test
+  void setMap_whenWithValidParameter_thenSetMap() {
+    String expected = "astring";
+    unitUnderTest.setMap(expected);
+
+    assertEquals(expected, unitUnderTest.getMap());
+  }
+
+  @Test
+  void setMode_whenWithValidParameter_thenSetMode() {
+    String expected = "astring";
+    unitUnderTest.setMode(expected);
+
+    assertEquals(expected, unitUnderTest.getMode());
   }
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    String expected = "Version()";
+    unitUnderTest.setId(815);
+    unitUnderTest.setMap("astring");
+    unitUnderTest.setMode("astring");
+    String expected = "PlayerBattleLogEvent(id=815, map=astring, mode=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

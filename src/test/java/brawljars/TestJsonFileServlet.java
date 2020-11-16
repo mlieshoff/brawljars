@@ -17,6 +17,7 @@
 package brawljars;
 
 import static brawljars.IntegrationTest.API_KEY;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.http.HttpHeaders.AUTHORIZATION;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 
@@ -36,18 +37,6 @@ public class TestJsonFileServlet extends HttpServlet {
 
   private static final long serialVersionUID = -5865669665520542333L;
 
-  void doGet(String filename, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
-      throws IOException {
-    if (checkAuth(httpServletRequest)) {
-      try (PrintWriter printWriter = httpServletResponse.getWriter()) {
-        printWriter.print(FileUtils.readFileToString(new File(filename)));
-        printWriter.flush();
-      }
-    } else {
-      httpServletResponse.setStatus(SC_FORBIDDEN);
-    }
-  }
-
   static String getRestTagParameter(HttpServletRequest httpServletRequest) {
     String uri = httpServletRequest.getRequestURI();
     return uri.substring(uri.lastIndexOf('/') + 1);
@@ -56,6 +45,19 @@ public class TestJsonFileServlet extends HttpServlet {
   private static boolean checkAuth(HttpServletRequest httpServletRequest) {
     String apiKey = httpServletRequest.getHeader(AUTHORIZATION);
     return ("Bearer " + API_KEY).equals(apiKey);
+  }
+
+  void doGet(String filename, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+      throws IOException {
+    if (checkAuth(httpServletRequest)) {
+      httpServletResponse.setCharacterEncoding("UTF8");
+      try (PrintWriter printWriter = httpServletResponse.getWriter()) {
+        printWriter.print(FileUtils.readFileToString(new File(filename), UTF_8));
+        printWriter.flush();
+      }
+    } else {
+      httpServletResponse.setStatus(SC_FORBIDDEN);
+    }
   }
 
 }

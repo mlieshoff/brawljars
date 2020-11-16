@@ -14,27 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars;
+package brawljars.model;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * @author Michael Lieshoff
- */
-public class TestPlayersServlet extends TestJsonFileServlet {
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-  private static final long serialVersionUID = 3575671062995051750L;
+import javax.annotation.Generated;
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    String filename = "src/test/resources/player.json";
-    String restTagParameter = getRestTagParameter(req);
-    if ("battlelog".equals(restTagParameter)) {
-      filename = "src/test/resources/playerBattleLog.json";
-    }
-    doGet(filename, req, resp);
+@Generated("org.mili.generator")
+class PlayerBattleLogBattleTeamTest {
+
+  private PlayerBattleLogBattleTeam unitUnderTest;
+
+  @BeforeEach
+  void setUp() {
+    unitUnderTest = new PlayerBattleLogBattleTeam();
+  }
+
+  @Test
+  void toString_whenCalled_thenReturnStringRepresentation() {
+    String expected = "PlayerBattleLogBattleTeam()";
+    String actual = unitUnderTest.toString();
+
+    assertEquals(expected, actual);
   }
 
 }

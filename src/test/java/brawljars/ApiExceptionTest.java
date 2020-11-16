@@ -52,7 +52,7 @@ class ApiExceptionTest {
   void getCode_whenWithCrawlerException_returnCode() throws Exception {
     when(crawlerException.getStatusCode()).thenReturn(SC_NOT_FOUND);
 
-    assertEquals(SC_NOT_FOUND, new ApiException(crawlerException).getCode());
+    assertEquals(SC_NOT_FOUND, new ApiException(new IllegalStateException(crawlerException)).getCode());
   }
 
   @Test
