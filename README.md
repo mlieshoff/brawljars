@@ -1,7 +1,7 @@
 # brawljars
 A Java Wrapper For Official Supercell Brawl Stars Api 
 
-## Actual version: 1.M1.0
+## Actual version: 1.M4.0
 
 ## Simplest Usage ##
 
@@ -49,6 +49,17 @@ GetClubResponse getClubResponse = api.getClub(GetClubRequest.builder("#L99U2L2")
 ```java
 // get club members
 GetClubMembersResponse getClubMembersResponse = api.getClub(GetClubMembersRequest.builder("#L99U2L2")
+  // paging
+  .limit()
+  .after()
+  .before()
+  .build()
+);
+```
+
+```java
+// get rankings powerplay seasons
+GetRankingsPowerplaySeasonsResponse getRankingsPowerplaySeasonsResponse = api.getRankingsPowerplaySeasons(GetRankingsPowerplaySeasonsRequest.builder("DE")
   // paging
   .limit()
   .after()
