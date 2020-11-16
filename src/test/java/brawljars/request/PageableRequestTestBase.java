@@ -25,9 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import brawljars.response.Response;
-
-abstract class PageableRequestTestBase<R extends Response, T extends PageableRequest<R>> extends RequestTestBase {
+abstract class PageableRequestTestBase<T extends PageableRequest> extends RequestTestBase {
 
   private static final int PAGEABLE_LIMIT = 100;
 

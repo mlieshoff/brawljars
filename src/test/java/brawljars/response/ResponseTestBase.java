@@ -16,7 +16,9 @@
  */
 package brawljars.response;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +39,12 @@ abstract class ResponseTestBase<T extends IResponse> {
     T response = getResponse();
     response.setReason(REASON);
     assertEquals(REASON, response.getReason());
+  }
+
+  @Test
+  void toString_whenWithCalled_thenReturnNotBlank() throws Exception {
+
+    assertTrue(isNotBlank(getResponse().toString()));
   }
 
   abstract T getResponse();

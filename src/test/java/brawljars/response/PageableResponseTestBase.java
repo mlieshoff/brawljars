@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 import brawljars.response.PageableResponse.Paging;
 
-abstract class PageableResponseTestBase<R extends Response, T extends PageableResponse<R>> extends ResponseTestBase<T> {
+abstract class PageableResponseTestBase<T extends PageableResponse> extends ResponseTestBase<T> {
 
   private static final String AFTER = "abc";
   private static final String BEFORE = "xyz";
