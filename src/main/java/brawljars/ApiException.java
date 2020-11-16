@@ -30,10 +30,11 @@ public class ApiException extends RuntimeException {
   private final String message;
 
   public ApiException(Throwable cause) {
-    super(cause);
+    super(cause.getCause());
     message = cause.getMessage();
-    if (cause instanceof CrawlerException) {
-      CrawlerException crawlerException = (CrawlerException) cause;
+    Throwable superCause = cause.getCause();
+    if (superCause instanceof CrawlerException) {
+      CrawlerException crawlerException = (CrawlerException) superCause;
       code = crawlerException.getStatusCode();
     } else {
       code = 0;

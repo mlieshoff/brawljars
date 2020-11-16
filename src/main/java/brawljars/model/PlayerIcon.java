@@ -19,13 +19,13 @@ package brawljars.model;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Generated("org.mili.generator")
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode
 @ToString
 public class PlayerIcon {
 

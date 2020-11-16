@@ -26,7 +26,9 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.RawResponse;
 
@@ -44,6 +46,7 @@ class ApiTest {
   private Api api;
 
   private CrawlerException crawlerException;
+  private RuntimeException runtimeException;
 
   @BeforeEach
   void setUp() throws Exception {
@@ -53,6 +56,7 @@ class ApiTest {
     api = new Api(URL, API_KEY, clientFactory);
     crawlerException = mock(CrawlerException.class);
     when(crawlerException.getStatusCode()).thenReturn(SC_NOT_FOUND);
+    runtimeException = new IllegalStateException(crawlerException);
   }
 
   @Test
@@ -105,7 +109,7 @@ class ApiTest {
   @Test
   void getPlayer_whenWithException_thenThrowApiException() throws Exception {
     GetPlayerRequest getPlayerRequest = GetPlayerRequest.builder(PLAYER_TAG).build();
-    when(client.getPlayer(getPlayerRequest)).thenThrow(crawlerException);
+    when(client.getPlayer(getPlayerRequest)).thenThrow(runtimeException);
     try {
       api.getPlayer(getPlayerRequest);
 
@@ -115,5 +119,35 @@ class ApiTest {
       assertEquals(SC_NOT_FOUND, e.getCode());
     }
   }
+
+  @Test
+  void getPlayerBattleLog_whenWithNullRequest_thenThrowsException() throws Exception {
+
+    assertThrows(NullPointerException.class, () -> api.getPlayerBattleLog(null));
+  }
+
+  @Test
+  void getPlayerBattleLog_whenWithRequest_thenReturnResult() throws Exception {
+    GetPlayerBattleLogRequest getPlayerBattleLogRequest = GetPlayerBattleLogRequest.builder(PLAYER_TAG).build();
+    GetPlayerBattleLogResponse getPlayerBattleLogResponse = new GetPlayerBattleLogResponse();
+    when(client.getPlayerBattleLog(getPlayerBattleLogRequest)).thenReturn(getPlayerBattleLogResponse);
+
+    assertEquals(getPlayerBattleLogResponse, api.getPlayerBattleLog(getPlayerBattleLogRequest));
+  }
+
+  @Test
+  void getPlayerBattleLog_whenWithException_thenThrowApiException() throws Exception {
+    GetPlayerBattleLogRequest getPlayerBattleLogRequest = GetPlayerBattleLogRequest.builder(PLAYER_TAG).build();
+    when(client.getPlayerBattleLog(getPlayerBattleLogRequest)).thenThrow(runtimeException);
+    try {
+      api.getPlayerBattleLog(getPlayerBattleLogRequest);
+
+      fail();
+    } catch (ApiException e) {
+
+      assertEquals(SC_NOT_FOUND, e.getCode());
+    }
+  }
+
 
 }

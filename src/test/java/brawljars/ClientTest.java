@@ -30,8 +30,10 @@ import com.google.common.collect.ImmutableMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.response.Callback;
 import brawljars.response.GetPlayerResponse;
@@ -49,6 +51,19 @@ class ClientTest {
   private CrawlerFactory crawlerFactory;
 
   private Crawler crawler;
+
+  private static Map<String, String> createHeaders() {
+    return ImmutableMap.<String, String>builder().put(AUTHORIZATION, "Bearer " + API_KEY).build();
+  }
+
+  private static void waitUntil(Action action) {
+    long stop = System.currentTimeMillis() + 5000L;
+    for (long ms = System.currentTimeMillis(); ms < stop; ms = System.currentTimeMillis()) {
+      if (action.eval()) {
+        break;
+      }
+    }
+  }
 
   @BeforeEach
   void setUp() throws Exception {
@@ -79,10 +94,6 @@ class ClientTest {
     return new Client("lala/", API_KEY, crawlerFactory);
   }
 
-  private static Map<String, String> createHeaders() {
-    return ImmutableMap.<String, String>builder().put(AUTHORIZATION, "Bearer " + API_KEY).build();
-  }
-
   @Test
   void getLastRawResponse_whenCalled_thenReturnLastRawResponse() throws Exception {
     RawResponse rawResponse = new RawResponse();
@@ -100,6 +111,17 @@ class ClientTest {
         .thenReturn("{}");
 
     assertNotNull(createClient().getPlayer(getPlayerRequest));
+  }
+
+  @Test
+  void getPlayer_whenWithRequestAndException_thenThrowException() throws Exception {
+    GetPlayerRequest getPlayerRequest = GetPlayerRequest.builder(PLAYER_TAG).build();
+    when(crawler
+        .get("lala/players/%s", createHeaders(), getPlayerRequest.getQueryParameters(),
+            getPlayerRequest.getRestParameters()))
+        .thenThrow(new IOException());
+
+    assertThrows(IllegalStateException.class, () -> createClient().getPlayer(getPlayerRequest));
   }
 
   @Test
@@ -127,13 +149,40 @@ class ClientTest {
     assertTrue(state.get(), "callback not notified!");
   }
 
-  private static void waitUntil(Action action) {
-    long stop = System.currentTimeMillis() + 5000L;
-    for (long ms = System.currentTimeMillis(); ms < stop; ms = System.currentTimeMillis()) {
-      if (action.eval()) {
-        break;
-      }
-    }
+  @Test
+  void getPlayer_whenWithCallbackExpection_thenCallOnException() throws Exception {
+    AtomicBoolean state = new AtomicBoolean(false);
+    GetPlayerRequest
+        getPlayerRequest =
+        GetPlayerRequest.builder(PLAYER_TAG).callback(new Callback<GetPlayerResponse>() {
+          @Override
+          public void onResponse(GetPlayerResponse getPlayerResponse) {
+            fail();
+          }
+
+          @Override
+          public void onException(Exception exception) {
+            assertNotNull(exception);
+            state.set(true);
+          }
+        }).build();
+    when(crawler.get("lala/players/%s", createHeaders(), getPlayerRequest.getQueryParameters(),
+        getPlayerRequest.getRestParameters())).thenThrow(new IOException());
+    createClient().getPlayer(getPlayerRequest);
+    waitUntil(state::get);
+
+    assertTrue(state.get(), "callback not notified!");
+  }
+
+  @Test
+  void getPlayerBattleLog_whenWithRequest_thenGetResponse() throws Exception {
+    GetPlayerBattleLogRequest getPlayerBattleLogRequest = GetPlayerBattleLogRequest.builder(PLAYER_TAG).build();
+    when(crawler
+        .get("lala/players/%s/battlelog", createHeaders(), getPlayerBattleLogRequest.getQueryParameters(),
+            getPlayerBattleLogRequest.getRestParameters()))
+        .thenReturn("{}");
+
+    assertNotNull(createClient().getPlayerBattleLog(getPlayerBattleLogRequest));
   }
 
   @FunctionalInterface

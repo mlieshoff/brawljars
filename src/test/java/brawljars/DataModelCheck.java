@@ -16,6 +16,7 @@
  */
 package brawljars;
 
+import static java.util.Arrays.asList;
 import static org.apache.http.HttpHeaders.AUTHORIZATION;
 
 import com.google.common.collect.ImmutableMap;
@@ -34,7 +35,6 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import brawljars.model.Player;
+import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 
 /**
@@ -70,10 +71,19 @@ public class DataModelCheck {
     new DataModelCheck("https://bsproxy.royaleapi.dev/v1/", API_KEY).start();
   }
 
+  private static boolean isCollection(Field field) {
+    return Collection.class.isAssignableFrom(field.getType());
+  }
+
+  private static boolean isArray(Field field) {
+    return Array.class.isAssignableFrom(field.getType());
+  }
+
   private void start() throws IOException, ClassNotFoundException {
     loadModel();
 
     testPlayer();
+    testPlayerBattleLog();
   }
 
   private void printResults() {
@@ -126,9 +136,11 @@ public class DataModelCheck {
   }
 
   private void testPlayer() throws IOException {
-    test(Arrays.asList(
-        "players?playerTag=#28UP80RRY"
-    ), GetPlayerRequest.class, false, Player.class);
+    test(asList("players/%2328UP80RRY"), GetPlayerRequest.class, false, Player.class);
+  }
+
+  private void testPlayerBattleLog() throws IOException {
+    test(asList("players/%2328UP80RRY/battlelog"), GetPlayerBattleLogRequest.class, false, Player.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {
@@ -229,14 +241,6 @@ public class DataModelCheck {
       System.out.println(templateName + ".not defined in model: " + notDefined);
     }
     return foundFields;
-  }
-
-  private static boolean isCollection(Field field) {
-    return Collection.class.isAssignableFrom(field.getType());
-  }
-
-  private static boolean isArray(Field field) {
-    return Array.class.isAssignableFrom(field.getType());
   }
 
   private Map<String, String> createHeader() {

@@ -20,11 +20,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Collection;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author Michael Lieshoff
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class PageableResponse<T> extends Response {
 
   @SerializedName("items")

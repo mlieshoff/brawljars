@@ -23,8 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
-import brawljars.response.GetPlayerResponse;
+import brawljars.response.IResponse;
 
 /**
  * @author Michael Lieshoff
@@ -42,13 +43,22 @@ class EndToEnd {
 
   @Test
   void getPlayer_whenWithValidParameters_thenGetResponse() throws Exception {
-    GetPlayerResponse getPlayerResponse = api.getPlayer(GetPlayerRequest.builder("#28UP80RRY").build());
 
+    assertResponse(api.getPlayer(GetPlayerRequest.builder("#28UP80RRY").build()));
+  }
+
+  private void assertResponse(IResponse response) {
     assertAll(
-        () -> assertNotNull(getPlayerResponse, "getPlayerResponse"),
-        () -> assertNull(getPlayerResponse.getMessage(), "message"),
-        () -> assertNull(getPlayerResponse.getReason(), "reason")
+        () -> assertNotNull(response, "response"),
+        () -> assertNull(response.getMessage(), "message"),
+        () -> assertNull(response.getReason(), "reason")
     );
+  }
+
+  @Test
+  void getPlayerBattleLog_whenWithValidParameters_thenGetResponse() throws Exception {
+
+    assertResponse(api.getPlayerBattleLog(GetPlayerBattleLogRequest.builder("#28UP80RRY").build()));
   }
 
 }

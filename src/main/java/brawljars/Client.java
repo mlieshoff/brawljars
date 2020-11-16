@@ -31,8 +31,10 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.io.IOException;
 import java.util.Map;
+import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.Request;
+import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.IResponse;
 import brawljars.response.RawResponse;
@@ -68,13 +70,32 @@ public class Client {
     checkArgument(!url.isEmpty(), url);
   }
 
-  GetPlayerResponse getPlayer(GetPlayerRequest getPlayerRequest) throws IOException {
-    return singleObjectFromJson("getPlayerRequest", "players/%s", getPlayerRequest, GetPlayerResponse.class);
+  private static Map<String, String> createAuthHeader(String apiKey) {
+    String headerValue = "Bearer " + apiKey;
+    return ImmutableMap.<String, String>builder().put(AUTHORIZATION, headerValue).build();
   }
 
-  private <T extends IResponse> T singleObjectFromJson(String nameOfRequest, String part, Request request,
-                                                       Class<T> responseClass) throws IOException {
-    checkNotNull(request, nameOfRequest);
+  RawResponse getLastRawResponse() {
+    return createCrawler().getLastRawResponse();
+  }
+
+  GetPlayerResponse getPlayer(GetPlayerRequest getPlayerRequest) {
+    return executeRequest("players/%s", getPlayerRequest, GetPlayerResponse.class);
+  }
+
+  private <T extends Request<R>, R extends IResponse> R executeRequest(String module, T request,
+                                                                       Class<R> responseClass) {
+    try {
+      return singleObjectFromJson(module, request, responseClass);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
+  private <T extends Request<R>, R extends IResponse> R singleObjectFromJson(String part, T request,
+                                                                             Class<R> responseClass)
+      throws IOException {
+    checkNotNull(request, request.getClass().getSimpleName());
     if (request.getCallback() == null) {
       return toJson(part, request, responseClass);
     } else {
@@ -89,13 +110,10 @@ public class Client {
     }
   }
 
-  private <T extends IResponse> T toJson(String part, Request request, Class<T> responseClass) throws IOException {
+  private <T extends Request<R>, R extends IResponse> R toJson(String part, T request, Class<R> responseClass)
+      throws IOException {
     String json = get(createUrl(part), request);
     return new Gson().fromJson(json, responseClass);
-  }
-
-  private String createUrl(String part) {
-    return url + part;
   }
 
   private String get(String url, Request request) throws IOException {
@@ -107,13 +125,12 @@ public class Client {
     return crawlerFactory.createCrawler();
   }
 
-  private static Map<String, String> createAuthHeader(String apiKey) {
-    String headerValue = "Bearer " + apiKey;
-    return ImmutableMap.<String, String>builder().put(AUTHORIZATION, headerValue).build();
+  private String createUrl(String part) {
+    return url + part;
   }
 
-  RawResponse getLastRawResponse() {
-    return createCrawler().getLastRawResponse();
+  GetPlayerBattleLogResponse getPlayerBattleLog(GetPlayerBattleLogRequest getPlayerBattleLogRequest) {
+    return executeRequest("players/%s/battlelog", getPlayerBattleLogRequest, GetPlayerBattleLogResponse.class);
   }
 
 }
