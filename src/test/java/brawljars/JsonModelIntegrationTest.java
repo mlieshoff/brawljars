@@ -24,6 +24,8 @@ import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import brawljars.response.GetClubResponse;
+import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 
 class JsonModelIntegrationTest {
@@ -34,6 +36,22 @@ class JsonModelIntegrationTest {
   void fromJson_whenForGetPlayer_thenResolve() throws Exception {
     String json = readFileToString(new File("src/test/resources/player.json"));
     GetPlayerResponse object = GSON.fromJson(json, GetPlayerResponse.class);
+
+    assertNotNull(object);
+  }
+
+  @Test
+  void fromJson_whenForGetPlayerBattleLog_thenResolve() throws Exception {
+    String json = readFileToString(new File("src/test/resources/playerBattleLog.json"));
+    GetPlayerBattleLogResponse object = GSON.fromJson(json, GetPlayerBattleLogResponse.class);
+
+    assertNotNull(object);
+  }
+
+  @Test
+  void fromJson_whenForGetClub_thenResolve() throws Exception {
+    String json = readFileToString(new File("src/test/resources/club.json"));
+    GetClubResponse object = GSON.fromJson(json, GetClubResponse.class);
 
     assertNotNull(object);
   }

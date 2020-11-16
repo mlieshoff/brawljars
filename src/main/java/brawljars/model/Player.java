@@ -37,10 +37,10 @@ public class Player {
   private int bestTimeAsBigBrawler;
 
   @SerializedName("brawlers")
-  private List<Brawler> brawlers;
+  private List<PlayerBrawler> brawlers;
 
   @SerializedName("club")
-  private Club club;
+  private PlayerClub club;
 
   @SerializedName("duoVictories")
   private int duoVictories;

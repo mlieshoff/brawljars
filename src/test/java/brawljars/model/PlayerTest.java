@@ -53,7 +53,7 @@ class PlayerTest {
 
   @Test
   void setBrawlers_whenWithValidParameter_thenSetBrawlers() {
-    List<Brawler> expected = new ArrayList<Brawler>();
+    List<PlayerBrawler> expected = new ArrayList<PlayerBrawler>();
     unitUnderTest.setBrawlers(expected);
 
     assertEquals(expected, unitUnderTest.getBrawlers());
@@ -61,7 +61,7 @@ class PlayerTest {
 
   @Test
   void setClub_whenWithValidParameter_thenSetClub() {
-    Club expected = new Club();
+    PlayerClub expected = new PlayerClub();
     unitUnderTest.setClub(expected);
 
     assertEquals(expected, unitUnderTest.getClub());
@@ -159,8 +159,8 @@ class PlayerTest {
   void toString_whenCalled_thenReturnStringRepresentation() {
     unitUnderTest.setBestRoboRumbleTime(815);
     unitUnderTest.setBestTimeAsBigBrawler(815);
-    unitUnderTest.setBrawlers(new ArrayList<Brawler>());
-    unitUnderTest.setClub(new Club());
+    unitUnderTest.setBrawlers(new ArrayList<PlayerBrawler>());
+    unitUnderTest.setClub(new PlayerClub());
     unitUnderTest.setDuoVictories(815);
     unitUnderTest.setExpLevel(815);
     unitUnderTest.setExpPoints(815);
@@ -172,12 +172,7 @@ class PlayerTest {
     unitUnderTest.setTag("astring");
     unitUnderTest.setThreeVsThreeVictories(815);
     unitUnderTest.setTrophies(815);
-    String
-        expected =
-        "Player(bestRoboRumbleTime=815, bestTimeAsBigBrawler=815, brawlers=" + new ArrayList<Brawler>() + ", club="
-            + new Club() + ", duoVictories=815, expLevel=815, expPoints=815, highestTrophies=815, icon="
-            + new PlayerIcon()
-            + ", QualifiedFromChampionshipChallenge=false, name=astring, soloVictories=815, tag=astring, threeVsThreeVictories=815, trophies=815)";
+    String expected = "Player(bestRoboRumbleTime=815, bestTimeAsBigBrawler=815, brawlers=" + new ArrayList<PlayerBrawler>() + ", club=" + new PlayerClub() + ", duoVictories=815, expLevel=815, expPoints=815, highestTrophies=815, icon=" + new PlayerIcon() + ", QualifiedFromChampionshipChallenge=false, name=astring, soloVictories=815, tag=astring, threeVsThreeVictories=815, trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

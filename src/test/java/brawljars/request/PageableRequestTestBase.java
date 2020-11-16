@@ -16,16 +16,18 @@
  */
 package brawljars.request;
 
-import static java.lang.String.valueOf;
 import static brawljars.request.PageableRequest.QUERY_PARAM_AFTER;
 import static brawljars.request.PageableRequest.QUERY_PARAM_BEFORE;
 import static brawljars.request.PageableRequest.QUERY_PARAM_LIMIT;
+import static java.lang.String.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-abstract class PageableRequestTestBase<T extends PageableRequest> extends RequestTestBase {
+import brawljars.response.Response;
+
+abstract class PageableRequestTestBase<R extends Response, T extends PageableRequest<R>> extends RequestTestBase {
 
   private static final int PAGEABLE_LIMIT = 100;
 
@@ -34,11 +36,13 @@ abstract class PageableRequestTestBase<T extends PageableRequest> extends Reques
 
   @Test
   void pageableRequestBuilder_whenCalled_thenConstruct() throws Exception {
+
     assertTrue(PageableRequest.pageableRequestBuilder() instanceof PageableRequest.PageableRequestBuilder);
   }
 
   @Test
   void build_whenWithLimit_thenShouldConstruct() throws Exception {
+
     assertEquals(PAGEABLE_LIMIT, getRequestWithLimit().getLimit());
   }
 
@@ -54,11 +58,13 @@ abstract class PageableRequestTestBase<T extends PageableRequest> extends Reques
 
   @Test
   void getQueryParameters_whenWithLimit_thenHaveParameter() throws Exception {
+
     assertEquals(valueOf(PAGEABLE_LIMIT), getRequestWithLimit().getQueryParameters().get(QUERY_PARAM_LIMIT));
   }
 
   @Test
   void build_whenWithAfter_thenShouldConstruct() throws Exception {
+
     assertEquals(PAGEABLE_AFTER, getRequestWithAfter().getAfter());
   }
 
@@ -74,11 +80,13 @@ abstract class PageableRequestTestBase<T extends PageableRequest> extends Reques
 
   @Test
   void getQueryParameters_whenWithAfter_thenHaveParameter() throws Exception {
+
     assertEquals(PAGEABLE_AFTER, getRequestWithAfter().getQueryParameters().get(QUERY_PARAM_AFTER));
   }
 
   @Test
   void build_whenWithBefore_thenShouldConstruct() throws Exception {
+
     assertEquals(PAGEABLE_BEFORE, getRequestWithBefore().getBefore());
   }
 
@@ -94,6 +102,7 @@ abstract class PageableRequestTestBase<T extends PageableRequest> extends Reques
 
   @Test
   void getQueryParameters_whenWithBefore_thenHaveParameter() throws Exception {
+
     assertEquals(PAGEABLE_BEFORE, getRequestWithBefore().getQueryParameters().get(QUERY_PARAM_BEFORE));
   }
 

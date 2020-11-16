@@ -27,7 +27,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class StarPower {
+public class PlayerBrawlerStarPower {
 
   @SerializedName("id")
   private long id;

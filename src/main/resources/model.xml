@@ -20,36 +20,36 @@
         <member name="duoVictories" type="int"/>
         <member name="bestRoboRumbleTime" type="int"/>
         <member name="bestTimeAsBigBrawler" type="int"/>
-        <member name="club" type="Club"/>
-        <member name="brawlers" type="list(Brawler)"/>
+        <member name="club" type="PlayerClub"/>
+        <member name="brawlers" type="list(PlayerBrawler)"/>
     </class>
 
     <class name="PlayerIcon">
         <member name="id" type="String"/>
     </class>
 
-    <class name="Club">
+    <class name="PlayerClub">
         <member name="tag" type="String"/>
         <member name="name" type="String"/>
     </class>
 
-    <class name="Brawler">
+    <class name="PlayerBrawler">
         <member name="id" type="long"/>
         <member name="name" type="String"/>
         <member name="power" type="int"/>
         <member name="rank" type="int"/>
         <member name="trophies" type="int"/>
         <member name="highestTrophies" type="int"/>
-        <member name="starPowers" type="list(StarPower)"/>
-        <member name="gadgets" type="list(Gadget)"/>
+        <member name="starPowers" type="list(PlayerBrawlerStarPower)"/>
+        <member name="gadgets" type="list(PlayerBrawlerGadget)"/>
     </class>
 
-    <class name="StarPower">
+    <class name="PlayerBrawlerStarPower">
         <member name="id" type="long"/>
         <member name="name" type="String"/>
     </class>
 
-    <class name="Gadget">
+    <class name="PlayerBrawlerGadget">
         <member name="id" type="long"/>
         <member name="name" type="String"/>
     </class>
@@ -104,6 +104,32 @@
         <member name="name" type="String"/>
         <member name="power" type="int"/>
         <member name="trophies" type="int"/>
+    </class>
+
+    <!-- club -->
+
+    <class name="Club">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="description" type="String"/>
+        <member name="type" type="String"/>
+        <member name="badgeId" type="int"/>
+        <member name="requiredTrophies" type="int"/>
+        <member name="trophies" type="int"/>
+        <member name="members" type="list(ClubMember)"/>
+    </class>
+
+    <class name="ClubMember">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="nameColor" type="String"/>
+        <member name="role" type="String"/>
+        <member name="trophies" type="int"/>
+        <member name="icon" type="ClubIcon"/>
+    </class>
+
+    <class name="ClubIcon">
+        <member name="id" type="String"/>
     </class>
 
 </model>

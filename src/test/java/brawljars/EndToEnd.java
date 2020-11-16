@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.response.IResponse;
@@ -59,6 +60,12 @@ class EndToEnd {
   void getPlayerBattleLog_whenWithValidParameters_thenGetResponse() throws Exception {
 
     assertResponse(api.getPlayerBattleLog(GetPlayerBattleLogRequest.builder("#28UP80RRY").build()));
+  }
+
+  @Test
+  void getClub_whenWithValidParameters_thenGetResponse() throws Exception {
+
+    assertResponse(api.getClub(GetClubRequest.builder("#L99U2L2").build()));
   }
 
 }

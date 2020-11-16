@@ -16,36 +16,38 @@
  */
 package brawljars.model;
 
-import com.google.gson.annotations.SerializedName;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import javax.annotation.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Generated("org.mili.generator")
-@Data
-@EqualsAndHashCode
-@ToString
-public class PlayerBattleLogBattle {
+class ClubIconTest {
 
-  @SerializedName("duration")
-  private int duration;
+  private ClubIcon unitUnderTest;
 
-  @SerializedName("mode")
-  private String mode;
+  @BeforeEach
+  void setUp() {
+    unitUnderTest = new ClubIcon();
+  }
 
-  @SerializedName("result")
-  private String result;
+  @Test
+  void setId_whenWithValidParameter_thenSetId() {
+    String expected = "astring";
+    unitUnderTest.setId(expected);
 
-  @SerializedName("starPlayer")
-  private PlayerBattleLogBattleStarPlayer starPlayer;
+    assertEquals(expected, unitUnderTest.getId());
+  }
 
-  @SerializedName("teams")
-  private List<PlayerBattleLogBattleTeam> teams;
+  @Test
+  void toString_whenCalled_thenReturnStringRepresentation() {
+    unitUnderTest.setId("astring");
+    String expected = "ClubIcon(id=astring)";
+    String actual = unitUnderTest.toString();
 
-  @SerializedName("type")
-  private String type;
+    assertEquals(expected, actual);
+  }
 
 }

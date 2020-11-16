@@ -18,7 +18,6 @@ package brawljars.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
 import javax.annotation.Generated;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,24 +27,9 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class PlayerBattleLogBattle {
+public class ClubIcon {
 
-  @SerializedName("duration")
-  private int duration;
-
-  @SerializedName("mode")
-  private String mode;
-
-  @SerializedName("result")
-  private String result;
-
-  @SerializedName("starPlayer")
-  private PlayerBattleLogBattleStarPlayer starPlayer;
-
-  @SerializedName("teams")
-  private List<PlayerBattleLogBattleTeam> teams;
-
-  @SerializedName("type")
-  private String type;
+  @SerializedName("id")
+  private String id;
 
 }

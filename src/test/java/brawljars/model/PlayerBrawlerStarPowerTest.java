@@ -24,13 +24,13 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class StarPowerTest {
+class PlayerBrawlerStarPowerTest {
 
-  private StarPower unitUnderTest;
+  private PlayerBrawlerStarPower unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new StarPower();
+    unitUnderTest = new PlayerBrawlerStarPower();
   }
 
   @Test
@@ -53,7 +53,7 @@ class StarPowerTest {
   void toString_whenCalled_thenReturnStringRepresentation() {
     unitUnderTest.setId(4711L);
     unitUnderTest.setName("astring");
-    String expected = "StarPower(id=4711, name=astring)";
+    String expected = "PlayerBrawlerStarPower(id=4711, name=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

@@ -24,24 +24,36 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class VersionTest {
+class PlayerBrawlerGadgetTest {
 
-  private Version unitUnderTest;
+  private PlayerBrawlerGadget unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Version();
+    unitUnderTest = new PlayerBrawlerGadget();
   }
 
   @Test
-  void getVERSION_whenCalled_thenReturnVERSION() {
+  void setId_whenWithValidParameter_thenSetId() {
+    long expected = 4711L;
+    unitUnderTest.setId(expected);
 
-    assertEquals( "v1", unitUnderTest.VERSION);
+    assertEquals(expected, unitUnderTest.getId());
+  }
+
+  @Test
+  void setName_whenWithValidParameter_thenSetName() {
+    String expected = "astring";
+    unitUnderTest.setName(expected);
+
+    assertEquals(expected, unitUnderTest.getName());
   }
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    String expected = "Version()";
+    unitUnderTest.setId(4711L);
+    unitUnderTest.setName("astring");
+    String expected = "PlayerBrawlerGadget(id=4711, name=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

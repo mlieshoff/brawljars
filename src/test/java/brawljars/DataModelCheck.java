@@ -84,6 +84,7 @@ public class DataModelCheck {
 
     testPlayer();
     testPlayerBattleLog();
+    testClub();
   }
 
   private void printResults() {
@@ -141,6 +142,10 @@ public class DataModelCheck {
 
   private void testPlayerBattleLog() throws IOException {
     test(asList("players/%2328UP80RRY/battlelog"), GetPlayerBattleLogRequest.class, false, Player.class);
+  }
+
+  private void testClub() throws IOException {
+    test(asList("clubs/%23L99U2L2"), GetPlayerBattleLogRequest.class, false, Player.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {

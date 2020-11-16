@@ -21,42 +21,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class ClubTest {
+class ClubMemberTest {
 
-  private Club unitUnderTest;
+  private ClubMember unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Club();
+    unitUnderTest = new ClubMember();
   }
 
   @Test
-  void setBadgeId_whenWithValidParameter_thenSetBadgeId() {
-    int expected = 815;
-    unitUnderTest.setBadgeId(expected);
+  void setIcon_whenWithValidParameter_thenSetIcon() {
+    ClubIcon expected = new ClubIcon();
+    unitUnderTest.setIcon(expected);
 
-    assertEquals(expected, unitUnderTest.getBadgeId());
-  }
-
-  @Test
-  void setDescription_whenWithValidParameter_thenSetDescription() {
-    String expected = "astring";
-    unitUnderTest.setDescription(expected);
-
-    assertEquals(expected, unitUnderTest.getDescription());
-  }
-
-  @Test
-  void setMembers_whenWithValidParameter_thenSetMembers() {
-    List<ClubMember> expected = new ArrayList<ClubMember>();
-    unitUnderTest.setMembers(expected);
-
-    assertEquals(expected, unitUnderTest.getMembers());
+    assertEquals(expected, unitUnderTest.getIcon());
   }
 
   @Test
@@ -68,11 +50,19 @@ class ClubTest {
   }
 
   @Test
-  void setRequiredTrophies_whenWithValidParameter_thenSetRequiredTrophies() {
-    int expected = 815;
-    unitUnderTest.setRequiredTrophies(expected);
+  void setNameColor_whenWithValidParameter_thenSetNameColor() {
+    String expected = "astring";
+    unitUnderTest.setNameColor(expected);
 
-    assertEquals(expected, unitUnderTest.getRequiredTrophies());
+    assertEquals(expected, unitUnderTest.getNameColor());
+  }
+
+  @Test
+  void setRole_whenWithValidParameter_thenSetRole() {
+    String expected = "astring";
+    unitUnderTest.setRole(expected);
+
+    assertEquals(expected, unitUnderTest.getRole());
   }
 
   @Test
@@ -92,27 +82,14 @@ class ClubTest {
   }
 
   @Test
-  void setType_whenWithValidParameter_thenSetType() {
-    String expected = "astring";
-    unitUnderTest.setType(expected);
-
-    assertEquals(expected, unitUnderTest.getType());
-  }
-
-  @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setBadgeId(815);
-    unitUnderTest.setDescription("astring");
-    unitUnderTest.setMembers(new ArrayList<ClubMember>());
+    unitUnderTest.setIcon(new ClubIcon());
     unitUnderTest.setName("astring");
-    unitUnderTest.setRequiredTrophies(815);
+    unitUnderTest.setNameColor("astring");
+    unitUnderTest.setRole("astring");
     unitUnderTest.setTag("astring");
     unitUnderTest.setTrophies(815);
-    unitUnderTest.setType("astring");
-    String
-        expected =
-        "Club(badgeId=815, description=astring, members=" + new ArrayList<ClubMember>()
-            + ", name=astring, requiredTrophies=815, tag=astring, trophies=815, type=astring)";
+    String expected = "ClubMember(icon=" + new ClubIcon() + ", name=astring, nameColor=astring, role=astring, tag=astring, trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

@@ -16,15 +16,15 @@
  */
 package brawljars.response;
 
-import static java.util.Collections.emptyList;
 import static brawljars.response.PageableResponse.Paging.Cursors;
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 import brawljars.response.PageableResponse.Paging;
 
-abstract class PageableResponseTestBase<T extends PageableResponse> extends ResponseTestBase<T> {
+abstract class PageableResponseTestBase<R extends Response, T extends PageableResponse<R>> extends ResponseTestBase<T> {
 
   private static final String AFTER = "abc";
   private static final String BEFORE = "xyz";
@@ -34,6 +34,7 @@ abstract class PageableResponseTestBase<T extends PageableResponse> extends Resp
     T response = getResponse();
     Paging expected = new Paging();
     response.setPaging(expected);
+
     assertEquals(expected, response.getPaging());
   }
 
@@ -42,6 +43,7 @@ abstract class PageableResponseTestBase<T extends PageableResponse> extends Resp
     Paging paging = new Paging();
     Cursors expected = new Cursors();
     paging.setCursors(expected);
+
     assertEquals(expected, paging.getCursors());
   }
 
@@ -49,6 +51,7 @@ abstract class PageableResponseTestBase<T extends PageableResponse> extends Resp
   void pagingCursorsSetAfter_whenWithValidParameter_thenGet() throws Exception {
     Cursors expected = new Cursors();
     expected.setAfter(AFTER);
+
     assertEquals(AFTER, expected.getAfter());
   }
 
@@ -56,6 +59,7 @@ abstract class PageableResponseTestBase<T extends PageableResponse> extends Resp
   void pagingCursorsSetBefore_whenWithValidParameter_thenGet() throws Exception {
     Cursors expected = new Cursors();
     expected.setBefore(BEFORE);
+
     assertEquals(BEFORE, expected.getBefore());
   }
 
@@ -63,6 +67,7 @@ abstract class PageableResponseTestBase<T extends PageableResponse> extends Resp
   void setItems_whenWithValidParameter_thenGet() throws Exception {
     T response = getResponse();
     response.setItems(emptyList());
+
     assertEquals(emptyList(), response.getItems());
   }
 

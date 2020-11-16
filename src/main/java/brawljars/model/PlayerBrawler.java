@@ -28,24 +28,30 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class PlayerBattleLogBattle {
+public class PlayerBrawler {
 
-  @SerializedName("duration")
-  private int duration;
+  @SerializedName("gadgets")
+  private List<PlayerBrawlerGadget> gadgets;
 
-  @SerializedName("mode")
-  private String mode;
+  @SerializedName("highestTrophies")
+  private int highestTrophies;
 
-  @SerializedName("result")
-  private String result;
+  @SerializedName("id")
+  private long id;
 
-  @SerializedName("starPlayer")
-  private PlayerBattleLogBattleStarPlayer starPlayer;
+  @SerializedName("name")
+  private String name;
 
-  @SerializedName("teams")
-  private List<PlayerBattleLogBattleTeam> teams;
+  @SerializedName("power")
+  private int power;
 
-  @SerializedName("type")
-  private String type;
+  @SerializedName("rank")
+  private int rank;
+
+  @SerializedName("starPowers")
+  private List<PlayerBrawlerStarPower> starPowers;
+
+  @SerializedName("trophies")
+  private int trophies;
 
 }
