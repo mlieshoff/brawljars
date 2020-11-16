@@ -14,39 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars.response;
+package brawljars.model;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-abstract class ResponseTestBase<T extends IResponse> {
+import javax.annotation.Generated;
 
-  private static final String MESSAGE = "message";
-  private static final String REASON = "reason";
+@Generated("org.mili.generator")
+class ClubIconTest {
 
-  @Test
-  void setMessage_whenWithValidParameter_thenGet() throws Exception {
-    T response = getResponse();
-    response.setMessage(MESSAGE);
-    assertEquals(MESSAGE, response.getMessage());
+  private ClubIcon unitUnderTest;
+
+  @BeforeEach
+  void setUp() {
+    unitUnderTest = new ClubIcon();
   }
 
   @Test
-  void setReason_whenWithValidParameter_thenGet() throws Exception {
-    T response = getResponse();
-    response.setReason(REASON);
-    assertEquals(REASON, response.getReason());
+  void setId_whenWithValidParameter_thenSetId() {
+    String expected = "astring";
+    unitUnderTest.setId(expected);
+
+    assertEquals(expected, unitUnderTest.getId());
   }
 
   @Test
-  void toString_whenWithCalled_thenReturnNotBlank() throws Exception {
+  void toString_whenCalled_thenReturnStringRepresentation() {
+    unitUnderTest.setId("astring");
+    String expected = "ClubIcon(id=astring)";
+    String actual = unitUnderTest.toString();
 
-    assertTrue(isNotBlank(getResponse().toString()));
+    assertEquals(expected, actual);
   }
-
-  abstract T getResponse();
 
 }

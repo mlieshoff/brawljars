@@ -29,8 +29,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 
@@ -39,18 +41,22 @@ import brawljars.response.GetPlayerResponse;
  */
 class IntegrationTest {
 
-  static final String API_KEY = "itsasecret";
   private static final int PORT = 50000;
-  private static final String CONTEXT = "test";
+
+  static final String API_KEY = "itsasecret";
   private static final String APP = "brawljars";
-  private static final String URL = format("http://localhost:50000/%s/%s/", CONTEXT, APP);
+  private static final String CLUB_TAG = "playerTag";
+  private static final String CONTEXT = "test";
   private static final String PLAYER_TAG = "playerTag";
+  private static final String URL = format("http://localhost:50000/%s/%s/", CONTEXT, APP);
+
   private static JettyServer jettyServer;
 
   @BeforeAll
   static void beforeClass() throws Exception {
     jettyServer = new JettyServer(PORT, '/' + CONTEXT);
     jettyServer.addServlet('/' + APP + "/players/*", new TestPlayersServlet());
+    jettyServer.addServlet('/' + APP + "/clubs/*", new TestClubsServlet());
     jettyServer.start();
   }
 
@@ -64,16 +70,6 @@ class IntegrationTest {
     GetPlayerResponse expected = new Gson().fromJson(expectedJson, GetPlayerResponse.class);
 
     GetPlayerResponse actual = new Api(URL, apiKey).getPlayer(GetPlayerRequest.builder(PLAYER_TAG).build());
-
-    assertEquals(expected, actual);
-  }
-
-  private static void doGetPlayerBattleLog(String apiKey) throws IOException {
-    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/playerBattleLog.json"));
-    GetPlayerBattleLogResponse expected = new Gson().fromJson(expectedJson, GetPlayerBattleLogResponse.class);
-
-    GetPlayerBattleLogResponse
-        actual = new Api(URL, apiKey).getPlayerBattleLog(GetPlayerBattleLogRequest.builder(PLAYER_TAG).build());
 
     assertEquals(expected, actual);
   }
@@ -94,10 +90,40 @@ class IntegrationTest {
     doGetPlayerBattleLog(API_KEY);
   }
 
+  private static void doGetPlayerBattleLog(String apiKey) throws IOException {
+    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/playerBattleLog.json"));
+    GetPlayerBattleLogResponse expected = new Gson().fromJson(expectedJson, GetPlayerBattleLogResponse.class);
+
+    GetPlayerBattleLogResponse
+        actual = new Api(URL, apiKey).getPlayerBattleLog(GetPlayerBattleLogRequest.builder(PLAYER_TAG).build());
+
+    assertEquals(expected, actual);
+  }
+
   @Test
   void getPlayerBattleLog_whenWithWrongUrl_thenThrow() throws Exception {
 
     assertThrows(ApiException.class, () -> doGetPlayerBattleLog("lala2"));
+  }
+
+  @Test
+  void getClub_whenWithValidParameters_thenReturnResponse() throws Exception {
+    doGetClub(API_KEY);
+  }
+
+  private static void doGetClub(String apiKey) throws IOException {
+    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/club.json"));
+    GetClubResponse expected = new Gson().fromJson(expectedJson, GetClubResponse.class);
+
+    GetClubResponse actual = new Api(URL, apiKey).getClub(GetClubRequest.builder(CLUB_TAG).build());
+
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void getClub_whenWithWrongUrl_thenThrow() throws Exception {
+
+    assertThrows(ApiException.class, () -> doGetClub("lala2"));
   }
 
 }

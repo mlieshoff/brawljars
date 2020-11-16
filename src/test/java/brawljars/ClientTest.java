@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.response.Callback;
@@ -45,6 +46,7 @@ import brawljars.response.RawResponse;
 class ClientTest {
 
   public static final String API_KEY = "apiKey";
+  public static final String CLUB_TAG = "clubTag";
   public static final String URL = "url";
   public static final String PLAYER_TAG = "playerTag";
 
@@ -63,6 +65,13 @@ class ClientTest {
         break;
       }
     }
+  }
+
+  @FunctionalInterface
+  private interface Action {
+
+    boolean eval();
+
   }
 
   @BeforeEach
@@ -185,11 +194,14 @@ class ClientTest {
     assertNotNull(createClient().getPlayerBattleLog(getPlayerBattleLogRequest));
   }
 
-  @FunctionalInterface
-  private interface Action {
+  @Test
+  void getClub_whenWithRequest_thenGetResponse() throws Exception {
+    GetClubRequest getClubRequest = GetClubRequest.builder(CLUB_TAG).build();
+    when(crawler
+        .get("lala/clubs/%s", createHeaders(), getClubRequest.getQueryParameters(), getClubRequest.getRestParameters()))
+        .thenReturn("{}");
 
-    boolean eval();
-
+    assertNotNull(createClient().getClub(getClubRequest));
   }
 
 }

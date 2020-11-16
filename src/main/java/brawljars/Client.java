@@ -31,9 +31,11 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.io.IOException;
 import java.util.Map;
+import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.Request;
+import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.IResponse;
@@ -116,7 +118,7 @@ public class Client {
     return new Gson().fromJson(json, responseClass);
   }
 
-  private String get(String url, Request request) throws IOException {
+  private <T extends Request<R>, R extends IResponse> String get(String url, T request) throws IOException {
     return createCrawler()
         .get(url, createAuthHeader(apiKey), request.getQueryParameters(), request.getRestParameters());
   }
@@ -131,6 +133,10 @@ public class Client {
 
   GetPlayerBattleLogResponse getPlayerBattleLog(GetPlayerBattleLogRequest getPlayerBattleLogRequest) {
     return executeRequest("players/%s/battlelog", getPlayerBattleLogRequest, GetPlayerBattleLogResponse.class);
+  }
+
+  GetClubResponse getClub(GetClubRequest getClubRequest) {
+    return executeRequest("clubs/%s", getClubRequest, GetClubResponse.class);
   }
 
 }

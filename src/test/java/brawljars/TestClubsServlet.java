@@ -14,44 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars.model;
+package brawljars;
 
-import com.google.gson.annotations.SerializedName;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import java.util.List;
-import javax.annotation.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+/**
+ * @author Michael Lieshoff
+ */
+public class TestClubsServlet extends TestJsonFileServlet {
 
-@Generated("org.mili.generator")
-@Data
-@EqualsAndHashCode
-@ToString
-public class Brawler {
+  private static final long serialVersionUID = 8270023318353714562L;
 
-  @SerializedName("gadgets")
-  private List<Gadget> gadgets;
-
-  @SerializedName("highestTrophies")
-  private int highestTrophies;
-
-  @SerializedName("id")
-  private long id;
-
-  @SerializedName("name")
-  private String name;
-
-  @SerializedName("power")
-  private int power;
-
-  @SerializedName("rank")
-  private int rank;
-
-  @SerializedName("starPowers")
-  private List<StarPower> starPowers;
-
-  @SerializedName("trophies")
-  private int trophies;
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    String filename = "src/test/resources/club.json";
+    doGet(filename, req, resp);
+  }
 
 }

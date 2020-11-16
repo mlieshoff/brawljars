@@ -27,12 +27,24 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class Gadget {
+public class ClubMember {
 
-  @SerializedName("id")
-  private long id;
+  @SerializedName("icon")
+  private ClubIcon icon;
 
   @SerializedName("name")
   private String name;
+
+  @SerializedName("nameColor")
+  private String nameColor;
+
+  @SerializedName("role")
+  private String role;
+
+  @SerializedName("tag")
+  private String tag;
+
+  @SerializedName("trophies")
+  private int trophies;
 
 }

@@ -14,39 +14,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars.response;
+package brawljars.model;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-abstract class ResponseTestBase<T extends IResponse> {
+import javax.annotation.Generated;
 
-  private static final String MESSAGE = "message";
-  private static final String REASON = "reason";
+@Generated("org.mili.generator")
+class PlayerBrawlerGadgetTest {
 
-  @Test
-  void setMessage_whenWithValidParameter_thenGet() throws Exception {
-    T response = getResponse();
-    response.setMessage(MESSAGE);
-    assertEquals(MESSAGE, response.getMessage());
+  private PlayerBrawlerGadget unitUnderTest;
+
+  @BeforeEach
+  void setUp() {
+    unitUnderTest = new PlayerBrawlerGadget();
   }
 
   @Test
-  void setReason_whenWithValidParameter_thenGet() throws Exception {
-    T response = getResponse();
-    response.setReason(REASON);
-    assertEquals(REASON, response.getReason());
+  void setId_whenWithValidParameter_thenSetId() {
+    long expected = 4711L;
+    unitUnderTest.setId(expected);
+
+    assertEquals(expected, unitUnderTest.getId());
   }
 
   @Test
-  void toString_whenWithCalled_thenReturnNotBlank() throws Exception {
+  void setName_whenWithValidParameter_thenSetName() {
+    String expected = "astring";
+    unitUnderTest.setName(expected);
 
-    assertTrue(isNotBlank(getResponse().toString()));
+    assertEquals(expected, unitUnderTest.getName());
   }
 
-  abstract T getResponse();
+  @Test
+  void toString_whenCalled_thenReturnStringRepresentation() {
+    unitUnderTest.setId(4711L);
+    unitUnderTest.setName("astring");
+    String expected = "PlayerBrawlerGadget(id=4711, name=astring)";
+    String actual = unitUnderTest.toString();
+
+    assertEquals(expected, actual);
+  }
 
 }

@@ -24,21 +24,13 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class GadgetTest {
+class PlayerClubTest {
 
-  private Gadget unitUnderTest;
+  private PlayerClub unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Gadget();
-  }
-
-  @Test
-  void setId_whenWithValidParameter_thenSetId() {
-    long expected = 4711L;
-    unitUnderTest.setId(expected);
-
-    assertEquals(expected, unitUnderTest.getId());
+    unitUnderTest = new PlayerClub();
   }
 
   @Test
@@ -50,10 +42,18 @@ class GadgetTest {
   }
 
   @Test
+  void setTag_whenWithValidParameter_thenSetTag() {
+    String expected = "astring";
+    unitUnderTest.setTag(expected);
+
+    assertEquals(expected, unitUnderTest.getTag());
+  }
+
+  @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setId(4711L);
     unitUnderTest.setName("astring");
-    String expected = "Gadget(id=4711, name=astring)";
+    unitUnderTest.setTag("astring");
+    String expected = "PlayerClub(name=astring, tag=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

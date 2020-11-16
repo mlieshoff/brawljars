@@ -20,9 +20,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.function.Function;
+import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.Request;
+import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.IResponse;
@@ -78,6 +80,10 @@ public class Api {
 
   public GetPlayerBattleLogResponse getPlayerBattleLog(GetPlayerBattleLogRequest getPlayerBattleLogRequest) {
     return executeRequest(getPlayerBattleLogRequest, client -> client.getPlayerBattleLog(getPlayerBattleLogRequest));
+  }
+
+  public GetClubResponse getClub(GetClubRequest getClubRequest) {
+    return executeRequest(getClubRequest, client -> client.getClub(getClubRequest));
   }
 
 }

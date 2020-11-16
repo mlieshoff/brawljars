@@ -36,7 +36,7 @@ class VersionTest {
   @Test
   void getVERSION_whenCalled_thenReturnVERSION() {
 
-    assertEquals("v1", unitUnderTest.VERSION);
+    assertEquals( "v1", unitUnderTest.VERSION);
   }
 
   @Test

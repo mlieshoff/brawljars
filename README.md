@@ -28,6 +28,24 @@ Map<String, String> responseHeaders = rawResponse.getResponseHeaders();
 GetPlayerResponse getPlayerResponse = api.getPlayer(GetPlayerRequest.builder("#28UP80RRY").build());
 ```
 
+```java
+// get player battle log
+GetPlayerBattleLogResponse getPlayerBattleLogResponse = api.getPlayerBattleLog(GetPlayerBattleLogRequest.builder("#28UP80RRY")
+  // paging
+  .limit()
+  .after()
+  .before()
+  .build()
+);
+```
+
+```java
+// get player battle log
+GetClubResponse getClubResponse = api.getClub(GetClubRequest.builder("#L99U2L2")
+  .build()
+);
+```
+
 ## Asynchronous usage
 
 All requests can have a *callback*. Then execution will be asynchronous.

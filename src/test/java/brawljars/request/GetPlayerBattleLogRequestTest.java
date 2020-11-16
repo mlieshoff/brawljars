@@ -11,22 +11,26 @@ class GetPlayerBattleLogRequestTest extends PageableRequestTestBase<GetPlayerBat
   public static final String PLAYER_TAG = "playerTag";
 
   @Test
-  void build_whenWithNullClanTag_thenThrowException() throws Exception {
+  void build_whenWithNullPlayerTag_thenThrowException() throws Exception {
+
     assertThrows(NullPointerException.class, () -> GetPlayerBattleLogRequest.builder(null).build());
   }
 
   @Test
-  void build_whenWithEmptyClanTag_thenThrowException() throws Exception {
+  void build_whenWithEmptyPlayerTag_thenThrowException() throws Exception {
+
     assertThrows(IllegalArgumentException.class, () -> GetPlayerBattleLogRequest.builder("").build());
   }
 
   @Test
-  void build_whenWithClanTag_thenSetValue() throws Exception {
+  void build_whenWithPlayerTag_thenSetValue() throws Exception {
+
     assertEquals(PLAYER_TAG, GetPlayerBattleLogRequest.builder(PLAYER_TAG).build().getPlayerTag());
   }
 
   @Test
-  void build_whenWithClanTag_thenHaveRestParameter() throws Exception {
+  void build_whenWithPlayerTag_thenHaveRestParameter() throws Exception {
+
     assertEquals(singletonList(PLAYER_TAG), GetPlayerBattleLogRequest.builder(PLAYER_TAG).build().getRestParameters());
   }
 

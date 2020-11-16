@@ -26,18 +26,18 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class BrawlerTest {
+class PlayerBrawlerTest {
 
-  private Brawler unitUnderTest;
+  private PlayerBrawler unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new Brawler();
+    unitUnderTest = new PlayerBrawler();
   }
 
   @Test
   void setGadgets_whenWithValidParameter_thenSetGadgets() {
-    List<Gadget> expected = new ArrayList<Gadget>();
+    List<PlayerBrawlerGadget> expected = new ArrayList<PlayerBrawlerGadget>();
     unitUnderTest.setGadgets(expected);
 
     assertEquals(expected, unitUnderTest.getGadgets());
@@ -85,7 +85,7 @@ class BrawlerTest {
 
   @Test
   void setStarPowers_whenWithValidParameter_thenSetStarPowers() {
-    List<StarPower> expected = new ArrayList<StarPower>();
+    List<PlayerBrawlerStarPower> expected = new ArrayList<PlayerBrawlerStarPower>();
     unitUnderTest.setStarPowers(expected);
 
     assertEquals(expected, unitUnderTest.getStarPowers());
@@ -101,19 +101,15 @@ class BrawlerTest {
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setGadgets(new ArrayList<Gadget>());
+    unitUnderTest.setGadgets(new ArrayList<PlayerBrawlerGadget>());
     unitUnderTest.setHighestTrophies(815);
     unitUnderTest.setId(4711L);
     unitUnderTest.setName("astring");
     unitUnderTest.setPower(815);
     unitUnderTest.setRank(815);
-    unitUnderTest.setStarPowers(new ArrayList<StarPower>());
+    unitUnderTest.setStarPowers(new ArrayList<PlayerBrawlerStarPower>());
     unitUnderTest.setTrophies(815);
-    String
-        expected =
-        "Brawler(gadgets=" + new ArrayList<Gadget>()
-            + ", highestTrophies=815, id=4711, name=astring, power=815, rank=815, starPowers="
-            + new ArrayList<StarPower>() + ", trophies=815)";
+    String expected = "PlayerBrawler(gadgets=" + new ArrayList<PlayerBrawlerGadget>() + ", highestTrophies=815, id=4711, name=astring, power=815, rank=815, starPowers=" + new ArrayList<PlayerBrawlerStarPower>() + ", trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);
