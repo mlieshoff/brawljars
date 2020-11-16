@@ -132,4 +132,12 @@
         <member name="id" type="String"/>
     </class>
 
+    <!-- rankings powerplay seasons -->
+
+    <class name="RankingsPowerplaySeason">
+        <member name="id" type="String"/>
+        <member name="startTime" type="String"/>
+        <member name="endTime" type="String"/>
+    </class>
+
 </model>

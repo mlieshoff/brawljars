@@ -49,6 +49,7 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 
 /**
  * @author Michael Lieshoff
@@ -86,10 +87,13 @@ public class DataModelCheck {
   private void start() throws IOException, ClassNotFoundException {
     loadModel();
 
+    /*
     testPlayer();
     testPlayerBattleLog();
     testClub();
     testClubMembers();
+    */
+    testRankingPowerplaySeason();
   }
 
   private void printResults() {
@@ -155,6 +159,10 @@ public class DataModelCheck {
 
   private void testClubMembers() throws IOException {
     test(asList("clubs/%23L99U2L2/members"), GetClubMembersRequest.class, false, ClubMember.class);
+  }
+
+  private void testRankingPowerplaySeason() throws IOException {
+    test(asList("rankings/DE/powerplay/seasons"), GetRankingsPowerplaySeasonsRequest.class, false, ClubMember.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {
