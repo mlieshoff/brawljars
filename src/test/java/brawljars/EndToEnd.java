@@ -27,6 +27,7 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsBrawlerRequest;
 import brawljars.request.GetRankingsClubsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
@@ -95,6 +96,12 @@ class EndToEnd {
   void getRankingsClubs() throws Exception {
 
     assertResponse(api.getRankingsClubs(GetRankingsClubsRequest.builder("DE").build()));
+  }
+
+  @Test
+  void getRankingsBrawler() throws Exception {
+
+    assertResponse(api.getRankingsBrawler(GetRankingsBrawlerRequest.builder("DE", "16000000").build()));
   }
 
 }

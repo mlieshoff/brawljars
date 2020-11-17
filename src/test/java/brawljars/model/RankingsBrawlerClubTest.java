@@ -16,38 +16,38 @@
  */
 package brawljars.model;
 
-import com.google.gson.annotations.SerializedName;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Generated("org.mili.generator")
-@Data
-@EqualsAndHashCode
-@ToString
-public class RankingsPowerplaySeasonsSeason {
+class RankingsBrawlerClubTest {
 
-  @SerializedName("club")
-  private RankingsPowerplaySeasonsSeasonClub club;
+  private RankingsBrawlerClub unitUnderTest;
 
-  @SerializedName("icon")
-  private RankingsPowerplaySeasonsSeasonIcon icon;
+  @BeforeEach
+  void setUp() {
+    unitUnderTest = new RankingsBrawlerClub();
+  }
 
-  @SerializedName("name")
-  private String name;
+  @Test
+  void setName_whenWithValidParameter_thenSetName() {
+    String expected = "astring";
+    unitUnderTest.setName(expected);
 
-  @SerializedName("nameColor")
-  private String nameColor;
+    assertEquals(expected, unitUnderTest.getName());
+  }
 
-  @SerializedName("rank")
-  private int rank;
+  @Test
+  void toString_whenCalled_thenReturnStringRepresentation() {
+    unitUnderTest.setName("astring");
+    String expected = "RankingsBrawlerClub(name=astring)";
+    String actual = unitUnderTest.toString();
 
-  @SerializedName("tag")
-  private String tag;
-
-  @SerializedName("trophies")
-  private int trophies;
+    assertEquals(expected, actual);
+  }
 
 }

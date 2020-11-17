@@ -162,13 +162,33 @@
 
     <!-- rankings clubs -->
 
-    <class name="RankingsPowerplaySeasonsSeason">
+    <class name="RankingsClubs">
         <member name="tag" type="String"/>
         <member name="name" type="String"/>
         <member name="badgeId" type="int"/>
         <member name="trophies" type="int"/>
         <member name="rank" type="int"/>
         <member name="memberCount" type="int"/>
+    </class>
+
+    <!-- rankings brawler -->
+
+    <class name="RankingsBrawler">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="nameColor" type="String"/>
+        <member name="icon" type="RankingsBrawlerIcon"/>
+        <member name="trophies" type="int"/>
+        <member name="rank" type="int"/>
+        <member name="club" type="RankingsBrawlerClub"/>
+    </class>
+
+    <class name="RankingsBrawlerIcon">
+        <member name="id" type="int"/>
+    </class>
+
+    <class name="RankingsBrawlerClub">
+        <member name="name" type="String"/>
     </class>
 
 </model>

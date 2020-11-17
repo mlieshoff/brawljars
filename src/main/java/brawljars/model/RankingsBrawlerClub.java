@@ -27,27 +27,9 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class RankingsPowerplaySeasonsSeason {
-
-  @SerializedName("club")
-  private RankingsPowerplaySeasonsSeasonClub club;
-
-  @SerializedName("icon")
-  private RankingsPowerplaySeasonsSeasonIcon icon;
+public class RankingsBrawlerClub {
 
   @SerializedName("name")
   private String name;
-
-  @SerializedName("nameColor")
-  private String nameColor;
-
-  @SerializedName("rank")
-  private int rank;
-
-  @SerializedName("tag")
-  private String tag;
-
-  @SerializedName("trophies")
-  private int trophies;
 
 }

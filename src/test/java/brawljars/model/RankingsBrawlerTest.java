@@ -24,18 +24,18 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class RankingsPowerplaySeasonsSeasonTest {
+class RankingsBrawlerTest {
 
-  private RankingsPowerplaySeasonsSeason unitUnderTest;
+  private RankingsBrawler unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new RankingsPowerplaySeasonsSeason();
+    unitUnderTest = new RankingsBrawler();
   }
 
   @Test
   void setClub_whenWithValidParameter_thenSetClub() {
-    RankingsPowerplaySeasonsSeasonClub expected = new RankingsPowerplaySeasonsSeasonClub();
+    RankingsBrawlerClub expected = new RankingsBrawlerClub();
     unitUnderTest.setClub(expected);
 
     assertEquals(expected, unitUnderTest.getClub());
@@ -43,7 +43,7 @@ class RankingsPowerplaySeasonsSeasonTest {
 
   @Test
   void setIcon_whenWithValidParameter_thenSetIcon() {
-    RankingsPowerplaySeasonsSeasonIcon expected = new RankingsPowerplaySeasonsSeasonIcon();
+    RankingsBrawlerIcon expected = new RankingsBrawlerIcon();
     unitUnderTest.setIcon(expected);
 
     assertEquals(expected, unitUnderTest.getIcon());
@@ -91,8 +91,8 @@ class RankingsPowerplaySeasonsSeasonTest {
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setClub(new RankingsPowerplaySeasonsSeasonClub());
-    unitUnderTest.setIcon(new RankingsPowerplaySeasonsSeasonIcon());
+    unitUnderTest.setClub(new RankingsBrawlerClub());
+    unitUnderTest.setIcon(new RankingsBrawlerIcon());
     unitUnderTest.setName("astring");
     unitUnderTest.setNameColor("astring");
     unitUnderTest.setRank(815);
@@ -100,8 +100,7 @@ class RankingsPowerplaySeasonsSeasonTest {
     unitUnderTest.setTrophies(815);
     String
         expected =
-        "RankingsPowerplaySeasonsSeason(club=" + new RankingsPowerplaySeasonsSeasonClub() + ", icon="
-            + new RankingsPowerplaySeasonsSeasonIcon()
+        "RankingsBrawler(club=" + new RankingsBrawlerClub() + ", icon=" + new RankingsBrawlerIcon()
             + ", name=astring, nameColor=astring, rank=815, tag=astring, trophies=815)";
     String actual = unitUnderTest.toString();
 

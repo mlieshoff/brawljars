@@ -1,6 +1,6 @@
 package brawljars.response;
 
-import brawljars.request.GetRankingsClubsRequest;
+import brawljars.model.RankingsBrawler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -8,6 +8,6 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class GetRankingsClubsResponse extends PageableResponse<GetRankingsClubsRequest> {
+public class GetRankingsBrawlerResponse extends PageableResponse<RankingsBrawler> {
 
 }
