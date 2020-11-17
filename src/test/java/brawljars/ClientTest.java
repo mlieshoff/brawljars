@@ -40,6 +40,7 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsClubsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
@@ -48,6 +49,7 @@ import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsClubsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
 import brawljars.response.IResponse;
@@ -266,6 +268,13 @@ class ClientTest {
     runTest("getRankingsPowerplaySeasonsSeason", "rankings/%s/powerplay/seasons/%s",
         GetRankingsPowerplaySeasonsSeasonRequest.builder(COUNTRY_CODE, SEASON_ID).build(),
         new GetRankingsPowerplaySeasonsSeasonResponse());
+  }
+
+  @Test
+  void getRankingsClubs() throws Exception {
+
+    runTest("getRankingsClubs", "rankings/%s/clubs", GetRankingsClubsRequest.builder(COUNTRY_CODE).build(),
+        new GetRankingsClubsResponse());
   }
 
 }

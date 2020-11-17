@@ -35,6 +35,7 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsClubsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
@@ -42,6 +43,7 @@ import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsClubsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
 import brawljars.response.IResponse;
@@ -159,6 +161,10 @@ public class Client {
       GetRankingsPowerplaySeasonsSeasonRequest getRankingsPowerplaySeasonsSeasonRequest) {
     return executeRequest("rankings/%s/powerplay/seasons/%s", getRankingsPowerplaySeasonsSeasonRequest,
         GetRankingsPowerplaySeasonsSeasonResponse.class);
+  }
+
+  GetRankingsClubsResponse getRankingsClubs(GetRankingsClubsRequest getRankingsClubsRequest) {
+    return executeRequest("rankings/%s/clubs", getRankingsClubsRequest, GetRankingsClubsResponse.class);
   }
 
 }

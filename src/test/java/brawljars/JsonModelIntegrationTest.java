@@ -24,36 +24,57 @@ import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import brawljars.response.GetClubResponse;
+import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsPowerplaySeasonsResponse;
+import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
+import brawljars.response.IResponse;
 
 class JsonModelIntegrationTest {
 
   private static final Gson GSON = new Gson();
 
   @Test
-  void fromJson_whenForGetPlayer_thenResolve() throws Exception {
-    String json = readFileToString(new File("src/test/resources/player.json"));
-    GetPlayerResponse object = GSON.fromJson(json, GetPlayerResponse.class);
+  void getPlayer() throws Exception {
 
-    assertNotNull(object);
+    runTest("src/test/resources/player.json", GetPlayerResponse.class);
+  }
+
+  <R extends IResponse> void runTest(String filename, Class<R> responseClass) throws Exception {
+    String json = readFileToString(new File(filename));
+
+    assertNotNull(GSON.fromJson(json, responseClass));
   }
 
   @Test
-  void fromJson_whenForGetPlayerBattleLog_thenResolve() throws Exception {
-    String json = readFileToString(new File("src/test/resources/playerBattleLog.json"));
-    GetPlayerBattleLogResponse object = GSON.fromJson(json, GetPlayerBattleLogResponse.class);
+  void getPlayerBattleLog() throws Exception {
 
-    assertNotNull(object);
+    runTest("src/test/resources/playerBattleLog.json", GetPlayerBattleLogResponse.class);
   }
 
   @Test
-  void fromJson_whenForGetClub_thenResolve() throws Exception {
-    String json = readFileToString(new File("src/test/resources/club.json"));
-    GetClubResponse object = GSON.fromJson(json, GetClubResponse.class);
+  void getClub() throws Exception {
 
-    assertNotNull(object);
+    runTest("src/test/resources/club.json", GetClubMembersResponse.class);
+  }
+
+  @Test
+  void getClubMembers() throws Exception {
+
+    runTest("src/test/resources/clubMembers.json", GetClubMembersResponse.class);
+  }
+
+  @Test
+  void getRankingsPowerplaySeasons() throws Exception {
+
+    runTest("src/test/resources/rankingsPowerplaySeasons.json", GetRankingsPowerplaySeasonsResponse.class);
+  }
+
+  @Test
+  void getRankingsPowerplaySeasonsSeason() throws Exception {
+
+    runTest("src/test/resources/rankingsPowerplaySeasonsSeason.json", GetRankingsPowerplaySeasonsSeasonResponse.class);
   }
 
 }

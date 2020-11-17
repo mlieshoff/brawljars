@@ -24,6 +24,7 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsClubsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
@@ -31,6 +32,7 @@ import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsClubsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
 import brawljars.response.IResponse;
@@ -106,6 +108,10 @@ public class Api {
       GetRankingsPowerplaySeasonsSeasonRequest getRankingsPowerplaySeasonsSeasonRequest) {
     return executeRequest(getRankingsPowerplaySeasonsSeasonRequest,
         client -> client.getRankingsPowerplaySeasonsSeason(getRankingsPowerplaySeasonsSeasonRequest));
+  }
+
+  public GetRankingsClubsResponse getRankingsClubs(GetRankingsClubsRequest getRankingsClubsRequest) {
+    return executeRequest(getRankingsClubsRequest, client -> client.getRankingsClubs(getRankingsClubsRequest));
   }
 
 }

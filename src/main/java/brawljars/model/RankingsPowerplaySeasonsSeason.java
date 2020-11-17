@@ -29,17 +29,14 @@ import lombok.ToString;
 @ToString
 public class RankingsPowerplaySeasonsSeason {
 
-  @SerializedName("club")
-  private RankingsPowerplaySeasonsSeasonClub club;
+  @SerializedName("badgeId")
+  private int badgeId;
 
-  @SerializedName("icon")
-  private RankingsPowerplaySeasonsSeasonIcon icon;
+  @SerializedName("memberCount")
+  private int memberCount;
 
   @SerializedName("name")
   private String name;
-
-  @SerializedName("nameColor")
-  private String nameColor;
 
   @SerializedName("rank")
   private int rank;
