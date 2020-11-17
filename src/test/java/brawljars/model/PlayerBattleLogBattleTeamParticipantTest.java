@@ -62,7 +62,10 @@ class PlayerBattleLogBattleTeamParticipantTest {
     unitUnderTest.setBrawler(new PlayerBattleLogBattleBrawler());
     unitUnderTest.setName("astring");
     unitUnderTest.setTag("astring");
-    String expected = "PlayerBattleLogBattleTeamParticipant(brawler=" + new PlayerBattleLogBattleBrawler() + ", name=astring, tag=astring)";
+    String
+        expected =
+        "PlayerBattleLogBattleTeamParticipant(brawler=" + new PlayerBattleLogBattleBrawler()
+            + ", name=astring, tag=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

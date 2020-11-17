@@ -134,10 +134,30 @@
 
     <!-- rankings powerplay seasons -->
 
-    <class name="RankingsPowerplaySeason">
+    <class name="RankingsPowerplaySeasons">
         <member name="id" type="String"/>
         <member name="startTime" type="String"/>
         <member name="endTime" type="String"/>
+    </class>
+
+    <!-- rankings powerplay season -->
+
+    <class name="RankingsPowerplaySeasonsSeason">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="nameColor" type="String"/>
+        <member name="icon" type="RankingsPowerplaySeasonsSeasonIcon"/>
+        <member name="trophies" type="int"/>
+        <member name="rank" type="int"/>
+        <member name="club" type="RankingsPowerplaySeasonsSeasonClub"/>
+    </class>
+
+    <class name="RankingsPowerplaySeasonsSeasonIcon">
+        <member name="id" type="String"/>
+    </class>
+
+    <class name="RankingsPowerplaySeasonsSeasonClub">
+        <member name="name" type="String"/>
     </class>
 
 </model>

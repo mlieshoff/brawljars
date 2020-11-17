@@ -91,7 +91,11 @@ class PlayerBattleLogBattleTest {
     unitUnderTest.setStarPlayer(new PlayerBattleLogBattleStarPlayer());
     unitUnderTest.setTeams(new ArrayList<PlayerBattleLogBattleTeam>());
     unitUnderTest.setType("astring");
-    String expected = "PlayerBattleLogBattle(duration=815, mode=astring, result=astring, starPlayer=" + new PlayerBattleLogBattleStarPlayer() + ", teams=" + new ArrayList<PlayerBattleLogBattleTeam>() + ", type=astring)";
+    String
+        expected =
+        "PlayerBattleLogBattle(duration=815, mode=astring, result=astring, starPlayer="
+            + new PlayerBattleLogBattleStarPlayer() + ", teams=" + new ArrayList<PlayerBattleLogBattleTeam>()
+            + ", type=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

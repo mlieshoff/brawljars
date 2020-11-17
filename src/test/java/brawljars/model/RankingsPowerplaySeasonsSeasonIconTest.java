@@ -24,21 +24,13 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class RankingsPowerplaySeasonTest {
+class RankingsPowerplaySeasonsSeasonIconTest {
 
-  private RankingsPowerplaySeason unitUnderTest;
+  private RankingsPowerplaySeasonsSeasonIcon unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new RankingsPowerplaySeason();
-  }
-
-  @Test
-  void setEndTime_whenWithValidParameter_thenSetEndTime() {
-    String expected = "astring";
-    unitUnderTest.setEndTime(expected);
-
-    assertEquals(expected, unitUnderTest.getEndTime());
+    unitUnderTest = new RankingsPowerplaySeasonsSeasonIcon();
   }
 
   @Test
@@ -50,19 +42,9 @@ class RankingsPowerplaySeasonTest {
   }
 
   @Test
-  void setStartTime_whenWithValidParameter_thenSetStartTime() {
-    String expected = "astring";
-    unitUnderTest.setStartTime(expected);
-
-    assertEquals(expected, unitUnderTest.getStartTime());
-  }
-
-  @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setEndTime("astring");
     unitUnderTest.setId("astring");
-    unitUnderTest.setStartTime("astring");
-    String expected = "RankingsPowerplaySeason(endTime=astring, id=astring, startTime=astring)";
+    String expected = "RankingsPowerplaySeasonsSeasonIcon(id=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

@@ -93,6 +93,7 @@ public class DataModelCheck {
     testClub();
     testClubMembers();
     */
+    testRankingPowerplaySeasons();
     testRankingPowerplaySeason();
   }
 
@@ -161,8 +162,12 @@ public class DataModelCheck {
     test(asList("clubs/%23L99U2L2/members"), GetClubMembersRequest.class, false, ClubMember.class);
   }
 
-  private void testRankingPowerplaySeason() throws IOException {
+  private void testRankingPowerplaySeasons() throws IOException {
     test(asList("rankings/DE/powerplay/seasons"), GetRankingsPowerplaySeasonsRequest.class, false, ClubMember.class);
+  }
+
+  private void testRankingPowerplaySeason() throws IOException {
+    test(asList("rankings/DE/powerplay/seasons/81"), GetRankingsPowerplaySeasonsRequest.class, false, ClubMember.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {

@@ -30,6 +30,7 @@ abstract class RequestTestBase {
 
   @Test
   void requestBuilder_whenCalled_thenConstruct() throws Exception {
+
     assertTrue(Request.requestBuilder() instanceof Request.RequestBuilder);
   }
 
@@ -54,22 +55,26 @@ abstract class RequestTestBase {
 
   @Test
   void getQueryParameters_whenConstructed_thenWithZeroElements() throws Exception {
+
     assertEquals(0, Request.requestBuilder().build().getQueryParameters().size());
   }
 
   @Test
   void getRestParameters_whenConstructed_thenWithZeroElements() throws Exception {
+
     assertEquals(0, Request.requestBuilder().build().getRestParameters().size());
   }
 
   @Test
   void getCallback_whenConstructed_thenReturnNull() throws Exception {
+
     assertNull(Request.requestBuilder().build().getCallback());
   }
 
   @Test
   void getCallback_whenSet_thenGet() throws Exception {
     Callback expected = mock(Callback.class);
+
     assertEquals(expected, Request.requestBuilder().callback(expected).build().getCallback());
   }
 

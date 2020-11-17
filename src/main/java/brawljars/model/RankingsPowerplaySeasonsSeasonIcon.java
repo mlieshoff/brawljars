@@ -27,15 +27,9 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class RankingsPowerplaySeason {
-
-  @SerializedName("endTime")
-  private String endTime;
+public class RankingsPowerplaySeasonsSeasonIcon {
 
   @SerializedName("id")
   private String id;
-
-  @SerializedName("startTime")
-  private String startTime;
 
 }

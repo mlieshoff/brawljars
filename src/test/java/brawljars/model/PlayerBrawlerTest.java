@@ -109,7 +109,11 @@ class PlayerBrawlerTest {
     unitUnderTest.setRank(815);
     unitUnderTest.setStarPowers(new ArrayList<PlayerBrawlerStarPower>());
     unitUnderTest.setTrophies(815);
-    String expected = "PlayerBrawler(gadgets=" + new ArrayList<PlayerBrawlerGadget>() + ", highestTrophies=815, id=4711, name=astring, power=815, rank=815, starPowers=" + new ArrayList<PlayerBrawlerStarPower>() + ", trophies=815)";
+    String
+        expected =
+        "PlayerBrawler(gadgets=" + new ArrayList<PlayerBrawlerGadget>()
+            + ", highestTrophies=815, id=4711, name=astring, power=815, rank=815, starPowers="
+            + new ArrayList<PlayerBrawlerStarPower>() + ", trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);
