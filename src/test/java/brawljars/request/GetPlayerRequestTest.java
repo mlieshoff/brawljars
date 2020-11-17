@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class GetPlayerRequestTest extends RequestTestBase {
 
-  public static final String PLAYER_TAG = "PlayerTag";
+  public static final String PLAYER_TAG = "playerTag";
 
   @Test
   void build_whenWithNullPlayerTag_thenThrowException() throws Exception {

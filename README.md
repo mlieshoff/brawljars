@@ -68,6 +68,17 @@ GetRankingsPowerplaySeasonsResponse getRankingsPowerplaySeasonsResponse = api.ge
 );
 ```
 
+```java
+// get rankings powerplay seasons season
+GetRankingsPowerplaySeasonsSeasonResponse getRankingsPowerplaySeasonsResponse = api.getRankingsPowerplaySeasonsSeason(GetRankingsPowerplaySeasonsSeasonRequest.builder("DE", "42")
+  // paging
+  .limit()
+  .after()
+  .before()
+  .build()
+);
+```
+
 ## Asynchronous usage
 
 All requests can have a *callback*. Then execution will be asynchronous.

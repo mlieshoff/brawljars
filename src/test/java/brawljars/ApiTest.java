@@ -17,6 +17,7 @@
 package brawljars;
 
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -26,16 +27,22 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
+import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
+import brawljars.request.Request;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
+import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
+import brawljars.response.IResponse;
 import brawljars.response.RawResponse;
 
 /**
@@ -46,6 +53,7 @@ class ApiTest {
   public static final String API_KEY = "apiKey";
   public static final String CLUB_TAG = "clubTag";
   public static final String COUNTRY_CODE = "countryCode";
+  public static final String SEASON_ID = "seasonId";
   public static final String PLAYER_TAG = "playerTag";
   public static final String URL = "url";
 
@@ -100,61 +108,63 @@ class ApiTest {
   }
 
   @Test
-  void getPlayer_whenWithNullRequest_thenThrowsException() throws Exception {
+  void getPlayer() throws Exception {
 
-    assertThrows(NullPointerException.class, () -> api.getPlayer(null));
+    runTest("getPlayer", GetPlayerRequest.builder(PLAYER_TAG).build(), new GetPlayerResponse());
   }
 
-  @Test
-  void getPlayer_whenWithRequest_thenReturnResult() throws Exception {
-    GetPlayerRequest getPlayerRequest = GetPlayerRequest.builder(PLAYER_TAG).build();
-    GetPlayerResponse getPlayerResponse = new GetPlayerResponse();
-    when(client.getPlayer(getPlayerRequest)).thenReturn(getPlayerResponse);
+  private <T extends Request<R>, R extends IResponse> void runTest(String methodName, T request, R response)
+      throws Exception {
+    Method clientMethod = client.getClass().getDeclaredMethod(methodName, request.getClass());
+    Method apiMethod = api.getClass().getDeclaredMethod(methodName, request.getClass());
 
-    assertEquals(getPlayerResponse, api.getPlayer(getPlayerRequest));
+    assertAll(
+        () -> whenWithNullRequest_thenThrowsException(apiMethod),
+        () -> whenWithRequest_thenReturnResult(apiMethod, clientMethod, request, response),
+        () -> whenWithException_thenThrowApiException(apiMethod, clientMethod, request)
+    );
   }
 
-  @Test
-  void getPlayer_whenWithException_thenThrowApiException() throws Exception {
-    GetPlayerRequest getPlayerRequest = GetPlayerRequest.builder(PLAYER_TAG).build();
-    when(client.getPlayer(getPlayerRequest)).thenThrow(runtimeException);
+  <T extends Request<R>, R extends IResponse> void whenWithNullRequest_thenThrowsException(Method apiMethod) {
     try {
-      api.getPlayer(getPlayerRequest);
+      apiMethod.invoke(api, (T) null);
 
       fail();
-    } catch (ApiException e) {
+    } catch (Exception e) {
 
-      assertEquals(SC_NOT_FOUND, e.getCode());
+      assertEquals(NullPointerException.class, e.getCause().getClass());
+    }
+  }
+
+  private <T extends Request<R>, R extends IResponse> void whenWithRequest_thenReturnResult(Method apiMethod,
+                                                                                            Method clientMethod,
+                                                                                            T request, R response)
+      throws InvocationTargetException, IllegalAccessException {
+    when(clientMethod.invoke(client, request)).thenReturn(response);
+
+    assertEquals(response, apiMethod.invoke(api, request));
+  }
+
+  private <T extends Request<R>, R extends IResponse> void whenWithException_thenThrowApiException(Method apiMethod,
+                                                                                                   Method clientMethod,
+                                                                                                   T request)
+      throws InvocationTargetException, IllegalAccessException {
+    when(clientMethod.invoke(client, request)).thenThrow(runtimeException);
+    try {
+      apiMethod.invoke(api, request);
+
+      fail();
+    } catch (Exception e) {
+      ApiException apiException = (ApiException) e.getCause();
+      assertEquals(SC_NOT_FOUND, apiException.getCode());
     }
   }
 
   @Test
-  void getPlayerBattleLog_whenWithNullRequest_thenThrowsException() throws Exception {
+  void getPlayerBattleLog() throws Exception {
 
-    assertThrows(NullPointerException.class, () -> api.getPlayerBattleLog(null));
-  }
-
-  @Test
-  void getPlayerBattleLog_whenWithRequest_thenReturnResult() throws Exception {
-    GetPlayerBattleLogRequest getPlayerBattleLogRequest = GetPlayerBattleLogRequest.builder(PLAYER_TAG).build();
-    GetPlayerBattleLogResponse getPlayerBattleLogResponse = new GetPlayerBattleLogResponse();
-    when(client.getPlayerBattleLog(getPlayerBattleLogRequest)).thenReturn(getPlayerBattleLogResponse);
-
-    assertEquals(getPlayerBattleLogResponse, api.getPlayerBattleLog(getPlayerBattleLogRequest));
-  }
-
-  @Test
-  void getPlayerBattleLog_whenWithException_thenThrowApiException() throws Exception {
-    GetPlayerBattleLogRequest getPlayerBattleLogRequest = GetPlayerBattleLogRequest.builder(PLAYER_TAG).build();
-    when(client.getPlayerBattleLog(getPlayerBattleLogRequest)).thenThrow(runtimeException);
-    try {
-      api.getPlayerBattleLog(getPlayerBattleLogRequest);
-
-      fail();
-    } catch (ApiException e) {
-
-      assertEquals(SC_NOT_FOUND, e.getCode());
-    }
+    runTest("getPlayerBattleLog", GetPlayerBattleLogRequest.builder(PLAYER_TAG).build(),
+        new GetPlayerBattleLogResponse());
   }
 
   @Test
@@ -164,90 +174,30 @@ class ApiTest {
   }
 
   @Test
-  void getClub_whenWithRequest_thenReturnResult() throws Exception {
-    GetClubRequest getClubRequest = GetClubRequest.builder(CLUB_TAG).build();
-    GetClubResponse getClubResponse = new GetClubResponse();
-    when(client.getClub(getClubRequest)).thenReturn(getClubResponse);
+  void getClub() throws Exception {
 
-    assertEquals(getClubResponse, api.getClub(getClubRequest));
+    runTest("getClub", GetClubRequest.builder(CLUB_TAG).build(), new GetClubResponse());
   }
 
   @Test
-  void getClub_whenWithException_thenThrowApiException() throws Exception {
-    GetClubRequest getClubRequest = GetClubRequest.builder(CLUB_TAG).build();
-    when(client.getClub(getClubRequest)).thenThrow(runtimeException);
-    try {
-      api.getClub(getClubRequest);
+  void getClubMembers() throws Exception {
 
-      fail();
-    } catch (ApiException e) {
-
-      assertEquals(SC_NOT_FOUND, e.getCode());
-    }
+    runTest("getClubMembers", GetClubMembersRequest.builder(CLUB_TAG).build(), new GetClubMembersResponse());
   }
 
   @Test
-  void getClubMembers_whenWithNullRequest_thenThrowsException() throws Exception {
+  void getRankingsPowerplaySeasons() throws Exception {
 
-    assertThrows(NullPointerException.class, () -> api.getClubMembers(null));
+    runTest("getRankingsPowerplaySeasons", GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build(),
+        new GetRankingsPowerplaySeasonsResponse());
   }
 
   @Test
-  void getClubMembers_whenWithRequest_thenReturnResult() throws Exception {
-    GetClubMembersRequest getClubMembersRequest = GetClubMembersRequest.builder(CLUB_TAG).build();
-    GetClubMembersResponse getClubMembersResponse = new GetClubMembersResponse();
-    when(client.getClubMembers(getClubMembersRequest)).thenReturn(getClubMembersResponse);
+  void getRankingsPowerplaySeasonsSeason() throws Exception {
 
-    assertEquals(getClubMembersResponse, api.getClubMembers(getClubMembersRequest));
-  }
-
-  @Test
-  void getClubMembers_whenWithException_thenThrowApiException() throws Exception {
-    GetClubMembersRequest getClubMembersRequest = GetClubMembersRequest.builder(CLUB_TAG).build();
-    when(client.getClubMembers(getClubMembersRequest)).thenThrow(runtimeException);
-    try {
-      api.getClubMembers(getClubMembersRequest);
-
-      fail();
-    } catch (ApiException e) {
-
-      assertEquals(SC_NOT_FOUND, e.getCode());
-    }
-  }
-
-  @Test
-  void getRankingsPowerplaySeasons_whenWithNullRequest_thenThrowsException() throws Exception {
-
-    assertThrows(NullPointerException.class, () -> api.getRankingsPowerplaySeasons(null));
-  }
-
-  @Test
-  void getRankingsPowerplaySeasons_whenWithRequest_thenReturnResult() throws Exception {
-    GetRankingsPowerplaySeasonsRequest
-        getRankingsPowerplaySeasonsRequest =
-        GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build();
-    GetRankingsPowerplaySeasonsResponse getRankingsPowerplaySeasonsResponse = new GetRankingsPowerplaySeasonsResponse();
-    when(client.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest))
-        .thenReturn(getRankingsPowerplaySeasonsResponse);
-
-    assertEquals(getRankingsPowerplaySeasonsResponse,
-        api.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest));
-  }
-
-  @Test
-  void getRankingsPowerplaySeasons_whenWithException_thenThrowApiException() throws Exception {
-    GetRankingsPowerplaySeasonsRequest
-        getRankingsPowerplaySeasonsRequest =
-        GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build();
-    when(client.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest)).thenThrow(runtimeException);
-    try {
-      api.getRankingsPowerplaySeasons(getRankingsPowerplaySeasonsRequest);
-
-      fail();
-    } catch (ApiException e) {
-
-      assertEquals(SC_NOT_FOUND, e.getCode());
-    }
+    runTest("getRankingsPowerplaySeasonsSeason",
+        GetRankingsPowerplaySeasonsSeasonRequest.builder(COUNTRY_CODE, SEASON_ID).build(),
+        new GetRankingsPowerplaySeasonsSeasonResponse());
   }
 
 }

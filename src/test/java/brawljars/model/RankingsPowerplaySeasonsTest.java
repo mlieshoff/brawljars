@@ -24,48 +24,45 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class PlayerBattleLogBattleStarPlayerTest {
+class RankingsPowerplaySeasonsTest {
 
-  private PlayerBattleLogBattleStarPlayer unitUnderTest;
+  private RankingsPowerplaySeasons unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new PlayerBattleLogBattleStarPlayer();
+    unitUnderTest = new RankingsPowerplaySeasons();
   }
 
   @Test
-  void setBrawler_whenWithValidParameter_thenSetBrawler() {
-    PlayerBattleLogBattleBrawler expected = new PlayerBattleLogBattleBrawler();
-    unitUnderTest.setBrawler(expected);
-
-    assertEquals(expected, unitUnderTest.getBrawler());
-  }
-
-  @Test
-  void setName_whenWithValidParameter_thenSetName() {
+  void setEndTime_whenWithValidParameter_thenSetEndTime() {
     String expected = "astring";
-    unitUnderTest.setName(expected);
+    unitUnderTest.setEndTime(expected);
 
-    assertEquals(expected, unitUnderTest.getName());
+    assertEquals(expected, unitUnderTest.getEndTime());
   }
 
   @Test
-  void setTag_whenWithValidParameter_thenSetTag() {
+  void setId_whenWithValidParameter_thenSetId() {
     String expected = "astring";
-    unitUnderTest.setTag(expected);
+    unitUnderTest.setId(expected);
 
-    assertEquals(expected, unitUnderTest.getTag());
+    assertEquals(expected, unitUnderTest.getId());
+  }
+
+  @Test
+  void setStartTime_whenWithValidParameter_thenSetStartTime() {
+    String expected = "astring";
+    unitUnderTest.setStartTime(expected);
+
+    assertEquals(expected, unitUnderTest.getStartTime());
   }
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setBrawler(new PlayerBattleLogBattleBrawler());
-    unitUnderTest.setName("astring");
-    unitUnderTest.setTag("astring");
-    String
-        expected =
-        "PlayerBattleLogBattleStarPlayer(brawler=" + new PlayerBattleLogBattleBrawler()
-            + ", name=astring, tag=astring)";
+    unitUnderTest.setEndTime("astring");
+    unitUnderTest.setId("astring");
+    unitUnderTest.setStartTime("astring");
+    String expected = "RankingsPowerplaySeasons(endTime=astring, id=astring, startTime=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

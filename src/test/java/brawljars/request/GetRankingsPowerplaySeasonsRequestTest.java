@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-class GetRankingsPowerplaySeasonsRequestTest extends PageableRequestTestBase<GetPlayerBattleLogRequest> {
+class GetRankingsPowerplaySeasonsRequestTest extends PageableRequestTestBase<GetRankingsPowerplaySeasonsRequest> {
 
   public static final String COUNTRY_CODE = "countryCode";
 

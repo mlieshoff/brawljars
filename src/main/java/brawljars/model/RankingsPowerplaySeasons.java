@@ -14,27 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package brawljars;
+package brawljars.model;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.google.gson.annotations.SerializedName;
 
-/**
- * @author Michael Lieshoff
- */
-public class TestRankingsServlet extends TestJsonFileServlet {
+import javax.annotation.Generated;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-  private static final long serialVersionUID = 3575671062995051750L;
+@Generated("org.mili.generator")
+@Data
+@EqualsAndHashCode
+@ToString
+public class RankingsPowerplaySeasons {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    String filename = "src/test/resources/rankingsPowerplaySeasons.json";
-    String restTag = getRestTagParameter(req);
-    if ("seasonId".equals(restTag)) {
-      filename = "src/test/resources/rankingsPowerplaySeasonsSeason.json";
-    }
-    doGet(filename, req, resp);
-  }
+  @SerializedName("endTime")
+  private String endTime;
+
+  @SerializedName("id")
+  private String id;
+
+  @SerializedName("startTime")
+  private String startTime;
 
 }

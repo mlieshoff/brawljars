@@ -24,21 +24,13 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class ClubMemberTest {
+class RankingsPowerplaySeasonsSeasonClubTest {
 
-  private ClubMember unitUnderTest;
+  private RankingsPowerplaySeasonsSeasonClub unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new ClubMember();
-  }
-
-  @Test
-  void setIcon_whenWithValidParameter_thenSetIcon() {
-    ClubIcon expected = new ClubIcon();
-    unitUnderTest.setIcon(expected);
-
-    assertEquals(expected, unitUnderTest.getIcon());
+    unitUnderTest = new RankingsPowerplaySeasonsSeasonClub();
   }
 
   @Test
@@ -50,49 +42,9 @@ class ClubMemberTest {
   }
 
   @Test
-  void setNameColor_whenWithValidParameter_thenSetNameColor() {
-    String expected = "astring";
-    unitUnderTest.setNameColor(expected);
-
-    assertEquals(expected, unitUnderTest.getNameColor());
-  }
-
-  @Test
-  void setRole_whenWithValidParameter_thenSetRole() {
-    String expected = "astring";
-    unitUnderTest.setRole(expected);
-
-    assertEquals(expected, unitUnderTest.getRole());
-  }
-
-  @Test
-  void setTag_whenWithValidParameter_thenSetTag() {
-    String expected = "astring";
-    unitUnderTest.setTag(expected);
-
-    assertEquals(expected, unitUnderTest.getTag());
-  }
-
-  @Test
-  void setTrophies_whenWithValidParameter_thenSetTrophies() {
-    int expected = 815;
-    unitUnderTest.setTrophies(expected);
-
-    assertEquals(expected, unitUnderTest.getTrophies());
-  }
-
-  @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setIcon(new ClubIcon());
     unitUnderTest.setName("astring");
-    unitUnderTest.setNameColor("astring");
-    unitUnderTest.setRole("astring");
-    unitUnderTest.setTag("astring");
-    unitUnderTest.setTrophies(815);
-    String
-        expected =
-        "ClubMember(icon=" + new ClubIcon()
-            + ", name=astring, nameColor=astring, role=astring, tag=astring, trophies=815)";
+    String expected = "RankingsPowerplaySeasonsSeasonClub(name=astring)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

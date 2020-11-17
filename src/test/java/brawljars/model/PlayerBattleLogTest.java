@@ -62,7 +62,10 @@ class PlayerBattleLogTest {
     unitUnderTest.setBattle(new PlayerBattleLogBattle());
     unitUnderTest.setBattleTime("astring");
     unitUnderTest.setEvent(new PlayerBattleLogEvent());
-    String expected = "PlayerBattleLog(battle=" + new PlayerBattleLogBattle() + ", battleTime=astring, event=" + new PlayerBattleLogEvent() + ")";
+    String
+        expected =
+        "PlayerBattleLog(battle=" + new PlayerBattleLogBattle() + ", battleTime=astring, event="
+            + new PlayerBattleLogEvent() + ")";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

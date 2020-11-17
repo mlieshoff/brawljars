@@ -24,18 +24,26 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class ClubMemberTest {
+class RankingsPowerplaySeasonsSeasonTest {
 
-  private ClubMember unitUnderTest;
+  private RankingsPowerplaySeasonsSeason unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new ClubMember();
+    unitUnderTest = new RankingsPowerplaySeasonsSeason();
+  }
+
+  @Test
+  void setClub_whenWithValidParameter_thenSetClub() {
+    RankingsPowerplaySeasonsSeasonClub expected = new RankingsPowerplaySeasonsSeasonClub();
+    unitUnderTest.setClub(expected);
+
+    assertEquals(expected, unitUnderTest.getClub());
   }
 
   @Test
   void setIcon_whenWithValidParameter_thenSetIcon() {
-    ClubIcon expected = new ClubIcon();
+    RankingsPowerplaySeasonsSeasonIcon expected = new RankingsPowerplaySeasonsSeasonIcon();
     unitUnderTest.setIcon(expected);
 
     assertEquals(expected, unitUnderTest.getIcon());
@@ -58,11 +66,11 @@ class ClubMemberTest {
   }
 
   @Test
-  void setRole_whenWithValidParameter_thenSetRole() {
-    String expected = "astring";
-    unitUnderTest.setRole(expected);
+  void setRank_whenWithValidParameter_thenSetRank() {
+    int expected = 815;
+    unitUnderTest.setRank(expected);
 
-    assertEquals(expected, unitUnderTest.getRole());
+    assertEquals(expected, unitUnderTest.getRank());
   }
 
   @Test
@@ -83,16 +91,18 @@ class ClubMemberTest {
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setIcon(new ClubIcon());
+    unitUnderTest.setClub(new RankingsPowerplaySeasonsSeasonClub());
+    unitUnderTest.setIcon(new RankingsPowerplaySeasonsSeasonIcon());
     unitUnderTest.setName("astring");
     unitUnderTest.setNameColor("astring");
-    unitUnderTest.setRole("astring");
+    unitUnderTest.setRank(815);
     unitUnderTest.setTag("astring");
     unitUnderTest.setTrophies(815);
     String
         expected =
-        "ClubMember(icon=" + new ClubIcon()
-            + ", name=astring, nameColor=astring, role=astring, tag=astring, trophies=815)";
+        "RankingsPowerplaySeasonsSeason(club=" + new RankingsPowerplaySeasonsSeasonClub() + ", icon="
+            + new RankingsPowerplaySeasonsSeasonIcon()
+            + ", name=astring, nameColor=astring, rank=815, tag=astring, trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

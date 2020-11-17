@@ -1,6 +1,6 @@
 package brawljars.response;
 
-import brawljars.model.RankingsPowerplaySeasons;
+import brawljars.model.RankingsPowerplaySeasonsSeason;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -8,6 +8,6 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class GetRankingsPowerplaySeasonsResponse extends PageableResponse<RankingsPowerplaySeasons> {
+public class GetRankingsPowerplaySeasonsSeasonResponse extends PageableResponse<RankingsPowerplaySeasonsSeason> {
 
 }

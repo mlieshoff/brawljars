@@ -17,8 +17,9 @@
 package brawljars;
 
 import static java.lang.String.format;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.google.gson.Gson;
 
@@ -28,17 +29,21 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
+import java.lang.reflect.Method;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
+import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
+import brawljars.request.Request;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
+import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
+import brawljars.response.IResponse;
 
 /**
  * @author Michael Lieshoff
@@ -53,6 +58,7 @@ class IntegrationTest {
   private static final String COUNTRY_CODE = "countryCode";
   private static final String CONTEXT = "test";
   private static final String PLAYER_TAG = "playerTag";
+  private static final String SEASON_ID = "seasonId";
   private static final String URL = format("http://localhost:50000/%s/%s/", CONTEXT, APP);
 
   private static JettyServer jettyServer;
@@ -71,112 +77,89 @@ class IntegrationTest {
     jettyServer.stop();
   }
 
-  private static void doGetPlayer(String apiKey) throws IOException {
-    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/player.json"));
-    GetPlayerResponse expected = new Gson().fromJson(expectedJson, GetPlayerResponse.class);
+  @Test
+  void getPlayer() throws Exception {
 
-    GetPlayerResponse actual = new Api(URL, apiKey).getPlayer(GetPlayerRequest.builder(PLAYER_TAG).build());
+    runTest("getPlayer", "src/test/resources/player.json", GetPlayerRequest.builder(PLAYER_TAG).build(),
+        GetPlayerResponse.class);
+  }
+
+  private <T extends Request<R>, R extends IResponse> void runTest(String methodName, String filename, T request,
+                                                                   Class<R> responseClass) throws Exception {
+
+    Method apiMethod = Api.class.getDeclaredMethod(methodName, request.getClass());
+
+    assertAll(
+        () -> whenWithValidParameters_thenReturnResponse(apiMethod, filename, request, responseClass),
+        () -> whenWithWrongApiKey_thenThrowException(apiMethod, request)
+    );
+
+  }
+
+  private <T extends Request<R>, R extends IResponse> void whenWithValidParameters_thenReturnResponse(Method apiMethod,
+                                                                                                      String filename,
+                                                                                                      T request,
+                                                                                                      Class<R> responseClass)
+      throws Exception {
+    String expectedJson = FileUtils.readFileToString(new File(filename));
+    R expected = new Gson().fromJson(expectedJson, responseClass);
+
+    R actual = (R) apiMethod.invoke(new Api(URL, API_KEY), request);
 
     assertEquals(expected, actual);
   }
 
-  @Test
-  void getPlayer_whenWithValidParameters_thenReturnResponse() throws Exception {
-    doGetPlayer(API_KEY);
+  private <T extends Request<R>, R extends IResponse> void whenWithWrongApiKey_thenThrowException(Method apiMethod,
+                                                                                                  T request) {
+    try {
+
+      apiMethod.invoke(new Api(URL, "lala2"), request);
+
+      fail();
+    } catch (Exception e) {
+      Throwable throwable = e.getCause();
+
+      assertEquals(ApiException.class, throwable.getClass());
+
+      ApiException apiException = (ApiException) throwable;
+      assertEquals(403, apiException.getCode());
+    }
   }
 
   @Test
-  void getPlayer_whenWithWrongUrl_thenThrow() throws Exception {
+  void getPlayerBattleLog() throws Exception {
 
-    assertThrows(ApiException.class, () -> doGetPlayer("lala2"));
+    runTest("getPlayerBattleLog", "src/test/resources/playerBattleLog.json",
+        GetPlayerBattleLogRequest.builder(PLAYER_TAG).build(), GetPlayerBattleLogResponse.class);
   }
 
   @Test
-  void getPlayerBattleLog_whenWithValidParameters_thenReturnResponse() throws Exception {
-    doGetPlayerBattleLog(API_KEY);
-  }
+  void getClub() throws Exception {
 
-  private static void doGetPlayerBattleLog(String apiKey) throws IOException {
-    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/playerBattleLog.json"));
-    GetPlayerBattleLogResponse expected = new Gson().fromJson(expectedJson, GetPlayerBattleLogResponse.class);
-
-    GetPlayerBattleLogResponse
-        actual = new Api(URL, apiKey).getPlayerBattleLog(GetPlayerBattleLogRequest.builder(PLAYER_TAG).build());
-
-    assertEquals(expected, actual);
+    runTest("getClub", "src/test/resources/club.json",
+        GetClubRequest.builder(CLUB_TAG).build(), GetClubResponse.class);
   }
 
   @Test
-  void getPlayerBattleLog_whenWithWrongUrl_thenThrow() throws Exception {
+  void getClubMembers() throws Exception {
 
-    assertThrows(ApiException.class, () -> doGetPlayerBattleLog("lala2"));
+    runTest("getClubMembers", "src/test/resources/clubMembers.json",
+        GetClubMembersRequest.builder(CLUB_TAG).build(), GetClubMembersResponse.class);
   }
 
   @Test
-  void getClub_whenWithValidParameters_thenReturnResponse() throws Exception {
-    doGetClub(API_KEY);
-  }
+  void getRankingsPowerplaySeasons() throws Exception {
 
-  private static void doGetClub(String apiKey) throws IOException {
-    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/club.json"));
-    GetClubResponse expected = new Gson().fromJson(expectedJson, GetClubResponse.class);
-
-    GetClubResponse actual = new Api(URL, apiKey).getClub(GetClubRequest.builder(CLUB_TAG).build());
-
-    assertEquals(expected, actual);
+    runTest("getRankingsPowerplaySeasons", "src/test/resources/rankingsPowerplaySeasons.json",
+        GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build(), GetRankingsPowerplaySeasonsResponse.class);
   }
 
   @Test
-  void getClub_whenWithWrongUrl_thenThrow() throws Exception {
+  void getRankingsPowerplaySeasonsSeason() throws Exception {
 
-    assertThrows(ApiException.class, () -> doGetClub("lala2"));
-  }
-
-  @Test
-  void getClubMembers_whenWithValidParameters_thenReturnResponse() throws Exception {
-    doGetClubMembers(API_KEY);
-  }
-
-  private static void doGetClubMembers(String apiKey) throws IOException {
-    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/clubMembers.json"));
-    GetClubMembersResponse expected = new Gson().fromJson(expectedJson, GetClubMembersResponse.class);
-
-    GetClubMembersResponse
-        actual =
-        new Api(URL, apiKey).getClubMembers(GetClubMembersRequest.builder(CLUB_TAG).build());
-
-    assertEquals(expected, actual);
-  }
-
-  @Test
-  void getClubMembers_whenWithWrongUrl_thenThrow() throws Exception {
-
-    assertThrows(ApiException.class, () -> doGetClubMembers("lala2"));
-  }
-
-  @Test
-  void getRankingsPowerplaySeasons_whenWithValidParameters_thenReturnResponse() throws Exception {
-    doGetRankingsPowerplaySeasons(API_KEY);
-  }
-
-  private static void doGetRankingsPowerplaySeasons(String apiKey) throws IOException {
-    String expectedJson = FileUtils.readFileToString(new File("src/test/resources/rankingsPowerplaySeasons.json"));
-    GetRankingsPowerplaySeasonsResponse
-        expected =
-        new Gson().fromJson(expectedJson, GetRankingsPowerplaySeasonsResponse.class);
-
-    GetRankingsPowerplaySeasonsResponse
-        actual =
-        new Api(URL, apiKey)
-            .getRankingsPowerplaySeasons(GetRankingsPowerplaySeasonsRequest.builder(COUNTRY_CODE).build());
-
-    assertEquals(expected, actual);
-  }
-
-  @Test
-  void getRankingsPowerplaySeasons_whenWithWrongUrl_thenThrow() throws Exception {
-
-    assertThrows(ApiException.class, () -> doGetRankingsPowerplaySeasons("lala2"));
+    runTest("getRankingsPowerplaySeasonsSeason", "src/test/resources/rankingsPowerplaySeasonsSeason.json",
+        GetRankingsPowerplaySeasonsSeasonRequest.builder(COUNTRY_CODE, SEASON_ID).build(),
+        GetRankingsPowerplaySeasonsSeasonResponse.class);
   }
 
 }
