@@ -35,6 +35,8 @@ public class TestRankingsServlet extends TestJsonFileServlet {
       filename = "src/test/resources/rankingsPowerplaySeasonsSeason.json";
     } else if ("clubs".equals(restTag)) {
       filename = "src/test/resources/rankingsClubs.json";
+    } else if ("brawlerId".equals(restTag)) {
+      filename = "src/test/resources/rankingsBrawler.json";
     }
     doGet(filename, req, resp);
   }

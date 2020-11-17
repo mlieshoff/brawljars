@@ -24,29 +24,29 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class RankingsPowerplaySeasonsSeasonTest {
+class RankingsClubTest {
 
-  private RankingsPowerplaySeasonsSeason unitUnderTest;
+  private RankingsClub unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new RankingsPowerplaySeasonsSeason();
+    unitUnderTest = new RankingsClub();
   }
 
   @Test
-  void setClub_whenWithValidParameter_thenSetClub() {
-    RankingsPowerplaySeasonsSeasonClub expected = new RankingsPowerplaySeasonsSeasonClub();
-    unitUnderTest.setClub(expected);
+  void setBadgeId_whenWithValidParameter_thenSetBadgeId() {
+    int expected = 815;
+    unitUnderTest.setBadgeId(expected);
 
-    assertEquals(expected, unitUnderTest.getClub());
+    assertEquals(expected, unitUnderTest.getBadgeId());
   }
 
   @Test
-  void setIcon_whenWithValidParameter_thenSetIcon() {
-    RankingsPowerplaySeasonsSeasonIcon expected = new RankingsPowerplaySeasonsSeasonIcon();
-    unitUnderTest.setIcon(expected);
+  void setMemberCount_whenWithValidParameter_thenSetMemberCount() {
+    int expected = 815;
+    unitUnderTest.setMemberCount(expected);
 
-    assertEquals(expected, unitUnderTest.getIcon());
+    assertEquals(expected, unitUnderTest.getMemberCount());
   }
 
   @Test
@@ -55,14 +55,6 @@ class RankingsPowerplaySeasonsSeasonTest {
     unitUnderTest.setName(expected);
 
     assertEquals(expected, unitUnderTest.getName());
-  }
-
-  @Test
-  void setNameColor_whenWithValidParameter_thenSetNameColor() {
-    String expected = "astring";
-    unitUnderTest.setNameColor(expected);
-
-    assertEquals(expected, unitUnderTest.getNameColor());
   }
 
   @Test
@@ -91,18 +83,13 @@ class RankingsPowerplaySeasonsSeasonTest {
 
   @Test
   void toString_whenCalled_thenReturnStringRepresentation() {
-    unitUnderTest.setClub(new RankingsPowerplaySeasonsSeasonClub());
-    unitUnderTest.setIcon(new RankingsPowerplaySeasonsSeasonIcon());
+    unitUnderTest.setBadgeId(815);
+    unitUnderTest.setMemberCount(815);
     unitUnderTest.setName("astring");
-    unitUnderTest.setNameColor("astring");
     unitUnderTest.setRank(815);
     unitUnderTest.setTag("astring");
     unitUnderTest.setTrophies(815);
-    String
-        expected =
-        "RankingsPowerplaySeasonsSeason(club=" + new RankingsPowerplaySeasonsSeasonClub() + ", icon="
-            + new RankingsPowerplaySeasonsSeasonIcon()
-            + ", name=astring, nameColor=astring, rank=815, tag=astring, trophies=815)";
+    String expected = "RankingsClub(badgeId=815, memberCount=815, name=astring, rank=815, tag=astring, trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

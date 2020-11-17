@@ -27,13 +27,13 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class RankingsPowerplaySeasonsSeason {
+public class RankingsBrawler {
 
   @SerializedName("club")
-  private RankingsPowerplaySeasonsSeasonClub club;
+  private RankingsBrawlerClub club;
 
   @SerializedName("icon")
-  private RankingsPowerplaySeasonsSeasonIcon icon;
+  private RankingsBrawlerIcon icon;
 
   @SerializedName("name")
   private String name;

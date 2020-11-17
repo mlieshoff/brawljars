@@ -45,6 +45,8 @@ import java.util.Optional;
 import brawljars.model.Club;
 import brawljars.model.ClubMember;
 import brawljars.model.Player;
+import brawljars.model.RankingsBrawler;
+import brawljars.model.RankingsClub;
 import brawljars.model.RankingsPowerplaySeasons;
 import brawljars.model.RankingsPowerplaySeasonsSeason;
 import brawljars.request.GetClubMembersRequest;
@@ -52,6 +54,8 @@ import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
+import brawljars.response.GetRankingsBrawlerResponse;
+import brawljars.response.GetRankingsClubsResponse;
 
 /**
  * @author Michael Lieshoff
@@ -96,8 +100,9 @@ public class DataModelCheck {
     testClubMembers();
     testRankingPowerplaySeasons();
     testRankingPowerplaySeason();
-    */
     testRankingClubs();
+    */
+    testRankingBrawler();
   }
 
   private void printResults() {
@@ -174,7 +179,11 @@ public class DataModelCheck {
   }
 
   private void testRankingClubs() throws IOException {
-    test(asList("rankings/DE/clubs"), GetRankingsPowerplaySeasonsRequest.class, false, ClubMember.class);
+    test(asList("rankings/DE/clubs"), GetRankingsClubsResponse.class, false, RankingsClub.class);
+  }
+
+  private void testRankingBrawler() throws IOException {
+    test(asList("rankings/DE/brawlers/16000000"), GetRankingsBrawlerResponse.class, false, RankingsBrawler.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {

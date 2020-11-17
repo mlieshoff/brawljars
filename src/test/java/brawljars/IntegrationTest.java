@@ -34,6 +34,7 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsBrawlerRequest;
 import brawljars.request.GetRankingsClubsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
@@ -42,6 +43,7 @@ import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsBrawlerResponse;
 import brawljars.response.GetRankingsClubsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
@@ -56,6 +58,7 @@ class IntegrationTest {
 
   static final String API_KEY = "itsasecret";
   private static final String APP = "brawljars";
+  private static final String BRAWLER_ID = "brawlerId";
   private static final String CLUB_TAG = "playerTag";
   private static final String COUNTRY_CODE = "countryCode";
   private static final String CONTEXT = "test";
@@ -169,6 +172,13 @@ class IntegrationTest {
 
     runTest("getRankingsClubs", "src/test/resources/rankingsClubs.json",
         GetRankingsClubsRequest.builder(COUNTRY_CODE).build(), GetRankingsClubsResponse.class);
+  }
+
+  @Test
+  void getRankingsBrawler() throws Exception {
+
+    runTest("getRankingsBrawler", "src/test/resources/rankingsBrawler.json",
+        GetRankingsBrawlerRequest.builder(COUNTRY_CODE, BRAWLER_ID).build(), GetRankingsBrawlerResponse.class);
   }
 
 }
