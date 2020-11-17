@@ -27,7 +27,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode
 @ToString
-public class RankingsClubs {
+public class RankingsClub {
 
   @SerializedName("badgeId")
   private int badgeId;

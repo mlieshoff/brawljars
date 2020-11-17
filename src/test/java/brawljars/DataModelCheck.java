@@ -46,7 +46,7 @@ import brawljars.model.Club;
 import brawljars.model.ClubMember;
 import brawljars.model.Player;
 import brawljars.model.RankingsBrawler;
-import brawljars.model.RankingsClubs;
+import brawljars.model.RankingsClub;
 import brawljars.model.RankingsPowerplaySeasons;
 import brawljars.model.RankingsPowerplaySeasonsSeason;
 import brawljars.request.GetClubMembersRequest;
@@ -179,7 +179,7 @@ public class DataModelCheck {
   }
 
   private void testRankingClubs() throws IOException {
-    test(asList("rankings/DE/clubs"), GetRankingsClubsResponse.class, false, RankingsClubs.class);
+    test(asList("rankings/DE/clubs"), GetRankingsClubsResponse.class, false, RankingsClub.class);
   }
 
   private void testRankingBrawler() throws IOException {

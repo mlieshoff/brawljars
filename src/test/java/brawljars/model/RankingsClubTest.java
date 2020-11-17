@@ -24,13 +24,13 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Generated;
 
 @Generated("org.mili.generator")
-class RankingsClubsTest {
+class RankingsClubTest {
 
-  private RankingsClubs unitUnderTest;
+  private RankingsClub unitUnderTest;
 
   @BeforeEach
   void setUp() {
-    unitUnderTest = new RankingsClubs();
+    unitUnderTest = new RankingsClub();
   }
 
   @Test
@@ -89,7 +89,7 @@ class RankingsClubsTest {
     unitUnderTest.setRank(815);
     unitUnderTest.setTag("astring");
     unitUnderTest.setTrophies(815);
-    String expected = "RankingsClubs(badgeId=815, memberCount=815, name=astring, rank=815, tag=astring, trophies=815)";
+    String expected = "RankingsClub(badgeId=815, memberCount=815, name=astring, rank=815, tag=astring, trophies=815)";
     String actual = unitUnderTest.toString();
 
     assertEquals(expected, actual);

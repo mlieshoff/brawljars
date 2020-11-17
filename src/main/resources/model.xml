@@ -162,7 +162,7 @@
 
     <!-- rankings clubs -->
 
-    <class name="RankingsClubs">
+    <class name="RankingsClub">
         <member name="tag" type="String"/>
         <member name="name" type="String"/>
         <member name="badgeId" type="int"/>
