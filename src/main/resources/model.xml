@@ -160,4 +160,15 @@
         <member name="name" type="String"/>
     </class>
 
+    <!-- rankings clubs -->
+
+    <class name="RankingsPowerplaySeasonsSeason">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="badgeId" type="int"/>
+        <member name="trophies" type="int"/>
+        <member name="rank" type="int"/>
+        <member name="memberCount" type="int"/>
+    </class>
+
 </model>

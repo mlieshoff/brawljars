@@ -33,6 +33,8 @@ public class TestRankingsServlet extends TestJsonFileServlet {
     String restTag = getRestTagParameter(req);
     if ("seasonId".equals(restTag)) {
       filename = "src/test/resources/rankingsPowerplaySeasonsSeason.json";
+    } else if ("clubs".equals(restTag)) {
+      filename = "src/test/resources/rankingsClubs.json";
     }
     doGet(filename, req, resp);
   }
