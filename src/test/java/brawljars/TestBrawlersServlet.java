@@ -30,6 +30,10 @@ public class TestBrawlersServlet extends TestJsonFileServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String filename = "src/test/resources/brawlers.json";
+    String restTagParameter = getRestTagParameter(req);
+    if ("brawlerId".equals(restTagParameter)) {
+      filename = "src/test/resources/brawler.json";
+    }
     doGet(filename, req, resp);
   }
 

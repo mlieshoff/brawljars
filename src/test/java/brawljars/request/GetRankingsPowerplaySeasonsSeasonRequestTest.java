@@ -55,7 +55,7 @@ class GetRankingsPowerplaySeasonsSeasonRequestTest
   }
 
   @Test
-  void build_whenWithCountryCode_thenHaveRestParameter() throws Exception {
+  void build_whenWithValues_thenHaveRestParameter() throws Exception {
 
     assertEquals(asList(COUNTRY_CODE, SEASON_ID),
         GetRankingsPowerplaySeasonsSeasonRequest.builder(COUNTRY_CODE, SEASON_ID).build().getRestParameters());

@@ -31,6 +31,7 @@ abstract class ResponseTestBase<T extends IResponse> {
   void setMessage_whenWithValidParameter_thenGet() throws Exception {
     T response = getResponse();
     response.setMessage(MESSAGE);
+
     assertEquals(MESSAGE, response.getMessage());
   }
 
@@ -38,6 +39,7 @@ abstract class ResponseTestBase<T extends IResponse> {
   void setReason_whenWithValidParameter_thenGet() throws Exception {
     T response = getResponse();
     response.setReason(REASON);
+
     assertEquals(REASON, response.getReason());
   }
 

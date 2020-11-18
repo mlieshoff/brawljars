@@ -123,6 +123,17 @@ GetBrawlersResponse getBrawlersResponse = api.getBrawlers(GetBrawlersRequest.bui
 );
 ```
 
+```java
+// get brawler
+GetBrawlerResponse getBrawlerResponse = api.getBrawler(GetBrawlerRequest.builder("16000000")
+  // paging
+  .limit()
+  .after()
+  .before()
+  .build()
+);
+```
+
 ## Asynchronous usage
 
 All requests can have a *callback*. Then execution will be asynchronous.
