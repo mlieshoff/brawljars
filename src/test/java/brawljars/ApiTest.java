@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import brawljars.request.GetBrawlerRequest;
 import brawljars.request.GetBrawlersRequest;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
@@ -40,6 +41,7 @@ import brawljars.request.GetRankingsPlayersRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
+import brawljars.response.GetBrawlerResponse;
 import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
@@ -233,6 +235,12 @@ class ApiTest {
   void getBrawlers() throws Exception {
 
     runTest("getBrawlers", GetBrawlersRequest.builder().build(), new GetBrawlersResponse());
+  }
+
+  @Test
+  void getBrawler() throws Exception {
+
+    runTest("getBrawler", GetBrawlerRequest.builder(BRAWLER_ID).build(), new GetBrawlerResponse());
   }
 
 }

@@ -103,8 +103,9 @@ public class DataModelCheck {
     testRankingClubs();
     testRankingBrawler();
     testRankingPlayers();
-    */
     testBrawlers();
+    */
+    testBrawler();
   }
 
   private void printResults() {
@@ -194,6 +195,10 @@ public class DataModelCheck {
 
   private void testBrawlers() throws IOException {
     test(asList("brawlers"), GetRankingsBrawlerResponse.class, false, RankingsBrawler.class);
+  }
+
+  private void testBrawler() throws IOException {
+    test(asList("brawlers/16000000"), GetRankingsBrawlerResponse.class, false, RankingsBrawler.class);
   }
 
   private void test(List<String> parts, Class<?> clazz, boolean isList, Class<?> itemClass) throws IOException {

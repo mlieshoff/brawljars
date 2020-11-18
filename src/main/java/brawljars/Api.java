@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.function.Function;
+import brawljars.request.GetBrawlerRequest;
 import brawljars.request.GetBrawlersRequest;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
@@ -31,6 +32,7 @@ import brawljars.request.GetRankingsPlayersRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
+import brawljars.response.GetBrawlerResponse;
 import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
@@ -130,6 +132,10 @@ public class Api {
 
   public GetBrawlersResponse getBrawlers(GetBrawlersRequest getBrawlersRequest) {
     return executeRequest(getBrawlersRequest, client -> client.getBrawlers(getBrawlersRequest));
+  }
+
+  public GetBrawlerResponse getBrawler(GetBrawlerRequest getBrawlerRequest) {
+    return executeRequest(getBrawlerRequest, client -> client.getBrawler(getBrawlerRequest));
   }
 
 }

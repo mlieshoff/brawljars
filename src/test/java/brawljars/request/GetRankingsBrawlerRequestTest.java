@@ -48,7 +48,7 @@ class GetRankingsBrawlerRequestTest extends PageableRequestTestBase<GetRankingsB
   }
 
   @Test
-  void build_whenWithCountryCode_thenHaveRestParameter() throws Exception {
+  void build_whenWithValues_thenHaveRestParameter() throws Exception {
 
     assertEquals(asList(COUNTRY_CODE, BRAWLER_ID),
         GetRankingsBrawlerRequest.builder(COUNTRY_CODE, BRAWLER_ID).build().getRestParameters());

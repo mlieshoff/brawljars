@@ -39,11 +39,13 @@ public class RawResponseTest {
   @Test
   public void raw_whenSet_shouldGetValue() {
     rawResponse.setRaw("json");
+
     assertEquals("json", rawResponse.getRaw());
   }
 
   @Test
   public void getResponseHeaders_whenConstructed_shouldNotBeNull() {
+
     assertNotNull(rawResponse.getResponseHeaders());
   }
 
@@ -51,6 +53,7 @@ public class RawResponseTest {
   public void hashCode_whenCalled_shouldEqual() {
     RawResponse rawResponse1 = createRawResponse();
     RawResponse rawResponse2 = createRawResponse();
+
     assertEquals(rawResponse1.hashCode(), rawResponse2.hashCode());
   }
 
@@ -65,6 +68,7 @@ public class RawResponseTest {
   public void equals_whenWithEqualsObjects_shouldEqual() {
     RawResponse rawResponse1 = createRawResponse();
     RawResponse rawResponse2 = createRawResponse();
+
     assertEquals(rawResponse1, rawResponse2);
   }
 
@@ -73,6 +77,7 @@ public class RawResponseTest {
     RawResponse rawResponse1 = createRawResponse();
     rawResponse1.setRaw("other");
     RawResponse rawResponse2 = createRawResponse();
+
     assertNotEquals(rawResponse1, rawResponse2);
   }
 
@@ -81,6 +86,7 @@ public class RawResponseTest {
     RawResponse rawResponse1 = createRawResponse();
     rawResponse1.getResponseHeaders().put("other", "other");
     RawResponse rawResponse2 = createRawResponse();
+
     assertNotEquals(rawResponse1, rawResponse2);
   }
 

@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import brawljars.response.GetBrawlerResponse;
 import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
@@ -102,6 +103,12 @@ class JsonModelIntegrationTest {
   void getBrawlers() throws Exception {
 
     runTest("src/test/resources/brawlers.json", GetBrawlersResponse.class);
+  }
+
+  @Test
+  void getBrawler() throws Exception {
+
+    runTest("src/test/resources/brawler.json", GetBrawlerResponse.class);
   }
 
 }

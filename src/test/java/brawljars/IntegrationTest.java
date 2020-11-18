@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import brawljars.request.GetBrawlerRequest;
 import brawljars.request.GetBrawlersRequest;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
@@ -41,6 +42,7 @@ import brawljars.request.GetRankingsPlayersRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
+import brawljars.response.GetBrawlerResponse;
 import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
@@ -198,6 +200,13 @@ class IntegrationTest {
 
     runTest("getBrawlers", "src/test/resources/brawlers.json", GetBrawlersRequest.builder().build(),
         GetBrawlersResponse.class);
+  }
+
+  @Test
+  void getBrawler() throws Exception {
+
+    runTest("getBrawler", "src/test/resources/brawler.json", GetBrawlerRequest.builder(BRAWLER_ID).build(),
+        GetBrawlerResponse.class);
   }
 
 }

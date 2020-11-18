@@ -31,7 +31,8 @@ class GetRankingsClubsRequestTest extends PageableRequestTestBase<GetRankingsClu
   @Test
   void build_whenWithCountryCode_thenHaveRestParameter() throws Exception {
 
-    assertEquals(singletonList(COUNTRY_CODE), GetRankingsClubsRequest.builder(COUNTRY_CODE).build().getRestParameters());
+    assertEquals(singletonList(COUNTRY_CODE),
+        GetRankingsClubsRequest.builder(COUNTRY_CODE).build().getRestParameters());
   }
 
   @Override
