@@ -285,7 +285,7 @@ class ClientTest {
   @Test
   void getRankingsBrawler() throws Exception {
 
-    runTest("getRankingsBrawler", "rankings/%s/brawlers/%s",
+    runTest("getRankingsBrawler", "rankings/%s/brawler/%s",
         GetRankingsBrawlerRequest.builder(COUNTRY_CODE, BRAWLER_ID).build(), new GetRankingsBrawlerResponse());
   }
 
