@@ -191,4 +191,24 @@
         <member name="name" type="String"/>
     </class>
 
+    <!-- rankings players -->
+
+    <class name="RankingsPlayer">
+        <member name="tag" type="String"/>
+        <member name="name" type="String"/>
+        <member name="nameColor" type="String"/>
+        <member name="icon" type="RankingsPlayerIcon"/>
+        <member name="trophies" type="int"/>
+        <member name="rank" type="int"/>
+        <member name="club" type="RankingsPlayerClub"/>
+    </class>
+
+    <class name="RankingsPlayerIcon">
+        <member name="id" type="int"/>
+    </class>
+
+    <class name="RankingsPlayerClub">
+        <member name="name" type="String"/>
+    </class>
+
 </model>

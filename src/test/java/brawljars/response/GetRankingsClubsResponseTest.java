@@ -1,10 +1,10 @@
 package brawljars.response;
 
-class GetRankingsClubsResponseTest extends PageableResponseTestBase<GetRankingsPowerplaySeasonsResponse> {
+class GetRankingsClubsResponseTest extends PageableResponseTestBase<GetRankingsClubsResponse> {
 
   @Override
-  GetRankingsPowerplaySeasonsResponse getResponse() {
-    return new GetRankingsPowerplaySeasonsResponse();
+  GetRankingsClubsResponse getResponse() {
+    return new GetRankingsClubsResponse();
   }
 
 }

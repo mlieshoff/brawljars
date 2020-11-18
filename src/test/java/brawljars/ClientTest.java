@@ -40,7 +40,9 @@ import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
+import brawljars.request.GetRankingsBrawlerRequest;
 import brawljars.request.GetRankingsClubsRequest;
+import brawljars.request.GetRankingsPlayersRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
@@ -49,7 +51,9 @@ import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
+import brawljars.response.GetRankingsBrawlerResponse;
 import brawljars.response.GetRankingsClubsResponse;
+import brawljars.response.GetRankingsPlayersResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
 import brawljars.response.IResponse;
@@ -62,6 +66,7 @@ class ClientTest {
 
   public static final String API_KEY = "apiKey";
   public static final String BASE_URL = "lala/";
+  public static final String BRAWLER_ID = "brawlerId";
   public static final String CLUB_TAG = "clubTag";
   public static final String COUNTRY_CODE = "countryCode";
   public static final String SEASON_ID = "seasonId";
@@ -275,6 +280,20 @@ class ClientTest {
 
     runTest("getRankingsClubs", "rankings/%s/clubs", GetRankingsClubsRequest.builder(COUNTRY_CODE).build(),
         new GetRankingsClubsResponse());
+  }
+
+  @Test
+  void getRankingsBrawler() throws Exception {
+
+    runTest("getRankingsBrawler", "rankings/%s/brawler/%s",
+        GetRankingsBrawlerRequest.builder(COUNTRY_CODE, BRAWLER_ID).build(), new GetRankingsBrawlerResponse());
+  }
+
+  @Test
+  void getRankingsPlayers() throws Exception {
+
+    runTest("getRankingsPlayers", "rankings/%s/players", GetRankingsPlayersRequest.builder(COUNTRY_CODE).build(),
+        new GetRankingsPlayersResponse());
   }
 
 }

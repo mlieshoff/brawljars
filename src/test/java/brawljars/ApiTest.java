@@ -35,6 +35,7 @@ import brawljars.request.GetPlayerBattleLogRequest;
 import brawljars.request.GetPlayerRequest;
 import brawljars.request.GetRankingsBrawlerRequest;
 import brawljars.request.GetRankingsClubsRequest;
+import brawljars.request.GetRankingsPlayersRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
@@ -44,6 +45,7 @@ import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.GetRankingsBrawlerResponse;
 import brawljars.response.GetRankingsClubsResponse;
+import brawljars.response.GetRankingsPlayersResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
 import brawljars.response.IResponse;
@@ -216,6 +218,13 @@ class ApiTest {
 
     runTest("getRankingsBrawler", GetRankingsBrawlerRequest.builder(COUNTRY_CODE, BRAWLER_ID).build(),
         new GetRankingsBrawlerResponse());
+  }
+
+  @Test
+  void getRankingsPlayers() throws Exception {
+
+    runTest("getRankingsPlayers", GetRankingsPlayersRequest.builder(COUNTRY_CODE).build(),
+        new GetRankingsPlayersResponse());
   }
 
 }
