@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
@@ -95,6 +96,12 @@ class JsonModelIntegrationTest {
   void getRankingsPlayers() throws Exception {
 
     runTest("src/test/resources/rankingsPlayers.json", GetRankingsPlayersResponse.class);
+  }
+
+  @Test
+  void getBrawlers() throws Exception {
+
+    runTest("src/test/resources/brawlers.json", GetBrawlersResponse.class);
   }
 
 }

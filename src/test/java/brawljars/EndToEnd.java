@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import brawljars.request.GetBrawlersRequest;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
@@ -109,6 +110,12 @@ class EndToEnd {
   void getRankingsPlayers() throws Exception {
 
     assertResponse(api.getRankingsPlayers(GetRankingsPlayersRequest.builder("DE").build()));
+  }
+
+  @Test
+  void getBrawlers() throws Exception {
+
+    assertResponse(api.getBrawlers(GetBrawlersRequest.builder().build()));
   }
 
 }

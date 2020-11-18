@@ -36,6 +36,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import brawljars.request.GetBrawlersRequest;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
@@ -47,6 +48,7 @@ import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
 import brawljars.response.Callback;
+import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
@@ -294,6 +296,12 @@ class ClientTest {
 
     runTest("getRankingsPlayers", "rankings/%s/players", GetRankingsPlayersRequest.builder(COUNTRY_CODE).build(),
         new GetRankingsPlayersResponse());
+  }
+
+  @Test
+  void getBrawlers() throws Exception {
+
+    runTest("getBrawlers", "brawlers", GetBrawlersRequest.builder().build(), new GetBrawlersResponse());
   }
 
 }

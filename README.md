@@ -1,7 +1,7 @@
 # brawljars
 A Java Wrapper For Official Supercell Brawl Stars Api 
 
-## Actual version: 1.M4.0
+## Actual version: 1.M5.0
 
 ## Simplest Usage ##
 
@@ -104,6 +104,17 @@ GetRankingsBrawlerResponse getRankingsBrawlerResponse = api.getRankingsBrawler(G
 ```java
 // get rankings players
 GetRankingsPlayersResponse getRankingsPlayersResponse = api.getRankingsPlayers(GetRankingsPlayersRequest.builder("DE")
+  // paging
+  .limit()
+  .after()
+  .before()
+  .build()
+);
+```
+
+```java
+// get brawlers
+GetBrawlersResponse getBrawlersResponse = api.getBrawlers(GetBrawlersRequest.builder()
   // paging
   .limit()
   .after()
