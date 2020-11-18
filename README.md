@@ -101,6 +101,17 @@ GetRankingsBrawlerResponse getRankingsBrawlerResponse = api.getRankingsBrawler(G
 );
 ```
 
+```java
+// get rankings players
+GetRankingsPlayersResponse getRankingsPlayersResponse = api.getRankingsPlayers(GetRankingsPlayersRequest.builder("DE")
+  // paging
+  .limit()
+  .after()
+  .before()
+  .build()
+);
+```
+
 ## Asynchronous usage
 
 All requests can have a *callback*. Then execution will be asynchronous.
