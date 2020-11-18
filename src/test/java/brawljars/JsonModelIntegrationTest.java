@@ -28,6 +28,7 @@ import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
 import brawljars.response.GetPlayerResponse;
 import brawljars.response.GetRankingsBrawlerResponse;
+import brawljars.response.GetRankingsPlayersResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsResponse;
 import brawljars.response.GetRankingsPowerplaySeasonsSeasonResponse;
 import brawljars.response.IResponse;
@@ -88,6 +89,12 @@ class JsonModelIntegrationTest {
   void getRankingsBrawler() throws Exception {
 
     runTest("src/test/resources/rankingsBrawler.json", GetRankingsBrawlerResponse.class);
+  }
+
+  @Test
+  void getRankingsPlayers() throws Exception {
+
+    runTest("src/test/resources/rankingsPlayers.json", GetRankingsPlayersResponse.class);
   }
 
 }

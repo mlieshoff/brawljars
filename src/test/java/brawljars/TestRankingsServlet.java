@@ -30,13 +30,15 @@ public class TestRankingsServlet extends TestJsonFileServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String filename = "src/test/resources/rankingsPowerplaySeasons.json";
-    String restTag = getRestTagParameter(req);
-    if ("seasonId".equals(restTag)) {
+    String restTagParameter = getRestTagParameter(req);
+    if ("seasonId".equals(restTagParameter)) {
       filename = "src/test/resources/rankingsPowerplaySeasonsSeason.json";
-    } else if ("clubs".equals(restTag)) {
+    } else if ("clubs".equals(restTagParameter)) {
       filename = "src/test/resources/rankingsClubs.json";
-    } else if ("brawlerId".equals(restTag)) {
+    } else if ("brawlerId".equals(restTagParameter)) {
       filename = "src/test/resources/rankingsBrawler.json";
+    } else if ("players".equals(restTagParameter)) {
+      filename = "src/test/resources/rankingsPlayers.json";
     }
     doGet(filename, req, resp);
   }
