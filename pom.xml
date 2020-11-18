@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>brawljars</artifactId>
     <packaging>jar</packaging>
-    <version>1.M4.0</version>
+    <version>1.M5.0</version>
     <groupId>brawljars</groupId>
     <url>http://maven.apache.org</url>
     <inceptionYear>2020</inceptionYear>

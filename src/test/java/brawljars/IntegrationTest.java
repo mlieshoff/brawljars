@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import brawljars.request.GetBrawlersRequest;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
@@ -40,6 +41,7 @@ import brawljars.request.GetRankingsPlayersRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
+import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
@@ -76,6 +78,7 @@ class IntegrationTest {
     jettyServer.addServlet('/' + APP + "/players/*", new TestPlayersServlet());
     jettyServer.addServlet('/' + APP + "/clubs/*", new TestClubsServlet());
     jettyServer.addServlet('/' + APP + "/rankings/*", new TestRankingsServlet());
+    jettyServer.addServlet('/' + APP + "/brawlers/*", new TestBrawlersServlet());
     jettyServer.start();
   }
 
@@ -188,6 +191,13 @@ class IntegrationTest {
 
     runTest("getRankingsPlayers", "src/test/resources/rankingsPlayers.json",
         GetRankingsPlayersRequest.builder(COUNTRY_CODE).build(), GetRankingsPlayersResponse.class);
+  }
+
+  @Test
+  void getBrawlers() throws Exception {
+
+    runTest("getBrawlers", "src/test/resources/brawlers.json", GetBrawlersRequest.builder().build(),
+        GetBrawlersResponse.class);
   }
 
 }

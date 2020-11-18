@@ -31,6 +31,7 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.io.IOException;
 import java.util.Map;
+import brawljars.request.GetBrawlersRequest;
 import brawljars.request.GetClubMembersRequest;
 import brawljars.request.GetClubRequest;
 import brawljars.request.GetPlayerBattleLogRequest;
@@ -41,6 +42,7 @@ import brawljars.request.GetRankingsPlayersRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsRequest;
 import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
 import brawljars.request.Request;
+import brawljars.response.GetBrawlersResponse;
 import brawljars.response.GetClubMembersResponse;
 import brawljars.response.GetClubResponse;
 import brawljars.response.GetPlayerBattleLogResponse;
@@ -177,6 +179,10 @@ public class Client {
 
   GetRankingsPlayersResponse getRankingsPlayers(GetRankingsPlayersRequest getRankingsPlayersRequest) {
     return executeRequest("rankings/%s/players", getRankingsPlayersRequest, GetRankingsPlayersResponse.class);
+  }
+
+  GetBrawlersResponse getBrawlers(GetBrawlersRequest getBrawlersRequest) {
+    return executeRequest("brawlers", getBrawlersRequest, GetBrawlersResponse.class);
   }
 
 }
