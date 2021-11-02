@@ -47,7 +47,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Michael Lieshoff
  */
 @Slf4j
-class Crawler {
+public class Crawler {
 
   private static final ThreadLocal<RawResponse> RESPONSE = new ThreadLocal<>();
 
