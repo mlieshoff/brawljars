@@ -1,11 +1,9 @@
-package brawljars.v2.api.brawlers;
+package brawljars.v2.api.soongenerated;
 
 import java.io.IOException;
 import brawljars.v2.api.AbstractApi;
 import brawljars.v2.api.ApiContext;
 import brawljars.v2.api.RequestContext;
-import brawljars.v2.api.brawlers.generated.BrawlersRequest;
-import brawljars.v2.api.brawlers.generated.BrawlersResponse;
 
 class BrawlersApiImpl extends AbstractApi implements BrawlersApi {
 

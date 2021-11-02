@@ -1,0 +1,9 @@
+package ${helper.getPackageName($properties)}
+
+public class ${filename} {
+
+#foreach( $attribute in $entity.attribute )
+    private final $attribute.name;
+#end
+
+}

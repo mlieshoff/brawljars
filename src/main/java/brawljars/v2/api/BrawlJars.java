@@ -3,7 +3,7 @@ package brawljars.v2.api;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
-import brawljars.v2.api.generated.DefaultApiClasses;
+import brawljars.v2.api.soongenerated.DefaultApiClasses;
 
 public class BrawlJars {
 

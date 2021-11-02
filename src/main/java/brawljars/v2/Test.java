@@ -4,8 +4,9 @@ import java.io.IOException;
 import brawljars.v2.api.BrawlJars;
 import brawljars.v2.api.Connector;
 import brawljars.v2.api.RequestContext;
-import brawljars.v2.api.brawlers.BrawlersApi;
-import brawljars.v2.api.brawlers.generated.BrawlersResponse;
+import brawljars.v2.api.soongenerated.BrawlersApi;
+import brawljars.v2.api.soongenerated.BrawlersRequest;
+import brawljars.v2.api.soongenerated.BrawlersResponse;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -35,6 +36,6 @@ public class Test {
           }
         });
     BrawlersApi brawlersApi = brawlJarsApi.getApi(BrawlersApi.class);
-    BrawlersResponse brawlersResponse = brawlersApi.getBrawlers();
+    BrawlersResponse brawlersResponse = brawlersApi.getBrawlers(new BrawlersRequest());
   }
 }

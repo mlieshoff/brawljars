@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<model>
+    <entity name="Brawlers">
+        <stereotype name="endpoint"/>
+        <method name="brawlers" return="void">
+            <attribute name="brawlersRequest" type="BrawlersRequest"/>
+        </method>
+    </entity>
+    <entity name="BrawlersRequest">
+        <stereotype name="request"/>
+    </entity>
+    <!--entity name="BrawlersResponse">
+        <stereotype name="response"/>
+    </entity>
+    <entity name="Brawler">
+        <stereotype name="dto"/>
+    </entity-->
+</model>

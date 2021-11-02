@@ -1,0 +1,12 @@
+package ${helper.getPackageName($properties)}
+
+import java.io.IOException;
+import brawljars.v2.api.Api;
+
+public interface ${filename} extends Api {
+
+#foreach( $method in $object.method )
+  ${helper.getReturnTypeName($method.return)} ${helper.getGetterMethodName($method.name)}(#foreach( $attribute in $method.attribute )${helper.getMethodParameterTypeName($attribute.type)} ${helper.getMethodParameterName($attribute.type)}#end) throws IOException;
+#end
+
+}

@@ -1,0 +1,20 @@
+package ${helper.getPackageName($properties)};
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import brawljars.v2.api.Api;
+
+public class ${filename} {
+
+  private final Map<Class<? extends Api>, String> apiClassMap = Collections.unmodifiableMap(new HashMap<Class<? extends Api>, String>(){{
+  #foreach( $entity in $object )
+    put(${entity.name.concat("Api")}.class, "brawljars.v2.api.brawlers.${entity.name.concat("Api")}Impl");
+  #end
+  }});
+
+  public Map<Class<? extends Api>, String> getApiClassMap() {
+    return apiClassMap;
+  }
+
+}

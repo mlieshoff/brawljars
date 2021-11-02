@@ -1,10 +1,9 @@
-package brawljars.v2.api.generated;
+package brawljars.v2.api.soongenerated;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import brawljars.v2.api.Api;
-import brawljars.v2.api.brawlers.BrawlersApi;
 
 public class DefaultApiClasses {
 
