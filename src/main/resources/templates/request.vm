@@ -1,0 +1,22 @@
+package ${helper.getPackageName($properties)};
+
+import brawljars.v2.api.common.PaginationRequest;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+public class ${filename} extends PaginationRequest {
+  #foreach( $attribute in $entity.attribute )
+  private final $attribute.name;
+  #end
+
+  @Builder
+  private ${filename}(int limit, String after, String before) {
+    super(limit, after, before);
+  }
+
+  public static ${filename}Builder builder() {
+    return new ${filename}Builder();
+  }
+
+}

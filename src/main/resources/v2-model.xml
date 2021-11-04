@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <model>
+    <!-- brawlers -->
     <entity name="Brawlers">
         <stereotype name="endpoint"/>
-        <method name="brawlers" return="void">
+        <method name="brawlers" return="BrawlersResponse">
             <attribute name="brawlersRequest" type="BrawlersRequest"/>
         </method>
     </entity>
     <entity name="BrawlersRequest">
         <stereotype name="request"/>
+        <extend name="PaginationRequest"/>
     </entity>
-    <!--entity name="BrawlersResponse">
+    <entity name="BrawlersResponse">
         <stereotype name="response"/>
+        <extend name="PaginationResponse" type="BrawlersBrawler"/>
     </entity>
-    <entity name="Brawler">
+    <entity name="BrawlersBrawler">
         <stereotype name="dto"/>
-    </entity-->
+        <attribute name="id" type="long"/>
+        <attribute name="name" type="String"/>
+        <attribute name="starPowers" type="list(BrawlersStarPower)"/>
+        <attribute name="gadgets" type="list(BrawlersGadget)"/>
+    </entity>
+    <entity name="BrawlersStarPower">
+        <stereotype name="dto"/>
+        <attribute name="id" type="long"/>
+        <attribute name="name" type="String"/>
+    </entity>
+    <entity name="BrawlersGadget">
+        <stereotype name="dto"/>
+        <attribute name="id" type="long"/>
+        <attribute name="name" type="String"/>
+    </entity>
 </model>

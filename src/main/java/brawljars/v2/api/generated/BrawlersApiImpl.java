@@ -1,8 +1,9 @@
-package brawljars.v2.api.soongenerated;
+package brawljars.v2.api.generated;
 
 import java.io.IOException;
 import brawljars.v2.api.AbstractApi;
 import brawljars.v2.api.ApiContext;
+import brawljars.v2.api.Connector;
 import brawljars.v2.api.RequestContext;
 
 class BrawlersApiImpl extends AbstractApi implements BrawlersApi {
@@ -13,8 +14,11 @@ class BrawlersApiImpl extends AbstractApi implements BrawlersApi {
 
   @Override
   public BrawlersResponse getBrawlers(BrawlersRequest brawlersRequest) throws IOException {
-    return getApiContext().getConnector()
-        .get(new RequestContext(getApiContext().getUrl() + "/brawlers", getApiContext().getApiKey()));
+    String apiKey = getApiContext().getApiKey();
+    Connector connector = getApiContext().getConnector();
+    String url = createUrl("/brawlers", brawlersRequest);
+    RequestContext requestContext = new RequestContext(url, apiKey, brawlersRequest, BrawlersResponse.class);
+    return connector.get(requestContext);
   }
 
 }

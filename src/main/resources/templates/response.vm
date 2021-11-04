@@ -1,0 +1,7 @@
+package ${helper.getPackageName($properties)};
+
+import brawljars.v2.api.common.PaginationResponse;
+
+public class ${filename} extends PaginationResponse<#foreach( $extend in $object.extend )${extend.type}#end> {
+
+}

@@ -9,7 +9,7 @@ public class ${filename} {
 
   private final Map<Class<? extends Api>, String> apiClassMap = Collections.unmodifiableMap(new HashMap<Class<? extends Api>, String>(){{
   #foreach( $entity in $object )
-    put(${entity.name.concat("Api")}.class, "brawljars.v2.api.brawlers.${entity.name.concat("Api")}Impl");
+    put(${entity.name.concat("Api")}.class, "brawljars.v2.api.generated.${entity.name.concat("Api")}Impl");
   #end
   }});
 
