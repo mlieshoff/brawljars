@@ -14,7 +14,7 @@ public class ${filename} {
 
 #foreach( $attribute in $object.attribute )
   @SerializedName("${helper.getAliasName($attribute)}")
-  private final ${helper.getTypeName($attribute.type)} ${helper.getAttributeName($attribute.name)};
+  private ${helper.getTypeName($attribute.type)} ${helper.getAttributeName($attribute.name)};
 #end
 
 }

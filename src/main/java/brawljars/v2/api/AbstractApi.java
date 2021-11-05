@@ -2,10 +2,12 @@ package brawljars.v2.api;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -25,10 +27,11 @@ public abstract class AbstractApi implements Api {
   }
 
   protected String createUrl(String part, Request request) throws UnsupportedEncodingException {
-    return appendToUrl(getApiContext().getUrl() + part, request.getQueryParameters());
+    return appendToUrl(getApiContext().getUrl() + part, request.getQueryParameters(), request.getRestParameters());
   }
 
-  private String appendToUrl(String url, Map<String, String> parameters) throws UnsupportedEncodingException {
+  private String appendToUrl(String url, Map<String, String> parameters, Map<String, String> restUrlParts)
+      throws UnsupportedEncodingException {
     StringBuilder appendedUrl = new StringBuilder(url);
     if (MapUtils.isNotEmpty(parameters)) {
       appendedUrl.append('?');
@@ -47,18 +50,13 @@ public abstract class AbstractApi implements Api {
       }
     }
     String result = appendedUrl.toString();
-    /*
-    if (CollectionUtils.isNotEmpty(restUrlParts)) {
-      Object[] encodedParams = restUrlParts.stream().map(s -> {
-        try {
-          return encode(s);
-        } catch (UnsupportedEncodingException e) {
-          throw new IllegalStateException(e);
-        }
-      }).toArray();
-      result = String.format(result, encodedParams);
+    if (MapUtils.isNotEmpty(restUrlParts)) {
+      for (Entry<String, String> entry : restUrlParts.entrySet()) {
+        String key = entry.getKey();
+        String value = entry.getValue();
+        result = result.replace("{" + key + "}", encode(value));
+      }
     }
-    */
 //    log.info("request to: {}", result);
     return result;
   }

@@ -1,22 +1,39 @@
 package ${helper.getPackageName($properties)};
 
-import brawljars.v2.api.common.PaginationRequest;
+import java.util.Map;
+import brawljars.v2.api.common.Request;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ${filename} extends PaginationRequest {
-  #foreach( $attribute in $entity.attribute )
-  private final $attribute.name;
+public class ${filename} extends Request {
+
+#foreach( $attribute in $object.attribute )
+  private final ${helper.getTypeName($attribute.type)} ${helper.getAttributeName($attribute.name)};
   #end
 
   @Builder
-  private ${filename}(int limit, String after, String before) {
-    super(limit, after, before);
+  private ${filename}(${helper.concatAttributes($object.attribute, ', ', '{type} {name}')}) {
+    #foreach( $attribute in $object.attribute )
+    this.${helper.getAttributeName($attribute.name)} = ${helper.getAttributeName($attribute.name)};
+    #end
   }
 
-  public static ${filename}Builder builder() {
-    return new ${filename}Builder();
+  public static ${filename}Builder builder(${helper.concatAttributes($object.attribute, ', ', '{type} {name}')}) {
+    return new ${filename}Builder()
+      #foreach( $attribute in $object.attribute )
+      .${helper.getAttributeName($attribute.name)}(${helper.getAttributeName($attribute.name)})
+      #end
+    ;
+  }
+
+  @Override
+  public Map<String, String> getRestParameters() {
+    Map<String, String> map = super.getRestParameters();
+    #foreach( $attribute in $object.attribute )
+    map.put("${attribute.name}", ${helper.getAttributeName($attribute.name)});
+    #end
+    return map;
   }
 
 }

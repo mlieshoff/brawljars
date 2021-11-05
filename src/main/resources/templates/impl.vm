@@ -14,11 +14,12 @@ class ${filename} extends AbstractApi implements ${WordUtils.capitalize($object.
 
   @Override
   #foreach( $method in $object.method )
-  public ${helper.getTypeName($method.return)} ${helper.getGetterMethodName($method.name)}(#foreach( $attribute in $method.attribute )${helper.getTypeName($attribute.type)} ${helper.getAttributeName($attribute.type)}#end) throws IOException {
+    #set($attribute=$method.attribute.get(0))
+  public ${helper.getTypeName($method.return)} ${helper.getMethodName($method.name)}(${helper.getTypeName($attribute.type)} ${helper.getAttributeName($attribute.type)}) throws IOException {
     String apiKey = getApiContext().getApiKey();
     Connector connector = getApiContext().getConnector();
-    String url = createUrl("/${object.name.toLowerCase()}", #foreach($attribute in $method.attribute)${helper.getAttributeName($attribute.type)}#end);
-    RequestContext requestContext = new RequestContext(url, apiKey, #foreach($attribute in $method.attribute)${helper.getAttributeName($attribute.type)}#end, ${helper.getTypeName($method.return)}.class);
+    String url = createUrl("${helper.findContextValue($method.getContext(), 'url')}", ${helper.getAttributeName($attribute.type)});
+    RequestContext requestContext = new RequestContext(url, apiKey, ${helper.getAttributeName($attribute.type)}, ${helper.getTypeName($method.return)}.class);
     return connector.get(requestContext);
   }
 

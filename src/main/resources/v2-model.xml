@@ -3,33 +3,66 @@
     <!-- brawlers -->
     <entity name="Brawlers">
         <stereotype name="endpoint"/>
-        <method name="brawlers" return="BrawlersResponse">
+        <method name="findAll" return="BrawlersResponse">
             <attribute name="brawlersRequest" type="BrawlersRequest"/>
+            <context key="url" value="/brawlers"/>
+        </method>
+        <method name="findById" return="BrawlerResponse">
+            <attribute name="brawlersRequest" type="BrawlerRequest"/>
+            <context key="url" value="/brawlers/{brawlerId}"/>
         </method>
     </entity>
+    <!-- brawlers -->
     <entity name="BrawlersRequest">
-        <stereotype name="request"/>
-        <extend name="PaginationRequest"/>
+        <stereotype name="paginationRequest"/>
     </entity>
     <entity name="BrawlersResponse">
-        <stereotype name="response"/>
-        <extend name="PaginationResponse" type="BrawlersBrawler"/>
+        <stereotype name="paginationResponse"/>
+        <context key="objectType" value="BrawlersBrawler"/>
     </entity>
     <entity name="BrawlersBrawler">
         <stereotype name="dto"/>
         <attribute name="id" type="long"/>
         <attribute name="name" type="String"/>
-        <attribute name="starPowers" type="list(BrawlersStarPower)"/>
-        <attribute name="gadgets" type="list(BrawlersGadget)"/>
+        <attribute name="starPowers" type="list(BrawlersBrawlerStarPower)"/>
+        <attribute name="gadgets" type="list(BrawlersBrawlerGadget)"/>
     </entity>
-    <entity name="BrawlersStarPower">
+    <entity name="BrawlersBrawlerStarPower">
         <stereotype name="dto"/>
         <attribute name="id" type="long"/>
         <attribute name="name" type="String"/>
     </entity>
-    <entity name="BrawlersGadget">
+    <entity name="BrawlersBrawlerGadget">
         <stereotype name="dto"/>
         <attribute name="id" type="long"/>
         <attribute name="name" type="String"/>
     </entity>
+    <!-- brawlers/{brawlerId} -->
+    <entity name="BrawlerRequest">
+        <stereotype name="request"/>
+        <attribute name="brawlerId" type="String"/>
+    </entity>
+    <entity name="BrawlerResponse">
+        <stereotype name="response"/>
+        <context key="objectType" value="BrawlerBrawler"/>
+    </entity>
+    <entity name="BrawlerBrawler">
+        <stereotype name="dto"/>
+        <attribute name="id" type="long"/>
+        <attribute name="name" type="String"/>
+        <attribute name="starPowers" type="list(BrawlerBrawlerStarPower)"/>
+        <attribute name="gadgets" type="list(BrawlerBrawlerGadget)"/>
+    </entity>
+    <entity name="BrawlerBrawlerStarPower">
+        <stereotype name="dto"/>
+        <attribute name="id" type="long"/>
+        <attribute name="name" type="String"/>
+    </entity>
+    <entity name="BrawlerBrawlerGadget">
+        <stereotype name="dto"/>
+        <attribute name="id" type="long"/>
+        <attribute name="name" type="String"/>
+    </entity>
+
+
 </model>

@@ -1,7 +1,22 @@
 package ${helper.getPackageName($properties)};
 
-import brawljars.v2.api.common.PaginationResponse;
+import brawljars.v2.api.common.IResponse;
 
-public class ${filename} extends PaginationResponse<#foreach( $extend in $object.extend )${extend.type}#end> {
+import com.google.gson.annotations.SerializedName;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class ${filename} extends ${helper.findContextValue($object.getContext(), 'objectType')} implements IResponse {
+
+  @SerializedName("reason")
+  private String reason;
+
+  @SerializedName("message")
+  private String message;
 
 }

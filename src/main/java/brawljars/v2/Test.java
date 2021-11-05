@@ -6,6 +6,8 @@ import java.io.IOException;
 import brawljars.v2.api.BrawlJars;
 import brawljars.v2.api.Connector;
 import brawljars.v2.api.RequestContext;
+import brawljars.v2.api.generated.BrawlerRequest;
+import brawljars.v2.api.generated.BrawlerResponse;
 import brawljars.v2.api.generated.BrawlersApi;
 import brawljars.v2.api.generated.BrawlersRequest;
 import brawljars.v2.api.generated.BrawlersResponse;
@@ -34,15 +36,18 @@ public class Test {
             Response response = call.execute();
             String json = response.body().string();
             System.out.println(json);
-            T t = (T) new Gson().fromJson(json, requestContext.getResponseClass());
-            System.out.println(new Gson().toJson(t));
-            return t;
+            return (T) new Gson().fromJson(json, requestContext.getResponseClass());
           }
         });
     BrawlersApi brawlersApi = brawlJarsApi.getApi(BrawlersApi.class);
-    BrawlersResponse brawlersResponse = brawlersApi.getBrawlers(BrawlersRequest.builder()
+    BrawlersResponse brawlersResponse = brawlersApi.findAll(BrawlersRequest.builder()
         .limit(1)
         .build()
     );
+    System.out.println(new Gson().toJson(brawlersResponse));
+    BrawlerResponse brawlerResponse = brawlersApi.findById(BrawlerRequest.builder("16000000")
+        .build()
+    );
+    System.out.println(new Gson().toJson(brawlerResponse));
   }
 }
