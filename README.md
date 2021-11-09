@@ -3,6 +3,8 @@ A Java Wrapper For Official Supercell Brawl Stars Api
 
 ## Actual version: 1.M5.0
 
+(we moved repository to https://packagecloud.io/mlieshoff/brawljars)
+
 ## Simplest Usage ##
 
 Note: Please combine the builder methods as it makes sense. The demonstrated was is showing only all possibilities. 
@@ -158,24 +160,26 @@ All requests can have a *callback*. Then execution will be asynchronous.
 ## How to bind the bintray repository ##
 
 ```xml
-<repository>
-    <id>org-mili-repo</id>
-    <url>http://dl.bintray.com/mlieshoff/maven</url>
+<repositories>
+  <repository>
+    <id>mlieshoff-brawljars</id>
+    <url>https://packagecloud.io/mlieshoff/brawljars/maven2</url>
     <releases>
-        <enabled>true</enabled>
+      <enabled>true</enabled>
     </releases>
     <snapshots>
-        <enabled>false</enabled>
+      <enabled>true</enabled>
     </snapshots>
-</repository>
+  </repository>
+</repositories>
 ```
 ## Continuous Integration ##
 
-https://travis-ci.org/mlieshoff/brawljars
+https://github.com/mlieshoff/brawljars/actions
 
 ## Repository ##
 
-https://bintray.com/mlieshoff/maven/brawljars
+https://packagecloud.io/mlieshoff/brawljars
 
 ## Logging ##
 
