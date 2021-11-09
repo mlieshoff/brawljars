@@ -3,6 +3,8 @@ A Java Wrapper For Official Supercell Brawl Stars Api
 
 ## Actual version: 2.0.0
 
+(we moved repository to https://packagecloud.io/mlieshoff/brawljars)
+
 ## Simplest Usage ##
 
 Note: Please combine the builder methods as it makes sense. The demonstrated was is showing only all possibilities.
@@ -73,14 +75,29 @@ BrawlerResponse brawlerResponse = brawlersApi.findById(BrawlersRequest.builder("
 
 All requests can have a *callback*. Then execution will be asynchronous.
 
-## How to bind the bintray repository ##
+## How to bind the packagecloud repository ##
 
+```xml
+<repositories>
+  <repository>
+    <id>mlieshoff-brawljars</id>
+    <url>https://packagecloud.io/mlieshoff/brawljars/maven2</url>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+```
 ## Continuous Integration ##
+
+https://github.com/mlieshoff/brawljars/actions
 
 ## Repository ##
 
-https://packagecloud.io/instructions/install_cli
-https://github.com/computology/maven-packagecloud-wagon
+https://packagecloud.io/mlieshoff/brawljars
 
 ## Logging ##
 
