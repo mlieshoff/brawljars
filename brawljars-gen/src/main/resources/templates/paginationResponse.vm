@@ -1,7 +1,0 @@
-package ${replacer.getPackageName($properties)};
-
-import brawljars.common.PaginationResponse;
-
-public class ${filename} extends PaginationResponse<${replacer.findContextValue($object.getContext(), 'objectType')}> {
-
-}
