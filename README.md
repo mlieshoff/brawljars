@@ -1,11 +1,12 @@
 [![](https://img.shields.io/badge/java-packagecloud.io-844fec.svg)](https://packagecloud.io/)
 
 
-# brawljars
+# brawljars 1.M5.0
 A Java Wrapper For Official Supercell Brawl Stars Api 
 
-## Actual version: 1.M5.0
-(we moved repository to https://packagecloud.io/mlieshoff/brawljars)
+## Why we moved to the amazing services of packagecloud?
+
+-- blog content goes here --
 
 ## Simplest Usage ##
 
