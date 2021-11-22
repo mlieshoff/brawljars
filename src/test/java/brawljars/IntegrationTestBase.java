@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.AfterEach;
@@ -24,7 +25,7 @@ import brawljars.connector.StandardConnector;
 
 public class IntegrationTestBase {
 
-  private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+  private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
   private static final ThreadLocal<String> expected = new ThreadLocal<>();
 
@@ -34,13 +35,14 @@ public class IntegrationTestBase {
 
   @BeforeAll
   public static void beforeAll() {
-    wireMockServer = new WireMockServer();
+    WireMockConfiguration wireMockConfiguration = new WireMockConfiguration().dynamicPort();
+    wireMockServer = new WireMockServer(wireMockConfiguration);
     wireMockServer.start();
   }
 
   @BeforeEach
   public void beforeEach() {
-    configureFor("localhost", 8080);
+    configureFor("localhost", wireMockServer.port());
     brawlJars = createBrawlJars();
   }
 
@@ -51,7 +53,7 @@ public class IntegrationTestBase {
   }
 
   private BrawlJars createBrawlJars() {
-    return new BrawlJars("http://localhost:8080", "myApiKey", new StandardConnector());
+    return new BrawlJars("http://localhost:" + wireMockServer.port(), "myApiKey", new StandardConnector());
   }
 
   protected String getExpected() {

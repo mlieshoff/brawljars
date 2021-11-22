@@ -4,14 +4,11 @@ import static brawljars.common.Utils.isNotBlank;
 import static brawljars.common.Utils.isNotEmpty;
 import static brawljars.common.Utils.require;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import brawljars.common.IResponse;
 import brawljars.common.RawResponse;
 import brawljars.common.Request;
@@ -20,16 +17,18 @@ import brawljars.connector.ConnectorException;
 import brawljars.connector.RequestContext;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 public class BaseApi implements Api {
 
-  private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(8);
+  private final ExecutorServiceDecorator executorServiceDecorator = new ExecutorServiceDecorator();
 
   @NonNull
   private final ApiContext apiContext;
 
-  protected <T extends IResponse> T get(String part, Request request, Class<? extends IResponse> responseClass) {
+  protected <T extends IResponse> T get(String part, Request<?> request, Class<? extends IResponse> responseClass) {
     require("part", part);
     require("request", request);
     require("responseClass", responseClass);
@@ -41,13 +40,7 @@ public class BaseApi implements Api {
       if (request.getCallback() == null) {
         return connector.get(requestContext);
       }
-      EXECUTOR_SERVICE.submit(() -> {
-        try {
-          request.getCallback().onResponse(connector.get(requestContext));
-        } catch (Exception e) {
-          request.getCallback().onException(e);
-        }
-      });
+      executorServiceDecorator.submit(request, connector, requestContext);
       return null;
     } catch (ConnectorException e) {
       throw new ApiException(e);
@@ -60,8 +53,8 @@ public class BaseApi implements Api {
     return apiContext;
   }
 
-  private String createUrl(String part, Request request) throws UnsupportedEncodingException {
-    return appendToUrl(getApiContext().getUrl() + part, request.getQueryParameters(), request.getRestParameters());
+  private String createUrl(String part, Request<?> request) throws UnsupportedEncodingException {
+    return appendToUrl(apiContext.getUrl() + part, request.getQueryParameters(), request.getRestParameters());
   }
 
   private String appendToUrl(String url, Map<String, String> parameters, Map<String, String> restUrlParts)
@@ -91,7 +84,7 @@ public class BaseApi implements Api {
         result = result.replace("{" + key + "}", encode(value));
       }
     }
-//    log.info("request to: {}", result);
+    log.info("request to: {}", result);
     return result;
   }
 

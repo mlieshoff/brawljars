@@ -18,6 +18,7 @@ package brawljars.connector;
 
 import static brawljars.common.Utils.isNotBlank;
 import static brawljars.common.Utils.isNotEmpty;
+import static brawljars.common.Utils.require;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.http.HttpStatus.SC_OK;
 
@@ -39,6 +40,7 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 import brawljars.common.RawResponse;
+import brawljars.common.Utils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -46,16 +48,11 @@ public class StandardConnector implements Connector {
 
   private static final ThreadLocal<RawResponse> RESPONSE = new ThreadLocal<>();
 
-  private static final Gson GSON = new GsonBuilder().create();
+  private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
   @Override
   public <T> T get(RequestContext requestContext) throws ConnectorException {
-    /*
-    checkNotNull(url);
-    checkArgument(!url.isEmpty());
-    checkNotNull(headers);
-    checkArgument(!headers.isEmpty());
-    */
+    require("requestContext", requestContext);
     try {
       String url = requestContext.getUrl();
       String

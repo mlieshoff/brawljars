@@ -1,6 +1,7 @@
 package brawljars.connector;
 
 import brawljars.common.Request;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
