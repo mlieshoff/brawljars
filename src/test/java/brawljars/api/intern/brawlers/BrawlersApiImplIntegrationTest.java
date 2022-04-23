@@ -22,8 +22,9 @@ public class BrawlersApiImplIntegrationTest extends IntegrationTestBase {
     prepare("/brawlers", "src/test/resources/brawlers-findAll.json");
 
     BrawlersResponse actual = unitUnderTest.findAll(brawlersRequest);
+    BrawlersResponse expected = toJson(BrawlersResponse.class, getExpected());
 
-    assertEquals(getExpected(), json(actual));
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -33,8 +34,9 @@ public class BrawlersApiImplIntegrationTest extends IntegrationTestBase {
     prepare("/brawlers/{brawlerId}".replace("{brawlerId}", brawlerId), "src/test/resources/brawlers-findById.json");
 
     BrawlerResponse actual = unitUnderTest.findById(brawlersRequest);
+    BrawlerResponse expected = toJson(BrawlerResponse.class, getExpected());
 
-    assertEquals(getExpected(), json(actual));
+    assertEquals(expected, actual);
   }
 
 }

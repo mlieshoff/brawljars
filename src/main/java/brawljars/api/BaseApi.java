@@ -49,10 +49,6 @@ public class BaseApi implements Api {
     }
   }
 
-  private ApiContext getApiContext() {
-    return apiContext;
-  }
-
   private String createUrl(String part, Request<?> request) throws UnsupportedEncodingException {
     return appendToUrl(apiContext.getUrl() + part, request.getQueryParameters(), request.getRestParameters());
   }

@@ -24,8 +24,9 @@ public class RankingsApiImplIntegrationTest extends IntegrationTestBase {
     prepare("/rankings/{countryCode}/powerplay/seasons/{seasonId}".replace("{countryCode}", countryCode).replace("{seasonId}", seasonId), "src/test/resources/rankings-findPowerplayRankings.json");
 
     PowerplayRankingsResponse actual = unitUnderTest.findPowerplayRankings(powerplayRankingsRequest);
+    PowerplayRankingsResponse expected = toJson(PowerplayRankingsResponse.class, getExpected());
 
-    assertEquals(getExpected(), json(actual));
+    assertEquals(expected, actual);
   }
 
 }

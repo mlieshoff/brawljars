@@ -64,6 +64,10 @@ public class IntegrationTestBase {
     return GSON.toJson(o);
   }
 
+  protected <T> T toJson(Class<T> clazz, String s) {
+    return GSON.fromJson(s, clazz);
+  }
+
   protected String body(String filename) throws IOException {
     String s = readFileToString(new File(filename));
     expected.set(s);

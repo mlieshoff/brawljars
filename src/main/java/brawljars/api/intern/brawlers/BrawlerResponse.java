@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BrawlerResponse extends Brawler implements IResponse {
 
