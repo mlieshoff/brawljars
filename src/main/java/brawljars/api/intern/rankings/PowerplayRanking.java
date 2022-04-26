@@ -15,12 +15,12 @@ public class PowerplayRanking {
   @SerializedName("nameColor")
   private String nameColor;
   @SerializedName("icon")
-  private PowerplayRankingIcon icon;
+  private Icon icon;
   @SerializedName("trophies")
   private int trophies;
   @SerializedName("rank")
   private int rank;
   @SerializedName("club")
-  private PowerplayRankingClub club;
+  private Club club;
 
 }

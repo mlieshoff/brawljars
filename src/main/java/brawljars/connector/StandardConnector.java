@@ -40,7 +40,6 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 import brawljars.common.RawResponse;
-import brawljars.common.Utils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -60,7 +59,6 @@ public class StandardConnector implements Connector {
           appendToUrl(url, requestContext.getRequest().getQueryParameters(),
               requestContext.getRequest().getRestParameters());
       HttpClient client = HttpClientBuilder.create().build();
-      ;
       HttpGet request = createRequest(replacedUrl, requestContext.getApiKey());
       HttpResponse response = client.execute(request);
       logResponse(response);

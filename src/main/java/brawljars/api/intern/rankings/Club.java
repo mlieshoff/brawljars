@@ -6,9 +6,9 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class PowerplayRankingIcon {
+public class Club {
 
-  @SerializedName("id")
-  private long id;
+  @SerializedName("name")
+  private String name;
 
 }
