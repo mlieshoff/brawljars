@@ -35,7 +35,7 @@ public class BaseApi implements Api {
     String apiKey = apiContext.getApiKey();
     Connector connector = apiContext.getConnector();
     try {
-      String url = createUrl(part, request);
+      String url = apiContext.getUrl() + part;
       RequestContext requestContext = new RequestContext(url, apiKey, request, responseClass);
       if (request.getCallback() == null) {
         return connector.get(requestContext);
@@ -47,45 +47,6 @@ public class BaseApi implements Api {
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }
-  }
-
-  private String createUrl(String part, Request<?> request) throws UnsupportedEncodingException {
-    return appendToUrl(apiContext.getUrl() + part, request.getQueryParameters(), request.getRestParameters());
-  }
-
-  private String appendToUrl(String url, Map<String, String> parameters, Map<String, String> restUrlParts)
-      throws UnsupportedEncodingException {
-    StringBuilder appendedUrl = new StringBuilder(url);
-    if (isNotEmpty(parameters)) {
-      appendedUrl.append('?');
-      for (Iterator<Entry<String, String>> iterator = parameters.entrySet().iterator(); iterator.hasNext(); ) {
-        Entry<String, String> entry = iterator.next();
-        String name = entry.getKey();
-        String value = entry.getKey();
-        appendedUrl.append(name);
-        appendedUrl.append('=');
-        if (isNotBlank(value)) {
-          appendedUrl.append(encode(entry.getValue()));
-        }
-        if (iterator.hasNext()) {
-          appendedUrl.append('&');
-        }
-      }
-    }
-    String result = appendedUrl.toString();
-    if (isNotEmpty(restUrlParts)) {
-      for (Entry<String, String> entry : restUrlParts.entrySet()) {
-        String key = entry.getKey();
-        String value = entry.getValue();
-        result = result.replace("{" + key + "}", encode(value));
-      }
-    }
-    log.info("request to: {}", result);
-    return result;
-  }
-
-  private String encode(String s) throws UnsupportedEncodingException {
-    return URLEncoder.encode(s, "UTF-8");
   }
 
   @Override

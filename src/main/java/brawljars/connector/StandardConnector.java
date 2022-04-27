@@ -128,7 +128,7 @@ public class StandardConnector implements Connector {
     if (isNotEmpty(restParameters)) {
       for (Map.Entry<String, String> entry : restParameters.entrySet()) {
         String encodedValue = encode(entry.getValue());
-        result.replace("{" + entry.getKey() + "}", encodedValue);
+        result = result.replace("{" + entry.getKey() + "}", encodedValue);
       }
     }
     log.info("request to: {}", result);

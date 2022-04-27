@@ -1,0 +1,122 @@
+[
+  {
+    "startTime": "20220427T080000.000Z",
+    "endTime": "20220428T080000.000Z",
+    "slotId": 1,
+    "event": {
+      "id": 15000009,
+      "mode": "gemGrab",
+      "map": "Deathcap Trap"
+    }
+  },
+  {
+    "startTime": "20220426T200000.000Z",
+    "endTime": "20220427T200000.000Z",
+    "slotId": 2,
+    "event": {
+      "id": 15000507,
+      "mode": "soloShowdown",
+      "map": "Canyon Rivers"
+    }
+  },
+  {
+    "startTime": "20220427T020000.000Z",
+    "endTime": "20220428T020000.000Z",
+    "slotId": 3,
+    "event": {
+      "id": 15000500,
+      "mode": "brawlBall",
+      "map": "Off the Line"
+    }
+  },
+  {
+    "startTime": "20220426T140000.000Z",
+    "endTime": "20220427T140000.000Z",
+    "slotId": 4,
+    "event": {
+      "id": 15000294,
+      "mode": "hotZone",
+      "map": "Split"
+    }
+  },
+  {
+    "startTime": "20220426T200000.000Z",
+    "endTime": "20220427T200000.000Z",
+    "slotId": 5,
+    "event": {
+      "id": 15000508,
+      "mode": "duoShowdown",
+      "map": "Canyon Rivers"
+    }
+  },
+  {
+    "startTime": "20220426T140000.000Z",
+    "endTime": "20220427T140000.000Z",
+    "slotId": 6,
+    "event": {
+      "id": 15000529,
+      "mode": "knockout",
+      "map": "X Marks the Spot"
+    }
+  },
+  {
+    "startTime": "20220430T080000.000Z",
+    "endTime": "20220502T080000.000Z",
+    "slotId": 7,
+    "event": {
+      "id": 15000133,
+      "mode": "bossFight",
+      "map": "Danger Zone"
+    }
+  },
+  {
+    "startTime": "20220427T080000.000Z",
+    "endTime": "20220428T080000.000Z",
+    "slotId": 10,
+    "event": {
+      "id": 15000526,
+      "mode": "unknown",
+      "map": "A Loud Place"
+    }
+  },
+  {
+    "startTime": "20220429T100000.000Z",
+    "endTime": "20220509T100000.000Z",
+    "slotId": 20,
+    "event": {
+      "id": 15000502,
+      "mode": "knockout",
+      "map": "Flowing Springs"
+    }
+  },
+  {
+    "startTime": "20220429T100000.000Z",
+    "endTime": "20220509T100000.000Z",
+    "slotId": 21,
+    "event": {
+      "id": 15000384,
+      "mode": "basketBrawl",
+      "map": "Ball Hog"
+    }
+  },
+  {
+    "startTime": "20220429T100000.000Z",
+    "endTime": "20220509T100000.000Z",
+    "slotId": 22,
+    "event": {
+      "id": 15000471,
+      "mode": "wipeout",
+      "map": "Infinite Doom"
+    }
+  },
+  {
+    "startTime": "20220429T100000.000Z",
+    "endTime": "20220509T100000.000Z",
+    "slotId": 23,
+    "event": {
+      "id": 15000256,
+      "mode": "brawlBall",
+      "map": "Warped Beach"
+    }
+  }
+]

@@ -21,6 +21,9 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.io.File;
 import java.io.IOException;
+import brawljars.common.IResponse;
+import brawljars.common.PaginationRequest;
+import brawljars.common.Request;
 import brawljars.connector.StandardConnector;
 
 public class IntegrationTestBase {
@@ -74,8 +77,12 @@ public class IntegrationTestBase {
     return s;
   }
 
-  protected void prepare(String url, String filename) throws Exception {
-    stubFor(get(urlEqualTo(url))
+  protected <T extends IResponse> void prepare(String url, String filename, Request<T> request) throws Exception {
+    String expectedUrl = url;
+    if (request instanceof PaginationRequest) {
+      expectedUrl += "?limit=100&after=aaa&before=zzz";
+    }
+    stubFor(get(urlEqualTo(expectedUrl))
         .withHeader(HttpHeaders.AUTHORIZATION, equalTo("Bearer myApiKey"))
         .willReturn(
             aResponse()

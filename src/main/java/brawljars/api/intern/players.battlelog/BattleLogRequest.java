@@ -24,7 +24,7 @@ public class BattleLogRequest extends PaginationRequest<BattleLogResponse> {
   @Override
   public Map<String, String> getRestParameters() {
     Map<String, String> map = super.getRestParameters();
-    map.put("playerTag", playerTag);
+      map.put("playerTag", playerTag);
     return map;
   }
 

@@ -7,15 +7,15 @@ import lombok.Builder;
 
 public class BrawlerRequest extends Request<BrawlerResponse> {
 
-  private final String brawlerId;
+  private final long brawlerId;
 
   @Builder
-  private BrawlerRequest(Callback<BrawlerResponse> callback, String brawlerId) {
+  private BrawlerRequest(Callback<BrawlerResponse> callback, long brawlerId) {
     super(callback);
     this.brawlerId = brawlerId;
   }
 
-  public static BrawlerRequestBuilder builder(String brawlerId) {
+  public static BrawlerRequestBuilder builder(long brawlerId) {
     return new BrawlerRequestBuilder()
       .brawlerId(brawlerId)
     ;
@@ -24,7 +24,7 @@ public class BrawlerRequest extends Request<BrawlerResponse> {
   @Override
   public Map<String, String> getRestParameters() {
     Map<String, String> map = super.getRestParameters();
-    map.put("brawlerId", brawlerId);
+    map.put("brawlerId", String.valueOf(brawlerId));
     return map;
   }
 

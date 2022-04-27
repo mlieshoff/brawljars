@@ -18,8 +18,12 @@ public class BrawlerApiImplIntegrationTest extends IntegrationTestBase {
 
   @Test
   void findAll() throws Exception {
-    brawljars.api.intern.brawlers.BrawlersRequest brawlersRequest = brawljars.api.intern.brawlers.BrawlersRequest.builder().build();
-    prepare("/brawlers", "src/test/resources/brawler-findAll.json");
+    brawljars.api.intern.brawlers.BrawlersRequest brawlersRequest = brawljars.api.intern.brawlers.BrawlersRequest.builder()
+      .limit(100)
+      .before("zzz")
+      .after("aaa")
+      .build();
+    prepare("/brawlers", "src/test/resources/brawler-findAll.json", brawlersRequest);
 
     brawljars.api.intern.brawlers.BrawlersResponse actual = unitUnderTest.findAll(brawlersRequest);
     brawljars.api.intern.brawlers.BrawlersResponse expected = toJson(brawljars.api.intern.brawlers.BrawlersResponse.class, getExpected());
@@ -29,9 +33,10 @@ public class BrawlerApiImplIntegrationTest extends IntegrationTestBase {
 
   @Test
   void findById() throws Exception {
-    String brawlerId = "brawlerId";
-    brawljars.api.intern.brawlers.BrawlerRequest brawlersRequest = brawljars.api.intern.brawlers.BrawlerRequest.builder(brawlerId).build();
-    prepare("/brawlers/{brawlerId}".replace("{brawlerId}", brawlerId), "src/test/resources/brawler-findById.json");
+    long brawlerId = 4711L;
+    brawljars.api.intern.brawlers.BrawlerRequest brawlersRequest = brawljars.api.intern.brawlers.BrawlerRequest.builder(brawlerId)
+      .build();
+    prepare("/brawlers/{brawlerId}".replace("{brawlerId}", String.valueOf(brawlerId)), "src/test/resources/brawler-findById.json", brawlersRequest);
 
     brawljars.api.intern.brawlers.BrawlerResponse actual = unitUnderTest.findById(brawlersRequest);
     brawljars.api.intern.brawlers.BrawlerResponse expected = toJson(brawljars.api.intern.brawlers.BrawlerResponse.class, getExpected());
