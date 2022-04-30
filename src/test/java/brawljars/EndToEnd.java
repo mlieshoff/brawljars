@@ -73,7 +73,7 @@ public class EndToEnd {
         playerResponse =
         playerApi.findById(PlayerRequest.builder("#28UP80RRY").build());
     String actual = GSON.toJson(playerResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = playerResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -84,7 +84,7 @@ public class EndToEnd {
         battleLogResponse =
         playerApi.findBattleLog(BattleLogRequest.builder("#28UP80RRY").build());
     String actual = GSON.toJson(battleLogResponse);
-    String expected = brawlerApi.getLastResponse().getRaw().replace(",\"map\":null", "");
+    String expected = battleLogResponse.getRawResponse().getRaw().replace(",\"map\":null", "");
 
     assertEquals(expected, actual);
   }
@@ -93,7 +93,7 @@ public class EndToEnd {
   void club_findClub() {
     ClubResponse clubResponse = clubApi.findClub(ClubRequest.builder("#JUURPCV9").build());
     String actual = GSON.toJson(clubResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = clubResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -102,7 +102,7 @@ public class EndToEnd {
   void club_findClubMembers() {
     ClubMembersResponse clubMembersResponse = clubApi.findClubMembers(ClubMembersRequest.builder("#JUURPCV9").build());
     String actual = GSON.toJson(clubMembersResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = clubMembersResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -113,7 +113,7 @@ public class EndToEnd {
         powerplayRankingsResponse =
         rankingApi.findPowerplayRankings(PowerplayRankingsRequest.builder("DE", 81L).build());
     String actual = GSON.toJson(powerplayRankingsResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = powerplayRankingsResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -124,7 +124,7 @@ public class EndToEnd {
         powerplayRankingsSeasonsResponse =
         rankingApi.findPowerplayRankingsSeasons(PowerplayRankingsSeasonsRequest.builder("DE").build());
     String actual = GSON.toJson(powerplayRankingsSeasonsResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = powerplayRankingsSeasonsResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -135,7 +135,7 @@ public class EndToEnd {
         clubRankingsResponse =
         rankingApi.findClubRankings(ClubRankingsRequest.builder("DE").build());
     String actual = GSON.toJson(clubRankingsResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = clubRankingsResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -146,7 +146,7 @@ public class EndToEnd {
         brawlerRankingsResponse =
         rankingApi.findBrawlerRankings(BrawlerRankingsRequest.builder("DE", 16000054L).build());
     String actual = GSON.toJson(brawlerRankingsResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = brawlerRankingsResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -157,16 +157,16 @@ public class EndToEnd {
         playerRankingsResponse =
         rankingApi.findPlayerRankings(PlayerRankingsRequest.builder("DE").build());
     String actual = GSON.toJson(playerRankingsResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = playerRankingsResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
 
   @Test
   void brawlers_findAll() throws ExecutionException, InterruptedException {
-    BrawlersResponse brawlersResponse = brawlerApi.findAll(BrawlersRequest.builder().build());
+    BrawlersResponse brawlersResponse = brawlerApi.findAll(BrawlersRequest.builder().storeRawResponse(true).build());
     String actual = GSON.toJson(brawlersResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = brawlersResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -175,7 +175,7 @@ public class EndToEnd {
   void brawlers_findById() {
     BrawlerResponse brawlerResponse = brawlerApi.findById(BrawlerRequest.builder(16000000L).build());
     String actual = GSON.toJson(brawlerResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = brawlerResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }
@@ -184,7 +184,7 @@ public class EndToEnd {
   void events_findEventRotation() {
     EventRotationResponse eventRotationResponse = eventApi.findEventRotation(EventRotationRequest.builder().build());
     String actual = GSON.toJson(eventRotationResponse);
-    String expected = brawlerApi.getLastResponse().getRaw();
+    String expected = eventRotationResponse.getRawResponse().getRaw();
 
     assertEquals(expected, actual);
   }

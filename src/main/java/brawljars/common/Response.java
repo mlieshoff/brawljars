@@ -32,4 +32,6 @@ public class Response implements IResponse {
   @SerializedName("message")
   private String message;
 
+  private transient RawResponse rawResponse;
+
 }

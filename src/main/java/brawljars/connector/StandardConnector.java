@@ -39,18 +39,17 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
+import brawljars.common.IResponse;
 import brawljars.common.RawResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class StandardConnector implements Connector {
 
-  private static final ThreadLocal<RawResponse> RESPONSE = new ThreadLocal<>();
-
   private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
   @Override
-  public <T> T get(RequestContext requestContext) throws ConnectorException {
+  public <T extends IResponse> T get(RequestContext requestContext) throws ConnectorException {
     require("requestContext", requestContext);
     try {
       String url = requestContext.getUrl();
@@ -64,7 +63,7 @@ public class StandardConnector implements Connector {
       logResponse(response);
       StatusLine statusLine = response.getStatusLine();
       if (statusLine.getStatusCode() != SC_OK) {
-        setLastResponse(null, response);
+        // TODO transfer headers to exception
         throw new ConnectorException(statusLine.toString());
       }
       StringBuilder content = new StringBuilder();
@@ -76,23 +75,26 @@ public class StandardConnector implements Connector {
       }
       String json = content.toString();
       log.info("    response content: {}", json);
-      setLastResponse(json, response);
-      return (T) GSON.fromJson(json, requestContext.getResponseClass());
+      T result = (T) GSON.fromJson(json, requestContext.getResponseClass());
+      if (requestContext.getRequest().isStoreRawResponse()) {
+        setLastResponse(result, json, response);
+      }
+      return result;
     } catch (IOException e) {
       throw new ConnectorException(e);
     }
   }
 
-  private static void setLastResponse(String result, HttpResponse response) {
+  private <T extends IResponse> void setLastResponse(T result, String json, HttpResponse response) {
     RawResponse rawResponse = new RawResponse();
-    rawResponse.setRaw(result);
+    rawResponse.setRaw(json);
     if (isNotEmpty(response.getAllHeaders())) {
       rawResponse.getResponseHeaders().clear();
       for (Header header : response.getAllHeaders()) {
         rawResponse.getResponseHeaders().put(header.getName().toLowerCase(), header.getValue());
       }
     }
-    RESPONSE.set(rawResponse);
+    result.setRawResponse(rawResponse);
   }
 
   private static void logResponse(HttpResponse httpResponse) {
@@ -143,11 +145,6 @@ public class StandardConnector implements Connector {
     HttpGet httpGet = new HttpGet(url);
     httpGet.addHeader("Authorization", "Bearer " + apiKey);
     return httpGet;
-  }
-
-  @Override
-  public RawResponse getLastRawResponse() {
-    return RESPONSE.get();
   }
 
 }

@@ -1,16 +1,8 @@
 package brawljars.api;
 
-import static brawljars.common.Utils.isNotBlank;
-import static brawljars.common.Utils.isNotEmpty;
 import static brawljars.common.Utils.require;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import brawljars.common.IResponse;
-import brawljars.common.RawResponse;
 import brawljars.common.Request;
 import brawljars.connector.Connector;
 import brawljars.connector.ConnectorException;
@@ -47,11 +39,6 @@ public class BaseApi implements Api {
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }
-  }
-
-  @Override
-  public RawResponse getLastResponse() {
-    return apiContext.getConnector().getLastRawResponse();
   }
 
 }

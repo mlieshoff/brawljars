@@ -10,8 +10,8 @@ public class PlayerRequest extends Request<PlayerResponse> {
   private final String playerTag;
 
   @Builder
-  private PlayerRequest(Callback<PlayerResponse> callback, String playerTag) {
-    super(callback);
+  private PlayerRequest(Callback<PlayerResponse> callback, boolean storeRawResponse, String playerTag) {
+    super(callback, storeRawResponse);
     this.playerTag = playerTag;
   }
 

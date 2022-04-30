@@ -29,4 +29,8 @@ public interface IResponse {
 
   void setReason(String reason);
 
+  RawResponse getRawResponse();
+
+  void setRawResponse(RawResponse rawResponse);
+
 }

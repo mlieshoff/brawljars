@@ -11,9 +11,12 @@ public class Request<T extends IResponse> {
 
   private final Callback<T> callback;
 
+  private final boolean storeRawResponse;
+
   @Builder(builderMethodName = "requestBuilder")
-  protected Request(Callback<T> callback) {
+  protected Request(Callback<T> callback, boolean storeRawResponse) {
     this.callback = callback;
+    this.storeRawResponse = storeRawResponse;
   }
 
   public Map<String, String> getQueryParameters() {

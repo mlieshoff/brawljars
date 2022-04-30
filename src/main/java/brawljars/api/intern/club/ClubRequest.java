@@ -10,8 +10,8 @@ public class ClubRequest extends Request<ClubResponse> {
   private final String clubTag;
 
   @Builder
-  private ClubRequest(Callback<ClubResponse> callback, String clubTag) {
-    super(callback);
+  private ClubRequest(Callback<ClubResponse> callback, boolean storeRawResponse, String clubTag) {
+    super(callback, storeRawResponse);
     this.clubTag = clubTag;
   }
 

@@ -11,8 +11,8 @@ public class BrawlerRankingsRequest extends PaginationRequest<BrawlerRankingsRes
   private final long brawlerId;
 
   @Builder
-  private BrawlerRankingsRequest(Callback<BrawlerRankingsResponse> callback, int limit, String after, String before, String countryCode, long brawlerId) {
-    super(callback, limit, after, before);
+  private BrawlerRankingsRequest(Callback<BrawlerRankingsResponse> callback, int limit, String after, String before, boolean storeRawResponse, String countryCode, long brawlerId) {
+    super(callback, limit, after, before, storeRawResponse);
     this.countryCode = countryCode;
     this.brawlerId = brawlerId;
   }

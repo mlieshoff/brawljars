@@ -1,11 +1,9 @@
 package brawljars.connector;
 
-import brawljars.common.RawResponse;
+import brawljars.common.IResponse;
 
 public interface Connector {
 
-  <T> T get(RequestContext requestContext) throws ConnectorException;
-
-  RawResponse getLastRawResponse();
+  <T extends IResponse> T get(RequestContext requestContext) throws ConnectorException;
 
 }

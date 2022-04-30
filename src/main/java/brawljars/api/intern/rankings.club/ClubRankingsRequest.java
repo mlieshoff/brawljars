@@ -10,8 +10,8 @@ public class ClubRankingsRequest extends PaginationRequest<ClubRankingsResponse>
   private final String countryCode;
 
   @Builder
-  private ClubRankingsRequest(Callback<ClubRankingsResponse> callback, int limit, String after, String before, String countryCode) {
-    super(callback, limit, after, before);
+  private ClubRankingsRequest(Callback<ClubRankingsResponse> callback, int limit, String after, String before, boolean storeRawResponse, String countryCode) {
+    super(callback, limit, after, before, storeRawResponse);
     this.countryCode = countryCode;
   }
 

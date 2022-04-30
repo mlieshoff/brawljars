@@ -9,8 +9,8 @@ public class EventRotationRequest extends Request<EventRotationResponse> {
 
 
   @Builder
-  private EventRotationRequest(Callback<EventRotationResponse> callback) {
-    super(callback);
+  private EventRotationRequest(Callback<EventRotationResponse> callback, boolean storeRawResponse) {
+    super(callback, storeRawResponse);
   }
 
   public static EventRotationRequestBuilder builder() {

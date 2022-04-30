@@ -50,7 +50,7 @@ class BaseApiTest {
   @BeforeEach
   void setUp() {
     apiContext = new ApiContext(URL, API_KEY, connector);
-    requestWithoutCallback = new FooRequest(null, 100, "after", "before");
+    requestWithoutCallback = new FooRequest(null, 100, "after", "before", true);
     unitUnderTest = new BaseApi(apiContext);
   }
 
@@ -59,8 +59,8 @@ class BaseApiTest {
   class FooRequest extends PaginationRequest<FooResponse> {
 
     protected FooRequest(Callback<FooResponse> callback, int limit, String after,
-                         String before) {
-      super(callback, limit, after, before);
+                         String before, boolean storeRawResponse) {
+      super(callback, limit, after, before, storeRawResponse);
     }
 
     @Override
@@ -134,14 +134,6 @@ class BaseApiTest {
       assertEquals(expected.getResponseClass(), actual.getResponseClass());
       return true;
     };
-  }
-
-  @Test
-  void getLastResponse_whenCalled_shouldReturnLastResponse() {
-    RawResponse expected = new RawResponse();
-    when(connector.getLastRawResponse()).thenReturn(expected);
-
-    assertEquals(expected, unitUnderTest.getLastResponse());
   }
 
 }

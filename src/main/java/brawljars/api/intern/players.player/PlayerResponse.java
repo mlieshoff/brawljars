@@ -4,6 +4,7 @@ import brawljars.common.IResponse;
 
 import com.google.gson.annotations.SerializedName;
 
+import brawljars.common.RawResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,5 +18,7 @@ public class PlayerResponse extends Player implements IResponse {
 
   @SerializedName("message")
   private String message;
+
+  private transient RawResponse rawResponse;
 
 }

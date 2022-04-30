@@ -11,8 +11,8 @@ public class PowerplayRankingsRequest extends PaginationRequest<PowerplayRanking
   private final long seasonId;
 
   @Builder
-  private PowerplayRankingsRequest(Callback<PowerplayRankingsResponse> callback, int limit, String after, String before, String countryCode, long seasonId) {
-    super(callback, limit, after, before);
+  private PowerplayRankingsRequest(Callback<PowerplayRankingsResponse> callback, int limit, String after, String before, boolean storeRawResponse, String countryCode, long seasonId) {
+    super(callback, limit, after, before, storeRawResponse);
     this.countryCode = countryCode;
     this.seasonId = seasonId;
   }

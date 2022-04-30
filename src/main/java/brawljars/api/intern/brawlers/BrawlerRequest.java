@@ -10,8 +10,8 @@ public class BrawlerRequest extends Request<BrawlerResponse> {
   private final long brawlerId;
 
   @Builder
-  private BrawlerRequest(Callback<BrawlerResponse> callback, long brawlerId) {
-    super(callback);
+  private BrawlerRequest(Callback<BrawlerResponse> callback, boolean storeRawResponse, long brawlerId) {
+    super(callback, storeRawResponse);
     this.brawlerId = brawlerId;
   }
 
