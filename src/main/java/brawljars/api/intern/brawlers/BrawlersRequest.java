@@ -1,12 +1,9 @@
 package brawljars.api.intern.brawlers;
 
-import java.util.Map;
-import brawljars.common.PaginationRequest;
 import brawljars.common.Callback;
+import brawljars.common.PaginationRequest;
 import lombok.Builder;
-import lombok.Getter;
 
-@Getter
 public class BrawlersRequest extends PaginationRequest<BrawlersResponse> {
 
 

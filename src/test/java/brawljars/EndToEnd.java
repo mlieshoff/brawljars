@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.ExecutionException;
 import brawljars.api.intern.brawlers.BrawlerApi;
 import brawljars.api.intern.brawlers.BrawlerRequest;
 import brawljars.api.intern.brawlers.BrawlerResponse;
@@ -162,7 +163,7 @@ public class EndToEnd {
   }
 
   @Test
-  void brawlers_findAll() {
+  void brawlers_findAll() throws ExecutionException, InterruptedException {
     BrawlersResponse brawlersResponse = brawlerApi.findAll(BrawlersRequest.builder().build());
     String actual = GSON.toJson(brawlersResponse);
     String expected = brawlerApi.getLastResponse().getRaw();
@@ -181,7 +182,7 @@ public class EndToEnd {
 
   @Test
   void events_findEventRotation() {
-    EventRotationResponse eventRotationResponse = eventApi.findEventRotation(EventRotationRequest.builder("dummy").build());
+    EventRotationResponse eventRotationResponse = eventApi.findEventRotation(EventRotationRequest.builder().build());
     String actual = GSON.toJson(eventRotationResponse);
     String expected = brawlerApi.getLastResponse().getRaw();
 
