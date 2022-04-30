@@ -1,9 +1,13 @@
+[![](https://img.shields.io/badge/java-packagecloud.io-844fec.svg)](https://packagecloud.io/)
+
 # brawljars
 A Java Wrapper For Official Supercell Brawl Stars Api
 
 ## Actual version: 2.0.0
 
-(we moved repository to https://packagecloud.io/mlieshoff/brawljars)
+## Why we moved to the amazing services of packagecloud?
+
+-- blog content goes here --
 
 ## Simplest Usage ##
 
@@ -82,7 +86,7 @@ All requests can are return *java.concurrent.Future*. The execution will be asyn
 ```xml
 <repositories>
   <repository>
-    <id>mlieshoff-brawljars</id>
+    <id>packagecloud-brawljars</id>
     <url>https://packagecloud.io/mlieshoff/brawljars/maven2</url>
     <releases>
       <enabled>true</enabled>
@@ -93,6 +97,7 @@ All requests can are return *java.concurrent.Future*. The execution will be asyn
   </repository>
 </repositories>
 ```
+
 ## Continuous Integration ##
 
 https://github.com/mlieshoff/brawljars/actions
@@ -104,3 +109,17 @@ https://packagecloud.io/mlieshoff/brawljars
 ## Logging ##
 
 We are using SLF4j.
+
+## Usage of RoyaleApi proxy ##
+
+This wrapper can be easy connected to the proxy of our friends on RoyaleAPI. Please proceed first the steps described here:
+
+https://docs.royaleapi.com/#/proxy
+
+Then initialize an instance of class Api like that:
+
+```
+Api api = new Api("https://bsproxy.royaleapi.dev/v1", API_KEY);
+```
+
+That's all, enjoy :)
