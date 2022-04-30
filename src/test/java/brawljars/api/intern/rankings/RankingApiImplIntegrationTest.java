@@ -20,7 +20,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
   void findPowerplayRankings() throws Exception {
     String countryCode = "countryCode";
     long seasonId = 4711L;
-  brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest request = brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest.builder(countryCode, seasonId)
+    brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest request = brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest.builder(countryCode, seasonId)
       .limit(100)
       .before("zzz")
       .after("aaa")
@@ -36,7 +36,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
   @Test
   void findPowerplayRankingsSeasons() throws Exception {
     String countryCode = "countryCode";
-  brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest request = brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest.builder(countryCode)
+    brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest request = brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest.builder(countryCode)
       .limit(100)
       .before("zzz")
       .after("aaa")
@@ -52,7 +52,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
   @Test
   void findClubRankings() throws Exception {
     String countryCode = "countryCode";
-  brawljars.api.intern.rankings.club.ClubRankingsRequest request = brawljars.api.intern.rankings.club.ClubRankingsRequest.builder(countryCode)
+    brawljars.api.intern.rankings.club.ClubRankingsRequest request = brawljars.api.intern.rankings.club.ClubRankingsRequest.builder(countryCode)
       .limit(100)
       .before("zzz")
       .after("aaa")
@@ -69,7 +69,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
   void findBrawlerRankings() throws Exception {
     String countryCode = "countryCode";
     long brawlerId = 4711L;
-  brawljars.api.intern.rankings.brawler.BrawlerRankingsRequest request = brawljars.api.intern.rankings.brawler.BrawlerRankingsRequest.builder(countryCode, brawlerId)
+    brawljars.api.intern.rankings.brawler.BrawlerRankingsRequest request = brawljars.api.intern.rankings.brawler.BrawlerRankingsRequest.builder(countryCode, brawlerId)
       .limit(100)
       .before("zzz")
       .after("aaa")
@@ -85,7 +85,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
   @Test
   void findPlayerRankings() throws Exception {
     String countryCode = "countryCode";
-  brawljars.api.intern.rankings.player.PlayerRankingsRequest request = brawljars.api.intern.rankings.player.PlayerRankingsRequest.builder(countryCode)
+    brawljars.api.intern.rankings.player.PlayerRankingsRequest request = brawljars.api.intern.rankings.player.PlayerRankingsRequest.builder(countryCode)
       .limit(100)
       .before("zzz")
       .after("aaa")

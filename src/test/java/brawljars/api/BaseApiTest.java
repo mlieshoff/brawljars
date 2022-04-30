@@ -100,14 +100,14 @@ class BaseApiTest {
   void get_whenWithConnectorException_shouldThrowApiException() {
     when(connector.get(any(RequestContext.class))).thenThrow(ConnectorException.class);
 
-    assertThrows(ApiException.class, () -> unitUnderTest.get(URL, request, FooResponse.class));
+    assertThrows(ExecutionException.class, () -> unitUnderTest.get(URL, request, FooResponse.class).get());
   }
 
   @Test
   void get_whenWithException_shouldThrowIllegalStateException() {
     when(connector.get(any(RequestContext.class))).thenThrow(IllegalStateException.class);
 
-    assertThrows(IllegalStateException.class, () -> unitUnderTest.get(URL, request, FooResponse.class));
+    assertThrows(ExecutionException.class, () -> unitUnderTest.get(URL, request, FooResponse.class).get());
   }
 
   @Test
@@ -115,7 +115,7 @@ class BaseApiTest {
     FooResponse expected = new FooResponse();
     RequestContext
         requestContext =
-        new RequestContext("urlpart?limit=100&after=after&before=before", API_KEY, request,
+        new RequestContext("urlpart", API_KEY, request,
             FooResponse.class);
     when(connector.get(argThat(createRequestContextArgumentMatcher(requestContext)))).thenReturn(expected);
 

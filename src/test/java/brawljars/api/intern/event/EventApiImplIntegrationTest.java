@@ -18,7 +18,7 @@ public class EventApiImplIntegrationTest extends IntegrationTestBase {
 
   @Test
   void findEventRotation() throws Exception {
-  brawljars.api.intern.event.EventRotationRequest request = brawljars.api.intern.event.EventRotationRequest.builder()
+    brawljars.api.intern.event.EventRotationRequest request = brawljars.api.intern.event.EventRotationRequest.builder()
       .build();
     prepare("/events/rotation", "src/test/resources/event-findEventRotation.json", request);
 

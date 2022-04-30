@@ -19,7 +19,7 @@ public class ClubApiImplIntegrationTest extends IntegrationTestBase {
   @Test
   void findClubMembers() throws Exception {
     String clubTag = "clubTag";
-  brawljars.api.intern.club.ClubMembersRequest request = brawljars.api.intern.club.ClubMembersRequest.builder(clubTag)
+    brawljars.api.intern.club.ClubMembersRequest request = brawljars.api.intern.club.ClubMembersRequest.builder(clubTag)
       .limit(100)
       .before("zzz")
       .after("aaa")
@@ -35,7 +35,7 @@ public class ClubApiImplIntegrationTest extends IntegrationTestBase {
   @Test
   void findClub() throws Exception {
     String clubTag = "clubTag";
-  brawljars.api.intern.club.ClubRequest request = brawljars.api.intern.club.ClubRequest.builder(clubTag)
+    brawljars.api.intern.club.ClubRequest request = brawljars.api.intern.club.ClubRequest.builder(clubTag)
       .build();
     prepare("/clubs/{clubTag}".replace("{clubTag}", String.valueOf(clubTag)), "src/test/resources/club-findClub.json", request);
 

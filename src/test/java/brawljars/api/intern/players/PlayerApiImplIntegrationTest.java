@@ -19,7 +19,7 @@ public class PlayerApiImplIntegrationTest extends IntegrationTestBase {
   @Test
   void findById() throws Exception {
     String playerTag = "playerTag";
-  brawljars.api.intern.players.player.PlayerRequest request = brawljars.api.intern.players.player.PlayerRequest.builder(playerTag)
+    brawljars.api.intern.players.player.PlayerRequest request = brawljars.api.intern.players.player.PlayerRequest.builder(playerTag)
       .build();
     prepare("/players/{playerTag}".replace("{playerTag}", String.valueOf(playerTag)), "src/test/resources/player-findById.json", request);
 
@@ -32,7 +32,7 @@ public class PlayerApiImplIntegrationTest extends IntegrationTestBase {
   @Test
   void findBattleLog() throws Exception {
     String playerTag = "playerTag";
-  brawljars.api.intern.players.battlelog.BattleLogRequest request = brawljars.api.intern.players.battlelog.BattleLogRequest.builder(playerTag)
+    brawljars.api.intern.players.battlelog.BattleLogRequest request = brawljars.api.intern.players.battlelog.BattleLogRequest.builder(playerTag)
       .limit(100)
       .before("zzz")
       .after("aaa")
