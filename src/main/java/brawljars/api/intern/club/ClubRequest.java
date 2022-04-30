@@ -2,7 +2,6 @@ package brawljars.api.intern.club;
 
 import java.util.Map;
 import brawljars.common.Request;
-import brawljars.common.Callback;
 import lombok.Builder;
 
 public class ClubRequest extends Request<ClubResponse> {
@@ -10,8 +9,8 @@ public class ClubRequest extends Request<ClubResponse> {
   private final String clubTag;
 
   @Builder
-  private ClubRequest(Callback<ClubResponse> callback, boolean storeRawResponse, String clubTag) {
-    super(callback, storeRawResponse);
+  private ClubRequest(boolean storeRawResponse, String clubTag) {
+    super(storeRawResponse);
     this.clubTag = clubTag;
   }
 

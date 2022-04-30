@@ -2,7 +2,6 @@ package brawljars.api.intern.rankings.powerplay;
 
 import java.util.Map;
 import brawljars.common.PaginationRequest;
-import brawljars.common.Callback;
 import lombok.Builder;
 
 public class PowerplayRankingsRequest extends PaginationRequest<PowerplayRankingsResponse> {
@@ -11,8 +10,8 @@ public class PowerplayRankingsRequest extends PaginationRequest<PowerplayRanking
   private final long seasonId;
 
   @Builder
-  private PowerplayRankingsRequest(Callback<PowerplayRankingsResponse> callback, int limit, String after, String before, boolean storeRawResponse, String countryCode, long seasonId) {
-    super(callback, limit, after, before, storeRawResponse);
+  private PowerplayRankingsRequest(int limit, String after, String before, boolean storeRawResponse, String countryCode, long seasonId) {
+    super(limit, after, before, storeRawResponse);
     this.countryCode = countryCode;
     this.seasonId = seasonId;
   }

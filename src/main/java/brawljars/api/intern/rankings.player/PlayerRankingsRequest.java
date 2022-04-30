@@ -2,7 +2,6 @@ package brawljars.api.intern.rankings.player;
 
 import java.util.Map;
 import brawljars.common.PaginationRequest;
-import brawljars.common.Callback;
 import lombok.Builder;
 
 public class PlayerRankingsRequest extends PaginationRequest<PlayerRankingsResponse> {
@@ -10,8 +9,8 @@ public class PlayerRankingsRequest extends PaginationRequest<PlayerRankingsRespo
   private final String countryCode;
 
   @Builder
-  private PlayerRankingsRequest(Callback<PlayerRankingsResponse> callback, int limit, String after, String before, boolean storeRawResponse, String countryCode) {
-    super(callback, limit, after, before, storeRawResponse);
+  private PlayerRankingsRequest(int limit, String after, String before, boolean storeRawResponse, String countryCode) {
+    super(limit, after, before, storeRawResponse);
     this.countryCode = countryCode;
   }
 

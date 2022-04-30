@@ -15,10 +15,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Map;
-import brawljars.common.Callback;
+import java.util.concurrent.ExecutionException;
 import brawljars.common.PaginationRequest;
 import brawljars.common.PaginationResponse;
-import brawljars.common.RawResponse;
 import brawljars.connector.Connector;
 import brawljars.connector.ConnectorException;
 import brawljars.connector.RequestContext;
@@ -40,7 +39,7 @@ class BaseApiTest {
 
   private ApiContext apiContext;
 
-  private PaginationRequest<FooResponse> requestWithoutCallback;
+  private PaginationRequest<FooResponse> request;
 
   @Getter
   @Setter
@@ -50,7 +49,7 @@ class BaseApiTest {
   @BeforeEach
   void setUp() {
     apiContext = new ApiContext(URL, API_KEY, connector);
-    requestWithoutCallback = new FooRequest(null, 100, "after", "before", true);
+    request = new FooRequest(100, "after", "before", true);
     unitUnderTest = new BaseApi(apiContext);
   }
 
@@ -58,9 +57,8 @@ class BaseApiTest {
   @Setter
   class FooRequest extends PaginationRequest<FooResponse> {
 
-    protected FooRequest(Callback<FooResponse> callback, int limit, String after,
-                         String before, boolean storeRawResponse) {
-      super(callback, limit, after, before, storeRawResponse);
+    protected FooRequest(int limit, String after, String before, boolean storeRawResponse) {
+      super(limit, after, before, storeRawResponse);
     }
 
     @Override
@@ -76,14 +74,14 @@ class BaseApiTest {
   void get_whenWithNullPart_shouldThrowException() {
 
     assertThrows(IllegalArgumentException.class,
-        () -> unitUnderTest.get(null, requestWithoutCallback, FooResponse.class));
+        () -> unitUnderTest.get(null, request, FooResponse.class));
   }
 
   @Test
   void get_whenWithEmptyPart_shouldThrowException() {
 
     assertThrows(IllegalArgumentException.class,
-        () -> unitUnderTest.get(EMPTY, requestWithoutCallback, FooResponse.class));
+        () -> unitUnderTest.get(EMPTY, request, FooResponse.class));
   }
 
   @Test
@@ -95,33 +93,33 @@ class BaseApiTest {
   @Test
   void get_whenWithNullResponseClass_shouldThrowException() {
 
-    assertThrows(IllegalArgumentException.class, () -> unitUnderTest.get(URL, requestWithoutCallback, null));
+    assertThrows(IllegalArgumentException.class, () -> unitUnderTest.get(URL, request, null));
   }
 
   @Test
   void get_whenWithConnectorException_shouldThrowApiException() {
     when(connector.get(any(RequestContext.class))).thenThrow(ConnectorException.class);
 
-    assertThrows(ApiException.class, () -> unitUnderTest.get(URL, requestWithoutCallback, FooResponse.class));
+    assertThrows(ApiException.class, () -> unitUnderTest.get(URL, request, FooResponse.class));
   }
 
   @Test
   void get_whenWithException_shouldThrowIllegalStateException() {
     when(connector.get(any(RequestContext.class))).thenThrow(IllegalStateException.class);
 
-    assertThrows(IllegalStateException.class, () -> unitUnderTest.get(URL, requestWithoutCallback, FooResponse.class));
+    assertThrows(IllegalStateException.class, () -> unitUnderTest.get(URL, request, FooResponse.class));
   }
 
   @Test
-  void get_whenWithValidParameters_shouldReturnResponse() {
+  void get_whenWithValidParameters_shouldReturnResponse() throws ExecutionException, InterruptedException {
     FooResponse expected = new FooResponse();
     RequestContext
         requestContext =
-        new RequestContext("urlpart?limit=100&after=after&before=before", API_KEY, requestWithoutCallback,
+        new RequestContext("urlpart?limit=100&after=after&before=before", API_KEY, request,
             FooResponse.class);
     when(connector.get(argThat(createRequestContextArgumentMatcher(requestContext)))).thenReturn(expected);
 
-    FooResponse actual = unitUnderTest.get(PART, requestWithoutCallback, FooResponse.class);
+    FooResponse actual = unitUnderTest.get(PART, request, FooResponse.class).get();
 
     assertEquals(expected, actual);
   }

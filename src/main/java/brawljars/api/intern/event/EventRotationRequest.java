@@ -2,15 +2,14 @@ package brawljars.api.intern.event;
 
 import java.util.Map;
 import brawljars.common.Request;
-import brawljars.common.Callback;
 import lombok.Builder;
 
 public class EventRotationRequest extends Request<EventRotationResponse> {
 
 
   @Builder
-  private EventRotationRequest(Callback<EventRotationResponse> callback, boolean storeRawResponse) {
-    super(callback, storeRawResponse);
+  private EventRotationRequest(boolean storeRawResponse) {
+    super(storeRawResponse);
   }
 
   public static EventRotationRequestBuilder builder() {

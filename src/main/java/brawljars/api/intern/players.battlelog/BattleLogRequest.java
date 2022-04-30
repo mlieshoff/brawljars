@@ -2,7 +2,6 @@ package brawljars.api.intern.players.battlelog;
 
 import java.util.Map;
 import brawljars.common.PaginationRequest;
-import brawljars.common.Callback;
 import lombok.Builder;
 
 public class BattleLogRequest extends PaginationRequest<BattleLogResponse> {
@@ -10,8 +9,8 @@ public class BattleLogRequest extends PaginationRequest<BattleLogResponse> {
   private final String playerTag;
 
   @Builder
-  private BattleLogRequest(Callback<BattleLogResponse> callback, int limit, String after, String before, boolean storeRawResponse, String playerTag) {
-    super(callback, limit, after, before, storeRawResponse);
+  private BattleLogRequest(int limit, String after, String before, boolean storeRawResponse, String playerTag) {
+    super(limit, after, before, storeRawResponse);
     this.playerTag = playerTag;
   }
 

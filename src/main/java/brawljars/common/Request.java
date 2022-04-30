@@ -9,13 +9,10 @@ import lombok.Getter;
 @Getter
 public class Request<T extends IResponse> {
 
-  private final Callback<T> callback;
-
   private final boolean storeRawResponse;
 
   @Builder(builderMethodName = "requestBuilder")
-  protected Request(Callback<T> callback, boolean storeRawResponse) {
-    this.callback = callback;
+  protected Request(boolean storeRawResponse) {
     this.storeRawResponse = storeRawResponse;
   }
 

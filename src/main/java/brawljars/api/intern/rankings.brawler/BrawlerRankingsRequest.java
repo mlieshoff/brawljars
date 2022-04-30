@@ -2,7 +2,6 @@ package brawljars.api.intern.rankings.brawler;
 
 import java.util.Map;
 import brawljars.common.PaginationRequest;
-import brawljars.common.Callback;
 import lombok.Builder;
 
 public class BrawlerRankingsRequest extends PaginationRequest<BrawlerRankingsResponse> {
@@ -11,8 +10,8 @@ public class BrawlerRankingsRequest extends PaginationRequest<BrawlerRankingsRes
   private final long brawlerId;
 
   @Builder
-  private BrawlerRankingsRequest(Callback<BrawlerRankingsResponse> callback, int limit, String after, String before, boolean storeRawResponse, String countryCode, long brawlerId) {
-    super(callback, limit, after, before, storeRawResponse);
+  private BrawlerRankingsRequest(int limit, String after, String before, boolean storeRawResponse, String countryCode, long brawlerId) {
+    super(limit, after, before, storeRawResponse);
     this.countryCode = countryCode;
     this.brawlerId = brawlerId;
   }

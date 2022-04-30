@@ -59,6 +59,8 @@ BrawlersResponse bBrawlersResponse = brawlersApi.findAll(BrawlersRequest.builder
   .limit()
   .after()
   .before()
+  // store raw response
+  .storeRawResponse()
   .build()
 );
 ```
@@ -73,7 +75,7 @@ BrawlerResponse brawlerResponse = brawlersApi.findById(BrawlersRequest.builder("
 
 ## Asynchronous usage
 
-All requests can have a *callback*. Then execution will be asynchronous.
+All requests can are return *java.concurrent.Future*. The execution will be asynchronous by default.
 
 ## How to bind the packagecloud repository ##
 

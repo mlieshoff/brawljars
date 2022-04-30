@@ -2,7 +2,6 @@ package brawljars.api.intern.players.player;
 
 import java.util.Map;
 import brawljars.common.Request;
-import brawljars.common.Callback;
 import lombok.Builder;
 
 public class PlayerRequest extends Request<PlayerResponse> {
@@ -10,8 +9,8 @@ public class PlayerRequest extends Request<PlayerResponse> {
   private final String playerTag;
 
   @Builder
-  private PlayerRequest(Callback<PlayerResponse> callback, boolean storeRawResponse, String playerTag) {
-    super(callback, storeRawResponse);
+  private PlayerRequest(boolean storeRawResponse, String playerTag) {
+    super(storeRawResponse);
     this.playerTag = playerTag;
   }
 

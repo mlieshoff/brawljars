@@ -19,8 +19,8 @@ public class PaginationRequest<T extends IResponse> extends Request<T> {
   private final String before;
 
   @Builder(builderMethodName = "paginationRequestBuilder")
-  protected PaginationRequest(Callback<T> callback, int limit, String after, String before, boolean storeRawResponse) {
-    super(callback, storeRawResponse);
+  protected PaginationRequest(int limit, String after, String before, boolean storeRawResponse) {
+    super(storeRawResponse);
     this.limit = limit;
     this.after = after;
     this.before = before;

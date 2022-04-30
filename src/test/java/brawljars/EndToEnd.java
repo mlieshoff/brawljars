@@ -8,7 +8,6 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.ExecutionException;
 import brawljars.api.intern.brawlers.BrawlerApi;
 import brawljars.api.intern.brawlers.BrawlerRequest;
 import brawljars.api.intern.brawlers.BrawlerResponse;
@@ -68,10 +67,10 @@ public class EndToEnd {
   }
 
   @Test
-  void player_findById() {
+  void player_findById() throws Exception {
     PlayerResponse
         playerResponse =
-        playerApi.findById(PlayerRequest.builder("#28UP80RRY").storeRawResponse(true).build());
+        playerApi.findById(PlayerRequest.builder("#28UP80RRY").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(playerResponse);
     String expected = playerResponse.getRawResponse().getRaw();
 
@@ -79,10 +78,10 @@ public class EndToEnd {
   }
 
   @Test
-  void player_findBattleLog() {
+  void player_findBattleLog() throws Exception {
     BattleLogResponse
         battleLogResponse =
-        playerApi.findBattleLog(BattleLogRequest.builder("#28UP80RRY").storeRawResponse(true).build());
+        playerApi.findBattleLog(BattleLogRequest.builder("#28UP80RRY").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(battleLogResponse);
     String expected = battleLogResponse.getRawResponse().getRaw().replace(",\"map\":null", "");
 
@@ -90,8 +89,8 @@ public class EndToEnd {
   }
 
   @Test
-  void club_findClub() {
-    ClubResponse clubResponse = clubApi.findClub(ClubRequest.builder("#JUURPCV9").storeRawResponse(true).build());
+  void club_findClub() throws Exception {
+    ClubResponse clubResponse = clubApi.findClub(ClubRequest.builder("#JUURPCV9").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(clubResponse);
     String expected = clubResponse.getRawResponse().getRaw();
 
@@ -99,10 +98,10 @@ public class EndToEnd {
   }
 
   @Test
-  void club_findClubMembers() {
+  void club_findClubMembers() throws Exception {
     ClubMembersResponse
         clubMembersResponse =
-        clubApi.findClubMembers(ClubMembersRequest.builder("#JUURPCV9").storeRawResponse(true).build());
+        clubApi.findClubMembers(ClubMembersRequest.builder("#JUURPCV9").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(clubMembersResponse);
     String expected = clubMembersResponse.getRawResponse().getRaw();
 
@@ -110,10 +109,11 @@ public class EndToEnd {
   }
 
   @Test
-  void rankings_findPowerplayRankings() {
+  void rankings_findPowerplayRankings() throws Exception {
     PowerplayRankingsResponse
         powerplayRankingsResponse =
-        rankingApi.findPowerplayRankings(PowerplayRankingsRequest.builder("DE", 81L).storeRawResponse(true).build());
+        rankingApi.findPowerplayRankings(PowerplayRankingsRequest.builder("DE", 81L).storeRawResponse(true).build())
+            .get();
     String actual = GSON.toJson(powerplayRankingsResponse);
     String expected = powerplayRankingsResponse.getRawResponse().getRaw();
 
@@ -121,11 +121,11 @@ public class EndToEnd {
   }
 
   @Test
-  void rankings_findPowerplayRankingsSeasons() {
+  void rankings_findPowerplayRankingsSeasons() throws Exception {
     PowerplayRankingsSeasonsResponse
         powerplayRankingsSeasonsResponse =
         rankingApi.findPowerplayRankingsSeasons(
-            PowerplayRankingsSeasonsRequest.builder("DE").storeRawResponse(true).build());
+            PowerplayRankingsSeasonsRequest.builder("DE").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(powerplayRankingsSeasonsResponse);
     String expected = powerplayRankingsSeasonsResponse.getRawResponse().getRaw();
 
@@ -133,10 +133,10 @@ public class EndToEnd {
   }
 
   @Test
-  void rankings_findClubRankings() {
+  void rankings_findClubRankings() throws Exception {
     ClubRankingsResponse
         clubRankingsResponse =
-        rankingApi.findClubRankings(ClubRankingsRequest.builder("DE").storeRawResponse(true).build());
+        rankingApi.findClubRankings(ClubRankingsRequest.builder("DE").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(clubRankingsResponse);
     String expected = clubRankingsResponse.getRawResponse().getRaw();
 
@@ -144,10 +144,11 @@ public class EndToEnd {
   }
 
   @Test
-  void rankings_findBrawlerRankings() {
+  void rankings_findBrawlerRankings() throws Exception {
     BrawlerRankingsResponse
         brawlerRankingsResponse =
-        rankingApi.findBrawlerRankings(BrawlerRankingsRequest.builder("DE", 16000054L).storeRawResponse(true).build());
+        rankingApi.findBrawlerRankings(BrawlerRankingsRequest.builder("DE", 16000054L).storeRawResponse(true).build())
+            .get();
     String actual = GSON.toJson(brawlerRankingsResponse);
     String expected = brawlerRankingsResponse.getRawResponse().getRaw();
 
@@ -155,10 +156,10 @@ public class EndToEnd {
   }
 
   @Test
-  void rankings_findPlayerRankings() {
+  void rankings_findPlayerRankings() throws Exception {
     PlayerRankingsResponse
         playerRankingsResponse =
-        rankingApi.findPlayerRankings(PlayerRankingsRequest.builder("DE").storeRawResponse(true).build());
+        rankingApi.findPlayerRankings(PlayerRankingsRequest.builder("DE").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(playerRankingsResponse);
     String expected = playerRankingsResponse.getRawResponse().getRaw();
 
@@ -166,8 +167,10 @@ public class EndToEnd {
   }
 
   @Test
-  void brawlers_findAll() throws ExecutionException, InterruptedException {
-    BrawlersResponse brawlersResponse = brawlerApi.findAll(BrawlersRequest.builder().storeRawResponse(true).build());
+  void brawlers_findAll() throws Exception {
+    BrawlersResponse
+        brawlersResponse =
+        brawlerApi.findAll(BrawlersRequest.builder().storeRawResponse(true).build()).get();
     String actual = GSON.toJson(brawlersResponse);
     String expected = brawlersResponse.getRawResponse().getRaw();
 
@@ -175,10 +178,10 @@ public class EndToEnd {
   }
 
   @Test
-  void brawlers_findById() {
+  void brawlers_findById() throws Exception {
     BrawlerResponse
         brawlerResponse =
-        brawlerApi.findById(BrawlerRequest.builder(16000000L).storeRawResponse(true).build());
+        brawlerApi.findById(BrawlerRequest.builder(16000000L).storeRawResponse(true).build()).get();
     String actual = GSON.toJson(brawlerResponse);
     String expected = brawlerResponse.getRawResponse().getRaw();
 
@@ -186,10 +189,10 @@ public class EndToEnd {
   }
 
   @Test
-  void events_findEventRotation() {
+  void events_findEventRotation() throws Exception {
     EventRotationResponse
         eventRotationResponse =
-        eventApi.findEventRotation(EventRotationRequest.builder().storeRawResponse(true).build());
+        eventApi.findEventRotation(EventRotationRequest.builder().storeRawResponse(true).build()).get();
     String actual = GSON.toJson(eventRotationResponse);
     String expected = eventRotationResponse.getRawResponse().getRaw();
 

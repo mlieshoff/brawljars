@@ -77,7 +77,7 @@ public class StandardConnector implements Connector {
       log.info("    response content: {}", json);
       T result = (T) GSON.fromJson(json, requestContext.getResponseClass());
       if (requestContext.getRequest().isStoreRawResponse()) {
-        setLastResponse(result, json, response);
+        setRawResponse(result, json, response);
       }
       return result;
     } catch (IOException e) {
@@ -85,7 +85,7 @@ public class StandardConnector implements Connector {
     }
   }
 
-  private <T extends IResponse> void setLastResponse(T result, String json, HttpResponse response) {
+  private <T extends IResponse> void setRawResponse(T result, String json, HttpResponse response) {
     RawResponse rawResponse = new RawResponse();
     rawResponse.setRaw(json);
     if (isNotEmpty(response.getAllHeaders())) {
