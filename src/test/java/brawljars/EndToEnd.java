@@ -1,6 +1,7 @@
 package brawljars;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,6 +9,10 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.StringReader;
+import javax.json.Json;
+import javax.json.JsonPatch;
+import javax.json.JsonValue;
 import brawljars.api.intern.brawlers.BrawlerApi;
 import brawljars.api.intern.brawlers.BrawlerRequest;
 import brawljars.api.intern.brawlers.BrawlerResponse;
@@ -38,6 +43,7 @@ import brawljars.api.intern.rankings.powerplay.PowerplayRankingsResponse;
 import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest;
 import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsResponse;
 import brawljars.connector.StandardConnector;
+import wiremock.org.apache.commons.lang3.StringUtils;
 
 public class EndToEnd {
 
@@ -74,6 +80,21 @@ public class EndToEnd {
     String actual = GSON.toJson(playerResponse);
     String expected = playerResponse.getRawResponse().getRaw();
 
+    assertDiff(expected, actual);
+  }
+
+  private void assertDiff(String expected, String actual) {
+    JsonValue source = Json.createReader(new StringReader(expected)).readValue();
+    JsonValue target = Json.createReader(new StringReader(actual)).readValue();
+    JsonPatch diff;
+    try {
+      diff = Json.createDiff(source.asJsonObject(), target.asJsonObject());
+    } catch (ClassCastException e) {
+      diff = Json.createDiff(source.asJsonArray(), target.asJsonArray());
+    }
+    StringBuilder diffOutput = new StringBuilder();
+    diff.toJsonArray().forEach(entry -> diffOutput.append(entry + "\n"));
+    assertEquals(EMPTY, diffOutput.toString());
     assertEquals(expected, actual);
   }
 
@@ -85,7 +106,7 @@ public class EndToEnd {
     String actual = GSON.toJson(battleLogResponse);
     String expected = battleLogResponse.getRawResponse().getRaw().replace(",\"map\":null", "");
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -94,7 +115,7 @@ public class EndToEnd {
     String actual = GSON.toJson(clubResponse);
     String expected = clubResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -105,7 +126,7 @@ public class EndToEnd {
     String actual = GSON.toJson(clubMembersResponse);
     String expected = clubMembersResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -117,7 +138,7 @@ public class EndToEnd {
     String actual = GSON.toJson(powerplayRankingsResponse);
     String expected = powerplayRankingsResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -129,7 +150,7 @@ public class EndToEnd {
     String actual = GSON.toJson(powerplayRankingsSeasonsResponse);
     String expected = powerplayRankingsSeasonsResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -140,7 +161,7 @@ public class EndToEnd {
     String actual = GSON.toJson(clubRankingsResponse);
     String expected = clubRankingsResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -152,7 +173,7 @@ public class EndToEnd {
     String actual = GSON.toJson(brawlerRankingsResponse);
     String expected = brawlerRankingsResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -163,7 +184,7 @@ public class EndToEnd {
     String actual = GSON.toJson(playerRankingsResponse);
     String expected = playerRankingsResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -174,7 +195,7 @@ public class EndToEnd {
     String actual = GSON.toJson(brawlersResponse);
     String expected = brawlersResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -185,7 +206,7 @@ public class EndToEnd {
     String actual = GSON.toJson(brawlerResponse);
     String expected = brawlerResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
   @Test
@@ -196,7 +217,7 @@ public class EndToEnd {
     String actual = GSON.toJson(eventRotationResponse);
     String expected = eventRotationResponse.getRawResponse().getRaw();
 
-    assertEquals(expected, actual);
+    assertDiff(expected, actual);
   }
 
 }
