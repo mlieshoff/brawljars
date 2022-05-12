@@ -11,7 +11,7 @@ That's simple why :) If you think the same way (it may differ from case to case 
 
 ## Why we moved to the amazing services of packagecloud?
 
--- blog content goes here --
+We moved to packagecloud.io because the bintray closed their nice hosting... And packagecloud.io is a really nice place to be :)
 
 ## Simplest Usage
 
@@ -271,4 +271,4 @@ Then initialize an instance of class Api like that:
     BrawlJars brawlJars = new BrawlJars("https://bsproxy.royaleapi.dev/v1", API_KEY, CONNECTOR);
 ```
 
-That's all, enjoy :) 
+That's all, enjoy :)
