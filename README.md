@@ -3,17 +3,21 @@
 # brawljars
 A Java Wrapper For Official Supercell Brawl Stars Api
 
+## Actual version: 2.0.0
 
+## Why we don't use the Swagger scheme?
 
 A big sorry for that, but the quality of that scheme changes from day to day.
 Another big sorry, but the OpenApi Java generator is producing code quality we like much.
 That's simple why :) If you think the same way (it may differ from case to case of course), feel free to continue using our wrapper.
 
+## Why we moved to the amazing services of packagecloud?
 
 -- blog content goes here --
 
+## Simplest Usage
 
-Note: Please combine the builder methods as it makes sense. The demonstrated was is showing only all possibilities.
+Note: Please combine the builder methods as it makes sense. The demonstrated is showing only all possibilities.
 For more information please check
 
 https://developer.brawlstars.com/#/documentation
@@ -39,8 +43,8 @@ or use custom implementation
 ```java
     Connector connector = new Connector() {
     @Override
-    public <T> T get(RequestContext requestContext) throws IOException {
-            // dont forget to use header auth
+    public <T> T get(RequestContext requestContext) throws ConnectorException {
+            // do not forget to use header auth
             String authHeader =  "Authorization: Bearer " + requestContext.getApiKey();
         }
     });
