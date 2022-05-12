@@ -17,12 +17,11 @@
 package brawljars.connector;
 
 import java.io.IOException;
-import lombok.Getter;
 
 public class ConnectorException extends RuntimeException {
 
-  public ConnectorException(String message) {
-    super(message);
+  public ConnectorException(String s) {
+    super(s);
   }
 
   public ConnectorException(IOException e) {

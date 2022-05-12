@@ -21,9 +21,7 @@ public class BrawlJars {
 
   public BrawlJars(String url, String apiKey, Connector connector) {
     apiContext = new ApiContext(url, apiKey, connector);
-    for (Map.Entry<Class<? extends Api>, String> entry : new DefaultApiClasses().getApiClassMap().entrySet()) {
-      apiClassMap.put(entry.getKey(), entry.getValue());
-    }
+    apiClassMap.putAll(new DefaultApiClasses().getApiClassMap());
   }
 
   public <T extends Api> T getApi(Class<T> apiInterface) {
@@ -33,7 +31,7 @@ public class BrawlJars {
   private <T extends Api> T instantiateApi(String apiImplClassname) {
     try {
       Class<?> apiImplClass = Class.forName(apiImplClassname);
-      Constructor constructor = apiImplClass.getDeclaredConstructor(ApiContext.class);
+      Constructor<?> constructor = apiImplClass.getDeclaredConstructor(ApiContext.class);
       constructor.setAccessible(true);
       return (T) constructor.newInstance(apiContext);
     } catch (Exception e) {
@@ -42,7 +40,7 @@ public class BrawlJars {
   }
 
   public List<String> listApis() {
-    return apiClassMap.keySet().stream().map(entry -> entry.getName()).collect(toList());
+    return apiClassMap.keySet().stream().map(Class::getName).collect(toList());
   }
 
 }

@@ -55,7 +55,7 @@ class BaseApiTest {
 
   @Getter
   @Setter
-  class FooRequest extends PaginationRequest {
+  static class FooRequest extends PaginationRequest {
 
     protected FooRequest(int limit, String after, String before, boolean storeRawResponse) {
       super(limit, after, before, storeRawResponse);
@@ -110,7 +110,7 @@ class BaseApiTest {
   }
 
   @Test
-  void get_whenWithValidParameters_shouldReturnResponse() throws ExecutionException, InterruptedException {
+  void get_whenWithValidParameters_shouldReturnResponse() throws Exception {
     FooResponse expected = new FooResponse();
     RequestContext
         requestContext =
@@ -123,7 +123,7 @@ class BaseApiTest {
     assertEquals(expected, actual);
   }
 
-  private ArgumentMatcher<RequestContext> createRequestContextArgumentMatcher(RequestContext expected) {
+  private static ArgumentMatcher<RequestContext> createRequestContextArgumentMatcher(RequestContext expected) {
     return actual -> {
       assertNotNull(actual);
       assertEquals(expected.getApiKey(), actual.getApiKey());

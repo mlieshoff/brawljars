@@ -6,13 +6,13 @@ import brawljars.api.BaseApi;
 
 class EventApiImpl extends BaseApi implements EventApi {
 
-  public EventApiImpl(ApiContext apiContext) {
+  EventApiImpl(ApiContext apiContext) {
     super(apiContext);
   }
 
   @Override
-  public Future<brawljars.api.intern.event.EventRotationResponse> findEventRotation(brawljars.api.intern.event.EventRotationRequest eventRotationRequest) {
-    return get("/events/rotation", eventRotationRequest, brawljars.api.intern.event.EventRotationResponse.class);
+  public Future<EventRotationResponse> findEventRotation(EventRotationRequest eventRotationRequest) {
+    return get("/events/rotation", eventRotationRequest, EventRotationResponse.class);
   }
 
 }

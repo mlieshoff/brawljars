@@ -2,7 +2,6 @@ package brawljars.api.intern.brawlers;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
 import lombok.Data;
 
 @Data

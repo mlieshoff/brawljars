@@ -13,7 +13,7 @@ That's simple why :) If you think the same way (it may differ from case to case 
 -- blog content goes here --
 
 
-Note: Please combine the builder methods as it makes sense. The demonstrated is showing only all possibilities.
+Note: Please combine the builder methods as it makes sense. The demonstrated was is showing only all possibilities.
 For more information please check
 
 https://developer.brawlstars.com/#/documentation
@@ -40,7 +40,7 @@ or use custom implementation
     Connector connector = new Connector() {
     @Override
     public <T> T get(RequestContext requestContext) throws IOException {
-            // don't forget to use header auth
+            // dont forget to use header auth
             String authHeader =  "Authorization: Bearer " + requestContext.getApiKey();
         }
     });

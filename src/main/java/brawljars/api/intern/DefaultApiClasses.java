@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import brawljars.api.Api;
-import brawljars.api.intern.players.PlayerApi;
-import brawljars.api.intern.club.ClubApi;
-import brawljars.api.intern.rankings.RankingApi;
 import brawljars.api.intern.brawlers.BrawlerApi;
+import brawljars.api.intern.club.ClubApi;
 import brawljars.api.intern.event.EventApi;
+import brawljars.api.intern.players.PlayerApi;
+import brawljars.api.intern.rankings.RankingApi;
 
 public class DefaultApiClasses {
 

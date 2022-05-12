@@ -35,7 +35,7 @@ import brawljars.common.PaginationRequest;
 import brawljars.common.Request;
 import brawljars.connector.StandardConnector;
 
-public class IntegrationTestBase {
+public abstract class IntegrationTestBase {
 
   private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
@@ -64,7 +64,7 @@ public class IntegrationTestBase {
     brawlJars = createBrawlJars();
   }
 
-  private BrawlJars createBrawlJars() {
+  private static BrawlJars createBrawlJars() {
     return new BrawlJars("http://localhost:" + wireMockServer.port(), "myApiKey", new StandardConnector());
   }
 
@@ -72,15 +72,15 @@ public class IntegrationTestBase {
     return expected.get();
   }
 
-  protected String json(Object o) {
+  protected static String json(Object o) {
     return GSON.toJson(o);
   }
 
-  protected <T> T toJson(Class<T> clazz, String s) {
+  protected static <T> T toJson(Class<T> clazz, String s) {
     return GSON.fromJson(s, clazz);
   }
 
-  protected String body(String filename) throws IOException {
+  protected static String body(String filename) throws IOException {
     List<String> lines = readLines(new File(filename), StandardCharsets.UTF_8);
     String s = lines.stream().map(String::trim).collect(Collectors.joining());
     expected.set(s);
@@ -135,10 +135,12 @@ public class IntegrationTestBase {
     );
   }
 
+  @FunctionalInterface
   public interface TestRunner {
     void execute() throws Exception;
   }
 
+  @FunctionalInterface
   public interface ResultTestRunner<T extends IResponse> {
     T execute() throws Exception;
   }

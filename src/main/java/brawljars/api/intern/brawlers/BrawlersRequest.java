@@ -1,6 +1,5 @@
 package brawljars.api.intern.brawlers;
 
-import java.util.Map;
 import brawljars.common.PaginationRequest;
 import lombok.Builder;
 

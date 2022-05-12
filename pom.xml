@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
     <version>1.M5.0</version>
     <groupId>brawljars</groupId>
-    <url>http://maven.apache.org</url>
+    <url>https://maven.apache.org</url>
     <inceptionYear>2020</inceptionYear>
     <description>java connector for official supercell brawl stars</description>
     <developers>
@@ -27,7 +27,7 @@
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
     <build>

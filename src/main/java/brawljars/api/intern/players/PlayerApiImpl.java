@@ -3,20 +3,24 @@ package brawljars.api.intern.players;
 import java.util.concurrent.Future;
 import brawljars.api.ApiContext;
 import brawljars.api.BaseApi;
+import brawljars.api.intern.players.battlelog.BattleLogRequest;
+import brawljars.api.intern.players.battlelog.BattleLogResponse;
+import brawljars.api.intern.players.player.PlayerRequest;
+import brawljars.api.intern.players.player.PlayerResponse;
 
 class PlayerApiImpl extends BaseApi implements PlayerApi {
 
-  public PlayerApiImpl(ApiContext apiContext) {
+  PlayerApiImpl(ApiContext apiContext) {
     super(apiContext);
   }
 
   @Override
-  public Future<brawljars.api.intern.players.player.PlayerResponse> findById(brawljars.api.intern.players.player.PlayerRequest playerRequest) {
-    return get("/players/{playerTag}", playerRequest, brawljars.api.intern.players.player.PlayerResponse.class);
+  public Future<PlayerResponse> findById(PlayerRequest playerRequest) {
+    return get("/players/{playerTag}", playerRequest, PlayerResponse.class);
   }
 
-  public Future<brawljars.api.intern.players.battlelog.BattleLogResponse> findBattleLog(brawljars.api.intern.players.battlelog.BattleLogRequest battleLogRequest) {
-    return get("/players/{playerTag}/battlelog", battleLogRequest, brawljars.api.intern.players.battlelog.BattleLogResponse.class);
+  public Future<BattleLogResponse> findBattleLog(BattleLogRequest battleLogRequest) {
+    return get("/players/{playerTag}/battlelog", battleLogRequest, BattleLogResponse.class);
   }
 
 }

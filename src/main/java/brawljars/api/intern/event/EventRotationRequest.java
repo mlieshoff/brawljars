@@ -1,6 +1,5 @@
 package brawljars.api.intern.event;
 
-import java.util.Map;
 import brawljars.common.Request;
 import lombok.Builder;
 
@@ -17,10 +16,5 @@ public class EventRotationRequest extends Request {
     ;
   }
 
-  @Override
-  public Map<String, String> getRestParameters() {
-    Map<String, String> map = super.getRestParameters();
-    return map;
-  }
 
 }

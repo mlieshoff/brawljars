@@ -1,13 +1,11 @@
 package brawljars.api.intern.event;
 
-import brawljars.common.IResponse;
-
 import com.google.gson.annotations.SerializedName;
 
+import brawljars.common.IResponse;
 import brawljars.common.RawResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

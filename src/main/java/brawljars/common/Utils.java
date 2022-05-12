@@ -5,7 +5,7 @@ import java.util.Map;
 public class Utils {
 
   public static boolean isNotEmpty(Map<?, ?> map) {
-    return map != null && map.size() > 0;
+    return map != null && !map.isEmpty();
   }
 
   public static boolean isNotEmpty(Object[] array) {

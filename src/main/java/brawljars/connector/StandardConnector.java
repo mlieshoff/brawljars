@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.apache.http.Header;
+import org.apache.http.HttpMessage;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -38,6 +39,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import brawljars.common.IResponse;
 import brawljars.common.RawResponse;
@@ -84,13 +86,13 @@ public class StandardConnector implements Connector {
     }
   }
 
-  private <T extends IResponse> void setRawResponse(T result, String json, HttpResponse response) {
+  private <T extends IResponse> void setRawResponse(T result, String json, HttpMessage response) {
     RawResponse rawResponse = new RawResponse();
     rawResponse.setRaw(json);
     if (isNotEmpty(response.getAllHeaders())) {
       rawResponse.getResponseHeaders().clear();
       for (Header header : response.getAllHeaders()) {
-        rawResponse.getResponseHeaders().put(header.getName().toLowerCase(), header.getValue());
+        rawResponse.getResponseHeaders().put(header.getName().toLowerCase(Locale.ROOT), header.getValue());
       }
     }
     result.setRawResponse(rawResponse);
@@ -129,14 +131,14 @@ public class StandardConnector implements Connector {
     if (isNotEmpty(restParameters)) {
       for (Map.Entry<String, String> entry : restParameters.entrySet()) {
         String encodedValue = encode(entry.getValue());
-        result = result.replace("{" + entry.getKey() + "}", encodedValue);
+        result = result.replace('{' + entry.getKey() + '}', encodedValue);
       }
     }
     log.info("request to: {}", result);
     return result;
   }
 
-  String encode(String s) throws UnsupportedEncodingException {
+  private static String encode(String s) throws UnsupportedEncodingException {
     return URLEncoder.encode(s, "UTF-8");
   }
 
