@@ -8,7 +8,7 @@ A Java Wrapper For Official Supercell Brawl Stars Api
 ## Why we don't use the Swagger scheme?
 
 A big sorry for that, but the quality of that scheme changes from day to day.
-Another big sorry, but the OpenApi Java generator is producing code quality we like much.
+Another big sorry, but the OpenApi Java generator is producing code quality we don't like much.
 That's simple why :) If you think the same way (it may differ from case to case of course), feel free to continue using our wrapper.
 
 ## Why we moved to the amazing services of packagecloud?
