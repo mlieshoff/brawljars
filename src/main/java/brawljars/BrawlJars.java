@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import brawljars.api.Api;
 import brawljars.api.ApiContext;
-import brawljars.connector.Connector;
 import brawljars.api.intern.DefaultApiClasses;
+import brawljars.connector.Connector;
 
 public class BrawlJars {
 
@@ -22,12 +22,12 @@ public class BrawlJars {
   public BrawlJars(String url, String apiKey, Connector connector) {
     apiContext = new ApiContext(url, apiKey, connector);
     for (Map.Entry<Class<? extends Api>, String> entry : new DefaultApiClasses().getApiClassMap().entrySet()) {
-      try {
-        apiClassMap.put(entry.getKey(), entry.getValue());
-      } catch (Exception e) {
-        throw new IllegalStateException(e);
-      }
+      apiClassMap.put(entry.getKey(), entry.getValue());
     }
+  }
+
+  public <T extends Api> T getApi(Class<T> apiInterface) {
+    return (T) apiInstanceMap.computeIfAbsent(apiInterface, key -> instantiateApi(apiClassMap.get(key)));
   }
 
   private <T extends Api> T instantiateApi(String apiImplClassname) {
@@ -39,10 +39,6 @@ public class BrawlJars {
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }
-  }
-
-  public <T extends Api> T getApi(Class<T> apiInterface) {
-    return (T) apiInstanceMap.computeIfAbsent(apiInterface, key -> instantiateApi(apiClassMap.get(key)));
   }
 
   public List<String> listApis() {

@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.Request;
 import lombok.Builder;
 
-public class EventRotationRequest extends Request<EventRotationResponse> {
+public class EventRotationRequest extends Request {
 
 
   @Builder

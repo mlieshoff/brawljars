@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.PaginationRequest;
 import lombok.Builder;
 
-public class ClubMembersRequest extends PaginationRequest<ClubMembersResponse> {
+public class ClubMembersRequest extends PaginationRequest {
 
   private final String clubTag;
 

@@ -19,7 +19,6 @@ package brawljars.common;
 
 import java.util.HashMap;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,7 +26,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
 public class RawResponse {
 
   private final Map<String, String> responseHeaders = new HashMap<>();

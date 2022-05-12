@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -14,38 +16,27 @@ import brawljars.connector.Connector;
 class ApiContextTest {
 
   private static final String API_KEY = "apiKey";
-  private static final String EMPTY = "";
   private static final String URL = "url";
 
   @Mock
   private Connector connector;
 
-  @Test
-  void construct_whenWithNullUrl_throwException() {
+  @ParameterizedTest
+  @CsvSource(value = "null,", nullValues = "null")
+  void construct_withoutUrl_shouldThrowException(String actual) {
 
-    assertThrows(IllegalArgumentException.class, () -> new ApiContext(null, API_KEY, connector));
+    assertThrows(IllegalArgumentException.class, () -> new ApiContext(actual, API_KEY, connector));
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = "null,", nullValues = "null")
+  void construct_withoutApiKey_shouldThrowException(String actual) {
+
+    assertThrows(IllegalArgumentException.class, () -> new ApiContext(URL, actual, connector));
   }
 
   @Test
-  void construct_whenWithEmptyUrl_throwException() {
-
-    assertThrows(IllegalArgumentException.class, () -> new ApiContext(EMPTY, API_KEY, connector));
-  }
-
-  @Test
-  void construct_whenWithNullApiKey_throwException() {
-
-    assertThrows(IllegalArgumentException.class, () -> new ApiContext(URL, null, connector));
-  }
-
-  @Test
-  void construct_whenWithEmptyApiKey_throwException() {
-
-    assertThrows(IllegalArgumentException.class, () -> new ApiContext(URL, EMPTY, connector));
-  }
-
-  @Test
-  void construct_whenWithNullConnector_throwException() {
+  void construct_withoutConnector_shouldThrowException() {
 
     assertThrows(IllegalArgumentException.class, () -> new ApiContext(URL, API_KEY, null));
   }

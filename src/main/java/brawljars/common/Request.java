@@ -3,15 +3,13 @@ package brawljars.common;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class Request<T extends IResponse> {
+public class Request {
 
   private final boolean storeRawResponse;
 
-  @Builder(builderMethodName = "requestBuilder")
   protected Request(boolean storeRawResponse) {
     this.storeRawResponse = storeRawResponse;
   }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.when;
+import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,6 @@ import lombok.Setter;
 class BaseApiTest {
 
   private static final String API_KEY = "apiKey";
-  private static final String EMPTY = "";
   private static final String PART = "part";
   private static final String URL = "url";
 
@@ -39,7 +39,7 @@ class BaseApiTest {
 
   private ApiContext apiContext;
 
-  private PaginationRequest<FooResponse> request;
+  private PaginationRequest request;
 
   @Getter
   @Setter
@@ -55,7 +55,7 @@ class BaseApiTest {
 
   @Getter
   @Setter
-  class FooRequest extends PaginationRequest<FooResponse> {
+  class FooRequest extends PaginationRequest {
 
     protected FooRequest(int limit, String after, String before, boolean storeRawResponse) {
       super(limit, after, before, storeRawResponse);
@@ -80,8 +80,7 @@ class BaseApiTest {
   @Test
   void get_whenWithEmptyPart_shouldThrowException() {
 
-    assertThrows(IllegalArgumentException.class,
-        () -> unitUnderTest.get(EMPTY, request, FooResponse.class));
+    assertThrows(IllegalArgumentException.class, () -> unitUnderTest.get(EMPTY, request, FooResponse.class));
   }
 
   @Test

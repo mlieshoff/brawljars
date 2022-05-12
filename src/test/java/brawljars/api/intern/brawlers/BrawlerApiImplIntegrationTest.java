@@ -1,6 +1,10 @@
 package brawljars.api.intern.brawlers;
 
+import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,30 +22,52 @@ public class BrawlerApiImplIntegrationTest extends IntegrationTestBase {
 
   @Test
   void findAll() throws Exception {
-    brawljars.api.intern.brawlers.BrawlersRequest request = brawljars.api.intern.brawlers.BrawlersRequest.builder()
-      .limit(100)
+    brawljars.api.intern.brawlers.BrawlersRequest.BrawlersRequestBuilder builder = brawljars.api.intern.brawlers.BrawlersRequest.builder();
+    brawljars.api.intern.brawlers.BrawlersRequest request = builder      .limit(100)
       .before("zzz")
       .after("aaa")
+      .storeRawResponse(true)
       .build();
     prepare("/brawlers", "src/test/resources/brawler-findAll.json", request);
-
-    brawljars.api.intern.brawlers.BrawlersResponse actual = unitUnderTest.findAll(request).get();
     brawljars.api.intern.brawlers.BrawlersResponse expected = toJson(brawljars.api.intern.brawlers.BrawlersResponse.class, getExpected());
 
-    assertEquals(expected, actual);
+    run(expected, () -> unitUnderTest.findAll(request).get());
+  }
+
+  @Test
+  void findAll_whenWithException() {
+    brawljars.api.intern.brawlers.BrawlersRequest.BrawlersRequestBuilder builder = brawljars.api.intern.brawlers.BrawlersRequest.builder();
+    brawljars.api.intern.brawlers.BrawlersRequest request = builder      .limit(100)
+      .before("zzz")
+      .after("aaa")
+      .storeRawResponse(true)
+      .build();
+
+    prepareWithErrorAndRun("/brawlers", request, () -> unitUnderTest.findAll(request).get());
   }
 
   @Test
   void findById() throws Exception {
     long brawlerId = 4711L;
-    brawljars.api.intern.brawlers.BrawlerRequest request = brawljars.api.intern.brawlers.BrawlerRequest.builder(brawlerId)
+    brawljars.api.intern.brawlers.BrawlerRequest.BrawlerRequestBuilder builder = brawljars.api.intern.brawlers.BrawlerRequest.builder(brawlerId);
+    brawljars.api.intern.brawlers.BrawlerRequest request = builder
+      .storeRawResponse(true)
       .build();
     prepare("/brawlers/{brawlerId}".replace("{brawlerId}", String.valueOf(brawlerId)), "src/test/resources/brawler-findById.json", request);
-
-    brawljars.api.intern.brawlers.BrawlerResponse actual = unitUnderTest.findById(request).get();
     brawljars.api.intern.brawlers.BrawlerResponse expected = toJson(brawljars.api.intern.brawlers.BrawlerResponse.class, getExpected());
 
-    assertEquals(expected, actual);
+    run(expected, () -> unitUnderTest.findById(request).get());
+  }
+
+  @Test
+  void findById_whenWithException() {
+    long brawlerId = 4711L;
+    brawljars.api.intern.brawlers.BrawlerRequest.BrawlerRequestBuilder builder = brawljars.api.intern.brawlers.BrawlerRequest.builder(brawlerId);
+    brawljars.api.intern.brawlers.BrawlerRequest request = builder
+      .storeRawResponse(true)
+      .build();
+
+    prepareWithErrorAndRun("/brawlers/{brawlerId}".replace("{brawlerId}", String.valueOf(brawlerId)), request, () -> unitUnderTest.findById(request).get());
   }
 
 }

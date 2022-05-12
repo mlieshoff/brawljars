@@ -3,13 +3,15 @@
 # brawljars
 A Java Wrapper For Official Supercell Brawl Stars Api
 
-## Actual version: 2.0.0
 
-## Why we moved to the amazing services of packagecloud?
+
+A big sorry for that, but the quality of that scheme changes from day to day.
+Another big sorry, but the OpenApi Java generator is producing code quality we like much.
+That's simple why :) If you think the same way (it may differ from case to case of course), feel free to continue using our wrapper.
+
 
 -- blog content goes here --
 
-## Simplest Usage ##
 
 Note: Please combine the builder methods as it makes sense. The demonstrated was is showing only all possibilities.
 For more information please check
@@ -17,109 +19,248 @@ For more information please check
 https://developer.brawlstars.com/#/documentation
 
 Use one of these endpoints:
-```
+
 Official endpoint
-https://api.brawlstars.com/v1
 ```
+    https://api.brawlstars.com/v1
 ```
+
 Proxy endpoint
-https://bsproxy.royaleapi.dev/v1
 ```
+    https://bsproxy.royaleapi.dev/v1
+```
+
 Use built-in http connector
 ```java
-Connector connector = new OkHttpConnector();
+    Connector connector = new StandardConnector();
 ```
+
 or use custom implementation
+```java
+    Connector connector = new Connector() {
+    @Override
+    public <T> T get(RequestContext requestContext) throws IOException {
+            // dont forget to use header auth
+            String authHeader =  "Authorization: Bearer " + requestContext.getApiKey();
+        }
+    });
 ```
-Connector connector = new Connector() {
-  @Override
-  public <T> T get(RequestContext requestContext) throws IOException {
-    // dont forget to use header auth
-    String authHeader =  "Authorization: Bearer " + requestContext.getApiKey();
-  }
-});
-```
-connect to the api with creating a *BrawlJars* instance. 
-```
-BrawlJars brawlJars = new BrawlJars("https://bsproxy.royaleapi.dev/v1", "my-api-key", connector);
+
+connect to the api with creating a *BrawlJars* instance.
+```java
+    BrawlJars brawlJars = new BrawlJars("https://bsproxy.royaleapi.dev/v1", "my-api-key", connector);
 ```
 
 list all supported apis
-```
-System.out.println(brawlJars.listApis());
-```
-
-create an instance for a specific api
-```
-BrawlersApi brawlersApi = brawlJarsApi.getApi(BrawlersApi.class);
-```
-
-### Brawlers api
 ```java
-// find all brawlers
-BrawlersApi brawlersApi = brawlJarsApi.getApi(BrawlersApi.class);
-BrawlersResponse bBrawlersResponse = brawlersApi.findAll(BrawlersRequest.builder()
-  // paging
-  .limit()
-  .after()
-  .before()
-  // store raw response
-  .storeRawResponse()
-  .build()
-);
+    System.out.println(brawlJars.listApis());
 ```
 
+### List of APIs and example usages
+
+#### PlayerApi
 ```java
-// find brawler by id
-BrawlersApi brawlersApi = brawlJarsApi.getApi(BrawlersApi.class);
-BrawlerResponse brawlerResponse = brawlersApi.findById(BrawlersRequest.builder("16000000")
-  .build()
-);
+    // create an instance for the api
+    PlayerApi api = brawlJars.getApi(PlayerApi.class);
+```
+```java
+    // findById
+    PlayerResponse response = api.findById(PlayerRequest.builder()
+           .playerTag()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+```java
+    // findBattleLog
+    BattleLogResponse response = api.findBattleLog(BattleLogRequest.builder()
+           .playerTag()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+#### ClubApi
+```java
+    // create an instance for the api
+    ClubApi api = brawlJars.getApi(ClubApi.class);
+```
+```java
+    // findClubMembers
+    ClubMembersResponse response = api.findClubMembers(clubMembersRequest.builder()
+           .clubTag()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+```java
+    // findClub
+    ClubResponse response = api.findClub(clubRequest.builder()
+           .clubTag()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+#### RankingApi
+```java
+    // create an instance for the api
+    RankingApi api = brawlJars.getApi(RankingApi.class);
+```
+```java
+    // findPowerplayRankings
+    PowerplayRankingsResponse response = api.findPowerplayRankings(powerplayRankingsRequest.builder()
+           .countryCode()
+           .seasonId()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+```java
+    // findPowerplayRankingsSeasons
+    PowerplayRankingsSeasonsResponse response = api.findPowerplayRankingsSeasons(powerplayRankingsSeasonsRequest.builder()
+           .countryCode()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+```java
+    // findClubRankings
+    ClubRankingsResponse response = api.findClubRankings(clubRankingsRequest.builder()
+           .countryCode()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+```java
+    // findBrawlerRankings
+    BrawlerRankingsResponse response = api.findBrawlerRankings(brawlerRankingsRequest.builder()
+           .countryCode()
+           .brawlerId()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+```java
+    // findPlayerRankings
+    PlayerRankingsResponse response = api.findPlayerRankings(playerRankingsRequest.builder()
+           .countryCode()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+#### BrawlerApi
+```java
+    // create an instance for the api
+    BrawlerApi api = brawlJars.getApi(BrawlerApi.class);
+```
+```java
+    // findAll
+    BrawlersResponse response = api.findAll(brawlersRequest.builder()
+           // pagination
+           .limit()
+           .after()
+           .before()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+```java
+    // findById
+    BrawlerResponse response = api.findById(brawlersRequest.builder()
+           .brawlerId()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
+```
+#### EventApi
+```java
+    // create an instance for the api
+    EventApi api = brawlJars.getApi(EventApi.class);
+```
+```java
+    // findEventRotation
+    EventRotationResponse response = api.findEventRotation(eventRotationRequest.builder()
+           // store raw response
+           .storeRawResponse()
+        .build()
+    ).get();
 ```
 
-## Asynchronous usage
 
 All requests can are return *java.concurrent.Future*. The execution will be asynchronous by default.
 
-## How to bind the packagecloud repository ##
 
 ```xml
-<repositories>
-  <repository>
-    <id>packagecloud-brawljars</id>
-    <url>https://packagecloud.io/mlieshoff/brawljars/maven2</url>
-    <releases>
-      <enabled>true</enabled>
-    </releases>
-    <snapshots>
-      <enabled>true</enabled>
-    </snapshots>
-  </repository>
-</repositories>
+    <repositories>
+        <repository>
+            <id>packagecloud-brawljars</id>
+            <url>https://packagecloud.io/mlieshoff/brawljars/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 ```
 
-## Continuous Integration ##
 
 https://github.com/mlieshoff/brawljars/actions
 
-## Repository ##
 
 https://packagecloud.io/mlieshoff/brawljars
 
-## Logging ##
 
 We are using SLF4j.
 
-## Usage of RoyaleApi proxy ##
 
-This wrapper can be easy connected to the proxy of our friends on RoyaleAPI. Please proceed first the steps described here:
+This wrapper can be easyly connected to the proxy of our friends on RoyaleAPI. Please proceed first the steps described here:
 
 https://docs.royaleapi.com/#/proxy
 
 Then initialize an instance of class Api like that:
 
-```
-Api api = new Api("https://bsproxy.royaleapi.dev/v1", API_KEY);
+```java
+    BrawlJars brawlJars = new BrawlJars("https://bsproxy.royaleapi.dev/v1", API_KEY, CONNECTOR);
 ```
 
 That's all, enjoy :)

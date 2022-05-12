@@ -63,7 +63,6 @@ public class StandardConnector implements Connector {
       logResponse(response);
       StatusLine statusLine = response.getStatusLine();
       if (statusLine.getStatusCode() != SC_OK) {
-        // TODO transfer headers to exception
         throw new ConnectorException(statusLine.toString());
       }
       StringBuilder content = new StringBuilder();

@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.PaginationRequest;
 import lombok.Builder;
 
-public class BrawlersRequest extends PaginationRequest<BrawlersResponse> {
+public class BrawlersRequest extends PaginationRequest {
 
 
   @Builder

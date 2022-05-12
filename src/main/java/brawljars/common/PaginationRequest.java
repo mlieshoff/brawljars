@@ -3,11 +3,8 @@ package brawljars.common;
 import static brawljars.common.Utils.isNotBlank;
 
 import java.util.Map;
-import lombok.Builder;
-import lombok.Getter;
 
-@Getter
-public class PaginationRequest<T extends IResponse> extends Request<T> {
+public class PaginationRequest extends Request {
 
   static final String QUERY_PARAM_LIMIT = "limit";
   static final String QUERY_PARAM_AFTER = "after";
@@ -18,7 +15,6 @@ public class PaginationRequest<T extends IResponse> extends Request<T> {
   private final String after;
   private final String before;
 
-  @Builder(builderMethodName = "paginationRequestBuilder")
   protected PaginationRequest(int limit, String after, String before, boolean storeRawResponse) {
     super(storeRawResponse);
     this.limit = limit;

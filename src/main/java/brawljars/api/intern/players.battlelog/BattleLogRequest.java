@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.PaginationRequest;
 import lombok.Builder;
 
-public class BattleLogRequest extends PaginationRequest<BattleLogResponse> {
+public class BattleLogRequest extends PaginationRequest {
 
   private final String playerTag;
 

@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.PaginationRequest;
 import lombok.Builder;
 
-public class PowerplayRankingsRequest extends PaginationRequest<PowerplayRankingsResponse> {
+public class PowerplayRankingsRequest extends PaginationRequest {
 
   private final String countryCode;
   private final long seasonId;

@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.Request;
 import lombok.Builder;
 
-public class BrawlerRequest extends Request<BrawlerResponse> {
+public class BrawlerRequest extends Request {
 
   private final long brawlerId;
 

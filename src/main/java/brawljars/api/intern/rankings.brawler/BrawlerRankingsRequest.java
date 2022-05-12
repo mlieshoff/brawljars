@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.PaginationRequest;
 import lombok.Builder;
 
-public class BrawlerRankingsRequest extends PaginationRequest<BrawlerRankingsResponse> {
+public class BrawlerRankingsRequest extends PaginationRequest {
 
   private final String countryCode;
   private final long brawlerId;

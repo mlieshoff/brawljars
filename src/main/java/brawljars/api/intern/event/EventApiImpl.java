@@ -2,7 +2,6 @@ package brawljars.api.intern.event;
 
 import java.util.concurrent.Future;
 import brawljars.api.ApiContext;
-import brawljars.api.ApiException;
 import brawljars.api.BaseApi;
 
 class EventApiImpl extends BaseApi implements EventApi {
@@ -12,7 +11,7 @@ class EventApiImpl extends BaseApi implements EventApi {
   }
 
   @Override
-  public Future<brawljars.api.intern.event.EventRotationResponse> findEventRotation(brawljars.api.intern.event.EventRotationRequest eventRotationRequest) throws ApiException {
+  public Future<brawljars.api.intern.event.EventRotationResponse> findEventRotation(brawljars.api.intern.event.EventRotationRequest eventRotationRequest) {
     return get("/events/rotation", eventRotationRequest, brawljars.api.intern.event.EventRotationResponse.class);
   }
 

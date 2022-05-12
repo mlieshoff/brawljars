@@ -4,7 +4,7 @@ import java.util.Map;
 import brawljars.common.Request;
 import lombok.Builder;
 
-public class ClubRequest extends Request<ClubResponse> {
+public class ClubRequest extends Request {
 
   private final String clubTag;
 
