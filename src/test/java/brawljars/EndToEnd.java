@@ -16,113 +16,223 @@
  */
 package brawljars;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import brawljars.request.GetBrawlerRequest;
-import brawljars.request.GetBrawlersRequest;
-import brawljars.request.GetClubMembersRequest;
-import brawljars.request.GetClubRequest;
-import brawljars.request.GetPlayerBattleLogRequest;
-import brawljars.request.GetPlayerRequest;
-import brawljars.request.GetRankingsBrawlerRequest;
-import brawljars.request.GetRankingsClubsRequest;
-import brawljars.request.GetRankingsPlayersRequest;
-import brawljars.request.GetRankingsPowerplaySeasonsRequest;
-import brawljars.request.GetRankingsPowerplaySeasonsSeasonRequest;
-import brawljars.response.IResponse;
+import java.io.StringReader;
+import javax.json.Json;
+import javax.json.JsonPatch;
+import javax.json.JsonValue;
+import brawljars.api.intern.brawlers.BrawlerApi;
+import brawljars.api.intern.brawlers.BrawlerRequest;
+import brawljars.api.intern.brawlers.BrawlerResponse;
+import brawljars.api.intern.brawlers.BrawlersRequest;
+import brawljars.api.intern.brawlers.BrawlersResponse;
+import brawljars.api.intern.club.ClubApi;
+import brawljars.api.intern.club.ClubMembersRequest;
+import brawljars.api.intern.club.ClubMembersResponse;
+import brawljars.api.intern.club.ClubRequest;
+import brawljars.api.intern.club.ClubResponse;
+import brawljars.api.intern.event.EventApi;
+import brawljars.api.intern.event.EventRotationRequest;
+import brawljars.api.intern.event.EventRotationResponse;
+import brawljars.api.intern.players.PlayerApi;
+import brawljars.api.intern.players.battlelog.BattleLogRequest;
+import brawljars.api.intern.players.battlelog.BattleLogResponse;
+import brawljars.api.intern.players.player.PlayerRequest;
+import brawljars.api.intern.players.player.PlayerResponse;
+import brawljars.api.intern.rankings.RankingApi;
+import brawljars.api.intern.rankings.brawler.BrawlerRankingsRequest;
+import brawljars.api.intern.rankings.brawler.BrawlerRankingsResponse;
+import brawljars.api.intern.rankings.club.ClubRankingsRequest;
+import brawljars.api.intern.rankings.club.ClubRankingsResponse;
+import brawljars.api.intern.rankings.player.PlayerRankingsRequest;
+import brawljars.api.intern.rankings.player.PlayerRankingsResponse;
+import brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest;
+import brawljars.api.intern.rankings.powerplay.PowerplayRankingsResponse;
+import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest;
+import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsResponse;
+import brawljars.connector.StandardConnector;
 
-/**
- * @author Michael Lieshoff
- */
-class EndToEnd {
+public class EndToEnd {
 
-  private static final String API_KEY = System.getProperty("api.key");
+  private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
-  private Api api;
+  private BrawlJars brawlJars;
+
+  private BrawlerApi brawlerApi;
+
+  private RankingApi rankingApi;
+
+  private PlayerApi playerApi;
+
+  private ClubApi clubApi;
+
+  private EventApi eventApi;
 
   @BeforeEach
-  void setUp() throws Exception {
-    api = new Api("https://bsproxy.royaleapi.dev/v1/", API_KEY);
+  void setUp() {
+    brawlJars =
+        new BrawlJars("https://bsproxy.royaleapi.dev/v1", System.getProperty("apiKey"), new StandardConnector());
+    brawlerApi = brawlJars.getApi(BrawlerApi.class);
+    rankingApi = brawlJars.getApi(RankingApi.class);
+    playerApi = brawlJars.getApi(PlayerApi.class);
+    clubApi = brawlJars.getApi(ClubApi.class);
+    eventApi = brawlJars.getApi(EventApi.class);
   }
 
   @Test
-  void getPlayer() throws Exception {
+  void player_findById() throws Exception {
+    PlayerResponse
+        playerResponse =
+        playerApi.findById(PlayerRequest.builder("#28UP80RRY").storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(playerResponse);
+    String expected = playerResponse.getRawResponse().getRaw();
 
-    assertResponse(api.getPlayer(GetPlayerRequest.builder("#28UP80RRY").build()));
+    assertDiff(expected, actual);
   }
 
-  private void assertResponse(IResponse response) {
-    assertAll(
-        () -> assertNotNull(response, "response"),
-        () -> assertNull(response.getMessage(), "message"),
-        () -> assertNull(response.getReason(), "reason")
-    );
-  }
-
-  @Test
-  void getPlayerBattleLog() throws Exception {
-
-    assertResponse(api.getPlayerBattleLog(GetPlayerBattleLogRequest.builder("#28UP80RRY").build()));
-  }
-
-  @Test
-  void getClub() throws Exception {
-
-    assertResponse(api.getClub(GetClubRequest.builder("#L99U2L2").build()));
-  }
-
-  @Test
-  void getClubMembers() throws Exception {
-
-    assertResponse(api.getClubMembers(GetClubMembersRequest.builder("#L99U2L2").build()));
+  private void assertDiff(String expected, String actual) {
+    JsonValue source = Json.createReader(new StringReader(expected)).readValue();
+    JsonValue target = Json.createReader(new StringReader(actual)).readValue();
+    JsonPatch diff;
+    try {
+      diff = Json.createDiff(source.asJsonObject(), target.asJsonObject());
+    } catch (ClassCastException e) {
+      diff = Json.createDiff(source.asJsonArray(), target.asJsonArray());
+    }
+    StringBuilder diffOutput = new StringBuilder();
+    diff.toJsonArray().forEach(entry -> diffOutput.append(entry + "\n"));
+    assertEquals(EMPTY, diffOutput.toString());
+    assertEquals(expected, actual);
   }
 
   @Test
-  void getRankingsPowerplaySeasons() throws Exception {
+  void player_findBattleLog() throws Exception {
+    BattleLogResponse
+        battleLogResponse =
+        playerApi.findBattleLog(BattleLogRequest.builder("#28UP80RRY").storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(battleLogResponse);
+    String expected = battleLogResponse.getRawResponse().getRaw().replace(",\"map\":null", "");
 
-    assertResponse(api.getRankingsPowerplaySeasons(GetRankingsPowerplaySeasonsRequest.builder("DE").build()));
+    assertDiff(expected, actual);
   }
 
   @Test
-  void getRankingsPowerplaySeasonsSeason() throws Exception {
+  void club_findClub() throws Exception {
+    ClubResponse clubResponse = clubApi.findClub(ClubRequest.builder("#JUURPCV9").storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(clubResponse);
+    String expected = clubResponse.getRawResponse().getRaw();
 
-    assertResponse(
-        api.getRankingsPowerplaySeasonsSeason(GetRankingsPowerplaySeasonsSeasonRequest.builder("DE", "81").build()));
+    assertDiff(expected, actual);
   }
 
   @Test
-  void getRankingsClubs() throws Exception {
+  void club_findClubMembers() throws Exception {
+    ClubMembersResponse
+        clubMembersResponse =
+        clubApi.findClubMembers(ClubMembersRequest.builder("#JUURPCV9").storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(clubMembersResponse);
+    String expected = clubMembersResponse.getRawResponse().getRaw();
 
-    assertResponse(api.getRankingsClubs(GetRankingsClubsRequest.builder("DE").build()));
+    assertDiff(expected, actual);
   }
 
   @Test
-  void getRankingsBrawler() throws Exception {
+  void rankings_findPowerplayRankings() throws Exception {
+    PowerplayRankingsResponse
+        powerplayRankingsResponse =
+        rankingApi.findPowerplayRankings(PowerplayRankingsRequest.builder("DE", 81L).storeRawResponse(true).build())
+            .get();
+    String actual = GSON.toJson(powerplayRankingsResponse);
+    String expected = powerplayRankingsResponse.getRawResponse().getRaw();
 
-    assertResponse(api.getRankingsBrawler(GetRankingsBrawlerRequest.builder("DE", "16000000").build()));
+    assertDiff(expected, actual);
   }
 
   @Test
-  void getRankingsPlayers() throws Exception {
+  void rankings_findPowerplayRankingsSeasons() throws Exception {
+    PowerplayRankingsSeasonsResponse
+        powerplayRankingsSeasonsResponse =
+        rankingApi.findPowerplayRankingsSeasons(
+            PowerplayRankingsSeasonsRequest.builder("DE").storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(powerplayRankingsSeasonsResponse);
+    String expected = powerplayRankingsSeasonsResponse.getRawResponse().getRaw();
 
-    assertResponse(api.getRankingsPlayers(GetRankingsPlayersRequest.builder("DE").build()));
+    assertDiff(expected, actual);
   }
 
   @Test
-  void getBrawlers() throws Exception {
+  void rankings_findClubRankings() throws Exception {
+    ClubRankingsResponse
+        clubRankingsResponse =
+        rankingApi.findClubRankings(ClubRankingsRequest.builder("DE").storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(clubRankingsResponse);
+    String expected = clubRankingsResponse.getRawResponse().getRaw();
 
-    assertResponse(api.getBrawlers(GetBrawlersRequest.builder().build()));
+    assertDiff(expected, actual);
   }
 
   @Test
-  void getBrawler() throws Exception {
+  void rankings_findBrawlerRankings() throws Exception {
+    BrawlerRankingsResponse
+        brawlerRankingsResponse =
+        rankingApi.findBrawlerRankings(BrawlerRankingsRequest.builder("DE", 16000054L).storeRawResponse(true).build())
+            .get();
+    String actual = GSON.toJson(brawlerRankingsResponse);
+    String expected = brawlerRankingsResponse.getRawResponse().getRaw();
 
-    assertResponse(api.getBrawler(GetBrawlerRequest.builder("16000000").build()));
+    assertDiff(expected, actual);
+  }
+
+  @Test
+  void rankings_findPlayerRankings() throws Exception {
+    PlayerRankingsResponse
+        playerRankingsResponse =
+        rankingApi.findPlayerRankings(PlayerRankingsRequest.builder("DE").storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(playerRankingsResponse);
+    String expected = playerRankingsResponse.getRawResponse().getRaw();
+
+    assertDiff(expected, actual);
+  }
+
+  @Test
+  void brawlers_findAll() throws Exception {
+    BrawlersResponse
+        brawlersResponse =
+        brawlerApi.findAll(BrawlersRequest.builder().storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(brawlersResponse);
+    String expected = brawlersResponse.getRawResponse().getRaw();
+
+    assertDiff(expected, actual);
+  }
+
+  @Test
+  void brawlers_findById() throws Exception {
+    BrawlerResponse
+        brawlerResponse =
+        brawlerApi.findById(BrawlerRequest.builder(16000000L).storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(brawlerResponse);
+    String expected = brawlerResponse.getRawResponse().getRaw();
+
+    assertDiff(expected, actual);
+  }
+
+  @Test
+  void events_findEventRotation() throws Exception {
+    EventRotationResponse
+        eventRotationResponse =
+        eventApi.findEventRotation(EventRotationRequest.builder().storeRawResponse(true).build()).get();
+    String actual = GSON.toJson(eventRotationResponse);
+    String expected = eventRotationResponse.getRawResponse().getRaw();
+
+    assertDiff(expected, actual);
   }
 
 }

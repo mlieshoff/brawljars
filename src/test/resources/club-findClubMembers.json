@@ -1,0 +1,97 @@
+{
+  "items": [
+    {
+      "tag": "#9GUV092V0",
+      "name": "IgloTV",
+      "nameColor": "0xffff8afb",
+      "role": "president",
+      "trophies": 18199,
+      "icon": {
+        "id": 28000022
+      }
+    },
+    {
+      "tag": "#28UP80RRY",
+      "name": "micah",
+      "nameColor": "0xffa2e3fe",
+      "role": "vicePresident",
+      "trophies": 12505,
+      "icon": {
+        "id": 28000031
+      }
+    },
+    {
+      "tag": "#Y28JU90QC",
+      "name": "რრრ",
+      "nameColor": "0xffffffff",
+      "role": "vicePresident",
+      "trophies": 11836,
+      "icon": {
+        "id": 28000017
+      }
+    },
+    {
+      "tag": "#8JYC9V88L",
+      "name": "Maxi_King",
+      "nameColor": "0xffcb5aff",
+      "role": "member",
+      "trophies": 9201,
+      "icon": {
+        "id": 28000031
+      }
+    },
+    {
+      "tag": "#9CPR88LRQ",
+      "name": "NOOBY LEON",
+      "nameColor": "0xfff05637",
+      "role": "member",
+      "trophies": 6231,
+      "icon": {
+        "id": 28000054
+      }
+    },
+    {
+      "tag": "#L29YYY2V8",
+      "name": "Türkische Döner",
+      "nameColor": "0xffa8e132",
+      "role": "member",
+      "trophies": 5990,
+      "icon": {
+        "id": 28000000
+      }
+    },
+    {
+      "tag": "#YLRRLR020",
+      "name": "ئك",
+      "nameColor": "0xff1ba5f5",
+      "role": "member",
+      "trophies": 2474,
+      "icon": {
+        "id": 28000050
+      }
+    },
+    {
+      "tag": "#P2GRVVVJY",
+      "name": "Free2play",
+      "nameColor": "0xfff05637",
+      "role": "member",
+      "trophies": 1755,
+      "icon": {
+        "id": 28000048
+      }
+    },
+    {
+      "tag": "#Y29UQQY0G",
+      "name": "Free2play",
+      "nameColor": "0xfff05637",
+      "role": "member",
+      "trophies": 1677,
+      "icon": {
+        "id": 28000051
+      }
+    }
+  ],
+  "paging": {
+    "cursors": {}
+  }
+}
