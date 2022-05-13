@@ -40,12 +40,13 @@ Use built-in http connector
 or use custom implementation
 ```java
     Connector connector = new Connector() {
-    @Override
-    public <T> T get(RequestContext requestContext) throws ConnectorException {
-            // do not forget to use header auth
-            String authHeader =  "Authorization: Bearer " + requestContext.getApiKey();
+        @Override
+        public <T extends IResponse> T get(RequestContext requestContext) throws ConnectorException {
+                // do not forget to use auth header with *Bearer*
+                String authHeader =  "Authorization: Bearer " + requestContext.getApiKey();
+            }
         }
-    });
+    );
 ```
 
 connect to the api with creating a *BrawlJars* instance.
@@ -226,9 +227,20 @@ list all supported apis
     ).get();
 ```
 
+## Add or replace registered API's
+
+```java
+    BrawlJars brawlJars = new BrawlJars(...);
+    brawlJars.register(MyApi.class, MyApiImpl.class.getName());
+    MyApi myApi = brawlJars.getApi(MyApi.class);
+    GoodiesResponse goodiesResponse = myApi.findAllGoodies(new GoodiesRequest(...))).get();
+```
+
+Custom API implementations just need to inherit from *BaseApi*.
+
 ## Asynchronous usage
 
-All requests can are return *java.concurrent.Future*. The execution will be asynchronous by default.
+All requests are returning *java.concurrent.Future*. The execution will be asynchronous by default.
 
 ## How to bind the packagecloud repository
 

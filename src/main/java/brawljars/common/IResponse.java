@@ -16,9 +16,6 @@
  */
 package brawljars.common;
 
-/**
- * @author Michael Lieshoff
- */
 public interface IResponse {
 
   String getMessage();

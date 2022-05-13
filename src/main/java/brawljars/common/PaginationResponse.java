@@ -23,9 +23,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-/**
- * @author Michael Lieshoff
- */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

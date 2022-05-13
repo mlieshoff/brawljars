@@ -20,9 +20,6 @@ import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
-/**
- * @author Michael Lieshoff
- */
 @Data
 public class Response implements IResponse {
 
