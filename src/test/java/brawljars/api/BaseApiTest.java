@@ -59,6 +59,7 @@ class BaseApiTest {
 
   @Getter
   @Setter
+  static
   class FooResponse extends PaginationResponse<FooRequest> {
   }
 
