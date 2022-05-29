@@ -57,10 +57,14 @@ class BaseApiTest {
 
   private PaginationRequest request;
 
-  @Getter
-  @Setter
-  static
-  class FooResponse extends PaginationResponse<FooRequest> {
+  private static ArgumentMatcher<RequestContext> createRequestContextArgumentMatcher(RequestContext expected) {
+    return actual -> {
+      assertNotNull(actual);
+      assertEquals(expected.getApiKey(), actual.getApiKey());
+      assertEquals(expected.getUrl(), actual.getUrl());
+      assertEquals(expected.getResponseClass(), actual.getResponseClass());
+      return true;
+    };
   }
 
   @BeforeEach
@@ -68,23 +72,6 @@ class BaseApiTest {
     apiContext = new ApiContext(URL, API_KEY, connector);
     request = new FooRequest(100, "after", "before", true);
     unitUnderTest = new BaseApi(apiContext);
-  }
-
-  @Getter
-  @Setter
-  static class FooRequest extends PaginationRequest {
-
-    protected FooRequest(int limit, String after, String before, boolean storeRawResponse) {
-      super(limit, after, before, storeRawResponse);
-    }
-
-    @Override
-    public Map<String, String> getRestParameters() {
-      Map<String, String> map = super.getRestParameters();
-      map.put("param", "value");
-      return map;
-    }
-
   }
 
   @Test
@@ -140,14 +127,27 @@ class BaseApiTest {
     assertEquals(expected, actual);
   }
 
-  private static ArgumentMatcher<RequestContext> createRequestContextArgumentMatcher(RequestContext expected) {
-    return actual -> {
-      assertNotNull(actual);
-      assertEquals(expected.getApiKey(), actual.getApiKey());
-      assertEquals(expected.getUrl(), actual.getUrl());
-      assertEquals(expected.getResponseClass(), actual.getResponseClass());
-      return true;
-    };
+  @Getter
+  @Setter
+  static
+  class FooResponse extends PaginationResponse<FooRequest> {
+  }
+
+  @Getter
+  @Setter
+  static class FooRequest extends PaginationRequest {
+
+    protected FooRequest(int limit, String after, String before, boolean storeRawResponse) {
+      super(limit, after, before, storeRawResponse);
+    }
+
+    @Override
+    public Map<String, Object> getRestParameters() {
+      Map<String, Object> map = super.getRestParameters();
+      map.put("param", "value");
+      return map;
+    }
+
   }
 
 }

@@ -34,19 +34,19 @@ import brawljars.api.intern.brawlers.BrawlerRequest;
 import brawljars.api.intern.brawlers.BrawlerResponse;
 import brawljars.api.intern.brawlers.BrawlersRequest;
 import brawljars.api.intern.brawlers.BrawlersResponse;
-import brawljars.api.intern.club.ClubApi;
-import brawljars.api.intern.club.ClubMembersRequest;
-import brawljars.api.intern.club.ClubMembersResponse;
-import brawljars.api.intern.club.ClubRequest;
-import brawljars.api.intern.club.ClubResponse;
-import brawljars.api.intern.event.EventApi;
-import brawljars.api.intern.event.EventRotationRequest;
-import brawljars.api.intern.event.EventRotationResponse;
+import brawljars.api.intern.clubs.ClubApi;
+import brawljars.api.intern.clubs.info.ClubRequest;
+import brawljars.api.intern.clubs.info.ClubResponse;
+import brawljars.api.intern.clubs.member.ClubMembersRequest;
+import brawljars.api.intern.clubs.member.ClubMembersResponse;
+import brawljars.api.intern.events.EventApi;
+import brawljars.api.intern.events.EventRotationRequest;
+import brawljars.api.intern.events.EventRotationResponse;
 import brawljars.api.intern.players.PlayerApi;
 import brawljars.api.intern.players.battlelog.BattleLogRequest;
 import brawljars.api.intern.players.battlelog.BattleLogResponse;
-import brawljars.api.intern.players.player.PlayerRequest;
-import brawljars.api.intern.players.player.PlayerResponse;
+import brawljars.api.intern.players.info.PlayerRequest;
+import brawljars.api.intern.players.info.PlayerResponse;
 import brawljars.api.intern.rankings.RankingApi;
 import brawljars.api.intern.rankings.brawler.BrawlerRankingsRequest;
 import brawljars.api.intern.rankings.brawler.BrawlerRankingsResponse;
@@ -79,12 +79,27 @@ public class EndToEnd {
   @BeforeEach
   void setUp() {
     brawlJars =
-        new BrawlJars("https://bsproxy.royaleapi.dev/v1", System.getProperty("apiKey"), new StandardConnector());
+        new BrawlJars("https://bsproxy.royaleapi.dev/v1", System.getProperty("apiKey", System.getenv("API_KEY")),
+            new StandardConnector());
     brawlerApi = brawlJars.getApi(BrawlerApi.class);
     rankingApi = brawlJars.getApi(RankingApi.class);
     playerApi = brawlJars.getApi(PlayerApi.class);
     clubApi = brawlJars.getApi(ClubApi.class);
     eventApi = brawlJars.getApi(EventApi.class);
+  }
+
+  private void assertDiff(String expected, String actual) {
+    JsonValue source = Json.createReader(new StringReader(actual)).readValue();
+    JsonValue target = Json.createReader(new StringReader(expected)).readValue();
+    JsonPatch diff;
+    try {
+      diff = Json.createDiff(source.asJsonObject(), target.asJsonObject());
+    } catch (ClassCastException e) {
+      diff = Json.createDiff(source.asJsonArray(), target.asJsonArray());
+    }
+    StringBuilder diffOutput = new StringBuilder();
+    diff.toJsonArray().forEach(entry -> diffOutput.append(entry + "\n"));
+    assertEquals(EMPTY, diffOutput.toString());
   }
 
   @Test
@@ -96,21 +111,6 @@ public class EndToEnd {
     String expected = playerResponse.getRawResponse().getRaw();
 
     assertDiff(expected, actual);
-  }
-
-  private void assertDiff(String expected, String actual) {
-    JsonValue source = Json.createReader(new StringReader(expected)).readValue();
-    JsonValue target = Json.createReader(new StringReader(actual)).readValue();
-    JsonPatch diff;
-    try {
-      diff = Json.createDiff(source.asJsonObject(), target.asJsonObject());
-    } catch (ClassCastException e) {
-      diff = Json.createDiff(source.asJsonArray(), target.asJsonArray());
-    }
-    StringBuilder diffOutput = new StringBuilder();
-    diff.toJsonArray().forEach(entry -> diffOutput.append(entry + "\n"));
-    assertEquals(EMPTY, diffOutput.toString());
-    assertEquals(expected, actual);
   }
 
   @Test

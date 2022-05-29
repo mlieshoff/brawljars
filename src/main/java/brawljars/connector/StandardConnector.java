@@ -16,7 +16,6 @@
  */
 package brawljars.connector;
 
-import static brawljars.common.Utils.isNotBlank;
 import static brawljars.common.Utils.isNotEmpty;
 import static brawljars.common.Utils.require;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -38,7 +37,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import brawljars.common.IResponse;
@@ -49,6 +50,26 @@ import lombok.extern.slf4j.Slf4j;
 public class StandardConnector implements Connector {
 
   private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
+
+  private static void logResponse(HttpResponse httpResponse) {
+    if (log.isInfoEnabled()) {
+      for (Header header : httpResponse.getAllHeaders()) {
+        log.info("    response header: {}={}", header.getName(), header.getValue());
+      }
+      StatusLine statusLine = httpResponse.getStatusLine();
+      log.info("    status code: {}- {}", statusLine.getStatusCode(), statusLine.getReasonPhrase());
+    }
+  }
+
+  private static String encode(String s) throws UnsupportedEncodingException {
+    return URLEncoder.encode(s, "UTF-8");
+  }
+
+  private static HttpGet createRequest(String url, String apiKey) {
+    HttpGet httpGet = new HttpGet(url);
+    httpGet.addHeader("Authorization", "Bearer " + apiKey);
+    return httpGet;
+  }
 
   @Override
   public <T extends IResponse> T get(RequestContext requestContext) throws ConnectorException {
@@ -98,54 +119,35 @@ public class StandardConnector implements Connector {
     result.setRawResponse(rawResponse);
   }
 
-  private static void logResponse(HttpResponse httpResponse) {
-    if (log.isInfoEnabled()) {
-      for (Header header : httpResponse.getAllHeaders()) {
-        log.info("    response header: {}={}", header.getName(), header.getValue());
-      }
-      StatusLine statusLine = httpResponse.getStatusLine();
-      log.info("    status code: {}- {}", statusLine.getStatusCode(), statusLine.getReasonPhrase());
-    }
-  }
-
-  private String appendToUrl(String url, Map<String, String> parameters, Map<String, String> restParameters)
+  private String appendToUrl(String url, Map<String, Object> parameters, Map<String, Object> restParameters)
       throws UnsupportedEncodingException {
     StringBuilder appendedUrl = new StringBuilder(url);
+    List<String> queries = new ArrayList<>();
     if (isNotEmpty(parameters)) {
-      appendedUrl.append('?');
-      for (Iterator<Map.Entry<String, String>> iterator = parameters.entrySet().iterator(); iterator.hasNext(); ) {
-        Map.Entry<String, String> entry = iterator.next();
+      for (Map.Entry<String, Object> entry : parameters.entrySet()) {
         String name = entry.getKey();
-        String value = entry.getKey();
-        appendedUrl.append(name);
-        appendedUrl.append('=');
-        if (isNotBlank(value)) {
-          appendedUrl.append(encode(entry.getValue()));
+        Object value = entry.getValue();
+        if (value != null) {
+          queries.add(name + '=' + encode(String.valueOf(value)));
         }
-        if (iterator.hasNext()) {
-          appendedUrl.append('&');
+      }
+      if (!queries.isEmpty()) {
+        appendedUrl.append('?');
+        for (Iterator<String> iterator = queries.iterator(); iterator.hasNext(); ) {
+          appendedUrl.append(iterator.next());
+          if (iterator.hasNext()) {
+            appendedUrl.append('&');
+          }
         }
       }
     }
     String result = appendedUrl.toString();
-    if (isNotEmpty(restParameters)) {
-      for (Map.Entry<String, String> entry : restParameters.entrySet()) {
-        String encodedValue = encode(entry.getValue());
-        result = result.replace('{' + entry.getKey() + '}', encodedValue);
-      }
+    for (Map.Entry<String, Object> entry : restParameters.entrySet()) {
+      String encodedValue = encode(String.valueOf(entry.getValue()));
+      result = result.replace('{' + entry.getKey() + '}', encodedValue);
     }
     log.info("request to: {}", result);
     return result;
-  }
-
-  private static String encode(String s) throws UnsupportedEncodingException {
-    return URLEncoder.encode(s, "UTF-8");
-  }
-
-  private static HttpGet createRequest(String url, String apiKey) {
-    HttpGet httpGet = new HttpGet(url);
-    httpGet.addHeader("Authorization", "Bearer " + apiKey);
-    return httpGet;
   }
 
 }

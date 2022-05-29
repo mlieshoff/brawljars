@@ -16,6 +16,7 @@
  */
 package brawljars.common;
 
+
 public interface IResponse {
 
   String getMessage();

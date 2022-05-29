@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
+import static wiremock.org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -68,24 +69,8 @@ public abstract class IntegrationTestBase {
     wireMockServer.start();
   }
 
-  @BeforeEach
-  public void beforeEach() {
-    configureFor("localhost", wireMockServer.port());
-    brawlJars = createBrawlJars();
-  }
-
-  @AfterEach
-  public void afterEach() {
-    wireMockServer.resetAll();
-    brawlJars = createBrawlJars();
-  }
-
   private static BrawlJars createBrawlJars() {
     return new BrawlJars("http://localhost:" + wireMockServer.port(), "myApiKey", new StandardConnector());
-  }
-
-  protected String getExpected() {
-    return expected.get();
   }
 
   protected static String json(Object o) {
@@ -103,8 +88,24 @@ public abstract class IntegrationTestBase {
     return s;
   }
 
-  protected void prepare(String url, String filename, Request request) throws Exception {
-    stubFor(get(urlEqualTo(createUrl(url, request)))
+  @BeforeEach
+  public void beforeEach() {
+    configureFor("localhost", wireMockServer.port());
+    brawlJars = createBrawlJars();
+  }
+
+  @AfterEach
+  public void afterEach() {
+    wireMockServer.resetAll();
+    brawlJars = createBrawlJars();
+  }
+
+  protected String getExpected() {
+    return expected.get();
+  }
+
+  protected void prepare(String url, String queryPart, String filename, Request request) throws Exception {
+    stubFor(get(urlEqualTo(createUrl(url, queryPart, request)))
         .withHeader(HttpHeaders.AUTHORIZATION, equalTo("Bearer myApiKey"))
         .willReturn(
             aResponse()
@@ -114,11 +115,17 @@ public abstract class IntegrationTestBase {
     );
   }
 
-  private String createUrl(String url, Request request) {
+  private String createUrl(String url, String queryPart, Request request) {
+    String createdUrl = url;
     if (request instanceof PaginationRequest) {
-      return url + "?limit=100&after=aaa&before=zzz";
+      createdUrl = url + "?limit=100&after=aaa&before=zzz";
+      if (isNotBlank(queryPart)) {
+        return createdUrl + '&' + queryPart;
+      }
+    } else if (isNotBlank(queryPart)) {
+      createdUrl += '?' + queryPart;
     }
-    return url;
+    return createdUrl;
   }
 
   protected void run(IResponse expected, ResultTestRunner<? extends IResponse> resultTestRunner) throws Exception {
@@ -130,8 +137,8 @@ public abstract class IntegrationTestBase {
     assertNotEquals(EMPTY, actual.toString());
   }
 
-  protected void prepareWithErrorAndRun(String url, Request request, TestRunner testRunner) {
-    prepareWithError(url, request);
+  protected void prepareWithErrorAndRun(String url, String queryPart, Request request, TestRunner testRunner) {
+    prepareWithError(url, queryPart, request);
     try {
       testRunner.execute();
       fail();
@@ -140,8 +147,8 @@ public abstract class IntegrationTestBase {
     }
   }
 
-  private void prepareWithError(String url, Request request) {
-    stubFor(get(urlEqualTo(createUrl(url, request)))
+  private void prepareWithError(String url, String queryPart, Request request) {
+    stubFor(get(urlEqualTo(createUrl(url, queryPart, request)))
         .withHeader(HttpHeaders.AUTHORIZATION, equalTo("Bearer myApiKey"))
         .willReturn(
             aResponse()
@@ -149,6 +156,10 @@ public abstract class IntegrationTestBase {
                 .withStatus(HttpStatus.SC_BAD_REQUEST)
         )
     );
+  }
+
+  protected BrawlJars getBrawlJars() {
+    return brawlJars;
   }
 
   @FunctionalInterface
@@ -159,10 +170,6 @@ public abstract class IntegrationTestBase {
   @FunctionalInterface
   public interface ResultTestRunner<T extends IResponse> {
     T execute() throws Exception;
-  }
-
-  protected BrawlJars getBrawlJars() {
-    return brawlJars;
   }
 
 }
