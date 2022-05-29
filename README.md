@@ -1,6 +1,6 @@
 [![](https://img.shields.io/badge/java-packagecloud.io-844fec.svg)](https://packagecloud.io/)
 
-# brawljars 2.0.0
+# brawljars 2.0.1
 A Java Wrapper For Official Supercell Brawl Stars Api
 
 ## Why we don't use the Swagger scheme?
@@ -12,6 +12,10 @@ That's simple why :) If you think the same way (it may differ from case to case 
 ## Why we moved to the amazing services of packagecloud?
 
 We moved to packagecloud.io because the bintray closed their nice hosting... And packagecloud.io is a really nice place to be :)
+
+## Join us on Discord
+
+https://discord.gg/WNb5c8hn
 
 ## Simplest Usage
 
@@ -257,6 +261,22 @@ All requests are returning *java.concurrent.Future*. The execution will be async
             </snapshots>
         </repository>
     </repositories>
+```
+
+## Add dependency
+
+to Gradle:
+```groovy
+    implementation group: 'brawljars', name: 'brawljars', version: '2.0.1'
+```
+
+to Maven:
+```xml
+    <dependency>
+        <groupId>brawljars</groupId>
+        <artifactId>brawljars</artifactId>
+        <version>2.0.1</version>
+    </dependency>
 ```
 
 ## Continuous Integration

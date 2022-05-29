@@ -59,9 +59,13 @@ class BrawlJarsTest {
   void listApis_whenCalled_shouldReturnListOfApiInterfaceNames() {
     Set<String>
         expected =
-        new HashSet<>(Arrays.asList("brawljars.api.intern.players.PlayerApi", "brawljars.api.intern.club.ClubApi",
-            "brawljars.api.intern.brawlers.BrawlerApi", "brawljars.api.intern.event.EventApi",
-            "brawljars.api.intern.rankings.RankingApi"));
+        new HashSet<>(Arrays.asList(
+            "brawljars.api.intern.players.PlayerApi",
+            "brawljars.api.intern.clubs.ClubApi",
+            "brawljars.api.intern.brawlers.BrawlerApi",
+            "brawljars.api.intern.events.EventApi",
+            "brawljars.api.intern.rankings.RankingApi")
+        );
 
     List<String> actual = unitUnderTest.listApis();
 

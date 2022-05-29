@@ -38,8 +38,8 @@ public class PaginationRequest extends Request {
     this.before = before;
   }
 
-  public Map<String, String> getQueryParameters() {
-    Map<String, String> map = super.getQueryParameters();
+  public Map<String, Object> getQueryParameters() {
+    Map<String, Object> map = super.getQueryParameters();
     if (limit > 0) {
       map.put(QUERY_PARAM_LIMIT, String.valueOf(limit));
     }

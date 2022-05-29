@@ -30,11 +30,11 @@ public class Request {
     this.storeRawResponse = storeRawResponse;
   }
 
-  public Map<String, String> getQueryParameters() {
+  public Map<String, Object> getQueryParameters() {
     return new LinkedHashMap<>();
   }
 
-  public Map<String, String> getRestParameters() {
+  public Map<String, Object> getRestParameters() {
     return new HashMap<>();
   }
 
