@@ -119,9 +119,13 @@ public class EndToEnd {
         battleLogResponse =
         playerApi.findBattleLog(BattleLogRequest.builder("#28UP80RRY").storeRawResponse(true).build()).get();
     String actual = GSON.toJson(battleLogResponse);
-    String expected = battleLogResponse.getRawResponse().getRaw().replace(",\"map\":null", "");
+    String expected = deleteNullValue(battleLogResponse.getRawResponse().getRaw(), "map");
 
     assertDiff(expected, actual);
+  }
+
+  private String deleteNullValue(String s, String key) {
+    return s.replace(",\"" + key + "\":null", "");
   }
 
   @Test
@@ -230,7 +234,7 @@ public class EndToEnd {
         eventRotationResponse =
         eventApi.findEventRotation(EventRotationRequest.builder().storeRawResponse(true).build()).get();
     String actual = GSON.toJson(eventRotationResponse);
-    String expected = eventRotationResponse.getRawResponse().getRaw();
+    String expected = deleteNullValue(eventRotationResponse.getRawResponse().getRaw(), "map");
 
     assertDiff(expected, actual);
   }
