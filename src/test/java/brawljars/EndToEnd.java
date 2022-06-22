@@ -64,7 +64,11 @@ public class EndToEnd {
 
   private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
-  private BrawlJars brawlJars;
+  private static final long SEASON_ID = 81L;
+  private static final long BRAWLER_ID = 16000054L;
+
+  private static final String PLAYER_TAG = "#28UP80RRY";
+  private static final String CLUB_TAG = "#JUURPCV9";
 
   private BrawlerApi brawlerApi;
 
@@ -78,7 +82,8 @@ public class EndToEnd {
 
   @BeforeEach
   void setUp() {
-    brawlJars =
+    BrawlJars
+        brawlJars =
         new BrawlJars("https://bsproxy.royaleapi.dev/v1", System.getProperty("apiKey", System.getenv("API_KEY")),
             new StandardConnector());
     brawlerApi = brawlJars.getApi(BrawlerApi.class);
@@ -88,7 +93,7 @@ public class EndToEnd {
     eventApi = brawlJars.getApi(EventApi.class);
   }
 
-  private void assertDiff(String expected, String actual) {
+  private static void assertDiff(String expected, String actual) {
     JsonValue source = Json.createReader(new StringReader(actual)).readValue();
     JsonValue target = Json.createReader(new StringReader(expected)).readValue();
     JsonPatch diff;
@@ -98,7 +103,7 @@ public class EndToEnd {
       diff = Json.createDiff(source.asJsonArray(), target.asJsonArray());
     }
     StringBuilder diffOutput = new StringBuilder();
-    diff.toJsonArray().forEach(entry -> diffOutput.append(entry + "\n"));
+    diff.toJsonArray().forEach(entry -> diffOutput.append(entry).append(System.getProperty("line.separator")));
     assertEquals(EMPTY, diffOutput.toString());
   }
 
@@ -106,7 +111,7 @@ public class EndToEnd {
   void player_findById() throws Exception {
     PlayerResponse
         playerResponse =
-        playerApi.findById(PlayerRequest.builder("#28UP80RRY").storeRawResponse(true).build()).get();
+        playerApi.findById(PlayerRequest.builder(PLAYER_TAG).storeRawResponse(true).build()).get();
     String actual = GSON.toJson(playerResponse);
     String expected = playerResponse.getRawResponse().getRaw();
 
@@ -117,16 +122,20 @@ public class EndToEnd {
   void player_findBattleLog() throws Exception {
     BattleLogResponse
         battleLogResponse =
-        playerApi.findBattleLog(BattleLogRequest.builder("#28UP80RRY").storeRawResponse(true).build()).get();
+        playerApi.findBattleLog(BattleLogRequest.builder(PLAYER_TAG).storeRawResponse(true).build()).get();
     String actual = GSON.toJson(battleLogResponse);
-    String expected = battleLogResponse.getRawResponse().getRaw().replace(",\"map\":null", "");
+    String expected = deleteNullValue(battleLogResponse.getRawResponse().getRaw(), "map");
 
     assertDiff(expected, actual);
   }
 
+  private static String deleteNullValue(String s, String key) {
+    return s.replace(",\"" + key + "\":null", "");
+  }
+
   @Test
   void club_findClub() throws Exception {
-    ClubResponse clubResponse = clubApi.findClub(ClubRequest.builder("#JUURPCV9").storeRawResponse(true).build()).get();
+    ClubResponse clubResponse = clubApi.findClub(ClubRequest.builder(CLUB_TAG).storeRawResponse(true).build()).get();
     String actual = GSON.toJson(clubResponse);
     String expected = clubResponse.getRawResponse().getRaw();
 
@@ -137,7 +146,7 @@ public class EndToEnd {
   void club_findClubMembers() throws Exception {
     ClubMembersResponse
         clubMembersResponse =
-        clubApi.findClubMembers(ClubMembersRequest.builder("#JUURPCV9").storeRawResponse(true).build()).get();
+        clubApi.findClubMembers(ClubMembersRequest.builder(CLUB_TAG).storeRawResponse(true).build()).get();
     String actual = GSON.toJson(clubMembersResponse);
     String expected = clubMembersResponse.getRawResponse().getRaw();
 
@@ -148,7 +157,8 @@ public class EndToEnd {
   void rankings_findPowerplayRankings() throws Exception {
     PowerplayRankingsResponse
         powerplayRankingsResponse =
-        rankingApi.findPowerplayRankings(PowerplayRankingsRequest.builder("DE", 81L).storeRawResponse(true).build())
+        rankingApi.findPowerplayRankings(
+                PowerplayRankingsRequest.builder("DE", SEASON_ID).storeRawResponse(true).build())
             .get();
     String actual = GSON.toJson(powerplayRankingsResponse);
     String expected = powerplayRankingsResponse.getRawResponse().getRaw();
@@ -183,7 +193,7 @@ public class EndToEnd {
   void rankings_findBrawlerRankings() throws Exception {
     BrawlerRankingsResponse
         brawlerRankingsResponse =
-        rankingApi.findBrawlerRankings(BrawlerRankingsRequest.builder("DE", 16000054L).storeRawResponse(true).build())
+        rankingApi.findBrawlerRankings(BrawlerRankingsRequest.builder("DE", BRAWLER_ID).storeRawResponse(true).build())
             .get();
     String actual = GSON.toJson(brawlerRankingsResponse);
     String expected = brawlerRankingsResponse.getRawResponse().getRaw();
@@ -217,7 +227,7 @@ public class EndToEnd {
   void brawlers_findById() throws Exception {
     BrawlerResponse
         brawlerResponse =
-        brawlerApi.findById(BrawlerRequest.builder(16000000L).storeRawResponse(true).build()).get();
+        brawlerApi.findById(BrawlerRequest.builder(BRAWLER_ID).storeRawResponse(true).build()).get();
     String actual = GSON.toJson(brawlerResponse);
     String expected = brawlerResponse.getRawResponse().getRaw();
 
@@ -230,7 +240,7 @@ public class EndToEnd {
         eventRotationResponse =
         eventApi.findEventRotation(EventRotationRequest.builder().storeRawResponse(true).build()).get();
     String actual = GSON.toJson(eventRotationResponse);
-    String expected = eventRotationResponse.getRawResponse().getRaw();
+    String expected = deleteNullValue(eventRotationResponse.getRawResponse().getRaw(), "map");
 
     assertDiff(expected, actual);
   }
