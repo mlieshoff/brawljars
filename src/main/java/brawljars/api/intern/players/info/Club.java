@@ -23,9 +23,9 @@ import lombok.Data;
 @Data
 public class Club {
 
-  @SerializedName("tag")
-  private String tag;
-  @SerializedName("name")
-  private String name;
+    @SerializedName("tag")
+    private String tag;
 
+    @SerializedName("name")
+    private String name;
 }

@@ -23,11 +23,12 @@ import lombok.Data;
 @Data
 public class Gear {
 
-  @SerializedName("id")
-  private long id;
-  @SerializedName("name")
-  private String name;
-  @SerializedName("level")
-  private int level;
+    @SerializedName("id")
+    private long id;
 
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("level")
+    private int level;
 }

@@ -23,11 +23,12 @@ import lombok.Data;
 @Data
 public class BattleLog {
 
-  @SerializedName("battleTime")
-  private String battleTime;
-  @SerializedName("event")
-  private Event event;
-  @SerializedName("battle")
-  private Battle battle;
+    @SerializedName("battleTime")
+    private String battleTime;
 
+    @SerializedName("event")
+    private Event event;
+
+    @SerializedName("battle")
+    private Battle battle;
 }
