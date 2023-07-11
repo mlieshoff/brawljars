@@ -18,90 +18,83 @@ package brawljars.api.intern.clubs;
 
 import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 
+import brawljars.IntegrationTestBase;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import brawljars.IntegrationTestBase;
-
 public class ClubApiImplIntegrationTest extends IntegrationTestBase {
 
-  private ClubApi unitUnderTest;
+    private ClubApi unitUnderTest;
 
-  @BeforeEach
-  void setUp() {
-    unitUnderTest = getBrawlJars().getApi(ClubApi.class);
-  }
+    @BeforeEach
+    void setUp() {
+        unitUnderTest = getBrawlJars().getApi(ClubApi.class);
+    }
 
-  @Test
-  void findClubMembers() throws Exception {
-    String clubTag = "clubTag";
-    brawljars.api.intern.clubs.member.ClubMembersRequest.ClubMembersRequestBuilder
-        builder =
-        brawljars.api.intern.clubs.member.ClubMembersRequest.builder(clubTag);
-    brawljars.api.intern.clubs.member.ClubMembersRequest request = builder
-        .limit(100)
-        .before("zzz")
-        .after("aaa")
-        .storeRawResponse(true)
-        .build();
-    prepare("/clubs/{clubTag}/members".replace("{clubTag}", String.valueOf(clubTag)), EMPTY,
-        "src/test/resources/club-findClubMembers.json", request);
-    brawljars.api.intern.clubs.member.ClubMembersResponse
-        expected =
-        toJson(brawljars.api.intern.clubs.member.ClubMembersResponse.class, getExpected());
+    @Test
+    void findClubMembers() throws Exception {
+        String clubTag = "clubTag";
+        brawljars.api.intern.clubs.member.ClubMembersRequest.ClubMembersRequestBuilder builder =
+                brawljars.api.intern.clubs.member.ClubMembersRequest.builder(clubTag);
+        brawljars.api.intern.clubs.member.ClubMembersRequest request =
+                builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
+        prepare(
+                "/clubs/{clubTag}/members".replace("{clubTag}", String.valueOf(clubTag)),
+                EMPTY,
+                "src/test/resources/club-findClubMembers.json",
+                request);
+        brawljars.api.intern.clubs.member.ClubMembersResponse expected =
+                toJson(brawljars.api.intern.clubs.member.ClubMembersResponse.class, getExpected());
 
-    run(expected, () -> unitUnderTest.findClubMembers(request).get());
-  }
+        run(expected, () -> unitUnderTest.findClubMembers(request).get());
+    }
 
-  @Test
-  void findClubMembers_whenWithException() {
-    String clubTag = "clubTag";
-    brawljars.api.intern.clubs.member.ClubMembersRequest.ClubMembersRequestBuilder
-        builder =
-        brawljars.api.intern.clubs.member.ClubMembersRequest.builder(clubTag);
-    brawljars.api.intern.clubs.member.ClubMembersRequest request = builder
-        .limit(100)
-        .before("zzz")
-        .after("aaa")
-        .storeRawResponse(true)
-        .build();
+    @Test
+    void findClubMembers_whenWithException() {
+        String clubTag = "clubTag";
+        brawljars.api.intern.clubs.member.ClubMembersRequest.ClubMembersRequestBuilder builder =
+                brawljars.api.intern.clubs.member.ClubMembersRequest.builder(clubTag);
+        brawljars.api.intern.clubs.member.ClubMembersRequest request =
+                builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
 
-    prepareWithErrorAndRun("/clubs/{clubTag}/members".replace("{clubTag}", String.valueOf(clubTag)), EMPTY, request,
-        () -> unitUnderTest.findClubMembers(request).get());
-  }
+        prepareWithErrorAndRun(
+                "/clubs/{clubTag}/members".replace("{clubTag}", String.valueOf(clubTag)),
+                EMPTY,
+                request,
+                () -> unitUnderTest.findClubMembers(request).get());
+    }
 
-  @Test
-  void findClub() throws Exception {
-    String clubTag = "clubTag";
-    brawljars.api.intern.clubs.info.ClubRequest.ClubRequestBuilder
-        builder =
-        brawljars.api.intern.clubs.info.ClubRequest.builder(clubTag);
-    brawljars.api.intern.clubs.info.ClubRequest request = builder
+    @Test
+    void findClub() throws Exception {
+        String clubTag = "clubTag";
+        brawljars.api.intern.clubs.info.ClubRequest.ClubRequestBuilder builder =
+                brawljars.api.intern.clubs.info.ClubRequest.builder(clubTag);
+        brawljars.api.intern.clubs.info.ClubRequest request =
+                builder.storeRawResponse(true).build();
+        prepare(
+                "/clubs/{clubTag}".replace("{clubTag}", String.valueOf(clubTag)),
+                EMPTY,
+                "src/test/resources/club-findClub.json",
+                request);
+        brawljars.api.intern.clubs.info.ClubResponse expected =
+                toJson(brawljars.api.intern.clubs.info.ClubResponse.class, getExpected());
 
-        .storeRawResponse(true)
-        .build();
-    prepare("/clubs/{clubTag}".replace("{clubTag}", String.valueOf(clubTag)), EMPTY,
-        "src/test/resources/club-findClub.json", request);
-    brawljars.api.intern.clubs.info.ClubResponse
-        expected =
-        toJson(brawljars.api.intern.clubs.info.ClubResponse.class, getExpected());
+        run(expected, () -> unitUnderTest.findClub(request).get());
+    }
 
-    run(expected, () -> unitUnderTest.findClub(request).get());
-  }
+    @Test
+    void findClub_whenWithException() {
+        String clubTag = "clubTag";
+        brawljars.api.intern.clubs.info.ClubRequest.ClubRequestBuilder builder =
+                brawljars.api.intern.clubs.info.ClubRequest.builder(clubTag);
+        brawljars.api.intern.clubs.info.ClubRequest request =
+                builder.storeRawResponse(true).build();
 
-  @Test
-  void findClub_whenWithException() {
-    String clubTag = "clubTag";
-    brawljars.api.intern.clubs.info.ClubRequest.ClubRequestBuilder
-        builder =
-        brawljars.api.intern.clubs.info.ClubRequest.builder(clubTag);
-    brawljars.api.intern.clubs.info.ClubRequest request = builder
-
-        .storeRawResponse(true)
-        .build();
-
-    prepareWithErrorAndRun("/clubs/{clubTag}".replace("{clubTag}", String.valueOf(clubTag)), EMPTY, request,
-        () -> unitUnderTest.findClub(request).get());
-  }
-
+        prepareWithErrorAndRun(
+                "/clubs/{clubTag}".replace("{clubTag}", String.valueOf(clubTag)),
+                EMPTY,
+                request,
+                () -> unitUnderTest.findClub(request).get());
+    }
 }

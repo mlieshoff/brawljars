@@ -18,6 +18,4 @@ package brawljars.api.intern.clubs.member;
 
 import brawljars.common.PaginationResponse;
 
-public class ClubMembersResponse extends PaginationResponse<Member> {
-
-}
+public class ClubMembersResponse extends PaginationResponse<Member> {}

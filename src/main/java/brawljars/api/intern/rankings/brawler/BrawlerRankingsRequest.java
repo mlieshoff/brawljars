@@ -16,39 +16,45 @@
  */
 package brawljars.api.intern.rankings.brawler;
 
-import java.util.Map;
 import brawljars.common.PaginationRequest;
+
 import lombok.Builder;
+
+import java.util.Map;
 
 public class BrawlerRankingsRequest extends PaginationRequest {
 
-  private final String countryCode;
-  private final long brawlerId;
+    private final String countryCode;
+    private final long brawlerId;
 
-  @Builder
-  private BrawlerRankingsRequest(int limit, String after, String before, boolean storeRawResponse, String countryCode,
-                                 long brawlerId) {
-    super(limit, after, before, storeRawResponse);
-    this.countryCode = countryCode;
-    this.brawlerId = brawlerId;
-  }
+    @Builder
+    private BrawlerRankingsRequest(
+            int limit,
+            String after,
+            String before,
+            boolean storeRawResponse,
+            String countryCode,
+            long brawlerId) {
+        super(limit, after, before, storeRawResponse);
+        this.countryCode = countryCode;
+        this.brawlerId = brawlerId;
+    }
 
-  public static BrawlerRankingsRequestBuilder builder(String countryCode, long brawlerId) {
-    return new BrawlerRankingsRequestBuilder().countryCode(countryCode).brawlerId(brawlerId);
-  }
+    public static BrawlerRankingsRequestBuilder builder(String countryCode, long brawlerId) {
+        return new BrawlerRankingsRequestBuilder().countryCode(countryCode).brawlerId(brawlerId);
+    }
 
-  @Override
-  public Map<String, Object> getRestParameters() {
-    Map<String, Object> map = super.getRestParameters();
-    map.put("countryCode", countryCode);
-    map.put("brawlerId", brawlerId);
-    return map;
-  }
+    @Override
+    public Map<String, Object> getRestParameters() {
+        Map<String, Object> map = super.getRestParameters();
+        map.put("countryCode", countryCode);
+        map.put("brawlerId", brawlerId);
+        return map;
+    }
 
-  @Override
-  public Map<String, Object> getQueryParameters() {
-    Map<String, Object> map = super.getQueryParameters();
-    return map;
-  }
-
+    @Override
+    public Map<String, Object> getQueryParameters() {
+        Map<String, Object> map = super.getQueryParameters();
+        return map;
+    }
 }

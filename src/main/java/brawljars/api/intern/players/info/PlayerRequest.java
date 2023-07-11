@@ -16,37 +16,36 @@
  */
 package brawljars.api.intern.players.info;
 
-import java.util.Map;
 import brawljars.common.Request;
+
 import lombok.Builder;
+
+import java.util.Map;
 
 public class PlayerRequest extends Request {
 
-  private final String playerTag;
+    private final String playerTag;
 
-  @Builder
-  private PlayerRequest(boolean storeRawResponse, String playerTag) {
-    super(storeRawResponse);
-    this.playerTag = playerTag;
-  }
+    @Builder
+    private PlayerRequest(boolean storeRawResponse, String playerTag) {
+        super(storeRawResponse);
+        this.playerTag = playerTag;
+    }
 
-  public static PlayerRequestBuilder builder(String playerTag) {
-    return new PlayerRequestBuilder()
-        .playerTag(playerTag)
-        ;
-  }
+    public static PlayerRequestBuilder builder(String playerTag) {
+        return new PlayerRequestBuilder().playerTag(playerTag);
+    }
 
-  @Override
-  public Map<String, Object> getRestParameters() {
-    Map<String, Object> map = super.getRestParameters();
-    map.put("playerTag", playerTag);
-    return map;
-  }
+    @Override
+    public Map<String, Object> getRestParameters() {
+        Map<String, Object> map = super.getRestParameters();
+        map.put("playerTag", playerTag);
+        return map;
+    }
 
-  @Override
-  public Map<String, Object> getQueryParameters() {
-    Map<String, Object> map = super.getQueryParameters();
-    return map;
-  }
-
+    @Override
+    public Map<String, Object> getQueryParameters() {
+        Map<String, Object> map = super.getQueryParameters();
+        return map;
+    }
 }

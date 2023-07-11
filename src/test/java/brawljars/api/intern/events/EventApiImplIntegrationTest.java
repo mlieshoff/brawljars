@@ -18,48 +18,48 @@ package brawljars.api.intern.events;
 
 import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 
+import brawljars.IntegrationTestBase;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import brawljars.IntegrationTestBase;
-
 public class EventApiImplIntegrationTest extends IntegrationTestBase {
 
-  private EventApi unitUnderTest;
+    private EventApi unitUnderTest;
 
-  @BeforeEach
-  void setUp() {
-    unitUnderTest = getBrawlJars().getApi(EventApi.class);
-  }
+    @BeforeEach
+    void setUp() {
+        unitUnderTest = getBrawlJars().getApi(EventApi.class);
+    }
 
-  @Test
-  void findEventRotation() throws Exception {
-    brawljars.api.intern.events.EventRotationRequest.EventRotationRequestBuilder
-        builder =
-        brawljars.api.intern.events.EventRotationRequest.builder();
-    brawljars.api.intern.events.EventRotationRequest request = builder
+    @Test
+    void findEventRotation() throws Exception {
+        brawljars.api.intern.events.EventRotationRequest.EventRotationRequestBuilder builder =
+                brawljars.api.intern.events.EventRotationRequest.builder();
+        brawljars.api.intern.events.EventRotationRequest request =
+                builder.storeRawResponse(true).build();
+        prepare(
+                "/events/rotation",
+                EMPTY,
+                "src/test/resources/event-findEventRotation.json",
+                request);
+        brawljars.api.intern.events.EventRotationResponse expected =
+                toJson(brawljars.api.intern.events.EventRotationResponse.class, getExpected());
 
-        .storeRawResponse(true)
-        .build();
-    prepare("/events/rotation", EMPTY, "src/test/resources/event-findEventRotation.json", request);
-    brawljars.api.intern.events.EventRotationResponse
-        expected =
-        toJson(brawljars.api.intern.events.EventRotationResponse.class, getExpected());
+        run(expected, () -> unitUnderTest.findEventRotation(request).get());
+    }
 
-    run(expected, () -> unitUnderTest.findEventRotation(request).get());
-  }
+    @Test
+    void findEventRotation_whenWithException() {
+        brawljars.api.intern.events.EventRotationRequest.EventRotationRequestBuilder builder =
+                brawljars.api.intern.events.EventRotationRequest.builder();
+        brawljars.api.intern.events.EventRotationRequest request =
+                builder.storeRawResponse(true).build();
 
-  @Test
-  void findEventRotation_whenWithException() {
-    brawljars.api.intern.events.EventRotationRequest.EventRotationRequestBuilder
-        builder =
-        brawljars.api.intern.events.EventRotationRequest.builder();
-    brawljars.api.intern.events.EventRotationRequest request = builder
-
-        .storeRawResponse(true)
-        .build();
-
-    prepareWithErrorAndRun("/events/rotation", EMPTY, request, () -> unitUnderTest.findEventRotation(request).get());
-  }
-
+        prepareWithErrorAndRun(
+                "/events/rotation",
+                EMPTY,
+                request,
+                () -> unitUnderTest.findEventRotation(request).get());
+    }
 }

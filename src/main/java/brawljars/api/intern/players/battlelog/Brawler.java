@@ -23,13 +23,15 @@ import lombok.Data;
 @Data
 public class Brawler {
 
-  @SerializedName("id")
-  private int id;
-  @SerializedName("name")
-  private String name;
-  @SerializedName("power")
-  private int power;
-  @SerializedName("trophies")
-  private int trophies;
+    @SerializedName("id")
+    private int id;
 
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("power")
+    private int power;
+
+    @SerializedName("trophies")
+    private int trophies;
 }

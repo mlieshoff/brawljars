@@ -16,37 +16,36 @@
  */
 package brawljars.api.intern.brawlers;
 
-import java.util.Map;
 import brawljars.common.Request;
+
 import lombok.Builder;
+
+import java.util.Map;
 
 public class BrawlerRequest extends Request {
 
-  private final long brawlerId;
+    private final long brawlerId;
 
-  @Builder
-  private BrawlerRequest(boolean storeRawResponse, long brawlerId) {
-    super(storeRawResponse);
-    this.brawlerId = brawlerId;
-  }
+    @Builder
+    private BrawlerRequest(boolean storeRawResponse, long brawlerId) {
+        super(storeRawResponse);
+        this.brawlerId = brawlerId;
+    }
 
-  public static BrawlerRequestBuilder builder(long brawlerId) {
-    return new BrawlerRequestBuilder()
-        .brawlerId(brawlerId)
-        ;
-  }
+    public static BrawlerRequestBuilder builder(long brawlerId) {
+        return new BrawlerRequestBuilder().brawlerId(brawlerId);
+    }
 
-  @Override
-  public Map<String, Object> getRestParameters() {
-    Map<String, Object> map = super.getRestParameters();
-    map.put("brawlerId", brawlerId);
-    return map;
-  }
+    @Override
+    public Map<String, Object> getRestParameters() {
+        Map<String, Object> map = super.getRestParameters();
+        map.put("brawlerId", brawlerId);
+        return map;
+    }
 
-  @Override
-  public Map<String, Object> getQueryParameters() {
-    Map<String, Object> map = super.getQueryParameters();
-    return map;
-  }
-
+    @Override
+    public Map<String, Object> getQueryParameters() {
+        Map<String, Object> map = super.getQueryParameters();
+        return map;
+    }
 }
