@@ -16,38 +16,36 @@
  */
 package brawljars.api.intern.clubs.info;
 
-iimport java.util.Map;
+import brawljars.common.Request;
 
-mport brawljars.common.Request;
 import lombok.Builder;
+
+import java.util.Map;
 
 public class ClubRequest extends Request {
 
-  private final String clubTag;
+    private final String clubTag;
 
-  @Builder
-  private ClubRequest(boolean storeRawResponse, String clubTag) {
-    super(storeRawResponse);
-    this.clubTag = clubTag;
-  }
+    @Builder
+    private ClubRequest(boolean storeRawResponse, String clubTag) {
+        super(storeRawResponse);
+        this.clubTag = clubTag;
+    }
 
-  public static ClubRequestBuilder builder(String clubTag) {
-    return new ClubRequestBuilder()
-      .clubTag(clubTag)
-    ;
-  }
+    public static ClubRequestBuilder builder(String clubTag) {
+        return new ClubRequestBuilder().clubTag(clubTag);
+    }
 
-  @Override
-  public Map<String, Object> getRestParameters() {
-    Map<String, Object> map = super.getRestParameters();
-    map.put("clubTag", clubTag);
-    return map;
-  }
+    @Override
+    public Map<String, Object> getRestParameters() {
+        Map<String, Object> map = super.getRestParameters();
+        map.put("clubTag", clubTag);
+        return map;
+    }
 
-  @Override
-  public Map<String, Object> getQueryParameters() {
-    Map<String, Object> map = super.getQueryParameters();
-    return map;
-  }
-
+    @Override
+    public Map<String, Object> getQueryParameters() {
+        Map<String, Object> map = super.getQueryParameters();
+        return map;
+    }
 }

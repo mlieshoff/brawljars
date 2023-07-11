@@ -16,22 +16,18 @@
  */
 package brawljars.api.intern.events;
 
-i
-mport brawljars.common.Request;
+import brawljars.common.Request;
+
 import lombok.Builder;
 
 public class EventRotationRequest extends Request {
 
+    @Builder
+    private EventRotationRequest(boolean storeRawResponse) {
+        super(storeRawResponse);
+    }
 
-  @Builder
-  private EventRotationRequest(boolean storeRawResponse) {
-    super(storeRawResponse);
-  }
-
-  public static EventRotationRequestBuilder builder() {
-    return new EventRotationRequestBuilder()
-    ;
-  }
-
-
+    public static EventRotationRequestBuilder builder() {
+        return new EventRotationRequestBuilder();
+    }
 }
