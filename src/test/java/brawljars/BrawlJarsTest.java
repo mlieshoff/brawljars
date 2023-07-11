@@ -20,6 +20,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import brawljars.api.Api;
+import brawljars.api.ApiContext;
+import brawljars.api.BaseApi;
+import brawljars.api.intern.players.PlayerApi;
+import brawljars.connector.Connector;
+
+import lombok.NonNull;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,78 +40,67 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import brawljars.api.Api;
-import brawljars.api.ApiContext;
-import brawljars.api.BaseApi;
-import brawljars.api.intern.players.PlayerApi;
-import brawljars.connector.Connector;
-import lombok.NonNull;
 
 @ExtendWith(MockitoExtension.class)
 class BrawlJarsTest {
 
-  private static final String URL = "url";
-  private static final String API_KEY = "apiKey";
+    private static final String URL = "url";
+    private static final String API_KEY = "apiKey";
 
-  private BrawlJars unitUnderTest;
+    private BrawlJars unitUnderTest;
 
-  @Mock
-  private Connector connector;
+    @Mock private Connector connector;
 
-  @BeforeEach
-  void setUp() {
-    unitUnderTest = new BrawlJars(URL, API_KEY, connector);
-  }
-
-  @Test
-  void listApis_whenCalled_shouldReturnListOfApiInterfaceNames() {
-    Set<String>
-        expected =
-        new HashSet<>(Arrays.asList(
-            "brawljars.api.intern.players.PlayerApi",
-            "brawljars.api.intern.clubs.ClubApi",
-            "brawljars.api.intern.brawlers.BrawlerApi",
-            "brawljars.api.intern.events.EventApi",
-            "brawljars.api.intern.rankings.RankingApi")
-        );
-
-    List<String> actual = unitUnderTest.listApis();
-
-    assertEquals(expected, new HashSet<>(actual));
-  }
-
-  @Test
-  void getApi_whenWithValidParameter_shouldReturnApiInstance() {
-    PlayerApi actual = unitUnderTest.getApi(PlayerApi.class);
-
-    assertNotNull(actual);
-  }
-
-  @ParameterizedTest
-  @CsvSource(value = "null,", nullValues = "null")
-  void registerApi_whenWithNull_thenThrowException(String actual) {
-
-    assertThrows(IllegalArgumentException.class, () -> unitUnderTest.register(FooApi.class, actual));
-  }
-
-  @Test
-  void registerAndGetApi_whenWithValidParameter_shouldRegister() {
-    unitUnderTest.register(FooApi.class, FooApiImpl.class.getName());
-    FooApi actual = unitUnderTest.getApi(FooApi.class);
-
-    assertNotNull(actual);
-  }
-
-  public interface FooApi extends Api {
-
-  }
-
-  public static class FooApiImpl extends BaseApi implements FooApi {
-
-    public FooApiImpl(@NonNull ApiContext apiContext) {
-      super(apiContext);
+    @BeforeEach
+    void setUp() {
+        unitUnderTest = new BrawlJars(URL, API_KEY, connector);
     }
 
-  }
+    @Test
+    void listApis_whenCalled_shouldReturnListOfApiInterfaceNames() {
+        Set<String> expected =
+                new HashSet<>(
+                        Arrays.asList(
+                                "brawljars.api.intern.players.PlayerApi",
+                                "brawljars.api.intern.clubs.ClubApi",
+                                "brawljars.api.intern.brawlers.BrawlerApi",
+                                "brawljars.api.intern.events.EventApi",
+                                "brawljars.api.intern.rankings.RankingApi"));
 
+        List<String> actual = unitUnderTest.listApis();
+
+        assertEquals(expected, new HashSet<>(actual));
+    }
+
+    @Test
+    void getApi_whenWithValidParameter_shouldReturnApiInstance() {
+        PlayerApi actual = unitUnderTest.getApi(PlayerApi.class);
+
+        assertNotNull(actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = "null,", nullValues = "null")
+    void registerApi_whenWithNull_thenThrowException(String actual) {
+
+        assertThrows(
+                IllegalArgumentException.class, () -> unitUnderTest.register(FooApi.class, actual));
+    }
+
+    @Test
+    void registerAndGetApi_whenWithValidParameter_shouldRegister() {
+        unitUnderTest.register(FooApi.class, FooApiImpl.class.getName());
+        FooApi actual = unitUnderTest.getApi(FooApi.class);
+
+        assertNotNull(actual);
+    }
+
+    public interface FooApi extends Api {}
+
+    public static class FooApiImpl extends BaseApi implements FooApi {
+
+        public FooApiImpl(@NonNull ApiContext apiContext) {
+            super(apiContext);
+        }
+    }
 }

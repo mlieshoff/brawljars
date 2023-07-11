@@ -16,12 +16,11 @@
  */
 package brawljars.api.intern.players.battlelog;
 
-import java.util.ArrayList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Team extends ArrayList<TeamMember> {
-
-}
+public class Team extends ArrayList<TeamMember> {}

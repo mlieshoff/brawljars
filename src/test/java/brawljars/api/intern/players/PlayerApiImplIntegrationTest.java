@@ -18,90 +18,85 @@ package brawljars.api.intern.players;
 
 import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 
+import brawljars.IntegrationTestBase;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import brawljars.IntegrationTestBase;
-
 public class PlayerApiImplIntegrationTest extends IntegrationTestBase {
 
-  private PlayerApi unitUnderTest;
+    private PlayerApi unitUnderTest;
 
-  @BeforeEach
-  void setUp() {
-    unitUnderTest = getBrawlJars().getApi(PlayerApi.class);
-  }
+    @BeforeEach
+    void setUp() {
+        unitUnderTest = getBrawlJars().getApi(PlayerApi.class);
+    }
 
-  @Test
-  void findById() throws Exception {
-    String playerTag = "playerTag";
-    brawljars.api.intern.players.info.PlayerRequest.PlayerRequestBuilder
-        builder =
-        brawljars.api.intern.players.info.PlayerRequest.builder(playerTag);
-    brawljars.api.intern.players.info.PlayerRequest request = builder
+    @Test
+    void findById() throws Exception {
+        String playerTag = "playerTag";
+        brawljars.api.intern.players.info.PlayerRequest.PlayerRequestBuilder builder =
+                brawljars.api.intern.players.info.PlayerRequest.builder(playerTag);
+        brawljars.api.intern.players.info.PlayerRequest request =
+                builder.storeRawResponse(true).build();
+        prepare(
+                "/players/{playerTag}".replace("{playerTag}", playerTag),
+                EMPTY,
+                "src/test/resources/player-findById.json",
+                request);
+        brawljars.api.intern.players.info.PlayerResponse expected =
+                toJson(brawljars.api.intern.players.info.PlayerResponse.class, getExpected());
 
-        .storeRawResponse(true)
-        .build();
-    prepare("/players/{playerTag}".replace("{playerTag}", playerTag), EMPTY, "src/test/resources/player-findById.json",
-        request);
-    brawljars.api.intern.players.info.PlayerResponse
-        expected =
-        toJson(brawljars.api.intern.players.info.PlayerResponse.class, getExpected());
+        run(expected, () -> unitUnderTest.findById(request).get());
+    }
 
-    run(expected, () -> unitUnderTest.findById(request).get());
-  }
+    @Test
+    void findById_whenWithException() {
+        String playerTag = "playerTag";
+        brawljars.api.intern.players.info.PlayerRequest.PlayerRequestBuilder builder =
+                brawljars.api.intern.players.info.PlayerRequest.builder(playerTag);
+        brawljars.api.intern.players.info.PlayerRequest request =
+                builder.storeRawResponse(true).build();
 
-  @Test
-  void findById_whenWithException() {
-    String playerTag = "playerTag";
-    brawljars.api.intern.players.info.PlayerRequest.PlayerRequestBuilder
-        builder =
-        brawljars.api.intern.players.info.PlayerRequest.builder(playerTag);
-    brawljars.api.intern.players.info.PlayerRequest request = builder
+        prepareWithErrorAndRun(
+                "/players/{playerTag}".replace("{playerTag}", playerTag),
+                EMPTY,
+                request,
+                () -> unitUnderTest.findById(request).get());
+    }
 
-        .storeRawResponse(true)
-        .build();
+    @Test
+    void findBattleLog() throws Exception {
+        String playerTag = "playerTag";
+        brawljars.api.intern.players.battlelog.BattleLogRequest.BattleLogRequestBuilder builder =
+                brawljars.api.intern.players.battlelog.BattleLogRequest.builder(playerTag);
+        brawljars.api.intern.players.battlelog.BattleLogRequest request =
+                builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
+        prepare(
+                "/players/{playerTag}/battlelog".replace("{playerTag}", playerTag),
+                EMPTY,
+                "src/test/resources/player-findBattleLog.json",
+                request);
+        brawljars.api.intern.players.battlelog.BattleLogResponse expected =
+                toJson(
+                        brawljars.api.intern.players.battlelog.BattleLogResponse.class,
+                        getExpected());
 
-    prepareWithErrorAndRun("/players/{playerTag}".replace("{playerTag}", playerTag), EMPTY, request,
-        () -> unitUnderTest.findById(request).get());
-  }
+        run(expected, () -> unitUnderTest.findBattleLog(request).get());
+    }
 
-  @Test
-  void findBattleLog() throws Exception {
-    String playerTag = "playerTag";
-    brawljars.api.intern.players.battlelog.BattleLogRequest.BattleLogRequestBuilder
-        builder =
-        brawljars.api.intern.players.battlelog.BattleLogRequest.builder(playerTag);
-    brawljars.api.intern.players.battlelog.BattleLogRequest request = builder
-        .limit(100)
-        .before("zzz")
-        .after("aaa")
-        .storeRawResponse(true)
-        .build();
-    prepare("/players/{playerTag}/battlelog".replace("{playerTag}", playerTag), EMPTY,
-        "src/test/resources/player-findBattleLog.json", request);
-    brawljars.api.intern.players.battlelog.BattleLogResponse
-        expected =
-        toJson(brawljars.api.intern.players.battlelog.BattleLogResponse.class, getExpected());
+    @Test
+    void findBattleLog_whenWithException() {
+        String playerTag = "playerTag";
+        brawljars.api.intern.players.battlelog.BattleLogRequest.BattleLogRequestBuilder builder =
+                brawljars.api.intern.players.battlelog.BattleLogRequest.builder(playerTag);
+        brawljars.api.intern.players.battlelog.BattleLogRequest request =
+                builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
 
-    run(expected, () -> unitUnderTest.findBattleLog(request).get());
-  }
-
-  @Test
-  void findBattleLog_whenWithException() {
-    String playerTag = "playerTag";
-    brawljars.api.intern.players.battlelog.BattleLogRequest.BattleLogRequestBuilder
-        builder =
-        brawljars.api.intern.players.battlelog.BattleLogRequest.builder(playerTag);
-    brawljars.api.intern.players.battlelog.BattleLogRequest request = builder
-        .limit(100)
-        .before("zzz")
-        .after("aaa")
-        .storeRawResponse(true)
-        .build();
-
-    prepareWithErrorAndRun("/players/{playerTag}/battlelog".replace("{playerTag}", playerTag), EMPTY, request,
-        () -> unitUnderTest.findBattleLog(request).get());
-  }
-
+        prepareWithErrorAndRun(
+                "/players/{playerTag}/battlelog".replace("{playerTag}", playerTag),
+                EMPTY,
+                request,
+                () -> unitUnderTest.findBattleLog(request).get());
+    }
 }

@@ -16,12 +16,11 @@
  */
 package brawljars.api.intern.events;
 
-import java.util.ArrayList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class EventRotation extends ArrayList<Rotation> {
-
-}
+public class EventRotation extends ArrayList<Rotation> {}

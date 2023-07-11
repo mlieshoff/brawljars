@@ -16,35 +16,37 @@
  */
 package brawljars.api.intern.rankings.club;
 
-import java.util.Map;
 import brawljars.common.PaginationRequest;
+
 import lombok.Builder;
+
+import java.util.Map;
 
 public class ClubRankingsRequest extends PaginationRequest {
 
-  private final String countryCode;
+    private final String countryCode;
 
-  @Builder
-  private ClubRankingsRequest(int limit, String after, String before, boolean storeRawResponse, String countryCode) {
-    super(limit, after, before, storeRawResponse);
-    this.countryCode = countryCode;
-  }
+    @Builder
+    private ClubRankingsRequest(
+            int limit, String after, String before, boolean storeRawResponse, String countryCode) {
+        super(limit, after, before, storeRawResponse);
+        this.countryCode = countryCode;
+    }
 
-  public static ClubRankingsRequestBuilder builder(String countryCode) {
-    return new ClubRankingsRequestBuilder().countryCode(countryCode);
-  }
+    public static ClubRankingsRequestBuilder builder(String countryCode) {
+        return new ClubRankingsRequestBuilder().countryCode(countryCode);
+    }
 
-  @Override
-  public Map<String, Object> getRestParameters() {
-    Map<String, Object> map = super.getRestParameters();
-    map.put("countryCode", countryCode);
-    return map;
-  }
+    @Override
+    public Map<String, Object> getRestParameters() {
+        Map<String, Object> map = super.getRestParameters();
+        map.put("countryCode", countryCode);
+        return map;
+    }
 
-  @Override
-  public Map<String, Object> getQueryParameters() {
-    Map<String, Object> map = super.getQueryParameters();
-    return map;
-  }
-
+    @Override
+    public Map<String, Object> getQueryParameters() {
+        Map<String, Object> map = super.getQueryParameters();
+        return map;
+    }
 }

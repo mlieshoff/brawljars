@@ -16,11 +16,11 @@
  */
 package brawljars.api.intern.events;
 
-import java.util.concurrent.Future;
 import brawljars.api.Api;
+
+import java.util.concurrent.Future;
 
 public interface EventApi extends Api {
 
-  Future<EventRotationResponse> findEventRotation(EventRotationRequest eventRotationRequest);
-
+    Future<EventRotationResponse> findEventRotation(EventRotationRequest eventRotationRequest);
 }

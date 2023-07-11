@@ -16,10 +16,11 @@
  */
 package brawljars.api.intern.clubs.info;
 
-import com.google.gson.annotations.SerializedName;
-
 import brawljars.common.IResponse;
 import brawljars.common.RawResponse;
+
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,12 +28,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class ClubResponse extends Club implements IResponse {
 
-  @SerializedName("reason")
-  private String reason;
+    @SerializedName("reason")
+    private String reason;
 
-  @SerializedName("message")
-  private String message;
+    @SerializedName("message")
+    private String message;
 
-  private transient RawResponse rawResponse;
-
+    private transient RawResponse rawResponse;
 }

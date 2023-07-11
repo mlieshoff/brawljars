@@ -18,19 +18,22 @@ package brawljars.api.intern.events;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class Event {
 
-  @SerializedName("id")
-  private long id;
-  @SerializedName("mode")
-  private String mode;
-  @SerializedName("map")
-  private String map;
-  @SerializedName("modifiers")
-  private List<String> modifiers;
+    @SerializedName("id")
+    private long id;
 
+    @SerializedName("mode")
+    private String mode;
+
+    @SerializedName("map")
+    private String map;
+
+    @SerializedName("modifiers")
+    private List<String> modifiers;
 }

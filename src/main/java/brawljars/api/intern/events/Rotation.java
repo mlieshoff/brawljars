@@ -23,13 +23,15 @@ import lombok.Data;
 @Data
 public class Rotation {
 
-  @SerializedName("startTime")
-  private String startTime;
-  @SerializedName("endTime")
-  private String endTime;
-  @SerializedName("slotId")
-  private long slotId;
-  @SerializedName("event")
-  private Event event;
+    @SerializedName("startTime")
+    private String startTime;
 
+    @SerializedName("endTime")
+    private String endTime;
+
+    @SerializedName("slotId")
+    private long slotId;
+
+    @SerializedName("event")
+    private Event event;
 }

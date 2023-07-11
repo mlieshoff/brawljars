@@ -16,7 +16,6 @@
  */
 package brawljars.api.intern.clubs;
 
-import java.util.concurrent.Future;
 import brawljars.api.ApiContext;
 import brawljars.api.BaseApi;
 import brawljars.api.intern.clubs.info.ClubRequest;
@@ -24,19 +23,20 @@ import brawljars.api.intern.clubs.info.ClubResponse;
 import brawljars.api.intern.clubs.member.ClubMembersRequest;
 import brawljars.api.intern.clubs.member.ClubMembersResponse;
 
+import java.util.concurrent.Future;
+
 class ClubApiImpl extends BaseApi implements ClubApi {
 
-  ClubApiImpl(ApiContext apiContext) {
-    super(apiContext);
-  }
+    ClubApiImpl(ApiContext apiContext) {
+        super(apiContext);
+    }
 
-  @Override
-  public Future<ClubMembersResponse> findClubMembers(ClubMembersRequest clubMembersRequest) {
-    return get("/clubs/{clubTag}/members", clubMembersRequest, ClubMembersResponse.class);
-  }
+    @Override
+    public Future<ClubMembersResponse> findClubMembers(ClubMembersRequest clubMembersRequest) {
+        return get("/clubs/{clubTag}/members", clubMembersRequest, ClubMembersResponse.class);
+    }
 
-  public Future<ClubResponse> findClub(ClubRequest clubRequest) {
-    return get("/clubs/{clubTag}", clubRequest, ClubResponse.class);
-  }
-
+    public Future<ClubResponse> findClub(ClubRequest clubRequest) {
+        return get("/clubs/{clubTag}", clubRequest, ClubResponse.class);
+    }
 }

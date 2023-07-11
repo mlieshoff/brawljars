@@ -16,19 +16,20 @@
  */
 package brawljars.api.intern.events;
 
-import java.util.concurrent.Future;
 import brawljars.api.ApiContext;
 import brawljars.api.BaseApi;
 
+import java.util.concurrent.Future;
+
 class EventApiImpl extends BaseApi implements EventApi {
 
-  EventApiImpl(ApiContext apiContext) {
-    super(apiContext);
-  }
+    EventApiImpl(ApiContext apiContext) {
+        super(apiContext);
+    }
 
-  @Override
-  public Future<EventRotationResponse> findEventRotation(EventRotationRequest eventRotationRequest) {
-    return get("/events/rotation", eventRotationRequest, EventRotationResponse.class);
-  }
-
+    @Override
+    public Future<EventRotationResponse> findEventRotation(
+            EventRotationRequest eventRotationRequest) {
+        return get("/events/rotation", eventRotationRequest, EventRotationResponse.class);
+    }
 }

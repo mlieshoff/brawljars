@@ -23,11 +23,12 @@ import lombok.Data;
 @Data
 public class PowerplayRankingSeason {
 
-  @SerializedName("id")
-  private String id;
-  @SerializedName("startTime")
-  private String startTime;
-  @SerializedName("endTime")
-  private String endTime;
+    @SerializedName("id")
+    private String id;
 
+    @SerializedName("startTime")
+    private String startTime;
+
+    @SerializedName("endTime")
+    private String endTime;
 }

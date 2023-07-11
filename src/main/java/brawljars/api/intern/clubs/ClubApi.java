@@ -16,17 +16,17 @@
  */
 package brawljars.api.intern.clubs;
 
-import java.util.concurrent.Future;
 import brawljars.api.Api;
 import brawljars.api.intern.clubs.info.ClubRequest;
 import brawljars.api.intern.clubs.info.ClubResponse;
 import brawljars.api.intern.clubs.member.ClubMembersRequest;
 import brawljars.api.intern.clubs.member.ClubMembersResponse;
 
+import java.util.concurrent.Future;
+
 public interface ClubApi extends Api {
 
-  Future<ClubMembersResponse> findClubMembers(ClubMembersRequest clubMembersRequest);
+    Future<ClubMembersResponse> findClubMembers(ClubMembersRequest clubMembersRequest);
 
-  Future<ClubResponse> findClub(ClubRequest clubRequest);
-
+    Future<ClubResponse> findClub(ClubRequest clubRequest);
 }
