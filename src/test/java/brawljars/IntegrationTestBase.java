@@ -44,11 +44,12 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+
+import wiremock.org.apache.http.HttpHeaders;
+import wiremock.org.apache.http.HttpStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -149,9 +150,7 @@ public abstract class IntegrationTestBase {
             testRunner.execute();
             fail();
         } catch (Exception e) {
-            assertEquals(
-                    "brawljars.connector.ConnectorException: HTTP/1.1 400 Bad Request",
-                    e.getMessage());
+            assertEquals("brawljars.connector.ConnectorException: 400", e.getMessage());
         }
     }
 

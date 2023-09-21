@@ -63,9 +63,9 @@ class BaseApiTest {
             RequestContext expected) {
         return actual -> {
             assertNotNull(actual);
-            assertEquals(expected.getApiKey(), actual.getApiKey());
-            assertEquals(expected.getUrl(), actual.getUrl());
-            assertEquals(expected.getResponseClass(), actual.getResponseClass());
+            assertEquals(expected.apiKey(), actual.apiKey());
+            assertEquals(expected.url(), actual.url());
+            assertEquals(expected.responseClass(), actual.responseClass());
             return true;
         };
     }
