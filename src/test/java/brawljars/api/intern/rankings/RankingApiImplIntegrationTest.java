@@ -45,7 +45,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare(
                 "/rankings/{countryCode}/powerplay/seasons/{seasonId}"
-                        .replace("{countryCode}", String.valueOf(countryCode))
+                        .replace("{countryCode}", countryCode)
                         .replace("{seasonId}", String.valueOf(seasonId)),
                 EMPTY,
                 "src/test/resources/ranking-findPowerplayRankings.json",
@@ -72,7 +72,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
 
         prepareWithErrorAndRun(
                 "/rankings/{countryCode}/powerplay/seasons/{seasonId}"
-                        .replace("{countryCode}", String.valueOf(countryCode))
+                        .replace("{countryCode}", countryCode)
                         .replace("{seasonId}", String.valueOf(seasonId)),
                 EMPTY,
                 request,
@@ -90,8 +90,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest request =
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare(
-                "/rankings/{countryCode}/powerplay/seasons"
-                        .replace("{countryCode}", String.valueOf(countryCode)),
+                "/rankings/{countryCode}/powerplay/seasons".replace("{countryCode}", countryCode),
                 EMPTY,
                 "src/test/resources/ranking-findPowerplayRankingsSeasons.json",
                 request);
@@ -116,8 +115,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
 
         prepareWithErrorAndRun(
-                "/rankings/{countryCode}/powerplay/seasons"
-                        .replace("{countryCode}", String.valueOf(countryCode)),
+                "/rankings/{countryCode}/powerplay/seasons".replace("{countryCode}", countryCode),
                 EMPTY,
                 request,
                 () -> unitUnderTest.findPowerplayRankingsSeasons(request).get());
@@ -131,8 +129,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.rankings.club.ClubRankingsRequest request =
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare(
-                "/rankings/{countryCode}/clubs"
-                        .replace("{countryCode}", String.valueOf(countryCode)),
+                "/rankings/{countryCode}/clubs".replace("{countryCode}", countryCode),
                 EMPTY,
                 "src/test/resources/ranking-findClubRankings.json",
                 request);
@@ -153,8 +150,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
 
         prepareWithErrorAndRun(
-                "/rankings/{countryCode}/clubs"
-                        .replace("{countryCode}", String.valueOf(countryCode)),
+                "/rankings/{countryCode}/clubs".replace("{countryCode}", countryCode),
                 EMPTY,
                 request,
                 () -> unitUnderTest.findClubRankings(request).get());
@@ -172,7 +168,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare(
                 "/rankings/{countryCode}/brawlers/{brawlerId}"
-                        .replace("{countryCode}", String.valueOf(countryCode))
+                        .replace("{countryCode}", countryCode)
                         .replace("{brawlerId}", String.valueOf(brawlerId)),
                 EMPTY,
                 "src/test/resources/ranking-findBrawlerRankings.json",
@@ -198,7 +194,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
 
         prepareWithErrorAndRun(
                 "/rankings/{countryCode}/brawlers/{brawlerId}"
-                        .replace("{countryCode}", String.valueOf(countryCode))
+                        .replace("{countryCode}", countryCode)
                         .replace("{brawlerId}", String.valueOf(brawlerId)),
                 EMPTY,
                 request,
@@ -215,8 +211,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.rankings.player.PlayerRankingsRequest request =
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare(
-                "/rankings/{countryCode}/players"
-                        .replace("{countryCode}", String.valueOf(countryCode)),
+                "/rankings/{countryCode}/players".replace("{countryCode}", countryCode),
                 EMPTY,
                 "src/test/resources/ranking-findPlayerRankings.json",
                 request);
@@ -239,8 +234,7 @@ public class RankingApiImplIntegrationTest extends IntegrationTestBase {
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
 
         prepareWithErrorAndRun(
-                "/rankings/{countryCode}/players"
-                        .replace("{countryCode}", String.valueOf(countryCode)),
+                "/rankings/{countryCode}/players".replace("{countryCode}", countryCode),
                 EMPTY,
                 request,
                 () -> unitUnderTest.findPlayerRankings(request).get());

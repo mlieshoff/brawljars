@@ -23,25 +23,18 @@ import brawljars.api.intern.events.EventApi;
 import brawljars.api.intern.players.PlayerApi;
 import brawljars.api.intern.rankings.RankingApi;
 
-import java.util.Collections;
-import java.util.HashMap;
+import lombok.Getter;
+
 import java.util.Map;
 
+@Getter
 public class DefaultApiClasses {
 
     private final Map<Class<? extends Api>, String> apiClassMap =
-            Collections.unmodifiableMap(
-                    new HashMap<Class<? extends Api>, String>() {
-                        {
-                            put(PlayerApi.class, "brawljars.api.intern.players.PlayerApiImpl");
-                            put(ClubApi.class, "brawljars.api.intern.clubs.ClubApiImpl");
-                            put(RankingApi.class, "brawljars.api.intern.rankings.RankingApiImpl");
-                            put(BrawlerApi.class, "brawljars.api.intern.brawlers.BrawlerApiImpl");
-                            put(EventApi.class, "brawljars.api.intern.events.EventApiImpl");
-                        }
-                    });
-
-    public Map<Class<? extends Api>, String> getApiClassMap() {
-        return apiClassMap;
-    }
+            Map.of(
+                    PlayerApi.class, "brawljars.api.intern.players.PlayerApiImpl",
+                    ClubApi.class, "brawljars.api.intern.clubs.ClubApiImpl",
+                    RankingApi.class, "brawljars.api.intern.rankings.RankingApiImpl",
+                    BrawlerApi.class, "brawljars.api.intern.brawlers.BrawlerApiImpl",
+                    EventApi.class, "brawljars.api.intern.events.EventApiImpl");
 }

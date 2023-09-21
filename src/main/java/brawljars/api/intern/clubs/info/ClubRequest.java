@@ -42,10 +42,4 @@ public class ClubRequest extends Request {
         map.put("clubTag", clubTag);
         return map;
     }
-
-    @Override
-    public Map<String, Object> getQueryParameters() {
-        Map<String, Object> map = super.getQueryParameters();
-        return map;
-    }
 }
