@@ -23,9 +23,7 @@ public class FilesystemCachedConnector extends StandardConnector {
 
     public static final Duration CACHE_TIMEOUT = Duration.ofMinutes(5);
 
-    // private static final File DIR = new File(System.getProperty("java.io.tmpdir") +
-    // "/brawljars");
-    private static final File DIR = new File("./brawljars/cache");
+    private static final File DIR = new File(System.getProperty("java.io.tmpdir") + "/brawljars");
 
     static {
         if (!DIR.mkdirs()) {
