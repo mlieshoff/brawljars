@@ -17,6 +17,7 @@
 ### Removed
 
 - Apache HTTP Client dependency
+- Some redundant overridden methods in request objects
 
 ## [3.0.2] - 2023-07-12
 
