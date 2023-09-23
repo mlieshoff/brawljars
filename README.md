@@ -1,6 +1,8 @@
 [![](https://img.shields.io/badge/java-packagecloud.io-844fec.svg)](https://packagecloud.io/)
+[![Qodana](https://github.com/mlieshoff/brawljars/actions/workflows/code_quality.yml/badge.svg)](https://github.com/mlieshoff/brawljars/actions/workflows/code_quality.yml)
+[![Nightlies](https://github.com/mlieshoff/brawljars/actions/workflows/nightlies.yml/badge.svg)](https://github.com/mlieshoff/brawljars/actions/workflows/nightlies.yml)
 
-# brawljars 3.0.3
+# brawljars 3.0.4
 A Java Wrapper For Official Supercell Brawl Stars Api
 
 ## Why we don't use the Swagger scheme?
@@ -267,7 +269,7 @@ All requests are returning *java.concurrent.Future*. The execution will be async
 
 to Gradle:
 ```groovy
-    implementation group: 'brawljars', name: 'brawljars', version: '3.0.3'
+    implementation group: 'brawljars', name: 'brawljars', version: '3.0.4'
 ```
 
 to Maven:
@@ -275,7 +277,7 @@ to Maven:
     <dependency>
         <groupId>brawljars</groupId>
         <artifactId>brawljars</artifactId>
-        <version>3.0.3</version>
+        <version>3.0.4</version>
     </dependency>
 ```
 
