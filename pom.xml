@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>brawljars</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.2</version>
+    <version>3.0.3</version>
     <groupId>brawljars</groupId>
     <url>https://maven.apache.org</url>
     <inceptionYear>2020</inceptionYear>
@@ -32,7 +32,6 @@
     </licenses>
     <properties>
         <version.gson>2.9.0</version.gson>
-        <version.httpclient>4.5.13</version.httpclient>
         <version.io>2.11.0</version.io>
         <version.java>17</version.java>
         <version.json>1.1.4</version.json>
@@ -166,11 +165,6 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${version.gson}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${version.httpclient}</version>
         </dependency>
 
         <!-- others -->

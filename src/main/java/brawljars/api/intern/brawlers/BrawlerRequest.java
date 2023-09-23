@@ -42,10 +42,4 @@ public class BrawlerRequest extends Request {
         map.put("brawlerId", brawlerId);
         return map;
     }
-
-    @Override
-    public Map<String, Object> getQueryParameters() {
-        Map<String, Object> map = super.getQueryParameters();
-        return map;
-    }
 }

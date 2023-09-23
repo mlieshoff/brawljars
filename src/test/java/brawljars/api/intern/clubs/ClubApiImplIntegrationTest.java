@@ -40,7 +40,7 @@ public class ClubApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.clubs.member.ClubMembersRequest request =
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare(
-                "/clubs/{clubTag}/members".replace("{clubTag}", String.valueOf(clubTag)),
+                "/clubs/{clubTag}/members".replace("{clubTag}", clubTag),
                 EMPTY,
                 "src/test/resources/club-findClubMembers.json",
                 request);
@@ -59,7 +59,7 @@ public class ClubApiImplIntegrationTest extends IntegrationTestBase {
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
 
         prepareWithErrorAndRun(
-                "/clubs/{clubTag}/members".replace("{clubTag}", String.valueOf(clubTag)),
+                "/clubs/{clubTag}/members".replace("{clubTag}", clubTag),
                 EMPTY,
                 request,
                 () -> unitUnderTest.findClubMembers(request).get());
@@ -73,7 +73,7 @@ public class ClubApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.clubs.info.ClubRequest request =
                 builder.storeRawResponse(true).build();
         prepare(
-                "/clubs/{clubTag}".replace("{clubTag}", String.valueOf(clubTag)),
+                "/clubs/{clubTag}".replace("{clubTag}", clubTag),
                 EMPTY,
                 "src/test/resources/club-findClub.json",
                 request);
@@ -92,7 +92,7 @@ public class ClubApiImplIntegrationTest extends IntegrationTestBase {
                 builder.storeRawResponse(true).build();
 
         prepareWithErrorAndRun(
-                "/clubs/{clubTag}".replace("{clubTag}", String.valueOf(clubTag)),
+                "/clubs/{clubTag}".replace("{clubTag}", clubTag),
                 EMPTY,
                 request,
                 () -> unitUnderTest.findClub(request).get());

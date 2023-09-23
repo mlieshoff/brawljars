@@ -19,8 +19,6 @@ package brawljars.connector;
 import static brawljars.common.Utils.isNotEmpty;
 import static brawljars.common.Utils.require;
 
-import static org.apache.http.HttpStatus.SC_OK;
-
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import brawljars.common.IResponse;
@@ -31,19 +29,14 @@ import com.google.gson.GsonBuilder;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.http.Header;
-import org.apache.http.HttpMessage;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpHeaders;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -55,85 +48,51 @@ public class StandardConnector implements Connector {
 
     private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
-    private static void logResponse(HttpResponse httpResponse) {
-        if (log.isInfoEnabled()) {
-            for (Header header : httpResponse.getAllHeaders()) {
-                log.info("    response header: {}={}", header.getName(), header.getValue());
-            }
-            StatusLine statusLine = httpResponse.getStatusLine();
-            log.info(
-                    "    status code: {}- {}",
-                    statusLine.getStatusCode(),
-                    statusLine.getReasonPhrase());
-        }
-    }
-
-    private static String encode(String s) throws UnsupportedEncodingException {
-        return URLEncoder.encode(s, "UTF-8");
-    }
-
-    private static HttpGet createRequest(String url, String apiKey) {
-        HttpGet httpGet = new HttpGet(url);
-        httpGet.addHeader("Authorization", "Bearer " + apiKey);
-        return httpGet;
-    }
-
     @Override
     public <T extends IResponse> T get(RequestContext requestContext) throws ConnectorException {
         require("requestContext", requestContext);
         try {
-            String url = requestContext.getUrl();
+            String url = requestContext.url();
             String replacedUrl =
                     appendToUrl(
                             url,
-                            requestContext.getRequest().getQueryParameters(),
-                            requestContext.getRequest().getRestParameters());
-            HttpClient client = HttpClientBuilder.create().build();
-            HttpGet request = createRequest(replacedUrl, requestContext.getApiKey());
-            HttpResponse response = client.execute(request);
-            logResponse(response);
-            StatusLine statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() != SC_OK) {
-                throw new ConnectorException(statusLine.toString());
-            }
-            StringBuilder content = new StringBuilder();
-            try (BufferedReader rd =
-                    new BufferedReader(
-                            new InputStreamReader(response.getEntity().getContent(), UTF_8))) {
-                String line;
-                while ((line = rd.readLine()) != null) {
-                    content.append(line);
+                            requestContext.request().getQueryParameters(),
+                            requestContext.request().getRestParameters());
+            String json = getInitialValue(replacedUrl);
+            boolean makeRequest = json == null || json.isEmpty();
+            HttpResponse<String> response = null;
+            if (makeRequest) {
+                HttpRequest request =
+                        HttpRequest.newBuilder()
+                                .uri(new URI(replacedUrl))
+                                .header("Authorization", "Bearer " + requestContext.apiKey())
+                                .GET()
+                                .build();
+                response =
+                        HttpClient.newBuilder()
+                                .build()
+                                .send(request, HttpResponse.BodyHandlers.ofString());
+                logResponse(response);
+                if (response.statusCode() != 200) {
+                    throw new ConnectorException(String.valueOf(response.statusCode()));
                 }
+                json = response.body();
+                onJsonReceived(replacedUrl, json);
             }
-            String json = content.toString();
+            HttpResponse<String> checkedResponse = checkResponse(json, response);
             log.info("    response content: {}", json);
-            T result = (T) GSON.fromJson(json, requestContext.getResponseClass());
-            if (requestContext.getRequest().isStoreRawResponse()) {
-                setRawResponse(result, json, response);
+            T result = (T) GSON.fromJson(json, requestContext.responseClass());
+            if (requestContext.request().isStoreRawResponse()) {
+                setRawResponse(result, json, checkedResponse);
             }
             return result;
-        } catch (IOException e) {
+        } catch (InterruptedException | URISyntaxException | IOException e) {
             throw new ConnectorException(e);
         }
     }
 
-    private <T extends IResponse> void setRawResponse(T result, String json, HttpMessage response) {
-        RawResponse rawResponse = new RawResponse();
-        rawResponse.setRaw(json);
-        if (isNotEmpty(response.getAllHeaders())) {
-            rawResponse.getResponseHeaders().clear();
-            for (Header header : response.getAllHeaders()) {
-                rawResponse
-                        .getResponseHeaders()
-                        .put(header.getName().toLowerCase(Locale.ROOT), header.getValue());
-            }
-        }
-        result.setRawResponse(rawResponse);
-    }
-
     private String appendToUrl(
-            String url, Map<String, Object> parameters, Map<String, Object> restParameters)
-            throws UnsupportedEncodingException {
+            String url, Map<String, Object> parameters, Map<String, Object> restParameters) {
         StringBuilder appendedUrl = new StringBuilder(url);
         List<String> queries = new ArrayList<>();
         if (isNotEmpty(parameters)) {
@@ -161,5 +120,50 @@ public class StandardConnector implements Connector {
         }
         log.info("request to: {}", result);
         return result;
+    }
+
+    private static String encode(String s) {
+        return URLEncoder.encode(s, UTF_8);
+    }
+
+    protected String getInitialValue(String url) throws IOException {
+        return null;
+    }
+
+    private static void logResponse(HttpResponse<String> httpResponse) {
+        if (log.isInfoEnabled()) {
+            for (Map.Entry<String, List<String>> entry : httpResponse.headers().map().entrySet()) {
+                String name = entry.getKey();
+                List<String> values = entry.getValue();
+                log.info("    response header: {}={}", name, String.join(",", values));
+            }
+            int code = httpResponse.statusCode();
+            log.info("    status code: {}- {}", code, httpResponse.body());
+        }
+    }
+
+    protected void onJsonReceived(String url, String json) throws IOException {
+        // do nothing here
+    }
+
+    protected HttpResponse<String> checkResponse(String json, HttpResponse<String> response) {
+        return response;
+    }
+
+    private <T extends IResponse> void setRawResponse(
+            T result, String json, HttpResponse<String> response) {
+        RawResponse rawResponse = new RawResponse();
+        rawResponse.setRaw(json);
+        HttpHeaders headers = response.headers();
+        if (headers != null) {
+            for (Map.Entry<String, List<String>> entry : headers.map().entrySet()) {
+                String name = entry.getKey();
+                List<String> values = entry.getValue();
+                rawResponse
+                        .getResponseHeaders()
+                        .put(name.toLowerCase(Locale.ROOT), String.join(",", values));
+            }
+        }
+        result.setRawResponse(rawResponse);
     }
 }

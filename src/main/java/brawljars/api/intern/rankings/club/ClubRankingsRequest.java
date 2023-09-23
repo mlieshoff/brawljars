@@ -43,10 +43,4 @@ public class ClubRankingsRequest extends PaginationRequest {
         map.put("countryCode", countryCode);
         return map;
     }
-
-    @Override
-    public Map<String, Object> getQueryParameters() {
-        Map<String, Object> map = super.getQueryParameters();
-        return map;
-    }
 }

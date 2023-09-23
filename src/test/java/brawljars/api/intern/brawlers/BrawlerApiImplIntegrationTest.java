@@ -39,6 +39,7 @@ public class BrawlerApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.brawlers.BrawlersRequest request =
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare("/brawlers", EMPTY, "src/test/resources/brawler-findAll.json", request);
+
         brawljars.api.intern.brawlers.BrawlersResponse expected =
                 toJson(brawljars.api.intern.brawlers.BrawlersResponse.class, getExpected());
 

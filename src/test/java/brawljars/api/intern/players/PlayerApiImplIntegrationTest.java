@@ -40,7 +40,7 @@ public class PlayerApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.players.info.PlayerRequest request =
                 builder.storeRawResponse(true).build();
         prepare(
-                "/players/{playerTag}".replace("{playerTag}", String.valueOf(playerTag)),
+                "/players/{playerTag}".replace("{playerTag}", playerTag),
                 EMPTY,
                 "src/test/resources/player-findById.json",
                 request);
@@ -59,7 +59,7 @@ public class PlayerApiImplIntegrationTest extends IntegrationTestBase {
                 builder.storeRawResponse(true).build();
 
         prepareWithErrorAndRun(
-                "/players/{playerTag}".replace("{playerTag}", String.valueOf(playerTag)),
+                "/players/{playerTag}".replace("{playerTag}", playerTag),
                 EMPTY,
                 request,
                 () -> unitUnderTest.findById(request).get());
@@ -73,7 +73,7 @@ public class PlayerApiImplIntegrationTest extends IntegrationTestBase {
         brawljars.api.intern.players.battlelog.BattleLogRequest request =
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
         prepare(
-                "/players/{playerTag}/battlelog".replace("{playerTag}", String.valueOf(playerTag)),
+                "/players/{playerTag}/battlelog".replace("{playerTag}", playerTag),
                 EMPTY,
                 "src/test/resources/player-findBattleLog.json",
                 request);
@@ -94,7 +94,7 @@ public class PlayerApiImplIntegrationTest extends IntegrationTestBase {
                 builder.limit(100).before("zzz").after("aaa").storeRawResponse(true).build();
 
         prepareWithErrorAndRun(
-                "/players/{playerTag}/battlelog".replace("{playerTag}", String.valueOf(playerTag)),
+                "/players/{playerTag}/battlelog".replace("{playerTag}", playerTag),
                 EMPTY,
                 request,
                 () -> unitUnderTest.findBattleLog(request).get());

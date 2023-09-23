@@ -16,7 +16,6 @@
  */
 package brawljars.connector;
 
-import java.io.IOException;
 
 public class ConnectorException extends RuntimeException {
 
@@ -24,7 +23,7 @@ public class ConnectorException extends RuntimeException {
         super(s);
     }
 
-    public ConnectorException(IOException e) {
+    public ConnectorException(Exception e) {
         super(e);
     }
 }
