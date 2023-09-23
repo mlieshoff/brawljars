@@ -2,15 +2,17 @@
 
 ## [Unreleased]
 
-## [3.0.3] - 2023-09-21
+## [3.0.3] - 2023-09-23
 
 ### Added
 
 - Usage of Java 17 HTTP Client
 
+### Fixed
 
 - Some minor code cleaning regarding Java 17 features
 
+### Changed
 
 - ApiContext to be a record
 
