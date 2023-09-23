@@ -35,6 +35,6 @@
 - Create release job #41
 
 [unreleased]: https://github.com/mlieshoff/brawljars/compare/v3.0.4...HEAD
-[3.0.4]: https://github.com/mlieshoff/brawljars/compare/v3.0.4...v3.0.4
+[3.0.4]: https://github.com/mlieshoff/brawljars/compare/v3.0.3...v3.0.4
 [3.0.3]: https://github.com/mlieshoff/brawljars/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/mlieshoff/brawljars/compare/v3.0.2...v3.0.2
