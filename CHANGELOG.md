@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [3.0.5] - 2023-09-26
+
+### Added
+
+- Release version check on build time
+
 ## [3.0.4] - 2023-09-23
 
 ### Added
@@ -34,7 +40,7 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v3.0.4...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v3.0.5...HEAD
 [3.0.4]: https://github.com/mlieshoff/brawljars/compare/v3.0.3...v3.0.4
 [3.0.3]: https://github.com/mlieshoff/brawljars/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/mlieshoff/brawljars/compare/v3.0.2...v3.0.2
