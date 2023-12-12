@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>brawljars</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.6</version>
+    <version>3.0.7</version>
     <groupId>brawljars</groupId>
     <url>https://maven.apache.org</url>
     <inceptionYear>2020</inceptionYear>
@@ -94,13 +94,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <outputDirectory>${project.basedir}/.qodana/code-coverage/</outputDirectory>
-                            <formats>XML</formats>
-                            <includes>
-                                <include>brawljars/**</include>
-                            </includes>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
