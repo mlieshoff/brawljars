@@ -2,6 +2,25 @@
 
 ## [Unreleased]
 
+## [3.0.8] - 2023-12-18
+
+### Added
+
+- Maven enforcer plugin -> Minimum Maven version is now 3.8.8
+
+### Changed
+
+- Lombok from 1.18.24 to 1.18.30
+- JaCoCo from 0.8.10 to 0.8.11
+- Apache Commons IO from 2.11.0 to 2.15.1
+- JUnit from 5.8.2 to 5.10.1
+- SLF4j from 1.8.0-beta2 to 2.0.9
+- Mockito from 4.5.1 to 5.8.0
+- WireMock from 2.27.2 to 3.0.1
+- GSON from 2.9.0 to 2.10.1
+- Maven Source Plugin from 3.0.1 to 3.3.0
+- Maven Surefire Plugin from 2.22.2 to 3.2.3
+
 ## [3.0.7] - 2023-12-12
 
 ### Removed
@@ -52,7 +71,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v3.0.7...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v3.0.8...HEAD
+[3.0.8]: https://github.com/mlieshoff/brawljars/compare/v3.0.7...v3.0.8
 [3.0.7]: https://github.com/mlieshoff/brawljars/compare/v3.0.6...v3.0.7
 [3.0.6]: https://github.com/mlieshoff/brawljars/compare/v3.0.5...v3.0.6
 [3.0.5]: https://github.com/mlieshoff/brawljars/compare/v3.0.4...v3.0.5

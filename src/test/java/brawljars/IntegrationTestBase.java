@@ -31,6 +31,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 import static wiremock.org.apache.commons.lang3.StringUtils.isNotBlank;
+import static wiremock.org.apache.hc.core5.http.HttpHeaders.AUTHORIZATION;
+import static wiremock.org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
+import static wiremock.org.apache.hc.core5.http.HttpStatus.SC_OK;
 
 import static java.util.Collections.emptyMap;
 
@@ -47,9 +50,6 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-
-import wiremock.org.apache.http.HttpHeaders;
-import wiremock.org.apache.http.HttpStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -115,9 +115,8 @@ public abstract class IntegrationTestBase {
             throws Exception {
         stubFor(
                 get(urlEqualTo(createUrl(url, queryPart, request)))
-                        .withHeader(HttpHeaders.AUTHORIZATION, equalTo("Bearer myApiKey"))
-                        .willReturn(
-                                aResponse().withBody(body(filename)).withStatus(HttpStatus.SC_OK)));
+                        .withHeader(AUTHORIZATION, equalTo("Bearer myApiKey"))
+                        .willReturn(aResponse().withBody(body(filename)).withStatus(SC_OK)));
     }
 
     private String createUrl(String url, String queryPart, Request request) {
@@ -157,11 +156,8 @@ public abstract class IntegrationTestBase {
     private void prepareWithError(String url, String queryPart, Request request) {
         stubFor(
                 get(urlEqualTo(createUrl(url, queryPart, request)))
-                        .withHeader(HttpHeaders.AUTHORIZATION, equalTo("Bearer myApiKey"))
-                        .willReturn(
-                                aResponse()
-                                        .withBody("body")
-                                        .withStatus(HttpStatus.SC_BAD_REQUEST)));
+                        .withHeader(AUTHORIZATION, equalTo("Bearer myApiKey"))
+                        .willReturn(aResponse().withBody("body").withStatus(SC_BAD_REQUEST)));
     }
 
     protected BrawlJars getBrawlJars() {
