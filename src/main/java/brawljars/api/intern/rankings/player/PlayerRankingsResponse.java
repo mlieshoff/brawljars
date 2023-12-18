@@ -16,6 +16,6 @@
  */
 package brawljars.api.intern.rankings.player;
 
-import brawljars.common.PaginationResponse;
+import supercell.api.wrapper.essentials.common.PaginationResponse;
 
 public class PlayerRankingsResponse extends PaginationResponse<PlayerRanking> {}

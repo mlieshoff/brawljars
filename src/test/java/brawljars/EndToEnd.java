@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
 
-import brawljars.api.connector.FilesystemCachedConnector;
 import brawljars.api.intern.brawlers.BrawlerApi;
 import brawljars.api.intern.brawlers.BrawlerRequest;
 import brawljars.api.intern.brawlers.BrawlerResponse;
@@ -57,6 +56,8 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import supercell.api.wrapper.essentials.connector.FilesystemCachedConnector;
+
 import java.io.StringReader;
 
 import javax.json.Json;
@@ -89,7 +90,7 @@ public class EndToEnd {
                 new BrawlJars(
                         "https://bsproxy.royaleapi.dev/v1",
                         System.getProperty("apiKey", System.getenv("API_KEY")),
-                        new FilesystemCachedConnector());
+                        new FilesystemCachedConnector("brawljars"));
         brawlerApi = brawlJars.getApi(BrawlerApi.class);
         rankingApi = brawlJars.getApi(RankingApi.class);
         playerApi = brawlJars.getApi(PlayerApi.class);

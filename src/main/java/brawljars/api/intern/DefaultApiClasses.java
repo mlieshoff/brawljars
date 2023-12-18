@@ -16,7 +16,6 @@
  */
 package brawljars.api.intern;
 
-import brawljars.api.Api;
 import brawljars.api.intern.brawlers.BrawlerApi;
 import brawljars.api.intern.clubs.ClubApi;
 import brawljars.api.intern.events.EventApi;
@@ -24,6 +23,8 @@ import brawljars.api.intern.players.PlayerApi;
 import brawljars.api.intern.rankings.RankingApi;
 
 import lombok.Getter;
+
+import supercell.api.wrapper.essentials.api.Api;
 
 import java.util.Map;
 

@@ -16,12 +16,13 @@
  */
 package brawljars.api.intern.clubs;
 
-import brawljars.api.ApiContext;
-import brawljars.api.BaseApi;
 import brawljars.api.intern.clubs.info.ClubRequest;
 import brawljars.api.intern.clubs.info.ClubResponse;
 import brawljars.api.intern.clubs.member.ClubMembersRequest;
 import brawljars.api.intern.clubs.member.ClubMembersResponse;
+
+import supercell.api.wrapper.essentials.api.ApiContext;
+import supercell.api.wrapper.essentials.api.BaseApi;
 
 import java.util.concurrent.Future;
 

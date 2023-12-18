@@ -16,9 +16,9 @@
  */
 package brawljars.api.intern.brawlers;
 
-import brawljars.common.Request;
-
 import lombok.Builder;
+
+import supercell.api.wrapper.essentials.common.Request;
 
 import java.util.Map;
 

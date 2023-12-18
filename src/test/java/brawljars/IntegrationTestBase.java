@@ -37,11 +37,6 @@ import static wiremock.org.apache.hc.core5.http.HttpStatus.SC_OK;
 
 import static java.util.Collections.emptyMap;
 
-import brawljars.common.IResponse;
-import brawljars.common.PaginationRequest;
-import brawljars.common.Request;
-import brawljars.connector.StandardConnector;
-
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.google.gson.Gson;
@@ -50,6 +45,11 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+
+import supercell.api.wrapper.essentials.common.IResponse;
+import supercell.api.wrapper.essentials.common.PaginationRequest;
+import supercell.api.wrapper.essentials.common.Request;
+import supercell.api.wrapper.essentials.connector.StandardConnector;
 
 import java.io.File;
 import java.io.IOException;
@@ -149,7 +149,9 @@ public abstract class IntegrationTestBase {
             testRunner.execute();
             fail();
         } catch (Exception e) {
-            assertEquals("brawljars.connector.ConnectorException: 400", e.getMessage());
+            assertEquals(
+                    "supercell.api.wrapper.essentials.connector.ConnectorException: 400",
+                    e.getMessage());
         }
     }
 

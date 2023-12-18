@@ -16,9 +16,9 @@
  */
 package brawljars.api.intern.events;
 
-import brawljars.common.Request;
-
 import lombok.Builder;
+
+import supercell.api.wrapper.essentials.common.Request;
 
 public class EventRotationRequest extends Request {
 
