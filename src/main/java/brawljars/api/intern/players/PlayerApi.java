@@ -16,11 +16,12 @@
  */
 package brawljars.api.intern.players;
 
-import brawljars.api.Api;
 import brawljars.api.intern.players.battlelog.BattleLogRequest;
 import brawljars.api.intern.players.battlelog.BattleLogResponse;
 import brawljars.api.intern.players.info.PlayerRequest;
 import brawljars.api.intern.players.info.PlayerResponse;
+
+import supercell.api.wrapper.essentials.api.Api;
 
 import java.util.concurrent.Future;
 

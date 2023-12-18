@@ -16,7 +16,6 @@
  */
 package brawljars.api.intern.rankings;
 
-import brawljars.api.Api;
 import brawljars.api.intern.rankings.brawler.BrawlerRankingsRequest;
 import brawljars.api.intern.rankings.brawler.BrawlerRankingsResponse;
 import brawljars.api.intern.rankings.club.ClubRankingsRequest;
@@ -27,6 +26,8 @@ import brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest;
 import brawljars.api.intern.rankings.powerplay.PowerplayRankingsResponse;
 import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest;
 import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsResponse;
+
+import supercell.api.wrapper.essentials.api.Api;
 
 import java.util.concurrent.Future;
 

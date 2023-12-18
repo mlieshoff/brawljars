@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [4.0.0] - 2023-12-18
+
+### Added
+
+- new dependency supercell-api-wrapper-essentials
+
+### Changed
+
+- classes in package brawljars.api.* moved to supercell.api.wrapper.essentials.api.*
+- classes in package brawljars.connector moved to supercell.api.wrapper.essentials.connector
+- classes in package brawljars.api.connector moved to supercell.api.wrapper.essentials.api.connector
+- classes in package brawljars.build moved to supercell.api.wrapper.essentials.build
+- classes in package brawljars.common moved to supercell.api.wrapper.essentials.common
+
 ## [3.0.8] - 2023-12-18
 
 ### Added
@@ -71,7 +85,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v3.0.8...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/mlieshoff/brawljars/compare/v3.0.8...v4.0.0
 [3.0.8]: https://github.com/mlieshoff/brawljars/compare/v3.0.7...v3.0.8
 [3.0.7]: https://github.com/mlieshoff/brawljars/compare/v3.0.6...v3.0.7
 [3.0.6]: https://github.com/mlieshoff/brawljars/compare/v3.0.5...v3.0.6

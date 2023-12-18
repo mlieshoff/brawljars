@@ -1,7 +1,7 @@
 [![](https://img.shields.io/badge/java-packagecloud.io-844fec.svg)](https://packagecloud.io/)
 [![Nightlies](https://github.com/mlieshoff/brawljars/actions/workflows/nightlies.yml/badge.svg)](https://github.com/mlieshoff/brawljars/actions/workflows/nightlies.yml)
 
-# brawljars 3.0.8
+# brawljars 4.0.0
 A Java Wrapper For Official Supercell Brawl Stars Api
 
 ## Why we don't use the Swagger scheme?
@@ -37,9 +37,39 @@ Proxy endpoint
     https://bsproxy.royaleapi.dev/v1
 ```
 
-Use built-in http connector
+Bind essentials to your project
+```xml
+<repositories>
+    <repository>
+        <id>packagecloud-supercell-api-wrapper-essentials</id>
+        <url>https://packagecloud.io/mlieshoff/supercell-api-wrapper-essentials/maven2</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+```
+
+and use the dependency
+```xml
+<dependency>
+    <groupId>supercell-api-wrapper-essentials</groupId>
+    <artifactId>supercell-api-wrapper-essentials</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
+
+Use built-in standard connector
 ```java
-    Connector connector = new StandardConnector();
+Connector connector = new StandardConnector();
+```
+
+or use the new filesystem cached connector
+```java
+Connector connector = new FilesystemCachedConnector("brawljars")
 ```
 
 or use custom implementation
@@ -268,7 +298,7 @@ All requests are returning *java.concurrent.Future*. The execution will be async
 
 to Gradle:
 ```groovy
-    implementation group: 'brawljars', name: 'brawljars', version: '3.0.8'
+    implementation group: 'brawljars', name: 'brawljars', version: '4.0.0'
 ```
 
 to Maven:
@@ -276,7 +306,7 @@ to Maven:
     <dependency>
         <groupId>brawljars</groupId>
         <artifactId>brawljars</artifactId>
-        <version>3.0.8</version>
+        <version>4.0.0</version>
     </dependency>
 ```
 

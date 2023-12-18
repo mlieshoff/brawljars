@@ -16,8 +16,8 @@
  */
 package brawljars.api.intern.events;
 
-import brawljars.api.ApiContext;
-import brawljars.api.BaseApi;
+import supercell.api.wrapper.essentials.api.ApiContext;
+import supercell.api.wrapper.essentials.api.BaseApi;
 
 import java.util.concurrent.Future;
 

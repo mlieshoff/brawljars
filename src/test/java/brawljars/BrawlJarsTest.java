@@ -20,11 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import brawljars.api.Api;
-import brawljars.api.ApiContext;
-import brawljars.api.BaseApi;
 import brawljars.api.intern.players.PlayerApi;
-import brawljars.connector.Connector;
 
 import lombok.NonNull;
 
@@ -35,6 +31,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import supercell.api.wrapper.essentials.api.Api;
+import supercell.api.wrapper.essentials.api.ApiContext;
+import supercell.api.wrapper.essentials.api.BaseApi;
+import supercell.api.wrapper.essentials.connector.Connector;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -93,6 +94,12 @@ class BrawlJarsTest {
         FooApi actual = unitUnderTest.getApi(FooApi.class);
 
         assertNotNull(actual);
+    }
+
+    @Test
+    void getApi_whenClassNotFound_thenThrowException() {
+
+        assertThrows(IllegalStateException.class, () -> unitUnderTest.getApi(FooApi.class));
     }
 
     public interface FooApi extends Api {}
