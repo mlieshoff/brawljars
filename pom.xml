@@ -135,7 +135,7 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>brawljars.build.ReleaseVersionChecker</mainClass>
+                            <mainClass>supercell.api.wrapper.essentials.build.ReleaseVersionChecker</mainClass>
                             <arguments>
                                 <argument>./VERSION.txt</argument>
                                 <argument>./pom.xml</argument>
