@@ -92,6 +92,7 @@
 - Create release job #41
 
 [unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.1...HEAD
+[4.0.1]: https://github.com/mlieshoff/brawljars/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/mlieshoff/brawljars/compare/v3.0.8...v4.0.0
 [3.0.8]: https://github.com/mlieshoff/brawljars/compare/v3.0.7...v3.0.8
 [3.0.7]: https://github.com/mlieshoff/brawljars/compare/v3.0.6...v3.0.7
