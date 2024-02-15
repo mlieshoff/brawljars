@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [4.0.1] - 2024-05-15
+
+### Fixed
+
+- surefire now uses the build dependencies and no more inner ones.
+
 ## [4.0.0] - 2023-12-18
 
 ### Added
@@ -85,7 +91,7 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.0...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.1...HEAD
 [4.0.0]: https://github.com/mlieshoff/brawljars/compare/v3.0.8...v4.0.0
 [3.0.8]: https://github.com/mlieshoff/brawljars/compare/v3.0.7...v3.0.8
 [3.0.7]: https://github.com/mlieshoff/brawljars/compare/v3.0.6...v3.0.7
