@@ -48,7 +48,7 @@
         <version.maven.packagecloud>0.0.4</version.maven.packagecloud>
         <version.mockito>5.8.0</version.mockito>
         <version.wiremock>3.0.1</version.wiremock>
-        <version.slf4j>2.0.9</version.slf4j>
+        <version.slf4j>2.0.10</version.slf4j>
     </properties>
     <build>
         <plugins>
