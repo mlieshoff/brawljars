@@ -16,8 +16,6 @@
  */
 package brawljars.api.intern.events;
 
-import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
-
 import brawljars.IntegrationTestBase;
 
 import org.junit.jupiter.api.BeforeEach;

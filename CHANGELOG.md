@@ -2,7 +2,27 @@
 
 ## [Unreleased]
 
-## [4.0.1] - 2024-05-15
+## [4.0.2] - 2024-05-08
+
+### Changed
+
+- test scope: isNotBlank() and EMPTY not depending on wiremock anymore
+- test scope: clean up integration test base & tests
+- Source code is now ready for Java 21 (#67)
+- Binary code is now Java 21 compliant (#67)
+- Apache Commons IO from 2.15.1 to 2.16.1
+- JaCoCo from 0.8.11 to 0.8.12
+- JUnit from 5.10.1 to 5.10.2
+- Lombok from 1.8.30 to 1.8.32
+- Maven Compiler Plugin from 3.11.0 to 3.13.0
+- Maven Exec Plugin from 3.1.1 to 3.2.0
+- Maven Source Plugin from 3.3.0 to 3.3.1
+- Maven Surfire Plugin from 3.2.3 to 3.2.5
+- Mockito from 5.8.0 to 5.11.0
+- SLF4j from 2.0.12 to 2.0.13
+- WireMock from 3.0.1 to 3.5.4
+
+## [4.0.1] - 2024-02-15
 
 ### Fixed
 
@@ -91,7 +111,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.1...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.2...HEAD
+[4.0.2]: https://github.com/mlieshoff/brawljars/compare/v4.0.1...v4.0.2
 [4.0.1]: https://github.com/mlieshoff/brawljars/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/mlieshoff/brawljars/compare/v3.0.8...v4.0.0
 [3.0.8]: https://github.com/mlieshoff/brawljars/compare/v3.0.7...v3.0.8
