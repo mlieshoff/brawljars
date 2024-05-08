@@ -8,8 +8,8 @@
 
 - test scope: isNotBlank() and EMPTY not depending on wiremock anymore
 - test scope: clean up integration test base & tests
-- Source code is now ready for Java 21 (#173)
-- Binary code is now Java 21 compliant (#173)
+- Source code is now ready for Java 21 (#67)
+- Binary code is now Java 21 compliant (#67)
 - Apache Commons IO from 2.15.1 to 2.16.1
 - JaCoCo from 0.8.11 to 0.8.12
 - JUnit from 5.10.1 to 5.10.2
