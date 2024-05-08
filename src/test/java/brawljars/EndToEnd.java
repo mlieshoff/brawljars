@@ -16,9 +16,11 @@
  */
 package brawljars;
 
+import static brawljars.IntegrationTestBase.EMPTY;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
+import static java.lang.System.lineSeparator;
 
 import brawljars.api.intern.brawlers.BrawlerApi;
 import brawljars.api.intern.brawlers.BrawlerRequest;
@@ -108,12 +110,7 @@ public class EndToEnd {
             diff = Json.createDiff(source.asJsonArray(), target.asJsonArray());
         }
         StringBuilder diffOutput = new StringBuilder();
-        diff.toJsonArray()
-                .forEach(
-                        entry ->
-                                diffOutput
-                                        .append(entry)
-                                        .append(System.getProperty("line.separator")));
+        diff.toJsonArray().forEach(entry -> diffOutput.append(entry).append(lineSeparator()));
         assertEquals(EMPTY, diffOutput.toString());
     }
 

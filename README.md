@@ -1,7 +1,7 @@
 [![](https://img.shields.io/badge/java-packagecloud.io-844fec.svg)](https://packagecloud.io/)
 [![Nightlies](https://github.com/mlieshoff/brawljars/actions/workflows/nightlies.yml/badge.svg)](https://github.com/mlieshoff/brawljars/actions/workflows/nightlies.yml)
 
-# brawljars 4.0.1
+# brawljars 4.0.2
 A Java Wrapper For Official Supercell Brawl Stars Api
 
 ## Why we don't use the Swagger scheme?
@@ -298,7 +298,7 @@ All requests are returning *java.concurrent.Future*. The execution will be async
 
 to Gradle:
 ```groovy
-    implementation group: 'brawljars', name: 'brawljars', version: '4.0.1'
+    implementation group: 'brawljars', name: 'brawljars', version: '4.0.2'
 ```
 
 to Maven:
@@ -306,7 +306,7 @@ to Maven:
     <dependency>
         <groupId>brawljars</groupId>
         <artifactId>brawljars</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.2</version>
     </dependency>
 ```
 
@@ -336,6 +336,23 @@ Then initialize an instance of class Api like that:
 
 That's all, enjoy :)
 
+## Library updates
+
+Minor versions
+```
+mvn versions:update-parent versions:use-latest-releases versions:update-properties versions:commit -DallowMajorUpdates=false
+```
+
+Major versions
+```
+mvn versions:update-parent versions:use-latest-releases versions:update-properties versions:commit -DallowMajorUpdates=true
+```
+
+Update plugins
+```
+mvn versions:display-plugin-updates -U
+```
+
 ## Contributing
 
-1. Set up the formatting hook, via copying the files under ./brawljars/hooks to ./brawljars/.git/hooks
+1. Feel free to open Pull Requests with your ideas :)

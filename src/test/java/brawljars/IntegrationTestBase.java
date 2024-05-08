@@ -24,16 +24,15 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
 import static org.apache.commons.io.FileUtils.readLines;
+import static org.apache.hc.core5.http.HttpHeaders.AUTHORIZATION;
+import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import static wiremock.org.apache.commons.lang3.StringUtils.EMPTY;
-import static wiremock.org.apache.commons.lang3.StringUtils.isNotBlank;
-import static wiremock.org.apache.hc.core5.http.HttpHeaders.AUTHORIZATION;
-import static wiremock.org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
-import static wiremock.org.apache.hc.core5.http.HttpStatus.SC_OK;
+import static supercell.api.wrapper.essentials.common.Utils.isNotBlank;
 
 import static java.util.Collections.emptyMap;
 
@@ -61,6 +60,8 @@ public abstract class IntegrationTestBase {
 
     private static final Gson GSON =
             new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+
+    public static final String EMPTY = "";
 
     private static final ThreadLocal<String> expected = new ThreadLocal<>();
 
