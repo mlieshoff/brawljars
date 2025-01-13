@@ -2,6 +2,22 @@
 
 ## [Unreleased]
 
+## [4.0.3] - 2025-01-13
+
+### Changed
+
+- Lombok from 1.18.32 to 1.18.36
+- JUnit from 5.10.2 to 5.11.4
+- Mockito from 5.11.0 to 5.15.2
+- GSON from 2.10.1 to 2.11.0
+- Maven Dependency Plugin from 3.6.1 to 3.8.1
+- Apache Commons IO from 2.16.1 to 2.18.0
+- SLF4j from 2.0.13 to 2.0.14
+- Maven Enforcer Plugin from 3.4.1 to 3.5.0
+- Maven Exec Plugin from 3.2.0 to 3.5.0
+- WireMock from 3.5.4 to 3.10.0
+- Maven Surefire Plugin from 3.2.5 to 3.5.2
+
 ## [4.0.2] - 2024-05-08
 
 ### Changed
@@ -111,7 +127,7 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.2...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.3...HEAD
 [4.0.2]: https://github.com/mlieshoff/brawljars/compare/v4.0.1...v4.0.2
 [4.0.1]: https://github.com/mlieshoff/brawljars/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/mlieshoff/brawljars/compare/v3.0.8...v4.0.0
