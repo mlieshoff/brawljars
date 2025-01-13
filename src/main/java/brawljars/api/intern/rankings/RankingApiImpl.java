@@ -22,10 +22,6 @@ import brawljars.api.intern.rankings.club.ClubRankingsRequest;
 import brawljars.api.intern.rankings.club.ClubRankingsResponse;
 import brawljars.api.intern.rankings.player.PlayerRankingsRequest;
 import brawljars.api.intern.rankings.player.PlayerRankingsResponse;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsResponse;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsResponse;
 
 import supercell.api.wrapper.essentials.api.ApiContext;
 import supercell.api.wrapper.essentials.api.BaseApi;
@@ -39,22 +35,6 @@ class RankingApiImpl extends BaseApi implements RankingApi {
     }
 
     @Override
-    public Future<PowerplayRankingsResponse> findPowerplayRankings(
-            PowerplayRankingsRequest powerplayRankingsRequest) {
-        return get(
-                "/rankings/{countryCode}/powerplay/seasons/{seasonId}",
-                powerplayRankingsRequest,
-                PowerplayRankingsResponse.class);
-    }
-
-    public Future<PowerplayRankingsSeasonsResponse> findPowerplayRankingsSeasons(
-            PowerplayRankingsSeasonsRequest powerplayRankingsSeasonsRequest) {
-        return get(
-                "/rankings/{countryCode}/powerplay/seasons",
-                powerplayRankingsSeasonsRequest,
-                PowerplayRankingsSeasonsResponse.class);
-    }
-
     public Future<ClubRankingsResponse> findClubRankings(ClubRankingsRequest clubRankingsRequest) {
         return get(
                 "/rankings/{countryCode}/clubs", clubRankingsRequest, ClubRankingsResponse.class);

@@ -156,33 +156,6 @@ list all supported apis
     RankingApi api = brawlJars.getApi(RankingApi.class);
 ```
 ```java
-    // findPowerplayRankings
-    PowerplayRankingsResponse response = api.findPowerplayRankings(powerplayRankingsRequest.builder()
-           .countryCode()
-           .seasonId()
-           // pagination
-           .limit()
-           .after()
-           .before()
-           // store raw response
-           .storeRawResponse()
-        .build()
-    ).get();
-```
-```java
-    // findPowerplayRankingsSeasons
-    PowerplayRankingsSeasonsResponse response = api.findPowerplayRankingsSeasons(powerplayRankingsSeasonsRequest.builder()
-           .countryCode()
-           // pagination
-           .limit()
-           .after()
-           .before()
-           // store raw response
-           .storeRawResponse()
-        .build()
-    ).get();
-```
-```java
     // findClubRankings
     ClubRankingsResponse response = api.findClubRankings(clubRankingsRequest.builder()
            .countryCode()
