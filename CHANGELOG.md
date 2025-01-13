@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [4.0.4] - 2025-01-13
+
+### Removed
+
+- PowerPlay API endpoints and related classes
+
 ## [4.0.3] - 2025-01-13
 
 ### Changed
@@ -127,7 +133,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.3...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.4...HEAD
+[4.0.4]: https://github.com/mlieshoff/brawljars/compare/v4.0.3...v4.0.4
 [4.0.3]: https://github.com/mlieshoff/brawljars/compare/v4.0.2...v4.0.3
 [4.0.2]: https://github.com/mlieshoff/brawljars/compare/v4.0.1...v4.0.2
 [4.0.1]: https://github.com/mlieshoff/brawljars/compare/v4.0.0...v4.0.1

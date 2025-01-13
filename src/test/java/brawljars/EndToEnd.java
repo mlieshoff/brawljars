@@ -47,10 +47,6 @@ import brawljars.api.intern.rankings.club.ClubRankingsRequest;
 import brawljars.api.intern.rankings.club.ClubRankingsResponse;
 import brawljars.api.intern.rankings.player.PlayerRankingsRequest;
 import brawljars.api.intern.rankings.player.PlayerRankingsResponse;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsRequest;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsResponse;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsRequest;
-import brawljars.api.intern.rankings.powerplay.PowerplayRankingsSeasonsResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -70,7 +66,6 @@ public class EndToEnd {
 
     private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
-    private static final long SEASON_ID = 81L;
     private static final long BRAWLER_ID = 16000054L;
 
     private static final String PLAYER_TAG = "#28UP80RRY";
@@ -162,36 +157,6 @@ public class EndToEnd {
                         .get();
         String actual = GSON.toJson(clubMembersResponse);
         String expected = clubMembersResponse.getRawResponse().getRaw();
-
-        assertDiff(expected, actual);
-    }
-
-    @Test
-    void rankings_findPowerplayRankings() throws Exception {
-        PowerplayRankingsResponse powerplayRankingsResponse =
-                rankingApi
-                        .findPowerplayRankings(
-                                PowerplayRankingsRequest.builder("DE", SEASON_ID)
-                                        .storeRawResponse(true)
-                                        .build())
-                        .get();
-        String actual = GSON.toJson(powerplayRankingsResponse);
-        String expected = powerplayRankingsResponse.getRawResponse().getRaw();
-
-        assertDiff(expected, actual);
-    }
-
-    @Test
-    void rankings_findPowerplayRankingsSeasons() throws Exception {
-        PowerplayRankingsSeasonsResponse powerplayRankingsSeasonsResponse =
-                rankingApi
-                        .findPowerplayRankingsSeasons(
-                                PowerplayRankingsSeasonsRequest.builder("DE")
-                                        .storeRawResponse(true)
-                                        .build())
-                        .get();
-        String actual = GSON.toJson(powerplayRankingsSeasonsResponse);
-        String expected = powerplayRankingsSeasonsResponse.getRawResponse().getRaw();
 
         assertDiff(expected, actual);
     }
