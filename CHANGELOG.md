@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+## [4.0.5] - 2025-02-13
+
+### Added
+
+- Spotless Maven Plugin
+
+### Removed
+
+- Git Commit hooks handling formatting
+- Google Java Format library
+
 ## [4.0.4] - 2025-01-13
 
 ### Removed
@@ -133,7 +144,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.4...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.5...HEAD
+[4.0.5]: https://github.com/mlieshoff/brawljars/compare/v4.0.4...v4.0.5
 [4.0.4]: https://github.com/mlieshoff/brawljars/compare/v4.0.3...v4.0.4
 [4.0.3]: https://github.com/mlieshoff/brawljars/compare/v4.0.2...v4.0.3
 [4.0.2]: https://github.com/mlieshoff/brawljars/compare/v4.0.1...v4.0.2
