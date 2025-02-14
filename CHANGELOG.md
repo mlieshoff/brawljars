@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [4.0.7] - 2025-02-14
+
+### Added
+
+- GitHub Packages pipeline
+
 ## [4.0.6] - 2025-02-14
 
 ### Changed
@@ -150,7 +156,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.6...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.7...HEAD
+[4.0.7]: https://github.com/mlieshoff/brawljars/compare/v4.0.6...v4.0.7
 [4.0.6]: https://github.com/mlieshoff/brawljars/compare/v4.0.5...v4.0.6
 [4.0.5]: https://github.com/mlieshoff/brawljars/compare/v4.0.4...v4.0.5
 [4.0.4]: https://github.com/mlieshoff/brawljars/compare/v4.0.3...v4.0.4
