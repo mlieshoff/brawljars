@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [4.0.6] - 2025-02-14
+
+### Changed
+
+- Use classes from Java Build Essentials for building time instead of Supercell API Wrapper Essentials
+
 ## [4.0.5] - 2025-02-13
 
 ### Added
@@ -144,7 +150,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.5...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.6...HEAD
+[4.0.6]: https://github.com/mlieshoff/brawljars/compare/v4.0.5...v4.0.6
 [4.0.5]: https://github.com/mlieshoff/brawljars/compare/v4.0.4...v4.0.5
 [4.0.4]: https://github.com/mlieshoff/brawljars/compare/v4.0.3...v4.0.4
 [4.0.3]: https://github.com/mlieshoff/brawljars/compare/v4.0.2...v4.0.3
