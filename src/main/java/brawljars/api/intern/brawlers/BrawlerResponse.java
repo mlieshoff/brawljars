@@ -16,6 +16,7 @@
  */
 package brawljars.api.intern.brawlers;
 
+import brawljars.api.generated.model.Brawler;
 import brawljars.essentials.common.IResponse;
 import brawljars.essentials.common.RawResponse;
 
@@ -26,7 +27,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class BrawlerResponse extends brawljars.api.generated.model.Brawler implements IResponse {
+public class BrawlerResponse extends Brawler implements IResponse {
 
     @SerializedName("reason")
     private String reason;

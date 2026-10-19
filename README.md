@@ -315,7 +315,10 @@ Payload models are generated from `src/main/resources/api.yaml` during Maven's
 `mvn generate-sources` to inspect them under
 `target/generated-sources/openapi/src/main/java/brawljars/api/generated/model`.
 Generated sources are compiled into the library; update the schema rather than
-editing generated Java.
+editing generated Java. Maven explicitly registers this generated source directory
+with Build Helper so IDE Maven imports include the generated models. After
+opening or updating the project, run `mvn generate-sources` and reload the Maven
+project in IntelliJ if generated-model imports are unresolved.
 
 The existing API interfaces, request builders, asynchronous results, pagination,
 raw responses remain in use. Shared transport classes live under

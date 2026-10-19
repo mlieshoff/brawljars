@@ -16,6 +16,7 @@
  */
 package brawljars.api.intern.brawlers;
 
+import brawljars.api.generated.model.Brawler;
 import brawljars.essentials.common.PaginationResponse;
 
-public class BrawlersResponse extends PaginationResponse<brawljars.api.generated.model.Brawler> {}
+public class BrawlersResponse extends PaginationResponse<Brawler> {}

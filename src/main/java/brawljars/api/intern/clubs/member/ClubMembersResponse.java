@@ -16,7 +16,7 @@
  */
 package brawljars.api.intern.clubs.member;
 
+import brawljars.api.generated.model.ClubMember;
 import brawljars.essentials.common.PaginationResponse;
 
-public class ClubMembersResponse
-        extends PaginationResponse<brawljars.api.generated.model.ClubMember> {}
+public class ClubMembersResponse extends PaginationResponse<ClubMember> {}

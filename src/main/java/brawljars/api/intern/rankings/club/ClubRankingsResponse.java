@@ -16,7 +16,7 @@
  */
 package brawljars.api.intern.rankings.club;
 
+import brawljars.api.generated.model.ClubRanking;
 import brawljars.essentials.common.PaginationResponse;
 
-public class ClubRankingsResponse
-        extends PaginationResponse<brawljars.api.generated.model.ClubRanking> {}
+public class ClubRankingsResponse extends PaginationResponse<ClubRanking> {}

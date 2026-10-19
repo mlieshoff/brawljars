@@ -16,6 +16,7 @@
  */
 package brawljars.api.intern.clubs.info;
 
+import brawljars.api.generated.model.Club;
 import brawljars.essentials.common.IResponse;
 import brawljars.essentials.common.RawResponse;
 
@@ -26,7 +27,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ClubResponse extends brawljars.api.generated.model.Club implements IResponse {
+public class ClubResponse extends Club implements IResponse {
 
     @SerializedName("reason")
     private String reason;
