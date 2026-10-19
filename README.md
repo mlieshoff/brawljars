@@ -343,9 +343,7 @@ build, including packaging checks.
 
 See [AGENTS.md](AGENTS.md) for contributor and coding-agent instructions.
 Dependency and plugin updates should be reviewed deliberately against the
-configured versions in [pom.xml](pom.xml). The
-[migration guide](OPENAPI_MIGRATION_GUIDE.md) records the approach using the
-original jcrapi2 migration as its example.
+configured versions in [pom.xml](pom.xml).
 
 ## Library updates
 
