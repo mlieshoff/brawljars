@@ -11,6 +11,39 @@
       "name": "BAND-AID"
     }
   ],
+  "hyperCharges": [
+    {
+      "id": 23000613,
+      "name": "DOUBLE BARREL"
+    }
+  ],
+  "gears": [
+    {
+      "id": 62000000,
+      "name": "SPEED",
+      "level": 3
+    },
+    {
+      "id": 62000001,
+      "name": "HEALTH",
+      "level": 3
+    },
+    {
+      "id": 62000002,
+      "name": "DAMAGE",
+      "level": 3
+    },
+    {
+      "id": 62000003,
+      "name": "VISION",
+      "level": 3
+    },
+    {
+      "id": 62000004,
+      "name": "SHIELD",
+      "level": 3
+    }
+  ],
   "gadgets": [
     {
       "id": 23000255,

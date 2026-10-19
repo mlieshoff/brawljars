@@ -21,6 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import brawljars.api.intern.players.PlayerApi;
+import brawljars.essentials.api.Api;
+import brawljars.essentials.api.ApiContext;
+import brawljars.essentials.api.BaseApi;
+import brawljars.essentials.connector.Connector;
 
 import lombok.NonNull;
 
@@ -31,11 +35,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import supercell.api.wrapper.essentials.api.Api;
-import supercell.api.wrapper.essentials.api.ApiContext;
-import supercell.api.wrapper.essentials.api.BaseApi;
-import supercell.api.wrapper.essentials.connector.Connector;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -66,6 +65,7 @@ class BrawlJarsTest {
                                 "brawljars.api.intern.clubs.ClubApi",
                                 "brawljars.api.intern.brawlers.BrawlerApi",
                                 "brawljars.api.intern.events.EventApi",
+                                "brawljars.api.intern.gamemodes.GameModeApi",
                                 "brawljars.api.intern.rankings.RankingApi"));
 
         List<String> actual = unitUnderTest.listApis();

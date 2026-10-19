@@ -16,6 +16,7 @@
  */
 package brawljars.api.intern.players.battlelog;
 
-import supercell.api.wrapper.essentials.common.PaginationResponse;
+import brawljars.api.generated.model.Battle;
+import brawljars.essentials.common.PaginationResponse;
 
-public class BattleLogResponse extends PaginationResponse<BattleLog> {}
+public class BattleLogResponse extends PaginationResponse<Battle> {}

@@ -20,9 +20,8 @@ import brawljars.api.intern.players.battlelog.BattleLogRequest;
 import brawljars.api.intern.players.battlelog.BattleLogResponse;
 import brawljars.api.intern.players.info.PlayerRequest;
 import brawljars.api.intern.players.info.PlayerResponse;
-
-import supercell.api.wrapper.essentials.api.ApiContext;
-import supercell.api.wrapper.essentials.api.BaseApi;
+import brawljars.essentials.api.ApiContext;
+import brawljars.essentials.api.BaseApi;
 
 import java.util.concurrent.Future;
 

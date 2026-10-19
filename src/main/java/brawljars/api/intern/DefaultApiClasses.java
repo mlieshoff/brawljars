@@ -19,12 +19,12 @@ package brawljars.api.intern;
 import brawljars.api.intern.brawlers.BrawlerApi;
 import brawljars.api.intern.clubs.ClubApi;
 import brawljars.api.intern.events.EventApi;
+import brawljars.api.intern.gamemodes.GameModeApi;
 import brawljars.api.intern.players.PlayerApi;
 import brawljars.api.intern.rankings.RankingApi;
+import brawljars.essentials.api.Api;
 
 import lombok.Getter;
-
-import supercell.api.wrapper.essentials.api.Api;
 
 import java.util.Map;
 
@@ -37,5 +37,6 @@ public class DefaultApiClasses {
                     ClubApi.class, "brawljars.api.intern.clubs.ClubApiImpl",
                     RankingApi.class, "brawljars.api.intern.rankings.RankingApiImpl",
                     BrawlerApi.class, "brawljars.api.intern.brawlers.BrawlerApiImpl",
+                    GameModeApi.class, "brawljars.api.intern.gamemodes.GameModeApiImpl",
                     EventApi.class, "brawljars.api.intern.events.EventApiImpl");
 }

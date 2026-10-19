@@ -35,6 +35,9 @@ import brawljars.api.intern.clubs.member.ClubMembersResponse;
 import brawljars.api.intern.events.EventApi;
 import brawljars.api.intern.events.EventRotationRequest;
 import brawljars.api.intern.events.EventRotationResponse;
+import brawljars.api.intern.gamemodes.GameModeApi;
+import brawljars.api.intern.gamemodes.GameModesRequest;
+import brawljars.api.intern.gamemodes.GameModesResponse;
 import brawljars.api.intern.players.PlayerApi;
 import brawljars.api.intern.players.battlelog.BattleLogRequest;
 import brawljars.api.intern.players.battlelog.BattleLogResponse;
@@ -47,14 +50,13 @@ import brawljars.api.intern.rankings.club.ClubRankingsRequest;
 import brawljars.api.intern.rankings.club.ClubRankingsResponse;
 import brawljars.api.intern.rankings.player.PlayerRankingsRequest;
 import brawljars.api.intern.rankings.player.PlayerRankingsResponse;
+import brawljars.essentials.connector.StandardConnector;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import supercell.api.wrapper.essentials.connector.FilesystemCachedConnector;
 
 import java.io.StringReader;
 
@@ -81,18 +83,31 @@ public class EndToEnd {
 
     private EventApi eventApi;
 
+    private GameModeApi gameModeApi;
+
     @BeforeEach
     void setUp() {
         BrawlJars brawlJars =
                 new BrawlJars(
-                        "https://bsproxy.royaleapi.dev/v1",
+                        System.getProperty("apiUrl", "https://bsproxy.royaleapi.dev/v1"),
                         System.getProperty("apiKey", System.getenv("API_KEY")),
-                        new FilesystemCachedConnector("brawljars"));
+                        new StandardConnector());
         brawlerApi = brawlJars.getApi(BrawlerApi.class);
         rankingApi = brawlJars.getApi(RankingApi.class);
         playerApi = brawlJars.getApi(PlayerApi.class);
         clubApi = brawlJars.getApi(ClubApi.class);
         eventApi = brawlJars.getApi(EventApi.class);
+        gameModeApi = brawlJars.getApi(GameModeApi.class);
+    }
+
+    @Test
+    void findAll_whenGameModesRequested_thenPreserveLivePayload() throws Exception {
+        GameModesResponse response =
+                gameModeApi
+                        .findAll(GameModesRequest.builder().limit(5).storeRawResponse(true).build())
+                        .get();
+
+        assertDiff(response.getRawResponse().getRaw(), GSON.toJson(response));
     }
 
     private static void assertDiff(String expected, String actual) {

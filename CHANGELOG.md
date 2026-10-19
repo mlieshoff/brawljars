@@ -2,6 +2,35 @@
 
 ## [Unreleased]
 
+## [5.0.0] - 2026-10-19
+
+### Added
+
+- Generate Gson-compatible payload models from `src/main/resources/api.yaml` using OpenAPI Generator 7.10.0; generated models are included in the library JAR.
+- Game modes endpoint (`GET /gamemodes`) through `GameModeApi.findAll(GameModesRequest)` with pagination and raw-response support.
+- Local shared API, request, response, and connector classes under `brawljars.essentials`.
+- Generated-model regression tests, game-mode integration tests, and fixture assertions detecting dropped JSON fields.
+- API definition download script and migration documentation.
+
+### Changed
+
+- **Breaking:** Response wrappers now extend generated models or contain generated collection elements. Replace removed DTO imports with `brawljars.api.generated.model` and adapt getter and enum types where needed.
+- **Breaking:** Replace `supercell.api.wrapper.essentials` imports with `brawljars.essentials`, including custom connector contracts and the record-based `RequestContext` accessors.
+- Preserve existing API entry points, request builders, asynchronous results, pagination, and raw-response behavior.
+- Refresh all eleven successful endpoint fixtures from real proxy responses audited on 2026-10-19, limiting each list, including nested lists, to five entries and documenting fixture provenance.
+- Run opt-in end-to-end tests through the configured proxy with an uncached connector; all eleven documented GET operations were verified successfully, with no endpoint removals required.
+
+### Fixed
+
+- Correct API schema definitions for localized names, battle results and nested battle players, and undefined generic list references.
+- Explicitly register generated sources with Maven Build Helper so IntelliJ resolves generated-model imports.
+- Derive integration-test pagination URLs from request parameters and stop WireMock servers after test classes complete.
+
+### Removed
+
+- 32 obsolete handwritten payload classes replaced by generated OpenAPI models.
+- External `supercell-api-wrapper-essentials` dependency, version property, and dedicated Maven repository.
+
 ## [4.0.7] - 2025-02-14
 
 ### Added
@@ -156,7 +185,8 @@
 
 - Create release job #41
 
-[unreleased]: https://github.com/mlieshoff/brawljars/compare/v4.0.7...HEAD
+[unreleased]: https://github.com/mlieshoff/brawljars/compare/v5.0.0...HEAD
+[5.0.0]: https://github.com/mlieshoff/brawljars/compare/v4.0.7...v5.0.0
 [4.0.7]: https://github.com/mlieshoff/brawljars/compare/v4.0.6...v4.0.7
 [4.0.6]: https://github.com/mlieshoff/brawljars/compare/v4.0.5...v4.0.6
 [4.0.5]: https://github.com/mlieshoff/brawljars/compare/v4.0.4...v4.0.5

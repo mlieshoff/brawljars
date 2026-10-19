@@ -16,6 +16,7 @@
  */
 package brawljars.api.intern.brawlers;
 
-import supercell.api.wrapper.essentials.common.PaginationResponse;
+import brawljars.api.generated.model.Brawler;
+import brawljars.essentials.common.PaginationResponse;
 
 public class BrawlersResponse extends PaginationResponse<Brawler> {}
