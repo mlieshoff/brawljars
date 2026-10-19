@@ -16,9 +16,9 @@
  */
 package brawljars.api.intern.rankings.brawler;
 
-import lombok.Builder;
+import brawljars.essentials.common.PaginationRequest;
 
-import supercell.api.wrapper.essentials.common.PaginationRequest;
+import lombok.Builder;
 
 import java.util.Map;
 

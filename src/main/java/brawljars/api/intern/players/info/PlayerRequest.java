@@ -16,9 +16,9 @@
  */
 package brawljars.api.intern.players.info;
 
-import lombok.Builder;
+import brawljars.essentials.common.Request;
 
-import supercell.api.wrapper.essentials.common.Request;
+import lombok.Builder;
 
 import java.util.Map;
 

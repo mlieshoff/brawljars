@@ -37,30 +37,8 @@ Proxy endpoint
     https://bsproxy.royaleapi.dev/v1
 ```
 
-Bind essentials to your project
-```xml
-<repositories>
-    <repository>
-        <id>packagecloud-supercell-api-wrapper-essentials</id>
-        <url>https://packagecloud.io/mlieshoff/supercell-api-wrapper-essentials/maven2</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-</repositories>
-```
-
-and use the dependency
-```xml
-<dependency>
-    <groupId>supercell-api-wrapper-essentials</groupId>
-    <artifactId>supercell-api-wrapper-essentials</artifactId>
-    <version>1.0.1</version>
-</dependency>
-```
+Shared API, connector, and response classes are included under
+`brawljars.essentials`; no separate essentials dependency is needed.
 
 Use built-in standard connector
 ```java
@@ -329,3 +307,28 @@ mvn versions:display-plugin-updates -U
 ## Contributing
 
 1. Feel free to open Pull Requests with your ideas :)
+
+### OpenAPI payload models
+
+Payload models are generated from `src/main/resources/api.yaml` during Maven's
+`generate-sources` phase using OpenAPI Generator 7.10.0. Run
+`mvn generate-sources` to inspect them under
+`target/generated-sources/openapi/src/main/java/brawljars/api/generated/model`.
+Generated sources are compiled into the library; update the schema rather than
+editing generated Java.
+
+The existing API interfaces, request builders, asynchronous results, pagination,
+raw responses remain in use. Shared transport classes live under
+`brawljars.essentials`. Response wrappers
+now extend generated object models or contain generated collection elements.
+This changes public payload types: callers should use
+`brawljars.api.generated.model` for nested objects and list elements. Generated
+getters and enum types can differ from the old handwritten DTOs. Unused
+handwritten DTOs have been removed; use generated models instead.
+
+Local schema corrections define localized names as strings, describe battle
+results and their nested players, and replace undefined generic List references
+with arrays of objects. Preserve these corrections when refreshing the upstream
+definition. Existing fixtures are historical samples; tests check that their
+non-null fields survive model serialization. No live provider requests are
+required by the default test suite.

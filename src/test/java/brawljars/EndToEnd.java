@@ -47,14 +47,13 @@ import brawljars.api.intern.rankings.club.ClubRankingsRequest;
 import brawljars.api.intern.rankings.club.ClubRankingsResponse;
 import brawljars.api.intern.rankings.player.PlayerRankingsRequest;
 import brawljars.api.intern.rankings.player.PlayerRankingsResponse;
+import brawljars.essentials.connector.FilesystemCachedConnector;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import supercell.api.wrapper.essentials.connector.FilesystemCachedConnector;
 
 import java.io.StringReader;
 

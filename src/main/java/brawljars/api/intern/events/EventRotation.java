@@ -23,4 +23,4 @@ import java.util.ArrayList;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class EventRotation extends ArrayList<Rotation> {}
+public class EventRotation extends ArrayList<brawljars.api.generated.model.ScheduledEvent> {}

@@ -16,6 +16,7 @@
  */
 package brawljars.api.intern.rankings.club;
 
-import supercell.api.wrapper.essentials.common.PaginationResponse;
+import brawljars.essentials.common.PaginationResponse;
 
-public class ClubRankingsResponse extends PaginationResponse<ClubRanking> {}
+public class ClubRankingsResponse
+        extends PaginationResponse<brawljars.api.generated.model.ClubRanking> {}

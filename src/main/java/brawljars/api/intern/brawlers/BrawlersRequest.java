@@ -16,9 +16,9 @@
  */
 package brawljars.api.intern.brawlers;
 
-import lombok.Builder;
+import brawljars.essentials.common.PaginationRequest;
 
-import supercell.api.wrapper.essentials.common.PaginationRequest;
+import lombok.Builder;
 
 public class BrawlersRequest extends PaginationRequest {
 

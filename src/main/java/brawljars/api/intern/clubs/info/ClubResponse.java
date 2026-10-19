@@ -16,17 +16,17 @@
  */
 package brawljars.api.intern.clubs.info;
 
+import brawljars.essentials.common.IResponse;
+import brawljars.essentials.common.RawResponse;
+
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import supercell.api.wrapper.essentials.common.IResponse;
-import supercell.api.wrapper.essentials.common.RawResponse;
-
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ClubResponse extends Club implements IResponse {
+public class ClubResponse extends brawljars.api.generated.model.Club implements IResponse {
 
     @SerializedName("reason")
     private String reason;

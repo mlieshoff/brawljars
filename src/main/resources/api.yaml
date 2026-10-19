@@ -1,0 +1,1339 @@
+swagger: "2.0"
+info:
+  title: Brawl Stars API
+  description: Brawl Stars API
+  version: v1
+  termsOfService: http://supercell.com/en/terms-of-service/
+host: api.brawlstars.com
+basePath: /v1
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  -
+    name: players
+    description: Access player specific information
+  -
+    name: clubs
+    description: Access club specific information
+  -
+    name: rankings
+    description: Access global and local rankings
+  -
+    name: brawlers
+    description: Access general brawler information
+responses:
+  InMaintenanceSpec:
+    description: Service is temprorarily unavailable because of maintenance.
+    schema:
+      $ref: '#/definitions/ClientError'
+  UnknownExceptionSpec:
+    description: Unknown error happened when handling the request.
+    schema:
+      $ref: '#/definitions/ClientError'
+  RequestThrottledSpec:
+    description: |
+      Request was throttled, because amount of requests was above the threshold defined for the used API token.
+    schema:
+      $ref: '#/definitions/ClientError'
+  NotFoundSpec:
+    description: Resource was not found.
+    schema:
+      $ref: '#/definitions/ClientError'
+  ForbiddenSpec:
+    description: |
+      Access denied, either because of missing/incorrect credentials or used API token does not grant access to the requested resource.
+    schema:
+      $ref: '#/definitions/ClientError'
+  BadRequestSpec:
+    description: Client provided incorrect parameters for the request.
+    schema:
+      $ref: '#/definitions/ClientError'
+definitions:
+  PlayerRankingList:
+    type: array
+    items:
+      $ref: '#/definitions/PlayerRanking'
+  PlayerRanking:
+    type: object
+    properties:
+      club:
+        $ref: '#/definitions/PlayerRankingClub'
+      icon:
+        $ref: '#/definitions/PlayerIcon'
+      trophies:
+        type: integer
+      tag:
+        type: string
+      name:
+        type: string
+      rank:
+        type: integer
+      nameColor:
+        type: string
+  PlayerIcon:
+    type: object
+    properties:
+      id:
+        type: integer
+  PlayerRankingClub:
+    type: object
+    properties:
+      name:
+        type: string
+  ServiceVersion:
+    type: object
+    properties:
+      major:
+        type: integer
+      minor:
+        type: integer
+      content:
+        type: integer
+  Brawler:
+    type: object
+    properties:
+      gadgets:
+        $ref: '#/definitions/AccessoryList'
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+      starPowers:
+        $ref: '#/definitions/StarPowerList'
+      hyperCharges:
+        $ref: '#/definitions/HyperChargeList'
+      gears:
+        $ref: '#/definitions/GearStatList'
+  GearStatList:
+    type: array
+    items:
+      $ref: '#/definitions/GearStat'
+  GearStat:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+      level:
+        type: integer
+  JsonLocalizedName:
+    type: string
+  HyperChargeList:
+    type: array
+    items:
+      $ref: '#/definitions/HyperCharge'
+  HyperCharge:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+  StarPowerList:
+    type: array
+    items:
+      $ref: '#/definitions/StarPower'
+  StarPower:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+  AccessoryList:
+    type: array
+    items:
+      $ref: '#/definitions/Accessory'
+  Accessory:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+  BattleRegionList:
+    type: array
+    items:
+      $ref: '#/definitions/BattleRegion'
+  BattleRegion:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  ClubRankingList:
+    type: array
+    items:
+      $ref: '#/definitions/ClubRanking'
+  ClubRanking:
+    type: object
+    properties:
+      tag:
+        type: string
+      name:
+        type: string
+      trophies:
+        type: integer
+      rank:
+        type: integer
+      memberCount:
+        type: integer
+      badgeId:
+        type: integer
+  RegisterMatchRequest:
+    type: object
+    properties:
+      mode:
+        type: string
+        enum:
+          - regular
+          - powerMatch
+      players:
+        $ref: '#/definitions/RegisterMatchRequestPlayers'
+      locationId:
+        type: integer
+      winsRequired:
+        type: integer
+      gadgetsAllowed:
+        type: boolean
+      bannedBrawlers:
+        $ref: '#/definitions/BannedBrawlerList'
+      buffiesDisabledForBrawlers:
+        $ref: '#/definitions/IntegerList'
+      timerPreset:
+        type: string
+        enum:
+          - default
+          - longer
+          - longest
+  IntegerList:
+    type: array
+    items:
+      type: integer
+  Integer:
+    type: object
+  BannedBrawlerList:
+    type: array
+    items:
+      $ref: '#/definitions/BannedBrawlerEntry'
+  BannedBrawlerEntry:
+    type: object
+    properties:
+      id:
+        type: integer
+      side:
+        type: integer
+  RegisterMatchRequestPlayers:
+    type: array
+    items:
+      $ref: '#/definitions/PlayerEntry'
+  PlayerEntry:
+    type: object
+    properties:
+      tag:
+        type: string
+      side:
+        type: integer
+  RegisterMatchResponse:
+    type: object
+    properties:
+      id:
+        type: string
+  MatchLocationList:
+    type: array
+    items:
+      $ref: '#/definitions/MatchLocation'
+  MatchLocation:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      gameMode:
+        type: string
+  SetEsportsNotificationRequest:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - hub
+          - unknown
+      players:
+        type: array
+        items:
+          type: object
+      ttl:
+        type: integer
+  SetEsportsNotificationResponse:
+    type: object
+    properties:
+      notification:
+        $ref: '#/definitions/SetEsportsNotificationRequest'
+      status:
+        type: string
+  Club:
+    type: object
+    properties:
+      tag:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      trophies:
+        type: integer
+      requiredTrophies:
+        type: integer
+      members:
+        $ref: '#/definitions/ClubMemberList'
+      type:
+        type: string
+        enum:
+          - open
+          - inviteOnly
+          - closed
+          - unknown
+      badgeId:
+        type: integer
+      isFamilyFriendly:
+        type: boolean
+  ClubMemberList:
+    type: array
+    items:
+      $ref: '#/definitions/ClubMember'
+  ClubMember:
+    type: object
+    properties:
+      icon:
+        $ref: '#/definitions/PlayerIcon'
+      tag:
+        type: string
+      name:
+        type: string
+      trophies:
+        type: integer
+      role:
+        type: string
+        enum:
+          - notMember
+          - member
+          - president
+          - senior
+          - vicePresident
+          - unknown
+      nameColor:
+        type: string
+  ScheduledEvents:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledEvent'
+  ScheduledEvent:
+    type: object
+    properties:
+      slotId:
+        type: integer
+      event:
+        $ref: '#/definitions/ScheduledEventLocation'
+      startTime:
+        type: string
+      endTime:
+        type: string
+  ScheduledEventLocation:
+    type: object
+    properties:
+      mode:
+        type: string
+      modeId:
+        type: integer
+      modifiers:
+        $ref: '#/definitions/EventModifierList'
+      id:
+        type: integer
+      map:
+        $ref: '#/definitions/JsonLocalizedName'
+  EventModifierList:
+    type: array
+    items:
+      type: string
+      enum:
+        - unknown
+        - none
+        - energyDrink
+        - angryRobo
+        - meteorShower
+        - graveyardShift
+        - healingMushrooms
+        - bossFightRockets
+        - takedownLasers
+        - takedownChainLightning
+        - takedownRockets
+        - waves
+        - hauntedBall
+        - superCharge
+        - fastBrawlers
+        - showdown+
+        - peekABoo
+        - burningBall
+  EventModifier:
+    type: object
+  Player:
+    type: object
+    properties:
+      club:
+        $ref: '#/definitions/PlayerClub'
+      isQualifiedFromChampionshipChallenge:
+        type: boolean
+      3vs3Victories:
+        type: integer
+      fameTierName:
+        $ref: '#/definitions/JsonLocalizedName'
+      icon:
+        $ref: '#/definitions/PlayerIcon'
+      tag:
+        type: string
+      name:
+        type: string
+      trophies:
+        type: integer
+      expLevel:
+        type: integer
+      expPoints:
+        type: integer
+      highestTrophies:
+        type: integer
+      totalPrestigeLevel:
+        type: integer
+      fame:
+        type: integer
+      soloVictories:
+        type: integer
+      duoVictories:
+        type: integer
+      bestRoboRumbleTime:
+        type: integer
+      bestTimeAsBigBrawler:
+        type: integer
+      brawlers:
+        $ref: '#/definitions/BrawlerStatList'
+      rankedSeasonId:
+        type: integer
+      rankedRank:
+        type: integer
+      rankedRankName:
+        $ref: '#/definitions/JsonLocalizedName'
+      rankedElo:
+        type: integer
+      highestSeasonRankedRank:
+        type: integer
+      highestSeasonRankedRankName:
+        $ref: '#/definitions/JsonLocalizedName'
+      highestSeasonRankedElo:
+        type: integer
+      highestAllTimeRankedRank:
+        type: integer
+      highestAllTimeRankedRankName:
+        $ref: '#/definitions/JsonLocalizedName'
+      highestAllTimeRankedElo:
+        type: integer
+      bestBossFightSpeedrunTimes:
+        $ref: '#/definitions/BossFightSpeedRunBestTimeList'
+      nameColor:
+        type: string
+  BossFightSpeedRunBestTimeList:
+    type: array
+    items:
+      $ref: '#/definitions/BossFightSpeedrunBestTime'
+  BossFightSpeedrunBestTime:
+    type: object
+    properties:
+      event:
+        $ref: '#/definitions/SpeedrunEvent'
+      bestTimeInSeconds:
+        type: integer
+      difficulty:
+        type: integer
+      difficultyName:
+        $ref: '#/definitions/JsonLocalizedName'
+  SpeedrunEvent:
+    type: object
+    properties:
+      mode:
+        type: string
+      modeId:
+        type: integer
+      id:
+        type: integer
+      map:
+        $ref: '#/definitions/JsonLocalizedName'
+  BrawlerStatList:
+    type: array
+    items:
+      $ref: '#/definitions/BrawlerStat'
+  BrawlerStat:
+    type: object
+    properties:
+      gadgets:
+        $ref: '#/definitions/AccessoryList'
+      starPowers:
+        $ref: '#/definitions/StarPowerList'
+      hyperCharges:
+        $ref: '#/definitions/HyperChargeList'
+      currentWinStreak:
+        type: integer
+      id:
+        type: integer
+      rank:
+        type: integer
+      trophies:
+        type: integer
+      highestTrophies:
+        type: integer
+      prestigeLevel:
+        type: integer
+      power:
+        type: integer
+      buffies:
+        $ref: '#/definitions/BrawlerBuffies'
+      gears:
+        $ref: '#/definitions/GearStatList'
+      maxWinStreak:
+        type: integer
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      skin:
+        $ref: '#/definitions/Skin'
+  Skin:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+  BrawlerBuffies:
+    type: object
+    properties:
+      gadget:
+        type: boolean
+      starPower:
+        type: boolean
+      hyperCharge:
+        type: boolean
+  PlayerClub:
+    type: object
+    properties:
+      name:
+        type: string
+      tag:
+        type: string
+  EventTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/EventType'
+  EventType:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+  Match:
+    type: object
+    properties:
+      phase:
+        type: string
+        enum:
+          - init
+          - banHeroes
+          - pickHeroes
+          - finalPreparation
+          - battle
+          - matchResult
+          - ending
+      initiativeSide:
+        type: integer
+      round:
+        type: integer
+      terminationReason:
+        type: string
+        enum:
+          - none
+          - playerDisconnected
+          - playerNotResponding
+          - technicalError
+          - matchTooLong
+          - other
+      teams:
+        $ref: '#/definitions/MatchTeamList'
+      games:
+        $ref: '#/definitions/CompletedGameList'
+      players:
+        $ref: '#/definitions/PlayerMatchStatusList'
+      state:
+        type: string
+        enum:
+          - open
+          - cancelled
+          - completed
+      id:
+        type: string
+  PlayerMatchStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/PlayerMatchStatus'
+  PlayerMatchStatus:
+    type: object
+    properties:
+      brawler:
+        $ref: '#/definitions/BrawlerInfo'
+      isOnline:
+        type: boolean
+      hasJoined:
+        type: boolean
+      isReady:
+        type: boolean
+      isInBattle:
+        type: boolean
+      tag:
+        type: string
+  BrawlerInfo:
+    type: object
+    properties:
+      trophyChange:
+        type: integer
+      buffies:
+        $ref: '#/definitions/BrawlerBuffies'
+      gears:
+        $ref: '#/definitions/GearInfoList'
+      starPower:
+        $ref: '#/definitions/StarPower'
+      hyperCharge:
+        $ref: '#/definitions/HyperCharge'
+      gadget:
+        $ref: '#/definitions/Accessory'
+      power:
+        type: integer
+      trophies:
+        type: integer
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+  GearInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/GearInfo'
+  GearInfo:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/JsonLocalizedName'
+      id:
+        type: integer
+      level:
+        type: integer
+  CompletedGameList:
+    type: array
+    items:
+      $ref: '#/definitions/CompletedGame'
+  CompletedGame:
+    type: object
+    properties:
+      teams:
+        $ref: '#/definitions/CompletedGameTeamList'
+      location:
+        $ref: '#/definitions/MatchLocation'
+      duration:
+        type: integer
+      replayId:
+        type: string
+  CompletedGameTeamList:
+    type: array
+    items:
+      $ref: '#/definitions/CompletedGameTeam'
+  CompletedGameTeam:
+    type: object
+    properties:
+      score:
+        type: integer
+      isWinner:
+        type: boolean
+      siege:
+        $ref: '#/definitions/SiegeStats'
+      players:
+        $ref: '#/definitions/PlayerEntryCompletedGameList'
+  PlayerEntryCompletedGameList:
+    type: array
+    items:
+      $ref: '#/definitions/PlayerEntryCompletedGame'
+  PlayerEntryCompletedGame:
+    type: object
+    properties:
+      brawler:
+        $ref: '#/definitions/BrawlerInfo'
+      statistics:
+        $ref: '#/definitions/Stats'
+      tag:
+        type: string
+      accountId:
+        type: string
+  Stats:
+    type: object
+    properties:
+      hotZoneInsideZonePercentage:
+        type: integer
+      averageLatency:
+        type: integer
+      damageDealt:
+        type: integer
+      healingDone:
+        type: integer
+      damageReceived:
+        type: integer
+      kills:
+        type: integer
+      deaths:
+        type: integer
+      totalDamageToSafe:
+        type: integer
+      totalDamageToPets:
+        type: integer
+      siegeDamageToRobot:
+        type: integer
+      siegeBoltsCollected:
+        type: integer
+      brawlBallGoalsScored:
+        type: integer
+      gemGrabGemsCollected:
+        type: integer
+      gemGrabGemsLost:
+        type: integer
+      bountyStarsGained:
+        type: integer
+      bountyStarsLost:
+        type: integer
+      superUsedCount:
+        type: integer
+      gadgetUsedCount:
+        type: integer
+      bountyPickedMiddleStar:
+        type: boolean
+      matchEndKillStreak:
+        type: integer
+      maxKillStreak:
+        type: integer
+      healingDoneToSelf:
+        type: integer
+      healingDoneToTeamMates:
+        type: integer
+      objectivesRecovered:
+        type: integer
+      objectivesStolen:
+        type: integer
+      brawlBallShotsOnGoal:
+        type: integer
+      brawlBallShotsSaved:
+        type: integer
+  SiegeStats:
+    type: object
+    properties:
+      botDamageToBase:
+        type: integer
+      botLevelByRound:
+        type: array
+        items:
+          type: object
+  MatchTeamList:
+    type: array
+    items:
+      $ref: '#/definitions/MatchTeam'
+  MatchTeam:
+    type: object
+    properties:
+      players:
+        $ref: '#/definitions/MatchTeamPlayerList'
+      bans:
+        $ref: '#/definitions/BrawlerInfoList'
+      side:
+        type: integer
+  BrawlerInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/BrawlerInfo'
+  MatchTeamPlayerList:
+    type: array
+    items:
+      $ref: '#/definitions/MatchTeamPlayer'
+  MatchTeamPlayer:
+    type: object
+    properties:
+      causedTermination:
+        type: boolean
+      tag:
+        type: string
+      isLeader:
+        type: boolean
+      brawler:
+        $ref: '#/definitions/BrawlerInfo'
+  CancelMatchResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+  BattleList:
+    type: array
+    items:
+      $ref: '#/definitions/Battle'
+  Battle:
+    type: object
+    properties:
+      battle:
+        $ref: '#/definitions/BattleResult'
+      battleTime:
+        type: string
+      event:
+        $ref: '#/definitions/Event'
+  Event:
+    type: object
+    properties:
+      mode:
+        type: string
+      modeId:
+        type: integer
+      id:
+        type: integer
+      map:
+        $ref: '#/definitions/JsonLocalizedName'
+  # Upstream leaves this empty; these fields are present in battle-log responses.
+  BattleResult:
+    type: object
+    properties:
+      mode:
+        type: string
+      type:
+        type: string
+      result:
+        type: string
+      duration:
+        type: integer
+      rank:
+        type: integer
+      trophyChange:
+        type: integer
+      starPlayer:
+        $ref: '#/definitions/BattlePlayer'
+      players:
+        type: array
+        items:
+          $ref: '#/definitions/BattlePlayer'
+      teams:
+        type: array
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/BattlePlayer'
+  BattlePlayer:
+    type: object
+    properties:
+      tag:
+        type: string
+      name:
+        type: string
+      brawler:
+        $ref: '#/definitions/BattleBrawler'
+  BattleBrawler:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      power:
+        type: integer
+      trophies:
+        type: integer
+  BrawlerList:
+    type: array
+    items:
+      $ref: '#/definitions/Brawler'
+  ClientError:
+    type: object
+    properties:
+      reason:
+        type: string
+      message:
+        type: string
+      type:
+        type: string
+      detail:
+        type: object
+paths:
+  /brawlers:
+    get:
+      summary: Get list of available brawlers.
+      description: Get list of available brawlers.
+      operationId: getBrawlers
+      tags:
+        - brawlers
+      parameters:
+        -
+          name: before
+          in: query
+          description: |
+            Return only items that occur before this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: after
+          in: query
+          description: |
+            Return only items that occur after this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: limit
+          in: query
+          description: Limit the number of items returned in the response.
+          required: false
+          type: integer
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BrawlerList'
+  /clubs/{clubTag}/members:
+    get:
+      summary: List club members.
+      description: List club members.
+      operationId: getClubMembers
+      tags:
+        - clubs
+      parameters:
+        -
+          name: clubTag
+          in: path
+          description: Tag of the club.
+          required: true
+          type: string
+        -
+          name: before
+          in: query
+          description: |
+            Return only items that occur before this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: after
+          in: query
+          description: |
+            Return only items that occur after this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: limit
+          in: query
+          description: Limit the number of items returned in the response.
+          required: false
+          type: integer
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClubMemberList'
+  /players/{playerTag}/battlelog:
+    get:
+      summary: Get log of recent battles for a player.
+      description: |
+        Get list of recent battle results for a player. NOTE: It may take up to 30 minutes for a new battle to appear in the battlelog.
+      operationId: getBattleLog
+      tags:
+        - players
+      parameters:
+        -
+          name: playerTag
+          in: path
+          description: Tag of the player.
+          required: true
+          type: string
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BattleList'
+  /gamemodes:
+    get:
+      summary: Get list of all available game modes.
+      description: Get list of all available game modes.
+      operationId: getGameModes
+      tags:
+        - events
+      parameters:
+        -
+          name: before
+          in: query
+          description: |
+            Return only items that occur before this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: after
+          in: query
+          description: |
+            Return only items that occur after this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: limit
+          in: query
+          description: Limit the number of items returned in the response.
+          required: false
+          type: integer
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EventTypeList'
+  /players/{playerTag}:
+    get:
+      summary: Get player information
+      description: |
+        Get information about a single player by player tag. Player tags can be found either in game or by from clan member list.
+      operationId: getPlayer
+      tags:
+        - players
+      parameters:
+        -
+          name: playerTag
+          in: path
+          description: Tag of the player.
+          required: true
+          type: string
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Player'
+  /events/rotation:
+    get:
+      summary: Get event rotation
+      description: Get event rotation for ongoing events.
+      operationId: getScheduledEvents
+      tags:
+        - events
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ScheduledEvents'
+  /clubs/{clubTag}:
+    get:
+      summary: Get club information.
+      description: |
+        Get information about a single clan by club tag. Club tags can be found in game. Note that clan tags start with hash character '#' and that needs to be URL-encoded properly to work in URL, so for example clan tag '#2ABC' would become '%232ABC' in the URL.
+      operationId: getClub
+      tags:
+        - clubs
+      parameters:
+        -
+          name: clubTag
+          in: path
+          description: Tag of the club.
+          required: true
+          type: string
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Club'
+  /rankings/{countryCode}/clubs:
+    get:
+      summary: Get club rankings for a country or global rankings.
+      description: Get club rankings for a country or global rankings.
+      operationId: getClubRankings
+      tags:
+        - rankings
+      parameters:
+        -
+          name: countryCode
+          in: path
+          description: Two letter country code, or 'global' for global rankings.
+          required: true
+          type: string
+        -
+          name: before
+          in: query
+          description: |
+            Return only items that occur before this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: after
+          in: query
+          description: |
+            Return only items that occur after this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: limit
+          in: query
+          description: Limit the number of items returned in the response.
+          required: false
+          type: integer
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClubRankingList'
+  /rankings/{countryCode}/brawlers/{brawlerId}:
+    get:
+      summary: Get brawler rankings for a country or global rankings.
+      description: |
+        Get brawler rankings for a country or global rankings. Brawler identifiers can be found by using the /v1/brawlers API endpoint.
+      operationId: getBrawlerRankings
+      tags:
+        - rankings
+      parameters:
+        -
+          name: countryCode
+          in: path
+          description: Two letter country code, or 'global' for global rankings.
+          required: true
+          type: string
+        -
+          name: brawlerId
+          in: path
+          description: Identifier of the brawler.
+          required: true
+          type: string
+        -
+          name: before
+          in: query
+          description: |
+            Return only items that occur before this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: after
+          in: query
+          description: |
+            Return only items that occur after this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: limit
+          in: query
+          description: Limit the number of items returned in the response.
+          required: false
+          type: integer
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerRankingList'
+  /brawlers/{brawlerId}:
+    get:
+      summary: Get information about a brawler.
+      description: Get information about a brawler.
+      operationId: getBrawler
+      tags:
+        - brawlers
+      parameters:
+        -
+          name: brawlerId
+          in: path
+          description: Identifier of the brawler.
+          required: true
+          type: string
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Brawler'
+  /rankings/{countryCode}/players:
+    get:
+      summary: Get player rankings for a country or global rankings.
+      description: Get player rankings for a country or global rankings.
+      operationId: getPlayerRankings
+      tags:
+        - rankings
+      parameters:
+        -
+          name: countryCode
+          in: path
+          description: Two letter country code, or 'global' for global rankings.
+          required: true
+          type: string
+        -
+          name: before
+          in: query
+          description: |
+            Return only items that occur before this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: after
+          in: query
+          description: |
+            Return only items that occur after this marker. Before marker can be found from the response, inside the 'paging' property. Note that only after or before can be specified for a request, not both.
+          required: false
+          type: string
+        -
+          name: limit
+          in: query
+          description: Limit the number of items returned in the response.
+          required: false
+          type: integer
+      responses:
+        '400':
+          $ref: '#/responses/BadRequestSpec'
+        '403':
+          $ref: '#/responses/ForbiddenSpec'
+        '404':
+          $ref: '#/responses/NotFoundSpec'
+        '429':
+          $ref: '#/responses/RequestThrottledSpec'
+        '500':
+          $ref: '#/responses/UnknownExceptionSpec'
+        '503':
+          $ref: '#/responses/InMaintenanceSpec'
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerRankingList'
+securityDefinitions:
+  JWT:
+    type: apiKey
+    description: JSON Web Token used as an API key
+    name: authorization
+    in: header
+security:
+  -
+    JWT: []

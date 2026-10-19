@@ -22,8 +22,7 @@ import brawljars.api.intern.rankings.club.ClubRankingsRequest;
 import brawljars.api.intern.rankings.club.ClubRankingsResponse;
 import brawljars.api.intern.rankings.player.PlayerRankingsRequest;
 import brawljars.api.intern.rankings.player.PlayerRankingsResponse;
-
-import supercell.api.wrapper.essentials.api.Api;
+import brawljars.essentials.api.Api;
 
 import java.util.concurrent.Future;
 

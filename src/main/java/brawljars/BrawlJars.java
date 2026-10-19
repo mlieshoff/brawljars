@@ -16,15 +16,14 @@
  */
 package brawljars;
 
-import static supercell.api.wrapper.essentials.common.Utils.require;
+import static brawljars.essentials.common.Utils.require;
 
 import static java.util.stream.Collectors.toList;
 
 import brawljars.api.intern.DefaultApiClasses;
-
-import supercell.api.wrapper.essentials.api.Api;
-import supercell.api.wrapper.essentials.api.ApiContext;
-import supercell.api.wrapper.essentials.connector.Connector;
+import brawljars.essentials.api.Api;
+import brawljars.essentials.api.ApiContext;
+import brawljars.essentials.connector.Connector;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;

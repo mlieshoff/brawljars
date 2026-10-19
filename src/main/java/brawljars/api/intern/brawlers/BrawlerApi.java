@@ -16,7 +16,7 @@
  */
 package brawljars.api.intern.brawlers;
 
-import supercell.api.wrapper.essentials.api.Api;
+import brawljars.essentials.api.Api;
 
 import java.util.concurrent.Future;
 

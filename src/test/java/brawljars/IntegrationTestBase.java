@@ -16,6 +16,8 @@
  */
 package brawljars;
 
+import static brawljars.essentials.common.Utils.isNotBlank;
+
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
@@ -27,28 +29,29 @@ import static org.apache.commons.io.FileUtils.readLines;
 import static org.apache.hc.core5.http.HttpHeaders.AUTHORIZATION;
 import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import static supercell.api.wrapper.essentials.common.Utils.isNotBlank;
-
 import static java.util.Collections.emptyMap;
+
+import brawljars.essentials.common.IResponse;
+import brawljars.essentials.common.PaginationRequest;
+import brawljars.essentials.common.Request;
+import brawljars.essentials.connector.StandardConnector;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-
-import supercell.api.wrapper.essentials.common.IResponse;
-import supercell.api.wrapper.essentials.common.PaginationRequest;
-import supercell.api.wrapper.essentials.common.Request;
-import supercell.api.wrapper.essentials.connector.StandardConnector;
 
 import java.io.File;
 import java.io.IOException;
@@ -137,10 +140,40 @@ public abstract class IntegrationTestBase {
             throws Exception {
         IResponse actual = resultTestRunner.execute();
         assertEquals(expected, actual);
+        assertPreserved(JsonParser.parseString(getExpected()), GSON.toJsonTree(actual), "$");
         assertNotNull(actual.getRawResponse());
         assertNotEquals(emptyMap(), actual.getRawResponse().getResponseHeaders());
         assertEquals(getExpected(), actual.getRawResponse().getRaw());
         assertNotEquals(EMPTY, actual.toString());
+    }
+
+    private static void assertPreserved(JsonElement expected, JsonElement actual, String path) {
+        if (expected.isJsonNull()) {
+            return;
+        }
+        assertThat(actual).as(path).isNotNull();
+        if (expected.isJsonObject()) {
+            assertThat(actual.isJsonObject()).as(path).isTrue();
+            expected.getAsJsonObject()
+                    .entrySet()
+                    .forEach(
+                            entry ->
+                                    assertPreserved(
+                                            entry.getValue(),
+                                            actual.getAsJsonObject().get(entry.getKey()),
+                                            path + "." + entry.getKey()));
+        } else if (expected.isJsonArray()) {
+            assertThat(actual.isJsonArray()).as(path).isTrue();
+            assertThat(actual.getAsJsonArray()).as(path).hasSize(expected.getAsJsonArray().size());
+            for (int i = 0; i < expected.getAsJsonArray().size(); i++) {
+                assertPreserved(
+                        expected.getAsJsonArray().get(i),
+                        actual.getAsJsonArray().get(i),
+                        path + "[" + i + "]");
+            }
+        } else {
+            assertThat(actual).as(path).isEqualTo(expected);
+        }
     }
 
     protected void prepareWithErrorAndRun(
@@ -151,8 +184,7 @@ public abstract class IntegrationTestBase {
             fail();
         } catch (Exception e) {
             assertEquals(
-                    "supercell.api.wrapper.essentials.connector.ConnectorException: 400",
-                    e.getMessage());
+                    "brawljars.essentials.connector.ConnectorException: 400: body", e.getMessage());
         }
     }
 
