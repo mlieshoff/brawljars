@@ -65,6 +65,7 @@ class BrawlJarsTest {
                                 "brawljars.api.intern.clubs.ClubApi",
                                 "brawljars.api.intern.brawlers.BrawlerApi",
                                 "brawljars.api.intern.events.EventApi",
+                                "brawljars.api.intern.gamemodes.GameModeApi",
                                 "brawljars.api.intern.rankings.RankingApi"));
 
         List<String> actual = unitUnderTest.listApis();

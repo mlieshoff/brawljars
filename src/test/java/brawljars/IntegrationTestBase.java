@@ -38,7 +38,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static java.util.Collections.emptyMap;
 
 import brawljars.essentials.common.IResponse;
-import brawljars.essentials.common.PaginationRequest;
 import brawljars.essentials.common.Request;
 import brawljars.essentials.connector.StandardConnector;
 
@@ -49,12 +48,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,6 +78,11 @@ public abstract class IntegrationTestBase {
         WireMockConfiguration wireMockConfiguration = new WireMockConfiguration().dynamicPort();
         wireMockServer = new WireMockServer(wireMockConfiguration);
         wireMockServer.start();
+    }
+
+    @AfterAll
+    public static void afterAll() {
+        wireMockServer.stop();
     }
 
     private static BrawlJars createBrawlJars() {
@@ -124,16 +130,21 @@ public abstract class IntegrationTestBase {
     }
 
     private String createUrl(String url, String queryPart, Request request) {
-        String createdUrl = url;
-        if (request instanceof PaginationRequest) {
-            createdUrl = url + "?limit=100&after=aaa&before=zzz";
-            if (isNotBlank(queryPart)) {
-                return createdUrl + '&' + queryPart;
-            }
-        } else if (isNotBlank(queryPart)) {
-            createdUrl += '?' + queryPart;
+        String parameters =
+                request.getQueryParameters().entrySet().stream()
+                        .filter(entry -> entry.getValue() != null)
+                        .map(
+                                entry ->
+                                        entry.getKey()
+                                                + "="
+                                                + URLEncoder.encode(
+                                                        String.valueOf(entry.getValue()),
+                                                        StandardCharsets.UTF_8))
+                        .collect(Collectors.joining("&"));
+        if (isNotBlank(queryPart)) {
+            parameters = parameters.isEmpty() ? queryPart : parameters + "&" + queryPart;
         }
-        return createdUrl;
+        return parameters.isEmpty() ? url : url + "?" + parameters;
     }
 
     protected void run(IResponse expected, ResultTestRunner<? extends IResponse> resultTestRunner)

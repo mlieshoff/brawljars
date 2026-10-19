@@ -332,3 +332,15 @@ with arrays of objects. Preserve these corrections when refreshing the upstream
 definition. Existing fixtures are historical samples; tests check that their
 non-null fields survive model serialization. No live provider requests are
 required by the default test suite.
+
+
+### Endpoint audit and fixtures
+
+The wrapper now covers all eleven GET operations in the checked-in specification,
+including game modes through `GameModeApi.findAll(GameModesRequest)`.
+The 2026-10-19 live audit was blocked by HTTP 403 (invalid authorization), so no
+endpoint removals or successful live payloads were verified. See
+[src/test/resources/README.md](src/test/resources/README.md) for route results,
+fixture provenance, and instructions for the opt-in live tests. Historical
+fixtures contain at most five entries per list; game-mode success examples are
+synthetic until provider access is restored.
