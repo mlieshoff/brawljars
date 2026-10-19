@@ -5,8 +5,11 @@
   "icon": {
     "id": 28000031
   },
-  "trophies": 12505,
+  "trophies": 12407,
   "highestTrophies": 12508,
+  "totalPrestigeLevel": 0,
+  "fame": 0,
+  "fameTierName": "GLOBAL FAME I",
   "expLevel": 79,
   "expPoints": 33966,
   "isQualifiedFromChampionshipChallenge": false,
@@ -15,6 +18,14 @@
   "duoVictories": 91,
   "bestRoboRumbleTime": 3,
   "bestTimeAsBigBrawler": 0,
+  "rankedSeasonId": 0,
+  "rankedRank": 0,
+  "rankedElo": 0,
+  "highestSeasonRankedRank": 0,
+  "highestSeasonRankedElo": 0,
+  "highestAllTimeRankedRank": 1,
+  "highestAllTimeRankedRankName": "BRONZE I",
+  "highestAllTimeRankedElo": 0,
   "club": {
     "tag": "#JUURPCV9",
     "name": "RoyalBrawl"
@@ -24,11 +35,16 @@
       "id": 16000000,
       "name": "SHELLY",
       "power": 7,
-      "rank": 13,
+      "rank": 2,
       "trophies": 251,
       "highestTrophies": 256,
-      "gears": [],
-      "starPowers": [],
+      "prestigeLevel": 0,
+      "currentWinStreak": 0,
+      "maxWinStreak": 0,
+      "skin": {
+        "id": 29000000,
+        "name": "SHELLY"
+      },
       "gadgets": [
         {
           "id": 23000288,
@@ -38,15 +54,40 @@
           "id": 23000255,
           "name": "FAST FORWARD"
         }
-      ]
+      ],
+      "gears": [],
+      "starPowers": [],
+      "hyperCharges": [],
+      "buffies": {
+        "gadget": false,
+        "starPower": false,
+        "hyperCharge": false
+      }
     },
     {
       "id": 16000001,
       "name": "COLT",
       "power": 9,
-      "rank": 18,
+      "rank": 2,
       "trophies": 429,
       "highestTrophies": 429,
+      "prestigeLevel": 0,
+      "currentWinStreak": 0,
+      "maxWinStreak": 0,
+      "skin": {
+        "id": 29000303,
+        "name": "GUNSLINGER COLT"
+      },
+      "gadgets": [
+        {
+          "id": 23000273,
+          "name": "SPEEDLOADER"
+        },
+        {
+          "id": 23000319,
+          "name": "SILVER BULLET"
+        }
+      ],
       "gears": [],
       "starPowers": [
         {
@@ -58,46 +99,60 @@
           "name": "SLICK BOOTS"
         }
       ],
-      "gadgets": [
-        {
-          "id": 23000273,
-          "name": "SPEEDLOADER"
-        },
-        {
-          "id": 23000319,
-          "name": "SILVER BULLET"
-        }
-      ]
+      "hyperCharges": [],
+      "buffies": {
+        "gadget": false,
+        "starPower": false,
+        "hyperCharge": false
+      }
     },
     {
       "id": 16000002,
       "name": "BULL",
       "power": 7,
-      "rank": 15,
+      "rank": 2,
       "trophies": 307,
       "highestTrophies": 307,
-      "gears": [],
-      "starPowers": [],
+      "prestigeLevel": 0,
+      "currentWinStreak": 0,
+      "maxWinStreak": 0,
+      "skin": {
+        "id": 29000003,
+        "name": "BULL"
+      },
       "gadgets": [
         {
           "id": 23000272,
-          "name": "T-BONE INJECTOR"
+          "name": "T-BONE MISSILE"
         },
         {
           "id": 23000310,
           "name": "STOMPER"
         }
-      ]
+      ],
+      "gears": [],
+      "starPowers": [],
+      "hyperCharges": [],
+      "buffies": {
+        "gadget": false,
+        "starPower": false,
+        "hyperCharge": false
+      }
     },
     {
       "id": 16000003,
       "name": "BROCK",
       "power": 8,
-      "rank": 16,
+      "rank": 2,
       "trophies": 329,
       "highestTrophies": 341,
-      "gears": [],
-      "starPowers": [],
+      "prestigeLevel": 0,
+      "currentWinStreak": 0,
+      "maxWinStreak": 0,
+      "skin": {
+        "id": 29000004,
+        "name": "BROCK"
+      },
       "gadgets": [
         {
           "id": 23000316,
@@ -107,27 +162,48 @@
           "id": 23000245,
           "name": "ROCKET LACES"
         }
-      ]
+      ],
+      "gears": [],
+      "starPowers": [],
+      "hyperCharges": [],
+      "buffies": {
+        "gadget": false,
+        "starPower": false,
+        "hyperCharge": false
+      }
     },
     {
       "id": 16000004,
       "name": "RICO",
       "power": 8,
-      "rank": 20,
-      "trophies": 511,
+      "rank": 3,
+      "trophies": 500,
       "highestTrophies": 525,
-      "gears": [],
-      "starPowers": [],
+      "prestigeLevel": 0,
+      "currentWinStreak": 0,
+      "maxWinStreak": 0,
+      "skin": {
+        "id": 29000009,
+        "name": "RICO"
+      },
       "gadgets": [
         {
           "id": 23000409,
-          "name": "BOUNCY CASTLE"
+          "name": "MULTIBALL"
         },
         {
           "id": 23000246,
           "name": "MULTIBALL LAUNCHER"
         }
-      ]
+      ],
+      "gears": [],
+      "starPowers": [],
+      "hyperCharges": [],
+      "buffies": {
+        "gadget": false,
+        "starPower": false,
+        "hyperCharge": false
+      }
     }
   ]
 }

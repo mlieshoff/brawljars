@@ -89,7 +89,7 @@ public class EndToEnd {
     void setUp() {
         BrawlJars brawlJars =
                 new BrawlJars(
-                        System.getProperty("apiUrl", "https://api.brawlstars.com/v1"),
+                        System.getProperty("apiUrl", "https://bsproxy.royaleapi.dev/v1"),
                         System.getProperty("apiKey", System.getenv("API_KEY")),
                         new StandardConnector());
         brawlerApi = brawlJars.getApi(BrawlerApi.class);

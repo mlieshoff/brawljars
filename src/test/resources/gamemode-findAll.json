@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "id": 0,
+      "name": "GEM GRAB"
+    },
+    {
+      "id": 2,
+      "name": "HEIST"
+    },
+    {
+      "id": 3,
+      "name": "BOUNTY"
+    },
+    {
+      "id": 5,
+      "name": "BRAWL BALL"
+    },
+    {
+      "id": 6,
+      "name": "SOLO SHOWDOWN"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "after": "eyJwb3MiOjV9"
+    }
+  }
+}

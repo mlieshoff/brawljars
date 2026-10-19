@@ -1,21 +1,11 @@
 {
   "items": [
     {
-      "tag": "#9GUV092V0",
-      "name": "IgloTV",
-      "nameColor": "0xffff8afb",
-      "role": "president",
-      "trophies": 18199,
-      "icon": {
-        "id": 28000022
-      }
-    },
-    {
       "tag": "#28UP80RRY",
       "name": "micah",
       "nameColor": "0xffa2e3fe",
       "role": "vicePresident",
-      "trophies": 12505,
+      "trophies": 12407,
       "icon": {
         "id": 28000031
       }
@@ -24,7 +14,7 @@
       "tag": "#Y28JU90QC",
       "name": "რრრ",
       "nameColor": "0xffffffff",
-      "role": "vicePresident",
+      "role": "president",
       "trophies": 11836,
       "icon": {
         "id": 28000017
@@ -35,7 +25,7 @@
       "name": "Maxi_King",
       "nameColor": "0xffcb5aff",
       "role": "member",
-      "trophies": 9201,
+      "trophies": 9221,
       "icon": {
         "id": 28000031
       }
@@ -49,9 +39,21 @@
       "icon": {
         "id": 28000054
       }
+    },
+    {
+      "tag": "#L29YYY2V8",
+      "name": "Türkische Döner",
+      "nameColor": "0xffa8e132",
+      "role": "member",
+      "trophies": 5866,
+      "icon": {
+        "id": 28000000
+      }
     }
   ],
   "paging": {
-    "cursors": {}
+    "cursors": {
+      "after": "eyJwb3MiOjV9"
+    }
   }
 }

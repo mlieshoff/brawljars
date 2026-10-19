@@ -1,72 +1,68 @@
 {
   "items": [
     {
-      "tag": "#9LVU0Y9Q2",
-      "name": "EP | Nexiv",
-      "nameColor": "0xff1ba5f5",
+      "tag": "#2R02L92C99",
+      "name": "민혁𝓂𝒾𝓃𝒽𝓊𝓀❦",
+      "nameColor": "0xffffce89",
       "icon": {
-        "id": 28000081
+        "id": 28000733
       },
-      "trophies": 1257,
+      "trophies": 6675,
       "rank": 1,
       "club": {
-        "name": "Gin N Juice"
+        "name": "신디신디신디신디신디"
       }
     },
     {
-      "tag": "#8082QU0JU",
-      "name": "Shawn jr 🦑",
-      "nameColor": "0xffff8afb",
+      "tag": "#90RRC8CG",
+      "name": "CR|JeTeMange",
+      "nameColor": "0xffffffff",
       "icon": {
-        "id": 28000004
+        "id": 28001280
       },
-      "trophies": 1254,
-      "rank": 2,
-      "club": {
-        "name": "AURORA"
-      }
+      "trophies": 5109,
+      "rank": 2
     },
     {
-      "tag": "#V9QGJY9",
-      "name": "YT:Landi",
-      "nameColor": "0xffa8e132",
+      "tag": "#GVUCGPVJG",
+      "name": "intrognito🦘",
+      "nameColor": "0xffffffff",
       "icon": {
-        "id": 28000017
+        "id": 28000486
       },
-      "trophies": 1253,
+      "trophies": 4779,
       "rank": 3,
       "club": {
-        "name": "BC*|Family*"
+        "name": "CHECK BIO!"
       }
     },
     {
-      "tag": "#JQJ02UJU",
-      "name": "2fast4karma",
-      "nameColor": "0xffff9727",
+      "tag": "#2LQ2PJJY9",
+      "name": "♔Acronixx❦🩶",
+      "nameColor": "0xffff8afb",
       "icon": {
-        "id": 28000084
+        "id": 28000138
       },
-      "trophies": 1253,
-      "rank": 4,
-      "club": {
-        "name": "ApeX Esports X"
-      }
+      "trophies": 4526,
+      "rank": 4
     },
     {
-      "tag": "#L2VPYV2LP",
-      "name": "Angry Gene😡",
-      "nameColor": "0xffa2e3fe",
+      "tag": "#Y2CG0LJ2",
+      "name": "Suomen Prinssi",
+      "nameColor": "0xffffffff",
       "icon": {
-        "id": 28000082
+        "id": 28000000
       },
-      "trophies": 1252,
+      "trophies": 4250,
       "rank": 5,
       "club": {
-        "name": "IQ esport"
+        "name": "Frostyfam❤️‍🩹"
       }
     }
   ],
   "paging": {
-    "cursors": {}
+    "cursors": {
+      "after": "eyJwb3MiOjV9"
+    }
   }
 }

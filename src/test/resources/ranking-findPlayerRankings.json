@@ -1,69 +1,74 @@
 {
   "items": [
     {
-      "tag": "#9RVPL0Q0P",
-      "name": "Arthur🤍",
-      "nameColor": "0xff1ba5f5",
+      "tag": "#29C8PULJ9",
+      "name": "『火|Tɪᴇs🥀』",
+      "nameColor": "0xffffffff",
       "icon": {
-        "id": 28000066
+        "id": 28000403
       },
-      "trophies": 56622,
+      "trophies": 325318,
       "rank": 1,
       "club": {
-        "name": "ApeX Esports"
+        "name": "Foss is Boss"
       }
     },
     {
-      "tag": "#2RLJ2QYLC",
-      "name": "MBC|Washed🥶",
-      "nameColor": "0xffff9727",
+      "tag": "#8LQCUYPYL",
+      "name": "Mikee",
+      "nameColor": "0xffffffff",
       "icon": {
-        "id": 28000018
+        "id": 28000290
       },
-      "trophies": 55526,
-      "rank": 2
-    },
-    {
-      "tag": "#CGQCYJGY",
-      "name": "TTV|SnakeThug7",
-      "nameColor": "0xfff9775d",
-      "icon": {
-        "id": 28000035
-      },
-      "trophies": 55029,
-      "rank": 3,
+      "trophies": 324488,
+      "rank": 2,
       "club": {
-        "name": "Snakes Amazonas"
+        "name": "Foss is Boss"
       }
     },
     {
-      "tag": "#VRLUYQYQ",
-      "name": "TTV | Jonkoryl",
+      "tag": "#QVLRCJQ00",
+      "name": "Netty",
       "nameColor": "0xffff8afb",
       "icon": {
-        "id": 28000073
+        "id": 28000000
       },
-      "trophies": 54029,
-      "rank": 4,
+      "trophies": 321931,
+      "rank": 3,
       "club": {
-        "name": "Munich Warriors"
+        "name": "Foss is Boss"
       }
     },
     {
-      "tag": "#QUQ9PVLV",
-      "name": "⛩|Josia64🎋",
-      "nameColor": "0xfff9c908",
+      "tag": "#2V0LYPV9L8",
+      "name": "alekzz",
+      "nameColor": "0xffffffff",
       "icon": {
-        "id": 28000014
+        "id": 28001077
       },
-      "trophies": 53234,
+      "trophies": 321261,
+      "rank": 4,
+      "club": {
+        "name": "Heaven🍁"
+      }
+    },
+    {
+      "tag": "#2V0UL0GQV8",
+      "name": "VITAL SHARK",
+      "nameColor": "0xffcb5aff",
+      "icon": {
+        "id": 28000977
+      },
+      "trophies": 318276,
       "rank": 5,
       "club": {
-        "name": "ApeX Esports"
+        "name": "Heaven🍁"
       }
     }
   ],
   "paging": {
-    "cursors": {}
+    "cursors": {
+      "after": "eyJwb3MiOjV9"
+    }
   }
 }

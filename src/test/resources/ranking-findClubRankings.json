@@ -1,47 +1,49 @@
 {
   "items": [
     {
-      "tag": "#2G0UCPY80",
-      "name": "Бурый Медведь",
-      "badgeId": 8000021,
-      "trophies": 4038965,
+      "tag": "#808VR8JGR",
+      "name": "Heaven🍁",
+      "badgeId": 8000055,
+      "trophies": 7740898,
       "rank": 1,
       "memberCount": 30
     },
     {
-      "tag": "#22Q8RJ0PR",
-      "name": "I Cromatici",
-      "badgeId": 8000022,
-      "trophies": 2483034,
+      "tag": "#82GGYG0G9",
+      "name": "Foss is Boss",
+      "badgeId": 8000055,
+      "trophies": 7517912,
       "rank": 2,
-      "memberCount": 0
+      "memberCount": 30
     },
     {
-      "tag": "#PL98PY0V",
-      "name": "Екатеринбург_96",
-      "badgeId": 8000037,
-      "trophies": 2451609,
+      "tag": "#JUU0V8VP",
+      "name": "XP|Gensdebellum",
+      "badgeId": 8000006,
+      "trophies": 6556779,
       "rank": 3,
-      "memberCount": 28
+      "memberCount": 30
     },
     {
-      "tag": "#2QGYGQPRJ",
-      "name": "BosnianBrawlers",
-      "badgeId": 8000010,
-      "trophies": 1726983,
+      "tag": "#828RU9YQG",
+      "name": "@toxicgenie",
+      "badgeId": 8000008,
+      "trophies": 6446011,
       "rank": 4,
       "memberCount": 30
     },
     {
-      "tag": "#2GUU9908V",
-      "name": "BC*|Family*",
-      "badgeId": 8000006,
-      "trophies": 1374420,
+      "tag": "#2GLGULQ92",
+      "name": "Flyers!?🪽",
+      "badgeId": 8000053,
+      "trophies": 6349179,
       "rank": 5,
       "memberCount": 30
     }
   ],
   "paging": {
-    "cursors": {}
+    "cursors": {
+      "after": "eyJwb3MiOjV9"
+    }
   }
 }
